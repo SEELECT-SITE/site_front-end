@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@material-tailwind/react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
@@ -17,7 +16,7 @@ export default function Kit() {
         />
       )}
       <div className="text-white">{session?.user?.name}</div>
-      <Button onClick={() => signOut()}>Sair</Button>
+      <button onClick={() => signOut()}>Sair</button>
       <div>seu kit é demais</div>
     </>
   );

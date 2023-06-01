@@ -1,17 +1,21 @@
-import { Button } from "@material-tailwind/react";
+
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 
 export default function GoogleButton() {
   return (
-    <span className="bg-black/80 rounded-lg">
-      <Button
-        color="white"
-        className="flex gap-x-2 items-center shadow-none hover:shadow-none hover:-translate-x-1 hover:-translate-y-1 "
+    <span className="bg-gray-950 rounded group">
+      <button
+        className="flex items-center duration-150 gap-2 rounded border-0 border-
+        [#171515] bg-gray-100 px-5 py-3 text-sm font-medium text-gray-950 
+        group-hover:-translate-x-1 group-hover:-translate-y-1 focus:outline-none 
+        focus:ring active:opacity-75"
         onClick={() => signIn("google")}
       >
         Entrar com Google <FcGoogle size={20} />
-      </Button>
+      </button>
     </span>
   );
 }
+      
+  
