@@ -17,12 +17,12 @@ export default function Userboard() {
 
   return (
     <main className="p-12">
-      {session?.user?.image && (
+      {session?.user && (
         <Image
           width={100}
           height={100}
           alt="picture"
-          src={session.user.image}
+          src={session.user.image as string}
         />
       )}
       <div className="text-white">{session?.user?.name}</div>
