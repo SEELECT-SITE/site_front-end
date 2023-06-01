@@ -24,7 +24,3 @@ export default function Login() {
     </main>
   );
 }
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  console.log("teste");
-  return { props: {} };
-};
