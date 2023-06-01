@@ -4,7 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-export default function Userboard() {  
+export default function Userboard() {
   const { data: session } = useSession();
   if (!session) {
     redirect("/login");
@@ -16,7 +16,7 @@ export default function Userboard() {
   }
 
   return (
-    <>
+    <main className="p-12">
       {session?.user?.image && (
         <Image
           width={100}
@@ -27,8 +27,6 @@ export default function Userboard() {
       )}
       <div className="text-white">{session?.user?.name}</div>
       <Button onClick={() => LogOff()}>Sair</Button>
-    </>
+    </main>
   );
 }
-
-
