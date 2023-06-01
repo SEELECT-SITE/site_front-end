@@ -30,7 +30,6 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "@material-tailwind/react": "^2.0.1",
     "react-icons": "^4.9.0"
   }
 }

@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@material-tailwind/react";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
@@ -26,7 +25,7 @@ export default function Userboard() {
             src={session.user.image as string}
           />
           <div className="text-white">{session?.user.name}</div>
-          <Button onClick={() => LogOff()}>Sair</Button>
+          <button onClick={() => LogOff()}>Sair</button>
         </>
       )}
     </main>

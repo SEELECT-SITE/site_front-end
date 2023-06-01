@@ -1,7 +1,6 @@
 "use client";
 import UseAnimations from "react-useanimations";
 import menu4 from "react-useanimations/lib/menu4";
-import { Button, IconButton } from "@material-tailwind/react";
 import { HiUserCircle } from "react-icons/hi";
 import useGlobalState from "@/store/menuStore";
 import Link from "next/link";
@@ -39,7 +38,7 @@ export default function MainMenu() {
       <div
         className={`duration-500 ${
           menuIsOpen ? "left-0" : "left-full"
-        } min-h-screen absolute w-full top-0 bg-blue-gray-800 flex flex-col items-center justify-center`}
+        } min-h-screen absolute w-full top-0 bg-gray-950 flex flex-col items-center justify-center`}
       >
         <ul className="font-bold text-4xl flex flex-col gap-y-12 h-full items-center">
           <li className="text-gray-100">SOBRE</li>
@@ -47,27 +46,25 @@ export default function MainMenu() {
           <li className="text-gray-100">PALESTRAS</li>
           <li className="text-gray-100">VISITAS TECNICAS</li>
           <li className="text-gray-100">
-            <Button className="text-4xl" variant="outlined">
-              INSCREVA-SE
-            </Button>{" "}
+          <button className="btn-outline px-8 py-4 border-2 rounded-lg active:scale-95 duration-150">INSCREVA-SE</button>
           </li>
         </ul>
       </div>
-      <div className="cursor-pointer">
-        <IconButton
-          variant="text"
-          className="duration-200 text-blue-gray-300 active:bg- hover:bg- hover:opacity-80 border-"
+      
+<div className="cursor-pointer">
+        <button
+          className="text-blue-gray-300 active:bg- hover:bg- hover:opacity-80 active:scale-95 duration-150 border- "
         >
           <UseAnimations
             strokeColor="rgb(233, 232, 232)"
             fillColor="#fff"
             onClick={(e) => setMenuIsOpen(!menuIsOpen)}
-            speed={1}
+            speed={1.5}
             animation={menu4}
             size={54}
             className={`duration-200 ${menuIsOpen && "bg"}`}
           />
-        </IconButton>
+        </button>
       </div>
     </div>
   );
