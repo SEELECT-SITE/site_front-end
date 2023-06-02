@@ -13,7 +13,7 @@ export default function Login() {
     if (session) {
       router.push("/userboard");
     }
-  }, [session]);
+  }, []);
 
   return (
     <main className="w-full py-12">
