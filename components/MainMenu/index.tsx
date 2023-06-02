@@ -13,15 +13,15 @@ export default function MainMenu() {
 
   return (
     <div className="flex items-center">
-      <div className="flex items-center text-base duration-200 text-gray-200 active:bg- hover:bg- hover:text-blue-gray-300 border- cursor-pointer">
+      <div className="flex items-center text-base duration-200 text-gray-200  active:bg- hover:bg- hover:text-blue-gray-300 border- cursor-pointer">
         {session ? (
           <Link href="/userboard">
-            <div className="rounded-full">
+            <div className="rounded-full overflow-hidden border-2">
               <Image
                 alt="teste"
                 src={session?.user?.image as string}
-                width={44}
-                height={44}
+                width={36}
+                height={36}
               />
             </div>
           </Link>

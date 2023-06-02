@@ -1,10 +1,11 @@
-
 import { signIn } from "next-auth/react";
+import { FunctionComponent } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { baseComponent } from "../GithubButton";
 
-export default function GoogleButton() {
+const GoogleButton:FunctionComponent<baseComponent> = ({className}) => {
   return (
-    <span className="bg-gray-950 rounded group">
+    <span className={`bg-gray-950 rounded-lg group ${className}`}>
       <button
         className="flex items-center duration-150 gap-2 rounded border-0 border-
         [#171515] bg-gray-100 px-5 py-3 text-sm text-gray-950 
@@ -16,6 +17,6 @@ export default function GoogleButton() {
       </button>
     </span>
   );
-}
-      
-  
+};
+
+export default GoogleButton;

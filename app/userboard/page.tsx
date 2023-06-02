@@ -1,17 +1,21 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Userboard() {
   const { data: session } = useSession();
-  if (!session) {
-    redirect("/login");
-  }
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!session) {
+      router.push("/login");
+    }
+  }, [session]);
 
   function LogOff() {
     signOut();
-    redirect("/login");
   }
 
   return (
