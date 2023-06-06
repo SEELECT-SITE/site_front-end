@@ -3,8 +3,10 @@ import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
 export default function Kit() {
-  const { data: session } = useSession();
-
+  const { data: session, status } = useSession();
+  if (status === "loading") {
+    return <div>carregando...</div>;
+  }
   return (
     <>
       {session?.user?.image && (

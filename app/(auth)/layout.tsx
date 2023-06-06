@@ -4,10 +4,17 @@ export const metadata = {
     "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
 };
 
-export default function RootLayout({
+export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <body>{children}</body>;
+  return (
+    <body>
+      <header>
+        <div>testeando login</div>
+      </header>
+      {children}
+    </body>
+  );
 }

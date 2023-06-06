@@ -11,7 +11,9 @@ const GoogleButton:FunctionComponent<baseComponent> = ({className}) => {
         [#171515] bg-gray-100 px-5 py-3 text-sm text-gray-950 
         group-hover:-translate-x-1 group-hover:-translate-y-1 focus:outline-none 
         focus:ring active:opacity-75 font-cafe-txt"
-        onClick={() => signIn("google")}
+        onClick={() =>
+          signIn("google", { callbackUrl: "/userboard" })
+        }
       >
         Entrar com Google <FcGoogle size={20} />
       </button>
