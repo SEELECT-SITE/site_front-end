@@ -6,14 +6,14 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Login() {
+  const router = useRouter()
   const { data: session } = useSession();
-  const router = useRouter();
 
-  useEffect(() => {
-    if (session) {
-      router.push("/userboard");
+  useEffect(()=>{
+    if(session){
+      router.push('/userboard')
     }
-  }, [session]);
+  },[session])
 
   return (
     <main className="w-full py-12">

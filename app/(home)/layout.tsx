@@ -11,7 +11,7 @@ export const metadata = {
     "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
 };
 
-export default function RootLayout({
+export default function HomeLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -27,8 +27,7 @@ export default function RootLayout({
                   <Image
                     src={Seelect_icon}
                     alt="icone seelect"
-                    width={48}
-                    height={48}
+                    width={52}
                   />
                   <h1
                     className={`${bebasFont.className} text-sm text-gray-100`}

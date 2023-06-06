@@ -1,3 +1,7 @@
+'use client'
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 export const metadata = {
   title: "SEELECT",
   description:
@@ -9,9 +13,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter()
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/login");
+    },
+  });
   return (
     <body className={`bg-white relative min-w-screen overflow-x-hidden `}>
-      {children}
+      <header>
+        <div>testeando login</div>
+      </header>
+      
+      {status!=="loading" ? children:<>carregando....</>}
     </body>
   );
 }
