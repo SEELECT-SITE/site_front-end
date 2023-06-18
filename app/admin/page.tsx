@@ -1,17 +1,16 @@
-"use client";
+'use client'
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import { CgLogOut } from "react-icons/cg";
 
-export default function Userboard() {
+export default function Admin() {
   const { data: session, status } = useSession();
-  console.log(session)
   if (status === "loading") {
     return <div>carregando...</div>;
   }
 
   return (
-    <main className="p-12">
+    <>
       {session?.user && (
         <>
           <Image
@@ -36,6 +35,8 @@ export default function Userboard() {
           </button>
         </>
       )}
-    </main>
+      <div>voce é admin</div>
+      <div>uhuuul</div>
+    </>
   );
 }

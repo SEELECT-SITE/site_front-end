@@ -15,8 +15,8 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOptions);
 
-  if (!session) {
-    redirect("/login");
+  if (session?.user.role !== "ADMIN") {
+    redirect("/userboard");
   }
 
   return (
