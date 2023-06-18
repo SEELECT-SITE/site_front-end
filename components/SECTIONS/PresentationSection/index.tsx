@@ -2,12 +2,12 @@
 import Image from "next/image";
 import seelect_logo from "@/public/icone_seelect.webp";
 import { bebasFont } from "@/app/fonts";
-import Button from "../Button";
+import Button from "../../Button";
 
 export default function PresentationSection() {
   return (
     <section>
-      <div className="px-6">
+      <div>
         <figure className="m-auto w-1/2 mb-6 max-w-md">
           <Image
             src={seelect_logo}
