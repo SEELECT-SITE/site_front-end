@@ -8,8 +8,9 @@ export default async function handler(
 ) {
   const session = await getServerSession(req, res, authOptions);
 
-  return res.json({
-    message: "Success",
-    session,
-  });
+  if (!session) {
+    res.status(401).json({ message: "You must be logged in." });
+    return;
+  }
+  return res.json({session});
 }
