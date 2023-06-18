@@ -1,6 +1,6 @@
-"use client";
-import Seelect_icon from "/public/icone_seelect.webp";
-import useGlobalState from "@/store/menuStore";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Login",
@@ -8,10 +8,22 @@ export const metadata = {
     "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
 };
 
-export default function RootLayout({
+export default async function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    redirect("/userboard");
+  }
+  return (
+    <body>
+      <header>
+        <div>testeando login</div>
+      </header>
+      {children}
+    </body>
+  );
 }

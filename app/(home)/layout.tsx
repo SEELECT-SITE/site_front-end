@@ -1,10 +1,7 @@
 "use client";
-import "../globals.css";
 import Image from "next/image";
-import Seelect_icon from "/public/icone_seelect.webp";
-import useGlobalState from "@/store/menuStore";
+import Seelect_icon from "@/public/icone-seelect-white.webp";
 import MainMenu from "@/components/MainMenu";
-import { SessionProvider } from "next-auth/react";
 import Link from "next/link";
 
 export const metadata = {
@@ -13,34 +10,30 @@ export const metadata = {
     "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
 };
 
-export default function RootLayout({
+export default function HomeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { menuIsOpen } = useGlobalState();
   return (
     <>
-      <html lang="en" className={`${menuIsOpen && "overflow-y-hidden"}`}>
-        <body className={`bg-white relative min-w-screen overflow-x-hidden `}>
-          <header className="w-full h-36 bg-teal-900 shadow-lg shadow-black/80">
-            <div className="w-full absolute z-50 m-auto flex justify-between p-6 items-center top-0 left-0">
-              <div>
-                <Link href="./">
-                  <Image
-                    src={Seelect_icon}
-                    alt="icone seelect"
-                    width={64}
-                    height={64}
-                  />
-                </Link>
-              </div>
-              <MainMenu />
-            </div>
-          </header>
-          {children}
-        </body>
-      </html>
+      <body className={`bg-m-dark relative min-w-screen overflow-x-hidden `}>
+        <header className="w-full h-40 ">
+          <div className="w-full absolute bg-dark-cian z-50 m-auto flex justify-between py-6 px-3 items-center top-0 left-0 shadow-lg  shadow-black/80">
+            <Link href="#">
+              <Image
+                src={Seelect_icon}
+                alt="icone seelect"
+                width={52}
+                className="hover:drop-shadow-icon-sm hover:-translate-x-1 hover:-translate-y-1 duration-150"
+              />
+            </Link>
+
+            <MainMenu />
+          </div>
+        </header>
+        {children}
+      </body>
     </>
   );
 }

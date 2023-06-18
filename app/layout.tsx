@@ -2,6 +2,7 @@
 import useGlobalState from "@/store/menuStore";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
+import { cafeFont } from "./fonts";
 
 export const metadata = {
   title: "SEELECT",
@@ -14,14 +15,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  
   const { menuIsOpen } = useGlobalState();
   return (
     <SessionProvider>
-      <html lang="en" className={`${menuIsOpen && "overflow-y-hidden"}`}>
-        <body className={`bg-white relative min-w-screen overflow-x-hidden `}>
-          {children}
-        </body>
+      <html
+        lang="en"
+        className={`${menuIsOpen && "overflow-y-hidden"} ${cafeFont.className}`}
+      >
+        {children}
       </html>
     </SessionProvider>
   );

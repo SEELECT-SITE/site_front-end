@@ -1,16 +1,19 @@
 "use client";
 import GithubButton from "@/components/GithubButton";
 import GoogleButton from "@/components/GoogleButton";
-import { GetServerSideProps } from "next";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Login() {
   const { data: session } = useSession();
+  const router = useRouter();
 
-  if (session) {
-    redirect("/userboard");
-  }
+  useEffect(() => {
+    if (session) {
+      router.push("/userboard");
+    }
+  }, [session]);
 
   return (
     <main className="w-full py-12">
