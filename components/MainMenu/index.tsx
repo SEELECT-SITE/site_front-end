@@ -1,24 +1,13 @@
 "use client";
 import UseAnimations from "react-useanimations";
 import menu4 from "react-useanimations/lib/menu4";
-import { HiUserCircle } from "react-icons/hi";
 import useGlobalState from "@/store/menuStore";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import Image from "next/image";
 import Button from "../Button";
-import { useRouter } from "next/navigation";
 
 export default function MainMenu() {
   const { menuIsOpen, setMenuIsOpen } = useGlobalState();
-  const router = useRouter()
-
-  function handleClick(){
-    var elemento = document.getElementById('animate_menu_btn');
-    elemento?.click();
-    router.push("./pacotes");
-    
-  }
+ 
 
   return (
     <div className="flex items-center">
@@ -52,11 +41,8 @@ export default function MainMenu() {
           <li className="">PALESTRAS</li>
           <li className="">VISITAS TECNICAS</li>
             <li>
-              <button onClick={e=>handleClick()}>
-                PACOTES
-              </button>
+              <Link href='./pacotes'>PACOTES</Link>
             </li>
-            
           <li className="">
             <Link href={"/login"}>
               <Button className="btn-outline hover:border-p-cian px-8 py-4 border-2 rounded-lg active:scale-95 duration-150">
