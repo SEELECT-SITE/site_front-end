@@ -4,12 +4,6 @@ import Seelect_icon from "@/public/icone-seelect-white.webp";
 import MainMenu from "@/components/MainMenu";
 import Link from "next/link";
 
-export const metadata = {
-  title: "SEELECT",
-  description:
-    "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
-};
-
 export default function HomeLayout({
   children,
 }: {
@@ -28,7 +22,6 @@ export default function HomeLayout({
                 className="hover:drop-shadow-icon-sm hover:-translate-x-1 hover:-translate-y-1 duration-150"
               />
             </Link>
-
             <MainMenu />
           </div>
         </header>

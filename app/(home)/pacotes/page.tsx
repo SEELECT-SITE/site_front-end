@@ -1,9 +1,3 @@
-"use client";
-import Image from "next/image";
-import Seelect_icon from "@/public/icone-seelect-white.webp";
-import MainMenu from "@/components/MainMenu";
-import Link from "next/link";
-
 export const metadata = {
   title: "Pacotes",
   description:
@@ -15,11 +9,5 @@ export default function PacotesPage({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <div>
-        pacotes
-      </div>
-    </>
-  );
+  return <div>pacotes</div>;
 }

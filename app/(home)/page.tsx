@@ -1,8 +1,12 @@
 import PresentationSection from "@/components/PresentationSection";
-import { cookies } from "next/headers";
+
+export const metadata = {
+  title: "SEELECT",
+  description:
+    "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
+};
 
 const Home = () => {
-  console.log(cookies().get("theme"));
   return (
     <main className="flex flex-col items-center justify-between text-l-cian">
       <PresentationSection />

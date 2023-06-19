@@ -4,12 +4,6 @@ import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import { cafeFont } from "./fonts";
 
-export const metadata = {
-  title: "SEELECT",
-  description:
-    "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
-};
-
 export default function RootLayout({
   children,
 }: {
