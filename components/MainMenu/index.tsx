@@ -7,7 +7,6 @@ import Button from "../Button";
 
 export default function MainMenu() {
   const { menuIsOpen, setMenuIsOpen } = useGlobalState();
- 
 
   return (
     <div className="flex items-center">
@@ -34,15 +33,18 @@ export default function MainMenu() {
         className={`duration-500 ${
           menuIsOpen ? "left-0" : "left-full"
         } min-h-screen absolute w-full top-0 bg-m-dark flex flex-col items-center justify-center`}
-      >''
+      >
+        ''
         <ul className="font-bold text-l-cian text-4xl flex flex-col gap-y-12 h-full items-center">
           <li className="">SOBRE</li>
           <li className="">WORKSHOPS</li>
           <li className="">PALESTRAS</li>
           <li className="">VISITAS TECNICAS</li>
-            <li>
-              <Link href='./pacotes'>PACOTES</Link>
-            </li>
+          <li>
+            <button onClick={(e) => setMenuIsOpen(!menuIsOpen)}>
+              <Link href="./pacotes">PACOTES</Link>
+            </button>
+          </li>
           <li className="">
             <Link href={"/login"}>
               <Button className="btn-outline hover:border-p-cian px-8 py-4 border-2 rounded-lg active:scale-95 duration-150">
@@ -53,7 +55,10 @@ export default function MainMenu() {
         </ul>
       </div>
 
-      <button id='animate_menu_btn' className="active:bg- hover:bg- hover:opacity-80 active:scale-95 duration-150 border- cursor-pointer">
+      <button
+        id="animate_menu_btn"
+        className="active:bg- hover:bg- hover:opacity-80 active:scale-95 duration-150 border- cursor-pointer"
+      >
         <UseAnimations
           strokeColor="rgb(233, 232, 232)"
           fillColor="#fff"
@@ -61,7 +66,7 @@ export default function MainMenu() {
           reverse={menuIsOpen ? true : false}
           speed={1.5}
           animation={menu4}
-          size={54}          
+          size={54}
           className={`duration-200 ${menuIsOpen && "bg"}`}
         />
       </button>
