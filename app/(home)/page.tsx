@@ -1,15 +1,17 @@
 import PresentationSection from "@/components/SECTIONS/PresentationSection";
-import { cookies } from "next/headers";
-import Parceiros from "@/components/SECTIONS/Parceiros"
+import Parceiros from "@/components/SECTIONS/Parceiros";
 
-
+export const metadata = {
+  title: "SEELECT",
+  description:
+    "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
+};
 
 const Home = () => {
-  console.log(cookies().get("theme"));
   return (
     <main className="flex flex-col px-6 items-center justify-between text-l-cian">
       <PresentationSection />
-      <Parceiros/>
+      <Parceiros />
     </main>
   );
 };
