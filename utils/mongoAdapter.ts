@@ -5,7 +5,7 @@ if (!process.env.DATABASE_URL) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
 }
 
-const uri = process.env.DATABASE_URL;
+const uri = process.env.DATABASE_URL_ADAPTER as string;
 const options = {};
 
 let client;
