@@ -5,5 +5,6 @@ export const metadata = {
 };
 
 export default function PacotesPage() {
+
   return <div>pacotes</div>;
 }
