@@ -4,10 +4,7 @@ export const metadata = {
     "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
 };
 
-export default function PacotesPage({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function PacotesPage() {
+
   return <div>pacotes</div>;
 }

@@ -1,4 +1,5 @@
-import PresentationSection from "@/components/PresentationSection";
+import PresentationSection from "@/components/SECTIONS/PresentationSection";
+import Parceiros from "@/components/SECTIONS/Parceiros";
 
 export const metadata = {
   title: "SEELECT",
@@ -8,8 +9,9 @@ export const metadata = {
 
 const Home = () => {
   return (
-    <main className="flex flex-col items-center justify-between text-l-cian">
+    <main className="flex flex-col px-6 items-center justify-between text-l-cian">
       <PresentationSection />
+      <Parceiros />
     </main>
   );
 };
