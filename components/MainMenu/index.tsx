@@ -1,9 +1,8 @@
 "use client";
-import UseAnimations from "react-useanimations";
-import menu4 from "react-useanimations/lib/menu4";
 import useGlobalState from "@/store/menuStore";
 import Link from "next/link";
 import Button from "../Button";
+import MenuButton from "../MenuButton";
 
 export default function MainMenu() {
   const { menuIsOpen, setMenuIsOpen } = useGlobalState();
@@ -57,18 +56,10 @@ export default function MainMenu() {
 
       <button
         id="animate_menu_btn"
-        className="active:bg- hover:bg- hover:opacity-80 active:scale-95 duration-150 border- cursor-pointer"
+        className="active:bg- w-10 h-full hover:bg- hover:opacity-80 active:scale-95 duration-150 border- cursor-pointer"
+        onClick={(e) => setMenuIsOpen(!menuIsOpen)}
       >
-        <UseAnimations
-          strokeColor="rgb(233, 232, 232)"
-          fillColor="#fff"
-          onClick={(e) => setMenuIsOpen(!menuIsOpen)}
-          reverse={menuIsOpen ? true : false}
-          speed={1.5}
-          animation={menu4}
-          size={54}
-          className={`duration-200 ${menuIsOpen && "bg"}`}
-        />
+        <MenuButton size={40} open={!menuIsOpen} />
       </button>
     </div>
   );

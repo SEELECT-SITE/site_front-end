@@ -7,6 +7,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      height: {
+        "1/8": "12%",
+      },
+       rotate: {
+        '135': '135deg',
+      },
       colors: {
         "p-cian": "#44c1ba",
         "s-cian": "#84d1cf",
