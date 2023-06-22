@@ -10,13 +10,13 @@ module.exports = {
       height: {
         "1/8": "12%",
       },
-       rotate: {
-        '135': '135deg',
+      rotate: {
+        135: "135deg",
       },
       colors: {
         "p-cian": "#44c1ba",
         "s-cian": "#84d1cf",
-        "l-cian": "#f4f4f4",
+        white: "#f4f4f4",
         "dark-cian": "#0f3849",
         "m-dark": "#101120",
       },

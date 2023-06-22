@@ -9,10 +9,10 @@ export const metadata = {
 
 const Home = () => {
   return (
-    <main className="flex flex-col px-6 items-center justify-between text-l-cian">
+    <>
       <PresentationSection />
       <Parceiros />
-    </main>
+    </>
   );
 };
 export default Home;
