@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Seelect_icon from "@/public/icone-seelect-white.webp";
+import Seelect_icon from "@/public/icone_seelect-light-cian.webp";
 import MainMenu from "@/components/MainMenu";
 import Link from "next/link";
 
@@ -12,8 +12,8 @@ export default function HomeLayout({
   return (
     <>
       <body className={`bg-m-dark relative min-w-screen overflow-x-hidden `}>
-        <header className="w-full h-40 ">
-          <div className="w-full absolute bg-dark-cian z-50 m-auto flex justify-between py-6 px-3 items-center top-0 left-0 shadow-lg  shadow-black/80">
+        <header className="w-full fixed z-50">
+          <div className="w-full absolute bg-white z-50 m-auto flex justify-between py-6 px-3 items-center top-0 left-0 shadow-lg  shadow-black/80">
             <Link href="#">
               <Image
                 src={Seelect_icon}
@@ -25,7 +25,9 @@ export default function HomeLayout({
             <MainMenu />
           </div>
         </header>
-        {children}
+        <main className="flex flex-col px-6 items-center justify-between text-white pt-36">
+          {children}
+        </main>
       </body>
     </>
   );

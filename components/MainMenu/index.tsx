@@ -3,50 +3,75 @@ import useGlobalState from "@/store/menuStore";
 import Link from "next/link";
 import Button from "../Button";
 import MenuButton from "../MenuButton";
+import {
+  AiFillHome,
+  AiOutlineInfoCircle,
+  AiOutlineLogin,
+} from "react-icons/ai";
+import { IoIosPeople } from "react-icons/io";
 
 export default function MainMenu() {
   const { menuIsOpen, setMenuIsOpen } = useGlobalState();
 
   return (
     <div className="flex items-center">
-      {/* <div className="flex items-center text-base duration-200 text-gray-200  active:bg- hover:bg- hover:text-blue-gray-300 border- cursor-pointer">
-        {session ? (
-          <Link href="/userboard">
-            <div className="rounded-full overflow-hidden border-2">
-              <Image
-                alt="teste"
-                src={session?.user?.image as string}
-                width={36}
-                height={36}
-              />
-            </div>
-          </Link>
-        ) : (
-          <Link href="/login">
-            <HiUserCircle size={36} />
-          </Link>
-        )}
-      </div> */}
-
       <div
         className={`duration-500 ${
           menuIsOpen ? "left-0" : "left-full"
-        } min-h-screen absolute w-full top-0 bg-m-dark flex flex-col items-center justify-center`}
+        } min-h-screen absolute w-full top-0 bg-white flex flex-col px-4 justify-center`}
       >
-        <ul className="font-bold text-l-cian text-4xl flex flex-col gap-y-12 h-full items-center">
-          <li className="">SOBRE</li>
-          <li className="">WORKSHOPS</li>
-          <li className="">PALESTRAS</li>
-          <li className="">VISITAS TECNICAS</li>
-          <li>
-            <button onClick={(e) => setMenuIsOpen(!menuIsOpen)}>
-              <Link href="./pacotes">PACOTES</Link>
-            </button>
+        <ul className="font-bold text-dark-cian text-2xl flex flex-col gap-y-12 h-full">
+          <li className="pb-4 border-b-2 border-dark-cian w-full">
+            <Link href={"/"}>
+              <button
+                onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+                className="flex gap-2 items-center hover:opacity-80 active:scale-95"
+              >
+                <AiFillHome />
+                Pagina Inicial
+              </button>
+            </Link>
+          </li>
+          <li className="pb-4 border-b-2 border-dark-cian w-full">
+            <Link href={"/sobre"}>
+              <button
+                onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+                className="flex gap-2 items-center hover:opacity-80 active:scale-95"
+              >
+                <AiOutlineInfoCircle />
+                Sobre
+              </button>
+            </Link>
+          </li>
+          <li className="pb-4 border-b-2 border-dark-cian w-full">
+            <Link href={"/contato"}>
+              <button
+                onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+                className="flex gap-2 items-center hover:opacity-80 active:scale-95"
+              >
+                <IoIosPeople />
+                Contato
+              </button>
+            </Link>
+          </li>
+          <li className="pb-4 border-b-2 border-dark-cian w-full">
+            <Link href={"/login"}>
+              <button
+                onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+                className="flex gap-2 items-center hover:opacity-80 active:scale-95"
+              >
+                <AiOutlineLogin />
+                Login
+              </button>
+            </Link>
           </li>
 
-          <li className="">
-            <Link href={"/login"}>
-              <Button className="btn-outline hover:border-p-cian px-8 py-4 border-2 rounded-lg active:scale-95 duration-150">
+          <li>
+            <Link href={"/pacotes"}>
+              <Button
+                className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:scale-95 duration-150 w-full"
+                onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+              >
                 INSCREVA-SE
               </Button>
             </Link>
@@ -56,7 +81,7 @@ export default function MainMenu() {
 
       <button
         id="animate_menu_btn"
-        className="active:bg- w-10 h-full hover:bg- hover:opacity-80 active:scale-95 duration-150 border- cursor-pointer"
+        className="active:bg- w-10 h-full mr-2 hover:bg- hover:opacity-80 active:scale-95 duration-150 border- cursor-pointer"
         onClick={(e) => setMenuIsOpen(!menuIsOpen)}
       >
         <MenuButton size={40} open={!menuIsOpen} />
