@@ -1,6 +1,9 @@
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
+import Image from "next/image";
 import { redirect } from "next/navigation";
+import logo_seelect from "@/public/icone_seelect-light-cian.webp";
+import Link from "next/link";
 
 export const metadata = {
   title: "Login",
@@ -19,9 +22,18 @@ export default async function AuthLayout({
     redirect("/userboard");
   }
   return (
-    <body>
+    <body className="bg-white">
       <header>
-        <div>testeando login</div>
+        <div className="w-full bg-m-dark z-50 m-auto flex justify-between p-4 items-center">
+          <Link href="#">
+            <Image
+              src={logo_seelect}
+              alt="icone seelect"
+              width={52}
+              className="hover:drop-shadow-icon-sm hover:-translate-x-1 hover:-translate-y-1 duration-150"
+            />
+          </Link>
+        </div>
       </header>
       {children}
     </body>

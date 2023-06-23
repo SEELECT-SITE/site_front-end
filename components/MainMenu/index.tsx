@@ -17,10 +17,10 @@ export default function MainMenu() {
     <div className="flex items-center">
       <div
         className={`duration-500 ${
-          menuIsOpen ? "left-0" : "left-full"
-        } min-h-screen absolute w-full top-0 bg-white flex flex-col px-4 justify-center`}
+          menuIsOpen ? "left-0" : "left-full "
+        } min-h-screen absolute w-full top-0 bg-white flex border-l-2 border-m-dark flex-col px-4 justify-center `}
       >
-        <ul className="font-bold text-dark-cian text-2xl flex flex-col gap-y-12 h-full">
+        <ul className="font-bold text-dark-cian text-2xl flex flex-col  gap-y-12 h-full">
           <li className="pb-4 border-b-2 border-dark-cian w-full">
             <Link href={"/"}>
               <button
@@ -84,7 +84,7 @@ export default function MainMenu() {
         className="active:bg- w-10 h-full mr-2 hover:bg- hover:opacity-80 active:scale-95 duration-150 border- cursor-pointer"
         onClick={(e) => setMenuIsOpen(!menuIsOpen)}
       >
-        <MenuButton size={40} open={!menuIsOpen} />
+        <MenuButton size={42} open={!menuIsOpen} />
       </button>
     </div>
   );
