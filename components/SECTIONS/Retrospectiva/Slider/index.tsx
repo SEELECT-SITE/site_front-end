@@ -22,6 +22,10 @@ const imagens = [
     {
         imagem: fundo,
         alt: "Texto de retrospectiva"
+    },
+    {
+        imagem: fundo,
+        alt: "Texto de retrospectiva"
     }
   ]
 
@@ -29,6 +33,7 @@ export default function App() {
   return (
     <>
       <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+        <div className='bg-m-dark absolute w-110% -left-5% h-20 rounded-100% -translate-y-1/2 top-0 z-10'></div>
         
         {imagens.map((elem,index) => {
           return(
@@ -37,7 +42,7 @@ export default function App() {
             </SwiperSlide>     
           )
         })}
-
+        <div className='bg-white absolute w-110% -left-5% h-20 rounded-100% translate-y-1/2 bottom-0 z-10'></div>
       </Swiper>
     </>
   );

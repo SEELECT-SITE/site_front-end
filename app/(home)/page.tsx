@@ -1,6 +1,8 @@
 import PresentationSection from "@/components/SECTIONS/PresentationSection";
 import Parceiros from "@/components/SECTIONS/Parceiros";
 import Retrospectiva from "@/components/SECTIONS/Retrospectiva";
+import Cronograma from "@/components/SECTIONS/Cronograma"
+import Container from "@/components/Container";
 
 export const metadata = {
   title: "SEELECT",
@@ -10,11 +12,26 @@ export const metadata = {
 
 const Home = () => {
   return (
-    <main className="flex flex-col px-6 items-center justify-between text-l-cian">
-      <PresentationSection />
-      <Retrospectiva/>
-      <Parceiros />
-    </main>
+
+      <main className="">
+        <Container>
+          <PresentationSection /> 
+        </Container>
+        
+        <Container className="p-0">
+        <Retrospectiva/>
+        </Container>
+
+        <Container>
+        <Cronograma/>
+        </Container>
+
+        <Container>
+        <Parceiros />
+        </Container>
+
+      </main>
+
   );
 };
 export default Home;

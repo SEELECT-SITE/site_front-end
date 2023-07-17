@@ -10,7 +10,7 @@ module.exports = {
       colors: {
         "p-cian": "#44c1ba",
         "s-cian": "#84d1cf",
-        "l-cian": "#f4f4f4",
+        "white": "#f4f4f4",
         "dark-cian": "#0f3849",
         "m-dark": "#101120",
       },
@@ -28,6 +28,13 @@ module.exports = {
         icon: "8px 8px 0px #000",
         "icon-sm": "4px 4px 0px rgba(0, 0, 0, 0.40)",
       },
+      spacing: {
+        "110%": "110%",
+        "5%": "5%"
+      },
+      borderRadius: {
+        "100%": "100%"
+      }
     },
   },
   plugins: [],
