@@ -1,5 +1,6 @@
 import PresentationSection from "@/components/SECTIONS/PresentationSection";
 import Parceiros from "@/components/SECTIONS/Parceiros";
+import Retrospectiva from "@/components/SECTIONS/Retrospectiva";
 
 export const metadata = {
   title: "SEELECT",
@@ -11,6 +12,7 @@ const Home = () => {
   return (
     <main className="flex flex-col px-6 items-center justify-between text-l-cian">
       <PresentationSection />
+      <Retrospectiva/>
       <Parceiros />
     </main>
   );
