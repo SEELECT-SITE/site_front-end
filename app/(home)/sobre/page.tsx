@@ -1,3 +1,9 @@
+import PriceCard from "@/components/PriceCard";
+import PacotesCards from "@/components/PriceCard";
+import PacotesDescricao from "@/components/SECTIONS/PacotesDescricao";
+import Paragraph from "@/components/Text";
+import Title from "@/components/Title";
+
 export const metadata = {
   title: "Pacotes",
   description:
@@ -5,5 +11,21 @@ export const metadata = {
 };
 
 export default function PacotesPage() {
-  return <>pacotes</>;
+  return (
+    <>
+      <Title>
+        PACOTES DE PARTICIPAÇÃO
+      </Title>
+      <Paragraph>
+        Descubra os diferentes níveis de participação oferecidos no evento SEELECT e escolha 
+        o que melhor se adequa às suas necessidades e orçamento. Explore os pacotes Básico, 
+        Premium e VIP, cada um com benefícios exclusivos para uma experiência personalizada 
+        e enriquecedora. Escolha o seu nível de participação e aproveite ao máximo o SEELECT!
+      </Paragraph>
+
+      <PriceCard price={30} title="Pacote Básico" description="teste"/>
+      <PriceCard price={60} title="Pacote Premium" description="teste"/>
+      <PriceCard price={120} title="Pacote VIP" description="teste"/>
+    </>
+  );
 }
