@@ -15,5 +15,3 @@ const Title: FunctionComponent<TitleProps> = ({ children, className }) => {
     </h2>
   );
 };
-
-export default Title;
