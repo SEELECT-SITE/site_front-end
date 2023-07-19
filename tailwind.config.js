@@ -34,6 +34,9 @@ module.exports = {
         icon: "8px 8px 0px #000",
         "icon-sm": "4px 4px 0px rgba(0, 0, 0, 0.40)",
       },
+      screens: {
+        xs: "350px",
+      }
     },
   },
   plugins: [],

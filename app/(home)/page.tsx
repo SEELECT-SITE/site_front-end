@@ -1,5 +1,7 @@
 import PresentationSection from "@/components/SECTIONS/PresentationSection";
 import Parceiros from "@/components/SECTIONS/Parceiros";
+import Container from "@/components/Container";
+import Cronograma from "@/components/SECTIONS/Cronograma"
 
 export const metadata = {
   title: "SEELECT",
@@ -10,8 +12,18 @@ export const metadata = {
 const Home = () => {
   return (
     <>
-      <PresentationSection />
-      <Parceiros />
+      <Container>
+        <PresentationSection />
+      </Container>
+        
+        <Cronograma/>
+
+      <Container className="bg-white w-full">
+        <Parceiros />
+      </Container>
+
+
+
     </>
   );
 };

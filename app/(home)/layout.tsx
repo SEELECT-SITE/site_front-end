@@ -25,7 +25,7 @@ export default function HomeLayout({
             <MainMenu />
           </div>
         </header>
-        <main className="flex flex-col px-6 items-center justify-between text-white pt-36">
+        <main className="flex flex-col items-center justify-between text-white pt-36">
           {children}
         </main>
       </body>

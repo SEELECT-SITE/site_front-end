@@ -39,6 +39,7 @@
     "mongodb": "^5.7.0",
     "react-icons": "^4.9.0",
     "react-query": "^3.39.3",
+    "swiper": "^10.0.4",
     "vite": "^2.7.2",
     "vite-plugin-env-compatible": "^1.1.1",
     "vite-plugin-html": "3.2.0"
