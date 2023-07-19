@@ -1,4 +1,4 @@
-import { bebasFont } from "@/app/fonts";
+
 import { FunctionComponent } from "react";
 import Title from "../Title";
 

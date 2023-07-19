@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import seelect_logo from "@/public/icone_seelect.webp";
-import { bebasFont } from "@/app/fonts";
 import Button from "../../Button";
 
 export default function PresentationSection() {
@@ -16,7 +15,7 @@ export default function PresentationSection() {
           />
         </figure>
         <div>
-          <h1 className={`${bebasFont.className} text-3xl mb-3`}>
+          <h1 className={` text-3xl mb-3`}>
             TERCEIRA SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELETRICA E
             TELECOMUNICAÇÕES.
           </h1>

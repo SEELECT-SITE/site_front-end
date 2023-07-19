@@ -1,11 +1,9 @@
-import { bebasFont } from "@/app/fonts";
-
 export default function PacotesDescricao() {
     return (
       <section>
         <div>
           <div>
-            <h1 className={`${bebasFont.className} text-3xl mb-3`}>
+            <h1 className={` text-3xl mb-3`}>
               PACOTES DE PARTICIPAÇÃO
             </h1>
             <h2 className="opacity-80">

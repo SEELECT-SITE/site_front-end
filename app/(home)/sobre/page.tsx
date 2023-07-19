@@ -1,6 +1,4 @@
 import PriceCard from "@/components/PriceCard";
-import PacotesCards from "@/components/PriceCard";
-import PacotesDescricao from "@/components/SECTIONS/PacotesDescricao";
 import Paragraph from "@/components/Text";
 import Title from "@/components/Title";
 
