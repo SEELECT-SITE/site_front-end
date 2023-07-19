@@ -11,7 +11,7 @@ export default function HomeLayout({
 }) {
   return (
     <>
-      <body className={`bg-m-dark relative min-w-screen overflow-x-hidden `}>
+      <body className={`bg-dark relative min-w-screen overflow-x-hidden `}>
         <header className="w-full fixed z-50">
           <div className="w-full absolute bg-white z-50 m-auto flex justify-between p-4 items-center top-0 left-0 shadow-lg  shadow-black/80">
             <Link href="#">
@@ -22,7 +22,7 @@ export default function HomeLayout({
                 className="hover:drop-shadow-icon-sm hover:-translate-x-1 hover:-translate-y-1 duration-150"
               />
             </Link>
-            <MainMenu/>
+            <MainMenu />
           </div>
         </header>
         <main className="flex flex-col px-6 items-center justify-between text-white pt-36">

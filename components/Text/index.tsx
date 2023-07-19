@@ -1,16 +1,16 @@
 import { FunctionComponent, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface ParagraphProps {
+interface TextProps {
   children: ReactNode;
   className?: string;
 }
 
-const Paragraph: FunctionComponent<ParagraphProps> = ({
+const Text: FunctionComponent<TextProps> = ({
   children,
   className,
 }) => {
   return <p className={twMerge("mb-3 tracking-wide", className)}>{children}</p>;
 };
 
-export default Paragraph;
+export default Text;
