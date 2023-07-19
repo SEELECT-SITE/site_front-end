@@ -14,11 +14,11 @@ module.exports = {
         135: "135deg",
       },
       colors: {
-        "p-cian": "#44c1ba",
-        "s-cian": "#84d1cf",
+        "cian-700": "#44c1ba",
+        "cian-400": "#84d1cf",
         white: "#f4f4f4",
         "dark-cian": "#0f3849",
-        "m-dark": "#101120",
+        dark: "#101120",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -24,7 +24,7 @@ export default async function AuthLayout({
   return (
     <body className="bg-white">
       <header>
-        <div className="w-full bg-m-dark z-50 m-auto flex justify-between p-4 items-center">
+        <div className="w-full bg-dark z-50 m-auto flex justify-between p-4 items-center">
           <Link href="#">
             <Image
               src={logo_seelect}

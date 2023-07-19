@@ -1,13 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import Seelect_icon from "@/public/icone-seelect-white.webp";
-import { bebasFont } from "@/app/fonts";
 
 function Parceiros() {
   return (
     <section className="w-full my-11">
       <div>
-        <h2 className={`text-3xl mb-11 ${bebasFont.className}`}>Parceiros</h2>
+        <h2 className={`text-3xl mb-11 `}>Parceiros</h2>
 
         <div className="flex items-center justify-between">
           <Image
