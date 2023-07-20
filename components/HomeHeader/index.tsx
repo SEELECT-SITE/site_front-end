@@ -4,10 +4,10 @@ import Link from "next/link";
 import Seelect_icon from "@/public/icone_seelect-light-cian.webp";
 import MainMenu from "../MainMenu";
 
-const HomeHeader = () => {
+const HeaderHome = () => {
   return (
     <header className={`w-full fixed z-50 -translate-y-1`}>
-      <div className="w-full absolute bg-white z-50 m-auto flex justify-between p-4 items-center top-0 left-0 shadow-lg  shadow-black/80">
+      <div className="w-full absolute bg-white z-50 m-auto flex justify-between p-4 items-center top-0 left-0 shadow-md shadow-black/30">
         <Link href="#">
           <Image
             src={Seelect_icon}
@@ -22,4 +22,4 @@ const HomeHeader = () => {
   );
 };
 
-export default HomeHeader;
+export default HeaderHome;
