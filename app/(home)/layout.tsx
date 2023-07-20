@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import { cafeFont } from "../fonts";
 import HomeHeader from "@/components/HomeHeader";
 export default function HomeLayout({
@@ -8,12 +9,13 @@ export default function HomeLayout({
   return (
     <>
       <body
-        className={`bg-dark relative min-w-screen overflow-x-hidden ${cafeFont.className}`}
+        className={`bg-dark relative min-w-screen max-w-xl overflow-x-hidden ${cafeFont.className}`}
       >
         <HomeHeader />
         <main className="flex flex-col items-center justify-between text-white">
           {children}
         </main>
+        <Footer />
       </body>
     </>
   );

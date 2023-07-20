@@ -38,7 +38,7 @@ const PriceCard: FunctionComponent<PriceCardProps> = ({
       }`}
     >
       <div
-        className={`rounded-3xl border-2 relative border-black/10 p-6 shadow-lg  sm:order-last sm:px-8 lg:p-12 ${
+        className={`rounded-3xl border-2 relative border-black/10 p-6 shadow-lg sm:order-last sm:px-8 lg:p-12 ${
           destack ? "bg-dark shadow-black/40" : "bg-white shadow-black/20"
         }`}
       >

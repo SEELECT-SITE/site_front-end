@@ -8,9 +8,7 @@ interface TitleProps {
 
 const Title: FunctionComponent<TitleProps> = ({ children, className }) => {
   return (
-    <h2
-      className={twMerge("text-3xl font-bold tracking-tight mb-2", className)}
-    >
+    <h2 className={twMerge("text-3xl font-bold tracking-wide mb-2", className)}>
       {children}
     </h2>
   );

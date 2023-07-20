@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import seelect_logo from "@/public/icone_seelect.webp";
-import Button from "../../Button";
 import Text from "@/components/Text";
 import FloatButton from "@/components/FloatButton";
 
