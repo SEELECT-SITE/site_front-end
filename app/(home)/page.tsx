@@ -2,6 +2,7 @@ import PresentationSection from "@/components/SECTIONS/PresentationSection";
 import Parceiros from "@/components/SECTIONS/Parceiros";
 import Container from "@/components/Container";
 import Cronograma from "@/components/SECTIONS/Cronograma"
+import Retrospec from "@/components/SECTIONS/Retrospec";
 
 export const metadata = {
   title: "SEELECT",
@@ -15,7 +16,11 @@ const Home = () => {
       <Container>
         <PresentationSection />
       </Container>
-        
+
+
+        <Retrospec/>
+
+
         <Cronograma/>
 
       <Container className="bg-white w-full">
