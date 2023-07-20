@@ -3,6 +3,7 @@ import Image from "next/image";
 import seelect_logo from "@/public/icone_seelect.webp";
 import Button from "../../Button";
 import Text from "@/components/Text";
+import FloatButton from "@/components/FloatButton";
 
 export default function PresentationSection() {
   return (
@@ -28,14 +29,10 @@ export default function PresentationSection() {
           </Text>
         </div>
         <div className="w-full py-4">
-          <Button
-            onClick={(e) => {
-              console.log(e);
-            }}
-            className="bg-cian-700 text-dark text-3xl font-bold w-full rounded-2xl"
-          >
-            SAIBA MAIS
-          </Button>
+
+          <FloatButton>SAIBA MAIS</FloatButton>
+          
+         
         </div>
       </div>
     </section>
