@@ -8,7 +8,7 @@ function Retrospec() {
   return (
     <>
         <Container>
-            <Title className='text-cian-700 text-2xl'>Retrospectiva SEELECT 2022</Title>
+            <Title className='text-cian-700 text-xl'>RETROSPECTIVA SEELECT 2022</Title>
         </Container>
 
         <Slider/>

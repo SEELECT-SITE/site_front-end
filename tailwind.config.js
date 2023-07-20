@@ -36,7 +36,14 @@ module.exports = {
       },
       screens: {
         xs: "350px",
-      }
+      },
+      borderRadius: {
+        "100%": "100%",
+      },
+      spacing: {
+        "5%": "5%",
+        "110%": "110%",
+      },
     },
   },
   plugins: [],

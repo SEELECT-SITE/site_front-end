@@ -10,7 +10,7 @@ const Container: FunctionComponent<ContainerProps> = ({
   children,
   className,
 }) => {
-  return <div className={twMerge('px-2 xs:px-3 py-1',className)}>{children}</div>;
+  return <div className={twMerge('px-3 xs:px-4 py-8 w-full',className)}>{children}</div>;
 };
 
 export default Container;

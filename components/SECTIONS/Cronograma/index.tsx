@@ -1,10 +1,11 @@
 import React from 'react'
 import Slider from "@/components/SECTIONS/Cronograma/Slider"
+import Title from '@/components/Title'
 
 function Cronograma() {
   return (
-    <section className="w-full pt-6 bg-white">
-        <h2 className={`text-3xl text-center text-dark mb-10`}>Cronograma GERAL</h2>
+    <section className="w-full pt-12 bg-white">
+        <Title className={`text-xl font-bold text-center text-dark mb-10`}>CRONOGRAMA GERAL</Title>
         <Slider/>
     </section>
   )
