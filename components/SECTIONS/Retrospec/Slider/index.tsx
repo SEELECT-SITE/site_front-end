@@ -1,20 +1,13 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React from "react";
 import Image from "next/image";
-import fundo from "@/public/Rectangle 24.png";
-
-// Import Swiper React components
+import fundo from "@/public/palestra.png";
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 
 import "./styles.css";
-
-// import required modules
 import { Navigation } from "swiper/modules";
-import Container from "@/components/Container";
 
 const imagens = [
   {

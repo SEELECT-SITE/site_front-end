@@ -15,7 +15,7 @@ export const metadata = {
 const Home = () => {
   return (
     <>
-      <Container className="pt-4">
+      <Container className="pt-32">
         <PresentationSection />
       </Container>
 

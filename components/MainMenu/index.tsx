@@ -1,5 +1,5 @@
 "use client";
-import useGlobalState from "@/store/menuStore";
+import useGlobalState from "@/stores/menuStore";
 import Link from "next/link";
 import Button from "../Button";
 import MenuButton from "../MenuButton";
@@ -9,6 +9,7 @@ import {
   AiOutlineLogin,
 } from "react-icons/ai";
 import { IoIosPeople } from "react-icons/io";
+import { MdAddShoppingCart } from "react-icons/md";
 
 export default function MainMenu() {
   const { menuIsOpen, setMenuIsOpen } = useGlobalState();
@@ -44,6 +45,17 @@ export default function MainMenu() {
             </Link>
           </li>
           <li className="pb-4 border-b-2 border-dark-cian w-full">
+            <Link href={"/pacotes"}>
+              <button
+                onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+                className="flex gap-2 items-center hover:opacity-80 active:scale-95"
+              >
+                <MdAddShoppingCart />
+                Pacotes
+              </button>
+            </Link>
+          </li>
+          <li className="pb-4 border-b-2 border-dark-cian w-full">
             <Link href={"/contato"}>
               <button
                 onClick={(e) => setMenuIsOpen(!menuIsOpen)}
@@ -51,17 +63,6 @@ export default function MainMenu() {
               >
                 <IoIosPeople />
                 Contato
-              </button>
-            </Link>
-          </li>
-          <li className="pb-4 border-b-2 border-dark-cian w-full">
-            <Link href={"/login"}>
-              <button
-                onClick={(e) => setMenuIsOpen(!menuIsOpen)}
-                className="flex gap-2 items-center hover:opacity-80 active:scale-95"
-              >
-                <AiOutlineLogin />
-                Login
               </button>
             </Link>
           </li>
