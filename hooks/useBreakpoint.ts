@@ -1,10 +1,11 @@
-'use client'
+"use client";
 import { useState, useEffect } from "react";
 
 const useBreakpoint = () => {
   const [breakpoint, setBreakpoint] = useState(window.innerWidth);
   const resize = () => {
     setBreakpoint(window.innerWidth);
+    console.log(breakpoint);
   };
 
   useEffect(() => {
