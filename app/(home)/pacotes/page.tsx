@@ -22,7 +22,7 @@ export default function PacotesPage() {
           Veja a melhor dentre as 3 opções abaixo:
         </Paragraph>
 
-        <div>
+        <div className="flex flex-col items-center">
           <PriceCard price={30} title="Pacote Básico" stars={1}>
             <ul className="text-black font-thin italic mt-4 mb-8">
               <li className="flex gap-1 mt-2 text-sm">

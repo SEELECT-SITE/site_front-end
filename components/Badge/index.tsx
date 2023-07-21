@@ -19,7 +19,7 @@ const Badge: FunctionComponent<BadgeProps> = ({
         <div
           style={{ writingMode: "vertical-lr", textOrientation: "upright" }}
           className={twMerge(
-            " absolute rounded-full border flex items-center justify-center text-dark bg-white font-bold",
+            "absolute rounded-full border flex items-center justify-center text-dark bg-white font-bold",
             className
           )}
         >
