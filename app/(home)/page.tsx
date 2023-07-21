@@ -4,7 +4,6 @@ import Container from "@/components/Container";
 import Cronograma from "@/components/SECTIONS/Cronograma";
 import Retrospec from "@/components/SECTIONS/Retrospec";
 import Contact from "@/components/SECTIONS/Contact";
-import Title from "@/components/Title";
 
 export const metadata = {
   title: "SEELECT",
