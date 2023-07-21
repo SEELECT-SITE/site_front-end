@@ -4,6 +4,7 @@ import Container from "@/components/Container";
 import Cronograma from "@/components/SECTIONS/Cronograma";
 import Retrospec from "@/components/SECTIONS/Retrospec";
 import Contact from "@/components/SECTIONS/Contact";
+import Testimony from "@/components/SECTIONS/Testimony";
 
 export const metadata = {
   title: "SEELECT",
@@ -16,6 +17,10 @@ const Home = () => {
     <>
       <Container className="pt-32">
         <PresentationSection />
+      </Container>
+
+      <Container>
+        <Testimony/>
       </Container>
 
       <Retrospec />

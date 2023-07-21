@@ -3,6 +3,8 @@ import Image from "next/image";
 import foto from "@/public/team_seelect.png";
 import Container from "@/components/Container";
 import Title from "@/components/Title";
+import FloatButton from "@/components/FloatButton";
+import { MdModeComment } from "react-icons/md"
 
 function Contact() {
   return (
@@ -27,6 +29,13 @@ function Contact() {
           possível. Aguardamos sua mensagem!
         </span>
       </Container>
+
+      <Container className="bg-white w-full">
+        <FloatButton className="bg-dark text-white flex" shadowClassname="bg-dark/80">
+          <MdModeComment size={21}/> Entre em contato
+        </FloatButton>
+      </Container>
+
     </>
   );
 }
