@@ -13,6 +13,9 @@ module.exports = {
       rotate: {
         135: "135deg",
       },
+      fontSize: {
+        '5xl': ["3rem", "3.4rem"],
+      },
       colors: {
         "cian-700": "#44c1ba",
         "cian-400": "#84d1cf",
@@ -31,7 +34,7 @@ module.exports = {
       },
       dropShadow: {
         "icon-xl": "12px 12px 0px rgba(0, 0, 0, 0.25)",
-        icon: "8px 8px 0px #000",
+        icon: "8px 8px 0px #0009",
         "icon-sm": "2px 2px 0px rgba(0, 0, 0, 0.40)",
         xlc: ["1px 1px 1px #0005", "-1px -1px 1px #0003"],
       },

@@ -1,25 +1,22 @@
 import { FunctionComponent, ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
-interface ContainerProps {
+interface TextProps {
   children: ReactNode;
   className?: string;
 }
 
-const Container: FunctionComponent<ContainerProps> = ({
-  children,
-  className,
-}) => {
+const SmallText: FunctionComponent<TextProps> = ({ children, className }) => {
   return (
-    <div
+    <small
       className={twMerge(
-        "px-3 xs:px-4 py-8 w-full lg:px-12 xl:px-16 2xl:px-24",
+        "lg:text-sm lg:font-thin m-0 p-0 tracking-wide",
         className
       )}
     >
       {children}
-    </div>
+    </small>
   );
 };
 
-export default Container;
+export default SmallText;

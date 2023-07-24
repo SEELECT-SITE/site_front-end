@@ -12,8 +12,8 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="w-full" id="footer_home">
-      <Container className="w-full flex flex-col justify-center">
+    <footer className="w-full bg-dark" id="footer_home">
+      <Container className="w-full flex flex-col justify-center ">
         <div className="my-12">
           <Image
             src={seelect_logo}

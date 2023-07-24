@@ -9,7 +9,7 @@ export default function RootLayout({
 }) {
   const { menuIsOpen } = useGlobalState();
   return (
-    <html lang="en" className={`max-w-xl ${menuIsOpen && "overflow-y-hidden"}`}>
+    <html lang="en" className={`${menuIsOpen && "overflow-y-hidden"}`}>
       {children}
     </html>
   );
