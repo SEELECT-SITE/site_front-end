@@ -5,7 +5,7 @@ import Text from "@/components/Text";
 
 function index() {
   return (
-    <div className="bg-dark w-full max-w-xs rounded-full flex flex-col items-center justify-center gap-2">
+    <div className="bg-dark w-full max-w-sm rounded-full flex flex-col items-center justify-center gap-2">
       <div className="w-5 justify-center pt-4">
         <MdTableRestaurant size={32} />
       </div>
