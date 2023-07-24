@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 
 import "./styles.css";
-import Conteudo from "@/components/SECTIONS/Cronograma/Slider/Conteudo";
+import Conteudo from "@/components/SECTIONS/Cronograma/CronoSlider/Conteudo";
 import Container from "@/components/Container";
 
 // import required modules
@@ -15,12 +15,20 @@ import Container from "@/components/Container";
 export default function CronoSlider() {
   return (
     <>
-      <Container>
+      <Container className="w-full m-auto">
         <Swiper
           slidesPerView={1.1}
           spaceBetween={15}
+          initialSlide={1}
+          breakpoints={{
+            1024: {
+              slidesPerView: 3,
+              centeredSlides:true,
+              centerInsufficientSlides: true,
+            },
+          }}
           modules={[]}
-          className="mySwiper"
+          className="mySwiper px-64"
         >
           <SwiperSlide>
             <Conteudo />

@@ -22,14 +22,13 @@ const Home = () => {
       <div className="pt-32 lg:py-44 bg-gradient-to-b from-dark to-dark/90">
         <PresentationSection />
 
-        <div className="w-110% -left-5% absolute -translate-y-1/2 -z-10">
-          <Image src={wave_svg} alt={"svg de decoração"} className="w-full" />
-        </div>
-        <div className="absolute -translate-y-1/2 -z-10 top-24 right-0"></div>
-
-        <Container>
+        <Container className="lg:mt-16">
           <Testimony />
         </Container>
+
+        <div className="w-110% -left-5% absolute -z-10 min-w-[800px] -translate-y-3/4 lg:-translate-y-1/2">
+          <Image src={wave_svg} alt={"svg de decoração"} className="w-full" />
+        </div>
       </div>
 
       <Retrospec />
