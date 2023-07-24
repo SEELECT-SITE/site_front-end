@@ -15,7 +15,7 @@ export default function MainMenu() {
   const { menuIsOpen, setMenuIsOpen } = useGlobalState();
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center lg:hidden">
       <div
         className={`duration-500 ${
           menuIsOpen ? "left-0" : "left-full "

@@ -7,7 +7,7 @@ import FloatButton from "@/components/FloatButton";
 export default function PresentationSection() {
   return (
     <section>
-      <figure className="m-auto w-2/3  mb-6 max-w-md">
+      <figure className="m-auto w-2/3 mb-6 max-w-md">
         <Image
           src={seelect_logo}
           alt="logo da seelect"
