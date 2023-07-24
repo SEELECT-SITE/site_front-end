@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Pacotes",
+  title: "Contato",
   description:
     "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
 };
