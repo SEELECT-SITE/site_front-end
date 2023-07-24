@@ -13,6 +13,9 @@ module.exports = {
       rotate: {
         135: "135deg",
       },
+      fontSize: {
+        '5xl': ["3rem", "3.4rem"],
+      },
       colors: {
         "cian-700": "#44c1ba",
         "cian-400": "#84d1cf",

@@ -10,7 +10,7 @@ const Text: FunctionComponent<TextProps> = ({
   children,
   className,
 }) => {
-  return <p className={twMerge("mb-3 tracking-wide", className)}>{children}</p>;
+  return <p className={twMerge("text-sm lg:text-base mb-3 tracking-wide", className)}>{children}</p>;
 };
 
 export default Text;
