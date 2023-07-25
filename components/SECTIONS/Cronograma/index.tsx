@@ -25,8 +25,8 @@ function Cronograma() {
         <div className="flex gap-2 py-0 rounded-lg">
           <Decoration />
           <FloatButton
-            className="bg-cian-700 text-xl text-dark lg:py-6 "
-            shadowClassname="bg-black lg:w-1/3 lg:float-right w-72"
+            className="bg-cian-700 text-xl text-dark lg:py-6 whitespace-nowrap"
+            shadowClassname="bg-black w-2/3 lg:w-1/3"
           >
             INSCREVA-SE
           </FloatButton>

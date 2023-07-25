@@ -32,10 +32,10 @@ const Home = () => {
       </div>
 
       <Retrospec />
+
       <Container>
         <Cronograma />
       </Container>
-      
 
       <Container className="bg-white w-full my-12 lg:my-32">
         <Parceiros />
