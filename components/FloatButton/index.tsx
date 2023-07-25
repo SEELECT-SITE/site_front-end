@@ -21,7 +21,7 @@ const FloatButton: FunctionComponent<baseComponent> = ({
     <button
       disabled={disabled}
       className={twMerge(
-        "group bg-cian-700 flex disabled:pointer-events-none disabled:opacity-50 rounded-md hover:opacity-90",
+        "group focus:ring bg-cian-700 flex disabled:pointer-events-none disabled:opacity-50 rounded-md hover:opacity-90",
         shadowClassname
       )}
       onClick={onClick ?? (() => {})}

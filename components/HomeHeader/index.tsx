@@ -10,7 +10,7 @@ const HeaderHome = () => {
   return (
     <header
       className={`w-full fixed z-50 duration-300 ${
-        isOpen ? "-translate-y-1" : "-translate-y-32"
+        isOpen ? "-translate-y-0" : "-translate-y-32"
       }`}
     >
       <div className="w-full absolute bg-white z-50 m-auto flex justify-between p-4 lg:px-12 xl:px-16 2xl:px-24 items-center top-0 left-0 shadow-md shadow-black/30">
