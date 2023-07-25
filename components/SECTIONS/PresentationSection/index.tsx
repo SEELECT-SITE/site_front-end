@@ -23,12 +23,19 @@ export default function PresentationSection() {
             quis rem earum vitae?
           </Text>
           <div className="w-full py-4 lg:max-w-lg lg:mt-8">
-            <FloatButton className="lg:text-2xl">SAIBA MAIS</FloatButton>
+            <FloatButton className="lg:text-2xl" shadowClassname="w-full">
+              SAIBA MAIS
+            </FloatButton>
           </div>
         </div>
 
         <figure className="m-auto w-2/3 mb-6 max-w-md">
-          <Image src={seelect_logo} alt="logo da seelect" className="lg:min-w-[360px]" />
+          <Image
+            src={seelect_logo}
+            priority={true}
+            alt="logo da seelect"
+            className="lg:min-w-[360px]"
+          />
         </figure>
       </Container>
     </section>
