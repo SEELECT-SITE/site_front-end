@@ -7,7 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 import Input from "@/components/Input";
 import FloatButton from "@/components/FloatButton";
 
-import loginBg from "@/public/login_bg.png";
+import loginBg from "@/public/login_bg.webp";
 
 export const metadata = {
   title: "Login",
@@ -28,6 +28,7 @@ export default function Login() {
             <Image
               src={logoSeelect}
               alt="logo"
+              priority={true}
               className="duration-200 min-w-12 group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 group-hover:drop-shadow-icon-sm"
             />
           </Link>
