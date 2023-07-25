@@ -9,6 +9,7 @@ interface PriceCardProps {
   title: string;
   children?: ReactNode;
   destack?: boolean;
+  destackText?: string;
   stars?: number;
 }
 
@@ -29,21 +30,30 @@ const PriceCard: FunctionComponent<PriceCardProps> = ({
   title,
   children,
   stars,
+  destackText,
   destack,
 }) => {
   return (
     <div
-      className={`w-full max-w-md py-6 lg:py-8 ${
+      className={`w-full max-w-md py-6 lg:py-8 grow shrink relative ${
         destack ? "text-white" : "text-black"
       }`}
     >
+      {destackText && (
+        <div
+          style={{ writingMode: "vertical-lr", textOrientation: "upright" }}
+          className="py-2 rounded-xl text-sm top-1/4 -translate-x-1/2 text-cian-700 border bg-white border-cian-700 absolute"
+        >
+          {destackText}
+        </div>
+      )}
       <div
         className={`rounded-3xl h-full flex flex-col justify-between border-2 border-black/10 p-6 shadow-lg sm:px-8 lg:p-12 ${
           destack ? "bg-dark shadow-black/40" : "bg-white shadow-black/20"
         }`}
       >
         <div className="text-left flex justify-between">
-          <Title className="text-xl xs:text-2xl  tracking-wide font-bold">
+          <Title className="text-lg xs:text-xl lg:text-2xl tracking-wide font-bold">
             {title}
           </Title>
           <ThunderIcons quantity={stars || 0} />
