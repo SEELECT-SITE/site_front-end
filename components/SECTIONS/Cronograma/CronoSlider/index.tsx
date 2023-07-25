@@ -15,32 +15,30 @@ import Container from "@/components/Container";
 export default function CronoSlider() {
   return (
     <>
-      <Container className="w-full m-auto">
-        <Swiper
-          slidesPerView={1.1}
-          spaceBetween={15}
-          initialSlide={1}
-          breakpoints={{
-            1024: {
-              slidesPerView: 3,
-              centeredSlides:true,
-              centerInsufficientSlides: true,
-            },
-          }}
-          modules={[]}
-          className="mySwiper px-64"
-        >
-          <SwiperSlide>
-            <Conteudo />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Conteudo />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Conteudo />
-          </SwiperSlide>
-        </Swiper>
-      </Container>
+      <Swiper
+        slidesPerView={1.1}
+        spaceBetween={15}
+        initialSlide={1}
+        breakpoints={{
+          1024: {
+            slidesPerView: 3,
+            centeredSlides: true,
+            centerInsufficientSlides: true,
+          },
+        }}
+        modules={[]}
+        className="mySwiper px-64"
+      >
+        <SwiperSlide>
+          <Conteudo />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Conteudo />
+        </SwiperSlide>
+        <SwiperSlide>
+          <Conteudo />
+        </SwiperSlide>
+      </Swiper>
     </>
   );
 }

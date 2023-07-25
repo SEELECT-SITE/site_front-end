@@ -1,6 +1,5 @@
 import React from "react";
 import { MdTableRestaurant } from "react-icons/md";
-import Title from "@/components/Title";
 import Text from "@/components/Text";
 
 function index() {

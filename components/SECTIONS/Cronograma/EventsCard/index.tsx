@@ -6,7 +6,7 @@ import { MdCalendarToday, MdLocationPin } from "react-icons/md";
 
 function EventCards() {
   return (
-    <div className="relative w-full bg-dark p-4 mt-16 lg:p-8 pt-16 lg:pt-24 rounded-2xl max-w-md ">
+    <div className="relative shrink grow bg-dark p-4 mt-16 lg:p-8 pt-16 lg:pt-24 rounded-2xl">
       <div className="w-28 lg:w-36 aspect-square absolute top-0 -translate-y-1/2 p-4 rounded-full bg-dark-cian overflow-hidden">
         <Image src={LogoSeelect} alt={"avatar"} />
       </div>

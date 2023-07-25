@@ -28,7 +28,7 @@ export default function PresentationSection() {
         </div>
 
         <figure className="m-auto w-2/3 mb-6 max-w-md">
-          <Image src={seelect_logo} alt="logo da seelect" className="lg:min-w-[360px]" />
+          <Image src={seelect_logo} priority={true} alt="logo da seelect" className="lg:min-w-[360px]" />
         </figure>
       </Container>
     </section>
