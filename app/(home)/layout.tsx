@@ -9,7 +9,7 @@ export default function HomeLayout({
   return (
     <>
       <body
-        className={`bg-white w-full relative min-h-screen ${cafeFont.className}`}
+        className={`bg-white w-full relative min-h-screen overflow-x-hidden ${cafeFont.className}`}
       >
         <HomeHeader />
         <main className="text-white">

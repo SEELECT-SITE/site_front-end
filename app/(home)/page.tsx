@@ -19,7 +19,7 @@ export const metadata = {
 const Home = () => {
   return (
     <>
-      <div className="pt-32 lg:py-44 bg-gradient-to-b from-dark to-dark/90">
+      <div className="pt-32 lg:py-44 bg-gradient-to-b from-dark via-dark via-40% to-dark/70">
         <PresentationSection />
 
         <Container className="lg:mt-16">

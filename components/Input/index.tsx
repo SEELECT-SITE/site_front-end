@@ -1,9 +1,15 @@
 "use client";
-import { ChangeEvent, FocusEventHandler, FunctionComponent } from "react";
+import {
+  ChangeEvent,
+  FocusEventHandler,
+  FunctionComponent,
+  InputHTMLAttributes,
+} from "react";
 import { twMerge } from "tailwind-merge";
 import { MdClose, MdCheck } from "react-icons/md";
+import { cafeFont } from "@/app/fonts";
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   valid?: boolean | undefined;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
@@ -15,12 +21,15 @@ const Input: FunctionComponent<InputProps> = ({
   valid,
   onChange,
   value,
+  ...restProps
 }) => {
   return (
     <label
       htmlFor="email"
       className={twMerge(
-        `relative block border border-black shadow-sm border-b-2 ${
+        `${
+          cafeFont.className
+        } relative block border rounded-lg border-black shadow-sm border-b-2 ${
           valid === false && "border-b-red-400"
         }
         ${valid === true && "border-b-green-600"}
@@ -28,6 +37,7 @@ const Input: FunctionComponent<InputProps> = ({
       )}
     >
       <input
+        {...restProps}
         type="email"
         id="email"
         onBlur={onBlur ?? (() => {})}
