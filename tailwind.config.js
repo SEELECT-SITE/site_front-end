@@ -14,7 +14,7 @@ module.exports = {
         135: "135deg",
       },
       fontSize: {
-        '5xl': ["3rem", "3.4rem"],
+        "5xl": ["3rem", "3.4rem"],
       },
       colors: {
         "cian-700": "#44c1ba",
@@ -22,6 +22,21 @@ module.exports = {
         white: "#f4f4f4",
         "dark-cian": "#0f3849",
         dark: "#101120",
+      },
+      animation: {
+        "login-deco": "login-deco 20s ease-in-out infinite",
+      },
+      keyframes: {
+        "login-deco": {
+          "0%, 100%": { transform: "translateX(-25%)" },
+          "50%": { transform: "translateX(0%)" },
+        },
+      },
+      minWidth: {
+        12: "3rem",
+        18: "4.5rem",
+        24: "6rem",
+        32: "8rem",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -47,6 +62,7 @@ module.exports = {
       spacing: {
         "5%": "5%",
         "110%": "110%",
+        "2-full": "200%",
       },
     },
   },
