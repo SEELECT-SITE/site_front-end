@@ -26,9 +26,12 @@
     "zustand": "^4.3.8"
   },
   "devDependencies": {
+    "@hookform/resolvers": "^3.1.1",
     "@originjs/vite-plugin-commonjs": "^1.0.1",
+    "react-hook-form": "^7.45.2",
     "react-icons": "^4.9.0",
     "react-query": "^3.39.3",
-    "swiper": "^10.0.4"
+    "swiper": "^10.0.4",
+    "zod": "^3.21.4"
   }
 }
