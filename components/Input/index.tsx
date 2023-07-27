@@ -1,7 +1,7 @@
 "use client";
 import { FunctionComponent, InputHTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
-import { MdClose, MdCheck } from "react-icons/md";
+import { MdClose, MdCheck, MdErrorOutline } from "react-icons/md";
 import { cafeFont } from "@/app/fonts";
 import { UseFormRegisterReturn } from "react-hook-form";
 
@@ -38,10 +38,10 @@ const Input: FunctionComponent<InputProps> = ({
         {...register}
         className="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none rounded-lg p-4 w-full text-dark focus:ring-2 focus:ring-dark-cian"
       />
-      
+
       <span
         className={`w-2 left-0 peer-focus:w-2 peer-hover:w-2 peer-placeholder-shown:w-0 duration-100 h-full top-0 absolute rounded-l-full ${
-          valid === false ? "border-b-red-400" : "bg-cian-700"
+          errorMsg ? "bg-red-400" : "bg-cian-700"
         }`}
       ></span>
 
@@ -49,7 +49,8 @@ const Input: FunctionComponent<InputProps> = ({
         {props.placeholder}
       </span>
       {errorMsg && (
-        <span className="pointer-events-none absolute end-4 -bottom-6 text-sm text-red-400">
+        <span className="pointer-events-none absolute end-4 -bottom-6 text-sm text-red-400 flex gap-1 items-center">
+          <MdErrorOutline size={16} />
           {errorMsg}
         </span>
       )}
