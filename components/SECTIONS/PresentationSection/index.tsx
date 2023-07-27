@@ -7,6 +7,7 @@ import Container from "@/components/Container";
 import seelect_logo from "@/public/icone_seelect.webp";
 import squares_deco from "@/public/SVG/squares-deco.svg";
 import elipse from "@/public/SVG/elipse-deco.svg";
+import Link from "next/link";
 
 export default function PresentationSection() {
   return (
@@ -29,9 +30,14 @@ export default function PresentationSection() {
             quis rem earum vitae?
           </Text>
           <div className="w-full py-4 lg:max-w-lg lg:mt-8">
-            <FloatButton className="lg:text-2xl" shadowClassname="w-full">
-              SAIBA MAIS
-            </FloatButton>
+            <Link href="/sobre">
+              <FloatButton
+                className="lg:text-2xl px-0"
+                shadowClassname="w-full"
+              >
+                SAIBA MAIS
+              </FloatButton>
+            </Link>
           </div>
         </div>
 

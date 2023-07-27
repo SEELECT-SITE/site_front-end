@@ -20,7 +20,6 @@ const Button: FunctionComponent<ShadowBtnProps> = ({
         } p-3 hover:scale-105 active:opacity-90 active:scale-95 duration-100`,
         className
       )}
-      onClick={onClick ?? (() => {})}
       {...restProps}
     >
       {children}
