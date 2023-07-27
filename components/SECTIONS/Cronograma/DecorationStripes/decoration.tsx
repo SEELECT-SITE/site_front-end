@@ -4,16 +4,20 @@ import "./decoration.css";
 interface DecorationProps {
   className?: string;
   shadowClassname?: string;
+  type?: "light";
 }
 
 export default function Decoration({
   className,
+  type,
   shadowClassname,
 }: DecorationProps) {
   return (
     <div
       className={twMerge(
-        `decoration_crono-2 rounded-lg shrink grow -translate-y-1 hover:translate-y-0 duration-150`,
+        `${
+          type ? "decoration_crono-light" : "decoration_crono-2"
+        } rounded-lg shrink grow -translate-y-1 hover:translate-y-0 duration-150`,
         shadowClassname
       )}
     >

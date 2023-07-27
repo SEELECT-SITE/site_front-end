@@ -12,10 +12,19 @@
   width: 100%;
   background-image: repeating-linear-gradient(
     45deg,
-    #f4f4f4,
-    #f4f4f4 10px,
+    #f4f4f400,
+    #f4f4f400 10px,
     #11111199 10px,
     #11111199 20px
   );
 }
-
+.decoration_crono-light {
+  width: 100%;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #f4f4f400,
+    #f4f4f400 10px,
+    #aaaaaa99 10px,
+    #aaaaaa99 20px
+  );
+}

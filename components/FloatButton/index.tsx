@@ -1,14 +1,19 @@
 "use client";
-import { FunctionComponent, MouseEventHandler, ReactNode } from "react";
+import {
+  ButtonHTMLAttributes,
+  FunctionComponent,
+  MouseEventHandler,
+  ReactNode,
+} from "react";
 import { twMerge } from "tailwind-merge";
 
-export type baseComponent = {
+export interface baseComponent extends ButtonHTMLAttributes<Element> {
   className?: string;
   children?: ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   shadowClassname?: string;
-};
+}
 
 const FloatButton: FunctionComponent<baseComponent> = ({
   className,
@@ -16,15 +21,15 @@ const FloatButton: FunctionComponent<baseComponent> = ({
   onClick,
   disabled,
   shadowClassname,
+  ...props
 }) => {
   return (
     <button
-      disabled={disabled}
+      {...props}
       className={twMerge(
         "group focus:ring bg-cian-700 flex disabled:pointer-events-none disabled:opacity-50 rounded-md hover:opacity-90",
         shadowClassname
       )}
-      onClick={onClick ?? (() => {})}
     >
       <span
         className={twMerge(

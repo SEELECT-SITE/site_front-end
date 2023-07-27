@@ -57,6 +57,8 @@ module.exports = {
         xs: "350px",
       },
       borderRadius: {
+        "4xl": "2rem",
+        "5xl": "3rem",
         "100%": "100%",
       },
       spacing: {
