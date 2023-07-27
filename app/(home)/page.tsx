@@ -22,9 +22,7 @@ const Home = () => {
       <div className="pt-32 lg:py-44 bg-gradient-to-b from-dark via-dark via-40% to-dark/70">
         <PresentationSection />
 
-        <Container className="lg:mt-16">
-          <Testimony />
-        </Container>
+        <Testimony />
 
         <div className="w-110% -left-5% absolute -z-10 min-w-[800px] -translate-y-3/4 lg:-translate-y-1/2">
           <Image src={wave_svg} alt={"svg de decoração"} className="w-full" />
