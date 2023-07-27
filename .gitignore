@@ -8,6 +8,7 @@
 # testing
 /coverage
 /pendentes
+
 # next.js
 /.next/
 /out/

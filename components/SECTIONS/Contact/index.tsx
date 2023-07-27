@@ -20,7 +20,10 @@ function Contact() {
         />
       </div>
 
-      <Decoration className="h-6" shadowClassname="my-6 lg:absolute lg:-top-0" />
+      <Decoration
+        className="h-6"
+        shadowClassname="my-6 lg:absolute lg:-top-0"
+      />
 
       <Container className="bg-white w-full flex flex-col items-start">
         <div>
