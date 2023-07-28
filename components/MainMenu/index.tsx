@@ -68,7 +68,7 @@ export default function MainMenu() {
                 </Link>
               </button>
             </li> */}
-            <li className="">
+            {/* <li className="">
               <button
                 onClick={(e) => setMenuIsOpen(!menuIsOpen)}
                 className="w-full"
@@ -81,7 +81,7 @@ export default function MainMenu() {
                   Contato
                 </Link>
               </button>
-            </li>
+            </li> */}
 
             <li>
               <Badge
@@ -140,14 +140,14 @@ export default function MainMenu() {
               Pacotes
             </Link>
           </li> */}
-          <li className="flex">
+          {/* <li className="flex">
             <Link
               href="/contato"
               className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
             >
               Contato
             </Link>
-          </li>
+          </li> */}
           <li className="p-2">
             <Badge
               value="EM BREVE"

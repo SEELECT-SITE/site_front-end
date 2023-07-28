@@ -14,13 +14,14 @@ const HeaderHome = () => {
       }`}
     >
       <div className="w-full absolute bg-white z-50 m-auto flex justify-between p-4 lg:px-12 xl:px-16 2xl:px-24 items-center top-0 left-0 shadow-md shadow-black/30">
-        <Link href="/">
-          <Image
-            src={Seelect_icon}
-            alt="icone seelect"
-            width={52}
-            className="hover:drop-shadow-icon-sm hover:-translate-x-0.5 hover:-translate-y-0.5 duration-150"
-          />
+        <Link href="/" className="">
+          <div className="w-12 lg:w-16">
+            <Image
+              src={Seelect_icon}
+              alt="icone seelect"
+              className="hover:drop-shadow-icon-sm hover:-translate-x-0.5 hover:-translate-y-0.5 duration-150"
+            />
+          </div>
         </Link>
         <MainMenu />
       </div>
