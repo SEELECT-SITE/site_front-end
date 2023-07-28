@@ -100,7 +100,7 @@ export default function MainMenu() {
           className="active:bg- w-10 h-full mr-2 hover:bg- hover:opacity-80 active:opacity-30 duration-150 border- cursor-pointer"
           onClick={(e) => setMenuIsOpen(!menuIsOpen)}
         >
-          <MenuButton size={42} open={!menuIsOpen} />
+          <MenuButton size={36} open={!menuIsOpen} />
         </button>
       </div>
 
