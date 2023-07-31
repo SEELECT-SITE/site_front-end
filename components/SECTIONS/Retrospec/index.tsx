@@ -1,5 +1,5 @@
 import React from "react";
-import Slider from "@/components/SECTIONS/Retrospec/Slider";
+import RetrospecSlider from "@/components/SECTIONS/Retrospec/RetrospecSlider";
 import Title from "@/components/Title";
 import Container from "@/components/Container";
 
@@ -12,7 +12,7 @@ function Retrospec() {
         </Title>
       </Container>
 
-      <Slider />
+      <RetrospecSlider />
     </section>
   );
 }

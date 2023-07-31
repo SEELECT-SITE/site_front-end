@@ -16,7 +16,7 @@ export default function PresentationSection() {
         <div className="">
           <div className="backdrop-blur-md p-2 rounded-md">
             <h1
-              className={`text-2xl mb-3 lg:mb-6 font-bold tracking-wide lg:text-4xl xl:text-5xl`}
+              className={`text-2xl mb-3 lg:mb-6 font-bold tracking-wide lg:text-4xl xl:text-5xl -ml-2`}
             >
               TERCEIRA SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELÉTRICA E
               TELECOMUNICAÇÕES.

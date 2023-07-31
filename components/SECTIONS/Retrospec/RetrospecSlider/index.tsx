@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import fundo from "@/public/visitas.webp";
 import fundo2 from "@/public/visitas2.webp";
+import fundo3 from "@/public/visitas3.webp";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,11 +21,19 @@ const imagens = [
     alt: "Imagem retrospectiva SEELECT",
   },
   {
+    imagem: fundo3,
+    alt: "Imagem retrospectiva SEELECT",
+  },
+  {
     imagem: fundo,
     alt: "Imagem retrospectiva SEELECT",
   },
   {
     imagem: fundo2,
+    alt: "Imagem retrospectiva SEELECT",
+  },
+  {
+    imagem: fundo3,
     alt: "Imagem retrospectiva SEELECT",
   },
 ];

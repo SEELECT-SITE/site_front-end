@@ -14,14 +14,14 @@ const createLoginSchema = z.object({
   senha: z.string().min(8, "Senha invalida").nonempty("O nome é obrigatorio"),
 });
 
-type CreateContactData = z.infer<typeof createLoginSchema>;
+type CreateLoginData = z.infer<typeof createLoginSchema>;
 
 export default function FormsLogin() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateContactData>({
+  } = useForm<CreateLoginData>({
     resolver: zodResolver(createLoginSchema),
   });
 

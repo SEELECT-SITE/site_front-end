@@ -5,8 +5,8 @@ import { FcGoogle } from "react-icons/fc";
 import FloatButton from "@/components/FloatButton";
 
 import FormsLogin from "./LoginSections/FormsLogin";
-import MarqueeLogin from "./LoginSections/MarqueeLogin";
-import BannerLogin from "./LoginSections/BannerLogin";
+import MarqueeLogin from "./LoginSections/MarqueeSign";
+import BannerLogin from "./LoginSections/BannerSign";
 
 export const metadata = {
   title: "Login",

@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import wave_contato from "@/public/SVG/wave-contato.svg";
 
 const createContactSchema = z.object({
   email: z
@@ -32,6 +33,7 @@ import FloatButton from "@/components/FloatButton";
 import Input from "@/components/Input";
 import TextAreaInput from "@/components/TextAreaInput";
 import Decoration from "@/components/SECTIONS/Cronograma/DecorationStripes/decoration";
+import Image from "next/image";
 
 export default function ContactForms() {
   const {
@@ -48,11 +50,14 @@ export default function ContactForms() {
   return (
     <form
       onSubmit={handleSubmit(createContact)}
-      className="w-full flex flex-col gap-8 border-dark bg-dark border py-8 px-4 rounded-2xl max-w-md"
+      className="w-full flex flex-col gap-8 border-dark bg-gradient-to-b from-dark to-[#2E3047] border py-8 px-4 lg:py-12 lg:px-8 rounded-2xl max-w-md relative z-10 overflow-hidden"
     >
-      <Decoration shadowClassname=" w-full h-8" type="light" />
+      <Decoration
+        shadowClassname="h-4 absolute top-0 w-110% left-0 rounded-none"
+        className="rounded-none"
+        type="light"
+      />
       <Input
-        required
         placeholder="Nome"
         type="text"
         errorMsg={errors.nome?.message as string}
@@ -60,7 +65,6 @@ export default function ContactForms() {
         className=" border-cian-400"
       />
       <Input
-        required
         placeholder="E-mail"
         errorMsg={errors.email?.message as string}
         type="email"
@@ -68,7 +72,6 @@ export default function ContactForms() {
         className=" border-cian-400"
       />
       <Input
-        required
         placeholder="Telefone"
         errorMsg={errors.telefone?.message as string}
         type="text"
@@ -79,6 +82,11 @@ export default function ContactForms() {
       <FloatButton type="submit" className=" text-xl" shadowClassname="w-full">
         Enviar
       </FloatButton>
+      <Image
+        src={wave_contato}
+        alt="decoration"
+        className="absolute left-0 w-110% bottom-0 -z-10"
+      />
     </form>
   );
 }
