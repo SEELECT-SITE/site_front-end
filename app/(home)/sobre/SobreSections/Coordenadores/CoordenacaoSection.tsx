@@ -16,7 +16,7 @@ const coordenadores = [
     cargo={"Coordenadora Geral"}
   />,
   <CardCoord
-    linkedin=""
+    linkedin="https://www.linkedin.com/in/joaovitordof/"
     nome={"João Vitor de Oliveira"}
     src={cg_telecom}
     cargo={"Coordenador Geral"}

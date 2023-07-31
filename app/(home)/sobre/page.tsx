@@ -40,20 +40,31 @@ export default function SobrePage() {
         </div>
         <div className=" backdrop-blur-sm max-w-4xl">
           <Text className="text-dark text-sm text-justify">
-            Rem vitae nobis ut eligendi laboriosam a eius sunt qui perspiciatis
-            debitis. Sit minus necessitatibus aut doloribus voluptate aut
-            molestias repudiandae et sunt amet ut rerum quia cum facilis esse ex
-            adipisci voluptates. Rem vitae nobis ut eligendi laboriosam a eius
-            sunt qui perspiciatis debitis. Sit minus necessitatibus aut
-            doloribus voluptate aut molestias repudiandae et sunt amet ut rerum
-            quia cum facilis esse ex adipisci voluptates.Rem vitae nobis ut
-            eligendi laboriosam a eius sunt qui perspiciatis debitis. Sit minus
-            necessitatibus aut doloribus voluptate aut molestias repudiandae et
-            sunt amet ut rerum quia cum facilis esse ex adipisci voluptates. Rem
-            vitae nobis ut eligendi laboriosam a eius sunt qui perspiciatis
-            debitis. Sit minus necessitatibus aut doloribus voluptate aut
-            molestias repudiandae et sunt amet ut rerum quia cum facilis esse ex
-            adipisci voluptates.
+            Bem-vindo à Seelect: a semana das engenharias elétrica, de
+            computação e de telecomunicações da prestigiada Universidade Federal
+            do Ceará. Nossa missão é promover uma experiência enriquecedora,
+            conectando alunos, conhecimento e oportunidades para o futuro
+            tecnológico! Aqui, buscamos ir além dos livros e teorias,
+            proporcionando uma verdadeira imersão no universo da tecnologia.
+            Durante o evento, mergulhe em um mar de conhecimentos atualizados e
+            inspiradores, compartilhados por palestrantes renomados e
+            especialistas do mercado. <br />
+            <br />
+            Acreditamos que o aprendizado deve ser dinâmico e empolgante,
+            despertando paixão pelo saber. Além disso, a Seelect é o ponto de
+            encontro entre os brilhantes estudantes da UFC e as principais
+            empresas de tecnologia do Ceará. Acreditamos que o aprendizado não
+            se limita às quatro paredes da sala de aula, e por isso,
+            proporcionamos experiências práticas que estimulam a criatividade e
+            inovação. Afinal, é na prática que as ideias ganham vida e se
+            transformam em projetos incríveis.
+            <br />
+            <br /> Se você está em busca de enriquecimento profissional,
+            conexões poderosas e um ambiente inspirador para crescer como
+            profissional, a Seelect é o lugar ideal para você. Junte-se a nós e
+            faça parte dessa jornada empolgante rumo ao sucesso! Vamos trilhar
+            juntos um caminho de descobertas, aprendizado e realizações. A sua
+            jornada para o sucesso começa aqui, na Seelect! Esperamos por você
           </Text>
         </div>
       </Container>

@@ -1,9 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import fundo from "@/public/visitas.webp";
-import fundo2 from "@/public/visitas2.webp";
-import fundo3 from "@/public/visitas3.webp";
+import visitas from "@/public/retrospectiva/visitas.webp";
+import visitas2 from "@/public/retrospectiva/visitas2.webp";
+import visitas3 from "@/public/retrospectiva/visitas3.webp";
+import visitas4 from "@/public/retrospectiva/visitas4.webp";
+import visitas5 from "@/public/retrospectiva/visitas5.webp";
+import visitas6 from "@/public/retrospectiva/visitas6.webp";
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -13,33 +16,32 @@ import SwiperButton from "./SwiperButtons";
 
 const imagens = [
   {
-    imagem: fundo,
+    imagem: visitas,
     alt: "Imagem retrospectiva SEELECT",
   },
   {
-    imagem: fundo2,
+    imagem: visitas2,
     alt: "Imagem retrospectiva SEELECT",
   },
   {
-    imagem: fundo3,
+    imagem: visitas3,
     alt: "Imagem retrospectiva SEELECT",
   },
   {
-    imagem: fundo,
+    imagem: visitas4,
     alt: "Imagem retrospectiva SEELECT",
   },
   {
-    imagem: fundo2,
+    imagem: visitas5,
     alt: "Imagem retrospectiva SEELECT",
   },
   {
-    imagem: fundo3,
+    imagem: visitas6,
     alt: "Imagem retrospectiva SEELECT",
   },
 ];
 
 export default function RetrospecSlider() {
-  const swiper = useSwiper();
   const [isEnd, setIsEnd] = useState<boolean>(false);
   const [isBegin, setIsBegin] = useState<boolean>(true);
   return (
@@ -68,20 +70,22 @@ export default function RetrospecSlider() {
           className="mySwiper max-h-[600px] relative"
         >
           <div className="w-110% h-24 lg:h-32 rounded-100%  absolute bg-dark top-0 z-10 -left-5% -translate-y-1/2"></div>
-          {imagens.map((elem, index) => {
-            return (
-              <SwiperSlide key={index + 1} className="border-x aspect-square">
-                <div className="h-full">
-                  <Image
-                    src={elem.imagem}
-                    alt={elem.alt}
-                    priority={true}
-                    className="object-cover"
-                  />
-                </div>
-              </SwiperSlide>
-            );
-          })}
+          {imagens
+            .sort(() => Math.random() - 0.5)
+            .map((elem, index) => {
+              return (
+                <SwiperSlide key={index + 1} className="border-x aspect-square">
+                  <div className="h-full flex items-center">
+                    <Image
+                      src={elem.imagem}
+                      alt={elem.alt}
+                      priority={true}
+                      className="w-full object-cover"
+                    />
+                  </div>
+                </SwiperSlide>
+              );
+            })}
           <div className="w-110% h-16 lg:h-32 rounded-100% absolute bg-white bottom-0 z-10 -left-5% translate-y-1/2"></div>
           <SwiperButton isEnd={isEnd} isBegin={isBegin} />
         </Swiper>

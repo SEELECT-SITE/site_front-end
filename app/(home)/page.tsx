@@ -5,10 +5,10 @@ import Parceiros from "@/components/SECTIONS/Parceiros";
 import Container from "@/components/Container";
 import Cronograma from "@/components/SECTIONS/Cronograma";
 import Retrospec from "@/components/SECTIONS/Retrospec";
-import Contact from "@/components/SECTIONS/Contact";
 import Testimony from "@/components/SECTIONS/Testimony";
 
 import wave_svg from "@/public/SVG/wave-home.svg";
+import Contact from "@/components/SECTIONS/Contact";
 
 export const metadata = {
   title: "SEELECT",
