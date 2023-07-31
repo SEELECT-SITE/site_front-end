@@ -16,7 +16,7 @@ export default function PresentationSection() {
         <div className="">
           <div className="backdrop-blur-md p-2 rounded-md">
             <h1
-              className={`text-2xl mb-3 lg:mb-6 font-bold tracking-wide lg:text-4xl xl:text-5xl`}
+              className={`text-2xl mb-3 lg:mb-6 font-bold tracking-wide lg:text-4xl xl:text-5xl -ml-2`}
             >
               TERCEIRA SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELÉTRICA E
               TELECOMUNICAÇÕES.
@@ -24,10 +24,11 @@ export default function PresentationSection() {
           </div>
 
           <Text className="opacity-80 font-thin max-w-4xl">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus
-            dicta veritatis debitis, illo provident voluptate, placeat soluta
-            assumenda accusantium id quo sit voluptas fugit distinctio. Debitis
-            quis rem earum vitae?
+            Bem-vindo à Seelect: a semana das engenharias elétrica, de
+            computação e de telecomunicações da prestigiada Universidade Federal
+            do Ceará. Nossa missão é promover uma experiência enriquecedora,
+            conectando alunos, conhecimento e oportunidades para o futuro
+            tecnológico!
           </Text>
           <div className="w-full py-4 lg:max-w-lg lg:mt-8">
             <Link href="/sobre">
