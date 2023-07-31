@@ -1,36 +1,37 @@
 import Container from "@/components/Container";
 import CardCoord from "./CardCoord";
 import square_balls from "@/public/SVG/square-balls.svg";
-import CoordImage1 from "@/public/avatar/avatar_coord.png";
-import CoordImage2 from "@/public/avatar/avatar1.jpg";
+import cg_comp from "@/public/avatar/coord_geral_comp.webp";
+import cg_telecom from "@/public/avatar/coord_geral_telecom.webp";
+import cg_eletri from "@/public/avatar/coord_geral_eletrica-square.png";
+import coor_log from "@/public/avatar/coord_log.webp";
 import Title from "@/components/Title";
 import Image from "next/image";
-import Decoration from "@/components/SECTIONS/Cronograma/DecorationStripes/decoration";
 
 const coordenadores = [
   <CardCoord
-    linkedin="https://www.linkedin.com/in/abrxao"
-    nome={"Coordinator Linhares"}
-    src={CoordImage1}
-    cargo={"Coordenador de seila"}
+    linkedin=""
+    nome={"Laura Campêlo"}
+    src={cg_comp}
+    cargo={"Coordenadora Geral"}
+  />,
+  <CardCoord
+    linkedin=""
+    nome={"João Vitor de Oliveira"}
+    src={cg_telecom}
+    cargo={"Coordenador Geral"}
+  />,
+  <CardCoord
+    linkedin=""
+    nome={"Juliana Barreira"}
+    src={cg_eletri}
+    cargo={"Coordenadora Geral"}
   />,
   <CardCoord
     linkedin="https://www.linkedin.com/in/abrxao"
-    nome={"Aline Coordinator"}
-    src={CoordImage2}
-    cargo={"Coordenador de algo"}
-  />,
-  <CardCoord
-    linkedin="https://www.linkedin.com/in/abrxao"
-    nome={"Coordinator Linhares"}
-    src={CoordImage1}
-    cargo={"Coordenador de seila"}
-  />,
-  <CardCoord
-    linkedin="https://www.linkedin.com/in/abrxao"
-    nome={"Aline Coordinator"}
-    src={CoordImage2}
-    cargo={"Coordenador de algo"}
+    nome={"Abraão Albuquerque"}
+    src={coor_log}
+    cargo={"Coordenador de Logistica"}
   />,
 ];
 
