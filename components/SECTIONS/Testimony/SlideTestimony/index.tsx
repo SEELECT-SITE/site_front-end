@@ -77,8 +77,7 @@ export default function TestemonySlider() {
     <>
       <div className="w-full relative">
         <Swiper
-          // centeredSlides
-          // modules={[Autoplay]}
+          modules={[Autoplay]}
           initialSlide={4}
           loop
           autoplay={{ delay: 2000, pauseOnMouseEnter: true }}
