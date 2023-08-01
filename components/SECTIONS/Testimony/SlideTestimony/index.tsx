@@ -77,11 +77,13 @@ export default function TestemonySlider() {
     <>
       <div className="w-full relative">
         <Swiper
-        centeredSlides
-          modules={[Autoplay]}
+          // centeredSlides
+          // modules={[Autoplay]}
           initialSlide={4}
           loop
           autoplay={{ delay: 2000, pauseOnMouseEnter: true }}
+          slidesPerView={1.01} //valor para não desativar o botão de slides
+          spaceBetween={16}
           breakpoints={{
             768: {
               slidesPerView: 2,
@@ -94,7 +96,6 @@ export default function TestemonySlider() {
             },
           }}
           onActiveIndexChange={(e) => {
-            console.log(e.activeIndex);
             if (e.activeIndex == e.slides.length - 1) {
               setIsEnd(true);
               setIsBegin(false);
@@ -112,9 +113,13 @@ export default function TestemonySlider() {
             return (
               <SwiperSlide
                 key={elem.tipo + index}
-                className="pl-8 py-12 flex items-center w-full"
+                className="py-12 flex justify-center w-full"
               >
-                <TestimonyCard feedback={elem.feedback} stars={elem.stars} />
+                <TestimonyCard
+                  feedback={elem.feedback}
+                  stars={elem.stars}
+                  tipo={elem.tipo}
+                />
               </SwiperSlide>
             );
           })}

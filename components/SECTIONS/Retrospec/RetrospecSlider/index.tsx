@@ -49,7 +49,6 @@ export default function RetrospecSlider() {
       <div className="w-full">
         <Swiper
           onActiveIndexChange={(e) => {
-            console.log(e.activeIndex);
             if (e.activeIndex == e.slides.length - 1) {
               setIsEnd(true);
               setIsBegin(false);
