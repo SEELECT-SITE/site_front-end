@@ -8,6 +8,7 @@ import {
   FaLinkedinIn,
   FaYoutube,
 } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -49,21 +50,23 @@ export default function Footer() {
             Siga-nos em nossas redes sociais para ficar por dentro de tudo!
           </Text>
           <div className="flex gap-4 px-2 pt-6 pb-12 justify-evenly">
-            <div className="w-full max-w-[4rem] p-2 aspect-square bg-cian-700 rounded-lg">
+            {/* <div className="w-full max-w-[4rem] p-2 aspect-square bg-cian-700 rounded-lg hover:opacity-90 active:scale-95">
               <FaFacebookF fill="#101120" size={"100%"} />
-            </div>
+            </div> */}
+            <Link href="https://www.instagram.com/seelectufc/">
+              <div className="w-full max-w-[4rem] p-2 aspect-square bg-cian-700 rounded-lg hover:opacity-90 active:scale-95">
+                <FaInstagram fill="#101120" size={"100%"} />
+              </div>
+            </Link>
+            <Link href="https://www.linkedin.com/company/seelect-ufc/mycompany/">
+              <div className="w-full max-w-[4rem] p-2 aspect-square bg-cian-700 rounded-lg hover:opacity-90 active:scale-95">
+                <FaLinkedinIn fill="#101120" size={"100%"} />
+              </div>
+            </Link>
 
-            <div className="w-full max-w-[4rem] p-2 aspect-square bg-cian-700 rounded-lg">
-              <FaInstagram fill="#101120" size={"100%"} />
-            </div>
-
-            <div className="w-full max-w-[4rem] p-2 aspect-square bg-cian-700 rounded-lg">
-              <FaLinkedinIn fill="#101120" size={"100%"} />
-            </div>
-
-            <div className="w-full max-w-[4rem] p-2 aspect-square bg-cian-700 rounded-lg">
+            {/* <div className="w-full max-w-[4rem] p-2 aspect-square bg-cian-700 rounded-lg hover:opacity-90 active:scale-95">
               <FaYoutube fill="#101120" size={"100%"} />
-            </div>
+            </div> */}
           </div>
         </Container>
       </div>
