@@ -3,14 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Seelect_icon from "@/public/icone_seelect-light-cian.webp";
 import MainMenu from "../MainMenu";
-import useScrollDirection from "@/hooks/useScrollDirection";
+import useHeaderHidden from "@/hooks/useHeaderHidden";
 
 const HeaderHome = () => {
-  const isOpen = useScrollDirection();
+  const isHeaderHidden = useHeaderHidden();
   return (
     <header
       className={`w-full fixed z-50 duration-300 ${
-        isOpen ? "-translate-y-0" : "-translate-y-32"
+        isHeaderHidden ? "-translate-y-0" : "-translate-y-48"
       }`}
     >
       <div className="w-full absolute bg-white z-50 m-auto flex justify-between p-4 lg:px-12 xl:px-16 2xl:px-24 items-center top-0 left-0 shadow-md shadow-black/30">
