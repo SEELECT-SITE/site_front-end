@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const useHeaderHidden = (): boolean => {
-  const [isHeaderHidden, setIsHeaderHidden] = useState(true);
+const useHeaderOpen = (): boolean => {
+  const [isHeaderOpen, setIsHeaderOpen] = useState(true);
 
   useEffect(() => {
     var lastScrollY = window.scrollY;
@@ -10,9 +10,9 @@ const useHeaderHidden = (): boolean => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > lastScrollY) {
-        setIsHeaderHidden(currentScrollY < 200);
+        setIsHeaderOpen(currentScrollY < 200);
       } else {
-        setIsHeaderHidden(true);
+        setIsHeaderOpen(true);
       }
       lastScrollY = currentScrollY;
     };
@@ -24,7 +24,7 @@ const useHeaderHidden = (): boolean => {
     };
   }, []);
 
-  return isHeaderHidden;
+  return isHeaderOpen;
 };
 
-export default useHeaderHidden;
+export default useHeaderOpen;

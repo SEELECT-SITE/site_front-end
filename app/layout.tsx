@@ -1,3 +1,4 @@
+"use client";
 import useGlobalState from "@/stores/menuStore";
 import "./globals.css";
 
@@ -6,5 +7,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <html lang="en">{children}</html>;
+  const { menuIsOpen } = useGlobalState();
+  return (
+    <html
+      lang="en"
+      className={`${menuIsOpen ? "overflow-y-hidden" : "overflow-y-auto"}`}
+    >
+      {children}
+    </html>
+  );
 }

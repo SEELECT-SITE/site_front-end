@@ -12,9 +12,7 @@ export default function HomeLayout({
   return (
     <>
       <body
-        className={`bg-white w-full relative min-h-screen overflow-x-hidden ${
-          cafeFont.className
-        } ${menuIsOpen && "overflow-y-hidden"}`}
+        className={`bg-white w-full relative min-h-screen overflow-x-hidden ${cafeFont.className}`}
       >
         <HomeHeader />
         <main className="text-white">{children}</main>

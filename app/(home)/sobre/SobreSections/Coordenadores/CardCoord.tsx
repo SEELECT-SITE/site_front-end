@@ -42,11 +42,11 @@ export default function CardCoord({
         </div>
 
         <div className="shrink grow ">
-          <Title className="text-base xs:text-lg lg:text-2xl tracking-wide font-bold text-cian-400 drop-shadow-icon-sm">
+          <Title className="text-lg xs:text-xl lg:text-2xl tracking-wide font-bold text-cian-400 drop-shadow-icon-sm">
             {nome}
           </Title>
 
-          <Text className="text-xs xs:text-sm lg:text-base text-gray-300 font-thin">
+          <Text className=" text-gray-300 font-thin">
             {cargo}
           </Text>
         </div>

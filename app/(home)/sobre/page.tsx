@@ -39,7 +39,7 @@ export default function SobrePage() {
           <Title className="text-2xl text-cian-700">O QUE É A SEELECT?</Title>
         </div>
         <div className=" backdrop-blur-sm lg:max-w-4xl xl:max-w-6xl">
-          <Text className="text-dark text-sm text-left">
+          <Text className="text-dark text-left">
             Bem-vindo à Seelect: a semana das engenharias elétrica, de
             computação e de telecomunicações da prestigiada Universidade Federal
             do Ceará. Nossa missão é promover uma experiência enriquecedora,
