@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FaLinkedinIn } from "react-icons/fa";
 import Link from "next/link";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import deco_wave from "@/public/SVG/squares_deco-dark.svg";
 
 export interface CardCoordProps {
   nome: string;
@@ -21,13 +22,14 @@ export default function CardCoord({
   return (
     <>
       <div
-        className={`rounded-3xl p-4 lg:px-8 w-full relative shadow-lg flex items-center justify-between group gap-3 bg-gradient-to-t from-dark via-dark via-50% to-[#2E3047] hover:drop-shadow-icon hover:-translate-x-2 hover:-translate-y-2 duration-300 max-w-sm lg:max-w-none lg:w-auto`}
+        className={`rounded-3xl p-4 lg:px-8 w-full relative z-10 overflow-hidden shadow-lg flex items-center justify-between group gap-3 bg-gradient-to-t from-dark via-dark via-50% to-[#2E3047] hover:drop-shadow-icon hover:-translate-x-2 hover:-translate-y-2 duration-300 max-w-sm lg:max-w-none lg:w-auto`}
       >
-        <div className="delay-100 duration-200 group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:drop-shadow-icon relative rounded-full aspect-square h-20 xs:h-24 lg:w-32 lg:h-32">
+        <div className="delay-100 duration-200 group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:drop-shadow-icon relative rounded-full aspect-square h-20 xs:h-24 lg:h-32">
           <Image
             src={src}
             alt={`${nome} ${cargo}`}
-            width={120}
+            priority
+            width={150}
             className="rounded-full aspect-square object-cover border-2 border-cian-700"
           />
           {linkedin && (
@@ -38,13 +40,18 @@ export default function CardCoord({
             </Link>
           )}
         </div>
-        <div className="shrink grow">
-          <Title className="text-base xs:text-lg lg:text-2xl tracking-wide font-bold text-cian-400">
+
+        <div className="shrink grow ">
+          <Title className="text-lg xs:text-xl lg:text-2xl tracking-wide font-bold text-cian-400 drop-shadow-icon-sm">
             {nome}
           </Title>
-          <Text className="text-xs xs:text-sm lg:text-base text-gray-300 font-thin">
+
+          <Text className=" text-gray-300 font-thin">
             {cargo}
           </Text>
+        </div>
+        <div className="absolute -z-10 w-1/2 right-0 translate-x-1/2 ">
+          <Image src={deco_wave} alt="decoration" />
         </div>
       </div>
     </>

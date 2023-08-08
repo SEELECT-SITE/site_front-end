@@ -10,6 +10,7 @@ import {
 } from "react-icons/ai";
 import { IoIosPeople, IoMdArrowForward } from "react-icons/io";
 import { MdAddShoppingCart } from "react-icons/md";
+import Badge from "../Badge";
 
 export default function MainMenu() {
   const { menuIsOpen, setMenuIsOpen } = useGlobalState();
@@ -53,7 +54,7 @@ export default function MainMenu() {
               </button>
             </li>
 
-            <li className="">
+            {/* <li className="">
               <button
                 onClick={(e) => setMenuIsOpen(!menuIsOpen)}
                 className="w-full"
@@ -66,8 +67,8 @@ export default function MainMenu() {
                   Pacotes
                 </Link>
               </button>
-            </li>
-            <li className="">
+            </li> */}
+            {/* <li className="">
               <button
                 onClick={(e) => setMenuIsOpen(!menuIsOpen)}
                 className="w-full"
@@ -80,17 +81,25 @@ export default function MainMenu() {
                   Contato
                 </Link>
               </button>
-            </li>
+            </li> */}
 
             <li>
-              <Link href={"/login"}>
+              <Badge
+                value="EM BREVE"
+                className={
+                  "top-0 -translate-y-1/2 text-xl p-1 text-white bg-cian-700 rounded-md left-2"
+                }
+              >
+                {/* <Link href={"/login"}> */}
                 <Button
+                  disabled
                   className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:opacity-30 duration-150 w-full"
                   onClick={(e) => setMenuIsOpen(!menuIsOpen)}
                 >
                   INSCREVA-SE
                 </Button>
-              </Link>
+              </Badge>
+              {/* </Link> */}
             </li>
           </ul>
         </div>
@@ -100,7 +109,7 @@ export default function MainMenu() {
           className="active:bg- w-10 h-full mr-2 hover:bg- hover:opacity-80 active:opacity-30 duration-150 border- cursor-pointer"
           onClick={(e) => setMenuIsOpen(!menuIsOpen)}
         >
-          <MenuButton size={36} open={!menuIsOpen} />
+          <MenuButton size={42} open={!menuIsOpen} />
         </button>
       </div>
 
@@ -123,28 +132,38 @@ export default function MainMenu() {
               Sobre
             </Link>
           </li>
-          <li className="flex">
+          {/* <li className="flex">
             <Link
               href="/pacotes"
               className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
             >
               Pacotes
             </Link>
-          </li>
-          <li className="flex">
+          </li> */}
+          {/* <li className="flex">
             <Link
               href="/contato"
               className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
             >
               Contato
             </Link>
-          </li>
+          </li> */}
           <li className="p-2">
-            <Button className="p-0 rounded-full m-0 bg-dark text-white">
-              <Link href="/" className="flex p-3 px-8 gap-1 items-center">
-                Inscreva-se <IoMdArrowForward />
-              </Link>
-            </Button>
+            <Badge
+              value="EM BREVE"
+              className={
+                "top-0 -translate-y-1/2 text-xl p-1 text-white bg-cian-700 rounded-md left-2"
+              }
+            >
+              <Button
+                disabled
+                className="p-0 rounded-full m-0 bg-dark text-white"
+              >
+                <Link href="/" className="flex p-3 px-8 gap-1 items-center">
+                  Inscreva-se <IoMdArrowForward />
+                </Link>
+              </Button>
+            </Badge>
           </li>
         </ul>
       </div>

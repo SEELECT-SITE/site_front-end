@@ -49,7 +49,6 @@ export default function RetrospecSlider() {
       <div className="w-full">
         <Swiper
           onActiveIndexChange={(e) => {
-            console.log(e.activeIndex);
             if (e.activeIndex == e.slides.length - 1) {
               setIsEnd(true);
               setIsBegin(false);
@@ -71,7 +70,6 @@ export default function RetrospecSlider() {
         >
           <div className="w-110% h-24 lg:h-32 rounded-100%  absolute bg-dark top-0 z-10 -left-5% -translate-y-1/2"></div>
           {imagens
-            .sort(() => Math.random() - 0.5)
             .map((elem, index) => {
               return (
                 <SwiperSlide key={index + 1} className="border-x aspect-square">

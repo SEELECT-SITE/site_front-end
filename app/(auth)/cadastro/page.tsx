@@ -18,7 +18,7 @@ export const metadata = {
 export default function Login() {
   return (
     <>
-      <div className="w-auto h-screen lg:flex lg:flex-row-reverse ">
+      <div className="w-auto lg:h-screen lg:flex lg:flex-row-reverse ">
         <BannerSign />
         <div className="mt-6 h-full lg:mt-0 bg-white pb-12 lg:w-1/2  lg:border-r-4 border-black overflow-hidden m-auto flex flex-col justify-start">
           <Container className="w-full max-w-md m-auto 2xl:p-8">

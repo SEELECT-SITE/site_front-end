@@ -21,7 +21,7 @@ export default function SobrePage() {
         className={`pt-32 relative bg-gradient-to-b z-10 from-dark via-dark via-30% pb-16 to-dark/90 rounded-br-5xl overflow-hidden`}
       >
         <div className="absolute w-1/2 lg:w-2/3 min-w-[160px] translate-x-1/3 top-0 right-0 lg:translate-x-2/3 -z-10">
-          <Image src={squareDeco} alt="teste" />
+          <Image src={squareDeco} alt="decoration" />
         </div>
         <Title className="text-4xl text-cian-700 text-justify">SOBRE</Title>
         <Text className="text-white text-sm text-justify">
@@ -33,13 +33,13 @@ export default function SobrePage() {
         <Image
           src={elipse_deco}
           alt="decoration"
-          className="absolute hidden w-3/4 lg:inline max-w-md right-0 -translate-y-1/2 translate-x-1/2 "
+          className="absolute w-3/4 hidden lg:inline max-w-md right-0 -translate-y-1/3 translate-x-1/2"
         />
-        <div className="backdrop-blur-sm  max-w-4xl">
+        <div className="backdrop-blur-sm max-w-lg">
           <Title className="text-2xl text-cian-700">O QUE É A SEELECT?</Title>
         </div>
-        <div className=" backdrop-blur-sm max-w-4xl">
-          <Text className="text-dark text-sm text-justify">
+        <div className=" backdrop-blur-sm lg:max-w-4xl xl:max-w-6xl">
+          <Text className="text-dark text-left">
             Bem-vindo à Seelect: a semana das engenharias elétrica, de
             computação e de telecomunicações da prestigiada Universidade Federal
             do Ceará. Nossa missão é promover uma experiência enriquecedora,

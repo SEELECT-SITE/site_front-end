@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode } from "react";
+import { FunctionComponent } from "react";
 import { MdStar } from "react-icons/md";
 
 interface Props {
@@ -10,16 +10,18 @@ const StarsIcons: FunctionComponent<Props> = ({ quantity }) => {
 
   for (let i = 0; i < quantity; i++) {
     StarsIcons.push(
-      <>
-        <div className="relative w-6 h-6">
-          <div className="bg-cian-400 w-5 h-5 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-          <MdStar
-            className="drop-shadow-xlc absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 "
-            fill="white"
-            size={30}
-          />
-        </div>
-      </>
+      <div
+        key={"star-" + i}
+        className="relative w-6 h-6 animate-bounce"
+        style={{ animationDelay: `${100 * i}ms` }}
+      >
+        <div className="bg-cian-400 w-5 h-5 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+        <MdStar
+          className="drop-shadow-xlc absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 "
+          fill="white"
+          size={30}
+        />
+      </div>
     );
   }
 
