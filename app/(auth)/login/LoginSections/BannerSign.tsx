@@ -13,13 +13,15 @@ export default function BannerLogin() {
       >
         <Image
           src={logoSeelect}
+          width={320}
           alt="logo"
           priority={true}
           className="duration-200 min-w-12 group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 group-hover:drop-shadow-icon-sm"
         />
       </Link>
-      <div className="flex items-center h-full">
+      <div className="flex items-center h-full w-full">
         <Image
+          width={1366}
           src={loginBg}
           alt="login background"
           className="min-h-full object-cover"

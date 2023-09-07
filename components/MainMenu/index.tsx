@@ -54,7 +54,7 @@ export default function MainMenu() {
               </button>
             </li>
 
-            {/* <li className="">
+            <li className="">
               <button
                 onClick={(e) => setMenuIsOpen(!menuIsOpen)}
                 className="w-full"
@@ -67,8 +67,8 @@ export default function MainMenu() {
                   Pacotes
                 </Link>
               </button>
-            </li> */}
-            {/* <li className="">
+            </li>
+            <li className="">
               <button
                 onClick={(e) => setMenuIsOpen(!menuIsOpen)}
                 className="w-full"
@@ -81,25 +81,24 @@ export default function MainMenu() {
                   Contato
                 </Link>
               </button>
-            </li> */}
+            </li>
 
             <li>
-              <Badge
+              {/* <Badge
                 value="EM BREVE"
                 className={
                   "top-0 -translate-y-1/2 text-xl p-1 text-white bg-cian-700 rounded-md left-2"
                 }
-              >
-                {/* <Link href={"/login"}> */}
+              > */}
+              <Link href={"/login"}>
                 <Button
-                  disabled
                   className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:opacity-30 duration-150 w-full"
                   onClick={(e) => setMenuIsOpen(!menuIsOpen)}
                 >
                   INSCREVA-SE
                 </Button>
-              </Badge>
-              {/* </Link> */}
+              </Link>
+              {/* </Badge> */}
             </li>
           </ul>
         </div>
@@ -132,38 +131,35 @@ export default function MainMenu() {
               Sobre
             </Link>
           </li>
-          {/* <li className="flex">
+          <li className="flex">
             <Link
               href="/pacotes"
               className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
             >
               Pacotes
             </Link>
-          </li> */}
-          {/* <li className="flex">
+          </li>
+          <li className="flex">
             <Link
               href="/contato"
               className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
             >
               Contato
             </Link>
-          </li> */}
+          </li>
           <li className="p-2">
-            <Badge
+            {/* <Badge
               value="EM BREVE"
               className={
                 "top-0 -translate-y-1/2 text-xl p-1 text-white bg-cian-700 rounded-md left-2"
               }
-            >
-              <Button
-                disabled
-                className="p-0 rounded-full m-0 bg-dark text-white"
-              >
-                <Link href="/" className="flex p-3 px-8 gap-1 items-center">
-                  Inscreva-se <IoMdArrowForward />
-                </Link>
-              </Button>
-            </Badge>
+            > */}
+            <Button className="p-0 rounded-full m-0 bg-dark text-white">
+              <Link href="/login" className="flex p-3 px-8 gap-1 items-center">
+                Inscreva-se <IoMdArrowForward />
+              </Link>
+            </Button>
+            {/* </Badge> */}
           </li>
         </ul>
       </div>

@@ -1,30 +1,23 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FloatButton from "@/components/FloatButton";
 import Input from "@/components/Input";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
+import Alert from "@/components/Alert";
+import { MdErrorOutline } from "react-icons/md";
+import {
+  CreateCadastroData,
+  createCadastroSchema,
+} from "./FormsCadastroSchemas";
+import { scrollToElement } from "@/utils/scrollToElement";
 
-const createCadastroSchema = z
-  .object({
-    nome: z.string().nonempty("Digite seu nome"),
-    email: z
-      .string()
-      .nonempty("Email invalido")
-      .email("Formato de e-mail invalido"),
-    senha: z
-      .string()
-      .min(8, { message: "A senha deve ter pelo menos 8 caracteres" }),
-    confirmSenha: z.string(),
-  })
-  .refine(
-    (data) => {
-      data.senha == data.confirmSenha;
-    },
-    { message: "As senhas estão diferentes", path: ["confirmSenha"] }
-  );
-
-type CreateCadastroData = z.infer<typeof createCadastroSchema>;
+interface erroReqType {
+  status: boolean;
+  errors: [string] | null;
+}
 
 export default function FormsCadastro() {
   const {
@@ -34,40 +27,111 @@ export default function FormsCadastro() {
   } = useForm<CreateCadastroData>({
     resolver: zodResolver(createCadastroSchema),
   });
+  const router = useRouter();
+  const [erroReq, setErroReq] = useState<erroReqType>({
+    status: false,
+    errors: null,
+  });
+  const errorsDiv = useRef<HTMLDivElement | null>(null);
+  const [registerSuccessMsg, setRegisterSuccessMsg] = useState<string>("");
 
-  function createContact(data: any) {
-    console.log(data);
+  async function createContact(data: any) {
+    setErroReq({ ...erroReq, status: false });
+    const formData = new URLSearchParams();
+    formData.append("first_name", data.first_name as string);
+    formData.append("last_name", data.last_name as string);
+    formData.append("username", data.username as string);
+    formData.append("password", data.password as string);
+    formData.append("email", data.email as string);
+
+    const headers = {
+      "Content-Type": "application/x-www-form-urlencoded",
+    };
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/auth/register/",
+        formData.toString(),
+        { headers }
+      );
+      if (response.status === 201) {
+        setRegisterSuccessMsg(
+          "Cadastro confirmado, você será redirecionado para o Login"
+        );
+        setTimeout(() => {
+          router.replace("/login");
+        }, 2000);
+      }
+    } catch (err: any) {
+      const errorKeys = Object.keys(err.response.data);
+      const errosList = errorKeys.map((key) => err.response.data[key][0]) as [string];
+      setErroReq({ status: true, errors: errosList });
+      scrollToElement(errorsDiv);
+    }
   }
   return (
     <form
       onSubmit={handleSubmit(createContact)}
-      className="w-full max-w-md m-auto"
+      className="w-full max-w-md m-auto relative"
     >
-      <div className="flex flex-col gap-6 my-8">
+      {registerSuccessMsg !== "" && (
+        <Alert timeout={4000} className="border-green-400">
+          {registerSuccessMsg}
+        </Alert>
+      )}
+      <div className="flex flex-col gap-3 lg:gap-5 my-8">
         <Input
           placeholder="Nome"
-          errorMsg={errors.nome?.message as string}
+          errorMsg={errors.first_name?.message}
           type="text"
-          register={register("nome")}
+          register={register("first_name")}
+        />
+        <Input
+          placeholder="Sobrenome"
+          errorMsg={errors.last_name?.message}
+          type="text"
+          register={register("last_name")}
+        />
+        <Input
+          placeholder="Username"
+          errorMsg={errors.username?.message}
+          type="text"
+          register={register("username")}
         />
         <Input
           placeholder="E-mail"
-          errorMsg={errors.email?.message as string}
+          errorMsg={errors.email?.message}
           type="email"
           register={register("email")}
         />
         <Input
           placeholder="Senha"
-          errorMsg={errors.senha?.message as string}
+          errorMsg={errors.password?.message as string}
           type="password"
-          register={register("senha")}
+          register={register("password")}
         />
         <Input
           placeholder="Confirme sua senha"
-          errorMsg={errors.confirmSenha?.message as string}
+          errorMsg={errors.confirmPassword?.message as string}
           type="password"
-          register={register("confirmSenha")}
+          register={register("confirmPassword")}
         />
+        <div id="errors_api" ref={errorsDiv}>
+          {erroReq.status && (
+            <ul className="text-dark flex flex-col gap-1 errorReqAnimated">
+              {erroReq.errors?.map((elem, index) => {
+                return (
+                  <li
+                    key={index + elem}
+                    className="underline flex items-start gap-1 text-red-500"
+                  >
+                    <MdErrorOutline size={16} className="mt-1.5" />
+                    {elem}
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
       </div>
 
       <FloatButton

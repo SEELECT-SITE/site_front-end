@@ -31,7 +31,7 @@ export default function Login() {
                 <b>Esquece sua senha?</b>
               </Link>
               <Link
-                href="#"
+                href="/cadastro"
                 className="hover:underline text-black/70 text-sm hover:text-black"
               >
                 Não tem conta? <b>Cadastre-se</b>
