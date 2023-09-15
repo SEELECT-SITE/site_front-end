@@ -4,7 +4,7 @@ import Text from "@/components/Text";
 import FloatButton from "@/components/FloatButton";
 import Container from "@/components/Container";
 
-import seelect_logo from "@/public/icone_seelect.webp";
+import SEELECT_logo from "@/public/icone_seelect.webp";
 import squares_deco from "@/public/SVG/squares-deco.svg";
 import elipse from "@/public/SVG/elipse-deco.svg";
 import Link from "next/link";
@@ -24,7 +24,7 @@ export default function PresentationSection() {
           </div>
 
           <Text className="opacity-80 font-thin max-w-4xl">
-            Bem-vindo à Seelect: a semana das engenharias elétrica, de
+            Bem-vindo à SEELECT: a semana das engenharias elétrica, de
             computação e de telecomunicações da prestigiada Universidade Federal
             do Ceará. Nossa missão é promover uma experiência enriquecedora,
             conectando alunos, conhecimento e oportunidades para o futuro
@@ -44,9 +44,9 @@ export default function PresentationSection() {
 
         <figure className="m-auto w-2/3 mb-6 max-w-md">
           <Image
-            src={seelect_logo}
+            src={SEELECT_logo}
             priority={true}
-            alt="logo da seelect"
+            alt="logo da SEELECT"
             className="lg:min-w-[360px]"
           />
         </figure>

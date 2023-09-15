@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import colaboradores from "@/public/coloboradores.webp";
+import colaboradores from "@/public/colaboradores.webp";
 import Container from "@/components/Container";
 import Title from "@/components/Title";
 import FloatButton from "@/components/FloatButton";
@@ -12,13 +12,14 @@ import Link from "next/link";
 function Contact() {
   return (
     <section className="flex items-start flex-col-reverse lg:flex-row-reverse lg:mt-16 relative lg:pt-24">
-      <div className="w-full overflow-hidden aspect-video relative max-w-5xl">
+      <div className="w-full overflow-hidden flex items-center justify-center aspect-video relative max-w-5xl">
+
         <Image
           src={colaboradores}
           priority
+          width={600}
           alt="Imagem dos organizadores"
-          height={600}
-          className="w-full absolute bottom-0"
+          className="w-full absolute bottom-0 translate-y-1/4"
         />
       </div>
 

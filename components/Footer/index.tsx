@@ -16,14 +16,15 @@ export default function Footer() {
       className="w-full bg-dark lg:flex lg:items-stretch"
       id="footer_home"
     >
-      <div className="py-12 flex items-center">
+      <div className="py-12 flex items-center lg:border-r border-r-white/40">
         <Image
+          width={300}
           src={seelect_logo}
           alt="logo da seelect"
-          className="object-contain w-1/3 max-w-md m-auto"
+          className="object-contain w-1/3 max-w-md m-auto "
         />
       </div>
-      <div className="lg:py-12">
+      <div className="lg:py-12 lg:border-r border-r-white/40">
         <Container className="border-b lg:border-none border-white/20 py-0">
           <Text className="text-cian-700 text-center text-lg lg:text-xl font-bold">
             INFORMAÇÕES
