@@ -2,7 +2,7 @@ import Container from "@/components/Container";
 import Text from "@/components/Text";
 import Title from "@/components/Title";
 import Image from "next/image";
-import Seelect_icon from "@/public/icone-seelect-white.webp";
+import SEELECT_icon from "@/public/icone-SEELECT-white.webp";
 import elipse_deco from "@/public/SVG/elipse-deco.svg";
 import squareDeco from "@/public/SVG/squares-deco.svg";
 import CoordenacaoSection from "./SobreSections/Coordenadores/CoordenacaoSection";
@@ -40,7 +40,7 @@ export default function SobrePage() {
         </div>
         <div className=" backdrop-blur-sm lg:max-w-4xl xl:max-w-6xl">
           <Text className="text-dark text-left">
-            Bem-vindo à Seelect: a semana das engenharias elétrica, de
+            Bem-vindo à SEELECT: a semana das engenharias elétrica, de
             computação e de telecomunicações da prestigiada Universidade Federal
             do Ceará. Nossa missão é promover uma experiência enriquecedora,
             conectando alunos, conhecimento e oportunidades para o futuro
@@ -51,7 +51,7 @@ export default function SobrePage() {
             especialistas do mercado. <br />
             <br />
             Acreditamos que o aprendizado deve ser dinâmico e empolgante,
-            despertando paixão pelo saber. Além disso, a Seelect é o ponto de
+            despertando paixão pelo saber. Além disso, a SEELECT é o ponto de
             encontro entre os brilhantes estudantes da UFC e as principais
             empresas de tecnologia do Ceará. Acreditamos que o aprendizado não
             se limita às quatro paredes da sala de aula, e por isso,
@@ -61,10 +61,10 @@ export default function SobrePage() {
             <br />
             <br /> Se você está em busca de enriquecimento profissional,
             conexões poderosas e um ambiente inspirador para crescer como
-            profissional, a Seelect é o lugar ideal para você. Junte-se a nós e
+            profissional, a SEELECT é o lugar ideal para você. Junte-se a nós e
             faça parte dessa jornada empolgante rumo ao sucesso! Vamos trilhar
             juntos um caminho de descobertas, aprendizado e realizações. A sua
-            jornada para o sucesso começa aqui, na Seelect! Esperamos por você
+            jornada para o sucesso começa aqui, na SEELECT! Esperamos por você
           </Text>
         </div>
       </Container>
@@ -75,26 +75,26 @@ export default function SobrePage() {
         </Title>
         <div className="flex items-center justify-between">
           <Image
-            src={Seelect_icon}
-            alt="icone seelect"
+            src={SEELECT_icon}
+            alt="icone SEELECT"
             width={52}
             className="invert hover:drop-shadow-icon-sm hover:-translate-x-1 hover:-translate-y-1 duration-150"
           />
           <Image
-            src={Seelect_icon}
-            alt="icone seelect"
+            src={SEELECT_icon}
+            alt="icone SEELECT"
             width={52}
             className="invert hover:drop-shadow-icon-sm hover:-translate-x-1 hover:-translate-y-1 duration-150"
           />
           <Image
-            src={Seelect_icon}
-            alt="icone seelect"
+            src={SEELECT_icon}
+            alt="icone SEELECT"
             width={52}
             className="invert hover:drop-shadow-icon-sm hover:-translate-x-1 hover:-translate-y-1 duration-150"
           />
           <Image
-            src={Seelect_icon}
-            alt="icone seelect"
+            src={SEELECT_icon}
+            alt="icone SEELECT"
             width={52}
             className="invert hover:drop-shadow-icon-sm hover:-translate-x-1 hover:-translate-y-1 duration-150"
           />

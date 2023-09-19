@@ -17,7 +17,7 @@ function Contact() {
         <Image
           src={colaboradores}
           priority
-          width={600}
+          width={1080}
           alt="Imagem dos organizadores"
           className="w-full absolute bottom-0 translate-y-1/4"
         />
