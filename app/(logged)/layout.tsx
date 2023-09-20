@@ -1,5 +1,5 @@
 import { Session, getServerSession } from "next-auth";
-import { cafeFont } from "../../fonts";
+import { cafeFont } from "../fonts";
 import { nextAuthOptions } from "@/pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
 
@@ -9,9 +9,8 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(nextAuthOptions);
-
-  if (session?.user?.role !== "admin") {
-    redirect("./userboard");
+  if (!session) {
+    redirect("./login");
   }
   return (
     <>

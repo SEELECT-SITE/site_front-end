@@ -15,6 +15,7 @@ export const metadata = {
 };
 
 export default function Login() {
+  
   return (
     <>
       <div className="w-full h-screen lg:flex lg:flex-row-reverse">

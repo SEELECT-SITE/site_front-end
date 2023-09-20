@@ -59,11 +59,13 @@ export default function FormsCadastro() {
         );
         setTimeout(() => {
           router.replace("/login");
-        }, 2000);
+        }, 1500);
       }
     } catch (err: any) {
       const errorKeys = Object.keys(err.response.data);
-      const errosList = errorKeys.map((key) => err.response.data[key][0]) as [string];
+      const errosList = errorKeys.map((key) => err.response.data[key][0]) as [
+        string
+      ];
       setErroReq({ status: true, errors: errosList });
       scrollToElement(errorsDiv);
     }
