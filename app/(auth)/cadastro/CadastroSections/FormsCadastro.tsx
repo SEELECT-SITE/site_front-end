@@ -40,13 +40,13 @@ export default function FormsCadastro() {
     const formData = new URLSearchParams();
     formData.append("first_name", data.first_name as string);
     formData.append("last_name", data.last_name as string);
-    formData.append("username", data.username as string);
     formData.append("password", data.password as string);
     formData.append("email", data.email as string);
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
     };
+    console.log(formData.toString());
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/auth/register/",
@@ -92,12 +92,6 @@ export default function FormsCadastro() {
           errorMsg={errors.last_name?.message}
           type="text"
           register={register("last_name")}
-        />
-        <Input
-          placeholder="Username"
-          errorMsg={errors.username?.message}
-          type="text"
-          register={register("username")}
         />
         <Input
           placeholder="E-mail"

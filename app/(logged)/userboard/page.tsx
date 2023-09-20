@@ -3,6 +3,7 @@ import Container from "@/components/Container";
 import Title from "@/components/Title";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import EventCardUser from "./EventCardUser";
 
 export default function UserboardPage() {
   const router = useRouter();
@@ -29,6 +30,12 @@ export default function UserboardPage() {
         >
           sair
         </button>
+        <div className=" flex gap-3">
+          <EventCardUser />
+          <EventCardUser />
+          <EventCardUser />
+          <EventCardUser />
+        </div>
       </Container>
     </div>
   );

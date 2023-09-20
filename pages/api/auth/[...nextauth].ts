@@ -13,7 +13,7 @@ export const nextAuthOptions: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         const formData = new URLSearchParams();
-        formData.append("username", credentials?.email as string);
+        formData.append("email", credentials?.email as string);
         formData.append("password", credentials?.password as string);
 
         const headers = {

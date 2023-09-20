@@ -4,7 +4,6 @@ export const createCadastroSchema = z
   .object({
     first_name: z.string().nonempty("Digite seu nome"),
     last_name: z.string().nonempty("Digite seu nome"),
-    username: z.string().nonempty("Digite seu nome de usuario"),
     email: z
       .string()
       .nonempty("Email invalido")

@@ -15,8 +15,10 @@ import { MdErrorOutline } from "react-icons/md";
 import { scrollToElement } from "@/utils/scrollToElement";
 
 const createLoginSchema = z.object({
-  email: z.string().nonempty("Coloque um email"),
-  // .email("Formato de e-mail invalido"),
+  email: z
+    .string()
+    .email("Formato de e-mail invalido")
+    .nonempty("Insira um email"),
   password: z
     .string()
     .min(8, "Senha invalida")
