@@ -43,7 +43,7 @@ const coordenadores = [
     cargo={"Coordenador Geral"}
   />,
   <CardCoord
-    linkedin=""
+    linkedin="https://www.linkedin.com/in/juliana-barreira-de-almeida-346361187/"
     nome={"Juliana Barreira"}
     src={cg_eletri}
     cargo={"Coordenadora Geral"}
