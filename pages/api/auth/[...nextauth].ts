@@ -34,7 +34,7 @@ export const nextAuthOptions: NextAuthOptions = {
               name: `${first_name} ${last_name}`,
               image: "teste",
               id: id,
-              role: role ?? "user",
+              role: role ?? "admin",
             };
             return user;
           }
@@ -49,19 +49,15 @@ export const nextAuthOptions: NextAuthOptions = {
     signIn: "/login",
   },
   callbacks: {
-    async jwt(params: any) {
-      if (params.user?.token) {
-        params.token.role = params.user.role ?? "user";
-        params.token.id = params.user.token;
-        params.token.name = `${params.user.first_name} ${params.user.last_name}`;
-      }
-      return params.token;
+    async jwt({ token, user }) {
+      if (user) token.role = user.role;
+      return token;
     },
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id;
-        session.user.role = token.role ?? "user";
         session.user.name = token.name;
+        session.user.role = token.role;
       }
       return session;
     },

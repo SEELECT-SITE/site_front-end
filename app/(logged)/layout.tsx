@@ -2,7 +2,6 @@ import { getServerSession } from "next-auth";
 import { cafeFont } from "../fonts";
 import { nextAuthOptions } from "@/pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
-import HeaderHome from "@/components/HeaderHome";
 
 export default async function AdminLayout({
   children,

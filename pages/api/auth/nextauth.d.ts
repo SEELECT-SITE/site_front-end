@@ -1,9 +1,8 @@
 import { DefaultSession, DefaultUser } from "next-auth";
-// Define a role enum
 
-// common interface for JWT and Session
+
 interface IUser extends DefaultUser {
-  role?: "user" | "admin";
+  role: "user" | "admin";
 }
 
 export interface EventoProps {
@@ -22,7 +21,5 @@ declare module "next-auth" {
   }
 }
 declare module "next-auth/jwt" {
-  interface JWT extends IUser {
-    role: "user" | "admin";
-  }
+  interface JWT extends IUser {}
 }
