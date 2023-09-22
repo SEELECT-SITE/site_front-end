@@ -1,9 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
+
 import Container from "@/components/Container";
 import { FcGoogle } from "react-icons/fc";
 import FloatButton from "@/components/FloatButton";
-
 import FormsCadastro from "./CadastroSections/FormsCadastro";
 import MarqueeSign from "../login/LoginSections/MarqueeSign";
 import BannerSign from "../login/LoginSections/BannerSign";
@@ -15,7 +13,7 @@ export const metadata = {
     "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
 };
 
-export default function Login() {
+export default function CadastroPage() {
   return (
     <>
       <div className="w-auto lg:h-screen lg:flex lg:flex-row-reverse ">

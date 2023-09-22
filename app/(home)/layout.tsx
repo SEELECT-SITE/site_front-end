@@ -1,7 +1,7 @@
 "use client";
 import Footer from "@/components/Footer";
 import { cafeFont } from "../fonts";
-import HomeHeader from "@/components/HomeHeader";
+import HomeHeader from "@/components/HeaderHome";
 export default function HomeLayout({
   children,
 }: {

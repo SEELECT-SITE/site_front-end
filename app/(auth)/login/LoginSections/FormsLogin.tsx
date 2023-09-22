@@ -5,12 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FloatButton from "@/components/FloatButton";
 import Input from "@/components/Input";
 import Text from "@/components/Text";
-import axios from "axios";
 import { signIn } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
-import SmallText from "@/components/SmallText";
-import Alert from "@/components/Alert";
-import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import { scrollToElement } from "@/utils/scrollToElement";
 

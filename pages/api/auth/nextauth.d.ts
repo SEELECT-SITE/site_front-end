@@ -4,8 +4,17 @@ import { DefaultSession, DefaultUser } from "next-auth";
 // common interface for JWT and Session
 interface IUser extends DefaultUser {
   role?: "user" | "admin";
-  eventos:string[]
 }
+
+export interface EventoProps {
+  title: string;
+  data: number;
+  local: string;
+  tipo: "workshop" | "palestra";
+  description: string;
+  vagas_livres: number;
+}
+
 declare module "next-auth" {
   interface User extends IUser {}
   interface Session {
@@ -13,5 +22,7 @@ declare module "next-auth" {
   }
 }
 declare module "next-auth/jwt" {
-  interface JWT extends IUser {}
+  interface JWT extends IUser {
+    role: "user" | "admin";
+  }
 }

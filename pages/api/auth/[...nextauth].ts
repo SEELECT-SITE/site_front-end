@@ -35,7 +35,6 @@ export const nextAuthOptions: NextAuthOptions = {
               image: "teste",
               id: id,
               role: role ?? "user",
-              eventos: ["tste1", "reste"],
             };
             return user;
           }
@@ -54,7 +53,6 @@ export const nextAuthOptions: NextAuthOptions = {
       if (params.user?.token) {
         params.token.role = params.user.role ?? "user";
         params.token.id = params.user.token;
-        params.token.eventos = ["tste1", "reste"];
         params.token.name = `${params.user.first_name} ${params.user.last_name}`;
       }
       return params.token;
@@ -64,7 +62,6 @@ export const nextAuthOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.role = token.role ?? "user";
         session.user.name = token.name;
-        session.user.eventos = ["tste1", "reste"];
       }
       return session;
     },

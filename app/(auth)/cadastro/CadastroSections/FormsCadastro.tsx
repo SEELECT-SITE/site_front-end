@@ -46,7 +46,6 @@ export default function FormsCadastro() {
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
     };
-    console.log(formData.toString());
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/auth/register/",
