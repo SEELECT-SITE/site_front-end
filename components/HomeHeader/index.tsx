@@ -4,6 +4,7 @@ import Link from "next/link";
 import Seelect_icon from "@/public/icone_seelect-light-cian.webp";
 import MainMenu from "../MainMenu";
 import useHeaderOpen from "@/hooks/useHeaderOpen";
+import NoticeHeader from "../NoticeHeader";
 
 const HeaderHome = () => {
   const isHeaderOpen = useHeaderOpen();
@@ -13,7 +14,8 @@ const HeaderHome = () => {
         isHeaderOpen ? "-translate-y-0" : "-translate-y-48"
       }`}
     >
-      <div className="w-full absolute bg-white z-50 m-auto flex justify-between p-4 lg:px-12 xl:px-16 2xl:px-24 items-center top-0 left-0 shadow-md shadow-black/30">
+      <NoticeHeader />
+      <div className="w-full absolute bg-white z-50 m-auto flex justify-between p-4 lg:px-12 xl:px-16 2xl:px-24 items-center left-0 shadow-md shadow-black/30 h">
         <Link href="/" className="">
           <div className="w-12 lg:w-16">
             <Image
