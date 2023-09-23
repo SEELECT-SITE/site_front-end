@@ -9,6 +9,7 @@ import Contact from "@/components/SECTIONS/Contact";
 import Testimony from "@/components/SECTIONS/Testimony";
 
 import wave_svg from "@/public/SVG/wave-home.svg";
+import EventosSection from "@/components/SECTIONS/Eventos";
 
 export const metadata = {
   title: "SEELECT",
@@ -30,7 +31,7 @@ const Home = () => {
       </div>
 
       <Retrospec />
-
+      <EventosSection />
       {/* <Container>
         <Cronograma />
       </Container>
