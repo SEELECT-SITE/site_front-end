@@ -33,6 +33,26 @@ export const nextAuthOptions: NextAuthOptions = {
               email,
               name: `${first_name} ${last_name}`,
               image: "teste",
+              eventos: [
+                {
+                  title:
+                    "Uma breve introdução a linguagem de dispositivos IOS, Swift.",
+                  local: "Bloco 707 - Sala 25",
+                  tipo: "workshop",
+                  description: "muito bom",
+                  data: Date.now(),
+                  vagas_livres: 4,
+                },
+                {
+                  title:
+                    "Uma breve introdução a linguagem de dispositivos IOS, Swift.",
+                  local: "Bloco 707 - Sala 25",
+                  tipo: "workshop",
+                  description: "muito bom",
+                  data: Date.now(),
+                  vagas_livres: 4,
+                },
+              ],
               id: id,
               role: role ?? "user",
             };
@@ -50,7 +70,10 @@ export const nextAuthOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.role = user.role;
+      if (user) {
+        token.role = user.role;
+        token.eventos = user.eventos;
+      }
       return token;
     },
     async session({ session, token }) {
@@ -58,6 +81,7 @@ export const nextAuthOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.name = token.name;
         session.user.role = token.role;
+        session.user.eventos = token.eventos;
       }
       return session;
     },

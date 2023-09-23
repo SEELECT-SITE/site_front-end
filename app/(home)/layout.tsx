@@ -8,14 +8,12 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <body
-        className={`bg-white w-full relative min-h-screen overflow-x-hidden ${cafeFont.className}`}
-      >
-        <HomeHeader />
-        <main className="text-white">{children}</main>
-        <Footer />
-      </body>
-    </>
+    <body
+      className={`bg-white w-full relative min-h-screen overflow-x-hidden ${cafeFont.className}`}
+    >
+      <HomeHeader />
+      <main className="text-white">{children}</main>
+      <Footer />
+    </body>
   );
 }

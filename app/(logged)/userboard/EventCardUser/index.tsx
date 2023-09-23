@@ -13,7 +13,7 @@ const EventCardUser: FunctionComponent<EventoProps> = ({
 }) => {
   const data_evento = new Date(data);
   return (
-    <article className="hover:animate-background rounded-xl bg-gradient-to-r from-cian-400 via-cian-700 to-dark-cian p-0.5 shadow-xl transition hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s] max-w-md">
+    <article className="hover:animate-background rounded-xl bg-gradient-to-r p-0.5 shadow-xl transition max-w-md">
       <div className="rounded-[10px] bg-white p-4 !pt-8 sm:p-6">
         <div className="flex justify-between">
           <time className="block text-xs text-gray-500">
@@ -32,6 +32,7 @@ const EventCardUser: FunctionComponent<EventoProps> = ({
 
         <div className="text-slate-500">{local}</div>
         <SmallText className="text-slate-500">{description}</SmallText>
+        <div className="text-dark">vagas restantes {vagas_livres}</div>
       </div>
     </article>
   );

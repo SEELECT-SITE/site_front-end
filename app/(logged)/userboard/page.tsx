@@ -1,6 +1,5 @@
 "use client";
 import Container from "@/components/Container";
-import Title from "@/components/Title";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import EventCardUser from "./EventCardUser";
@@ -13,6 +12,7 @@ export default function UserboardPage() {
 
   if (session) {
     const { user } = session;
+    console.log(user);
     return (
       <>
         <header className="w-full  bg-white flex justify-between p-4 lg:px-12 xl:px-16 2xl:px-24 items-center  shadow-md shadow-black/90 text-dark">
@@ -43,22 +43,15 @@ export default function UserboardPage() {
               notAnimated={true}
             />
             <h2 className="text-2xl font-bold">Seus eventos selecionados.</h2>
-            <EventCardUser
-              title="Uma breve introdução a linguagem de dispositivos IOS, Swift."
-              local="Bloco 707 - Sala 25"
-              tipo="workshop"
-              description="muito bom"
-              data={Date.now()}
-              vagas_livres={4}
-            />
-            <EventCardUser
-              title="Uma breve introdução a linguagem de dispositivos IOS, Swift."
-              local="Bloco 707 - Sala 25"
-              tipo="workshop"
-              description="muito bom"
-              data={Date.now()}
-              vagas_livres={4}
-            />
+            {user?.eventos.length != 0 ? (
+              <>
+                {user?.eventos.map((elem) => {
+                  return <EventCardUser {...elem} />;
+                })}
+              </>
+            ) : (
+              <div>sem eventos ainda</div>
+            )}
           </div>
         </Container>
       </>
