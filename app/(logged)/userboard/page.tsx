@@ -12,7 +12,6 @@ export default function UserboardPage() {
   const { data: session } = useSession();
 
   if (session) {
-    console.log(session);
     const { user } = session;
     return (
       <>
@@ -38,7 +37,11 @@ export default function UserboardPage() {
           )}
 
           <div className="flex flex-col gap-2">
-            <Decoration type="light" shadowClassname="h-4 my-4" />
+            <Decoration
+              type="light"
+              shadowClassname="h-4 my-4"
+              notAnimated={true}
+            />
             <h2 className="text-2xl font-bold">Seus eventos selecionados.</h2>
             <EventCardUser
               title="Uma breve introdução a linguagem de dispositivos IOS, Swift."

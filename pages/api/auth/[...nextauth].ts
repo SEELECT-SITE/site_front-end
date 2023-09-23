@@ -34,7 +34,7 @@ export const nextAuthOptions: NextAuthOptions = {
               name: `${first_name} ${last_name}`,
               image: "teste",
               id: id,
-              role: role ?? "admin",
+              role: role ?? "user",
             };
             return user;
           }
