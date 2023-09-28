@@ -17,6 +17,7 @@ const HeaderHome = () => {
         <Link href="/" className="">
           <div className="w-12 lg:w-16">
             <Image
+              width={64}
               src={Seelect_icon}
               alt="icone seelect"
               className="hover:drop-shadow-icon-sm hover:-translate-x-0.5 hover:-translate-y-0.5 duration-150"

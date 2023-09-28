@@ -1,9 +1,14 @@
+import { UUID } from "crypto";
 import { DefaultSession, DefaultUser } from "next-auth";
 
-
 interface IUser extends DefaultUser {
-  role: "user" | "admin";
+  role: "user" | "admin" | "staff";
+  universidade?: string;
+  idade?: number;
+  curso?: string;
+  semestre?: string;
   eventos: EventoProps[];
+  kit?: "iniciante" | "medio" | "avançado";
 }
 
 export interface EventoProps {

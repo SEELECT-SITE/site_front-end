@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import EventCardUser from "./EventCardUser";
 import Text from "@/components/Text";
 import Decoration from "@/components/SECTIONS/Cronograma/DecorationStripes/decoration";
+import Title from "@/components/Title";
+import Link from "next/link";
+import Image from "next/image";
+import Seelect_icon from "@/public/icone_seelect-light-cian.webp";
 
 export default function UserboardPage() {
   const router = useRouter();
@@ -12,11 +16,20 @@ export default function UserboardPage() {
 
   if (session) {
     const { user } = session;
-    console.log(user);
     return (
       <>
         <header className="w-full  bg-white flex justify-between p-4 lg:px-12 xl:px-16 2xl:px-24 items-center  shadow-md shadow-black/90 text-dark">
-          <Text>Bem-vindo {user?.name} </Text>
+          <Link href="/" className="">
+            <div className="w-12 lg:w-16">
+              <Image
+                width={64}
+                src={Seelect_icon}
+                alt="icone seelect"
+                className="hover:drop-shadow-icon-sm hover:-translate-x-0.5 hover:-translate-y-0.5 duration-150"
+              />
+            </div>
+          </Link>
+          <Text> </Text>
           <button
             className="border font-bold border-red-400 px-4 py-2 rounded-full hover:bg-red-400 hover:text-white duration-200 hover:shadow-md hover:border-slate-500"
             onClick={() => {
@@ -27,32 +40,30 @@ export default function UserboardPage() {
             Sair
           </button>
         </header>
+        <Decoration
+          type="light"
+          shadowClassname="h-6 my-2 rounded-none"
+          className="rounded-none"
+          notAnimated={true}
+        />
 
         <Container>
-          {session && (
-            <>
-              <div>{session.user?.name}</div>
-              <div>{session.user?.email}</div>
-            </>
-          )}
-
           <div className="flex flex-col gap-2">
-            <Decoration
-              type="light"
-              shadowClassname="h-4 my-4"
-              notAnimated={true}
-            />
-            <h2 className="text-2xl font-bold">Seus eventos selecionados.</h2>
-            {user?.eventos.length != 0 ? (
-              <>
-                {user?.eventos.map((elem) => {
-                  return <EventCardUser {...elem} />;
+            <Text>Bem-vindo {user?.name} </Text>
+            <Title className="text-cian-700 text-xl">
+              Seus eventos selecionados
+            </Title>
+            {user?.eventos ? (
+              <div className="flex gap-4 flex-wrap justify-center lg:justify-start">
+                {user?.eventos.map((elem, index) => {
+                  return <EventCardUser key={elem.title + index} {...elem} />;
                 })}
-              </>
+              </div>
             ) : (
-              <div>sem eventos ainda</div>
+              <div>Sem eventos.</div>
             )}
           </div>
+          <div></div>
         </Container>
       </>
     );

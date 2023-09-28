@@ -33,6 +33,10 @@ export const nextAuthOptions: NextAuthOptions = {
               email,
               name: `${first_name} ${last_name}`,
               image: "teste",
+              semestre: "2022.2",
+              idade: 18,
+              curso: "Engenharia de Telecomunicações",
+              universidade: "UFC - Universade Federal do Ceará",
               eventos: [
                 {
                   title:
@@ -80,8 +84,9 @@ export const nextAuthOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = token.id;
         session.user.name = token.name;
-        session.user.role = token.role;
         session.user.eventos = token.eventos;
+        session.user.universidade = token.universidade;
+        session.user.curso = token.curso;
       }
       return session;
     },
