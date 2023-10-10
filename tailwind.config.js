@@ -25,10 +25,15 @@ module.exports = {
       },
       animation: {
         "login-deco": "login-deco 20s ease-in-out infinite",
+        "marquee-slide": "marquee-slide 20s ease-in-out infinite",
       },
       keyframes: {
         "login-deco": {
           "0%, 100%": { transform: "translateX(-25%)" },
+          "50%": { transform: "translateX(0%)" },
+        },
+        "marquee-slide": {
+          "0%, 100%": { transform: "translateX(-100%)" },
           "50%": { transform: "translateX(0%)" },
         },
       },

@@ -12,13 +12,13 @@ import Link from "next/link";
 function Contact() {
   return (
     <section className="flex items-start flex-col-reverse lg:flex-row-reverse lg:mt-16 relative lg:pt-24">
-      <div className="w-full overflow-hidden aspect-video relative max-w-5xl">
+      <div className="w-full flex items-center overflow-hidden aspect-video relative max-w-5xl ">
         <Image
           src={colaboradores}
           priority
           alt="Imagem dos organizadores"
           height={600}
-          className="w-full absolute bottom-0"
+          className="w-full"
         />
       </div>
 

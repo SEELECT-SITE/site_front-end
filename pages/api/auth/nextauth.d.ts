@@ -3,21 +3,27 @@ import { DefaultSession, DefaultUser } from "next-auth";
 
 interface IUser extends DefaultUser {
   role: "user" | "admin" | "staff";
-  universidade?: string;
-  idade?: number;
-  curso?: string;
+  ies?: string;
+  age?: number;
+  course?: string;
   semestre?: string;
-  eventos: EventoProps[];
-  kit?: "iniciante" | "medio" | "avançado";
+  events: EventProps[];
+  kit?: {
+    name: "iniciante" | "medio" | "avançado";
+    n_palestras: number;
+    n_workshop: number;
+  };
 }
 
-export interface EventoProps {
+export interface EventProps {
   title: string;
-  data: number;
-  local: string;
+  hostedBy: string;
+  date: number;
+  location: { name: string; url: string };
   tipo: "workshop" | "palestra";
   description: string;
-  vagas_livres: number;
+  max_inscriptions: number;
+  inscriptions: number;
 }
 
 declare module "next-auth" {

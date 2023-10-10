@@ -13,7 +13,13 @@ interface PriceCardProps {
   stars?: number;
 }
 
-function SvgCardLine({ color, opacity }: { color?: string; opacity?: string }) {
+export function SvgCardLine({
+  color,
+  opacity,
+}: {
+  color?: string;
+  opacity?: string;
+}) {
   return (
     <svg viewBox="0 0 313 12" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path

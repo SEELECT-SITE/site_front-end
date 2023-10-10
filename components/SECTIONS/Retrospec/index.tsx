@@ -7,9 +7,7 @@ function Retrospec() {
   return (
     <section className="bg-dark z-10 pt-4 sm:pt-10">
       <Container className="bg-dark">
-        <Title className="text-cian-700 text-xl mb-10">
-          RETROSPECTIVA SEELECT
-        </Title>
+        <Title className="text-cian-700 mb-10">RETROSPECTIVA SEELECT</Title>
       </Container>
 
       <RetrospecSlider />

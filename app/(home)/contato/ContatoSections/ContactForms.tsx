@@ -50,7 +50,7 @@ export default function ContactForms() {
   return (
     <form
       onSubmit={handleSubmit(createContact)}
-      className="w-full flex flex-col gap-8 border-dark bg-gradient-to-b from-dark to-[#2E3047] border py-8 px-4 lg:py-12 lg:px-8 rounded-2xl max-w-md relative z-10 overflow-hidden"
+      className="w-full flex flex-col gap-8 border-slate-500 bg-gradient-to-b from-dark to-[#2E3047] border py-8 px-4 lg:py-12 shadow-md shadow-white/40 lg:px-8 rounded-2xl max-w-md relative z-10 overflow-hidden"
     >
       <Decoration
         shadowClassname="h-4 absolute top-0 w-110% left-0 rounded-none"

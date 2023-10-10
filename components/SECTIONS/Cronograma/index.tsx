@@ -9,7 +9,7 @@ import Decoration from "./DecorationStripes/decoration";
 function Cronograma() {
   return (
     <section className="w-full pt-12 lg:pt-24 bg-white">
-      <Title className={`text-xl font-bold text-center text-dark-cian mb-10`}>
+      <Title className={`font-bold text-center text-dark-cian mb-10`}>
         CRONOGRAMA GERAL
       </Title>
 
