@@ -7,7 +7,6 @@ interface IUser extends DefaultUser {
   age?: number;
   course?: string;
   semestre?: string;
-  events: EventProps[];
   kit?: {
     name: "iniciante" | "medio" | "avançado";
     n_palestras: number;

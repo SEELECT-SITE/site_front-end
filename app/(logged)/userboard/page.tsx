@@ -58,7 +58,7 @@ export default function UserboardPage() {
           />
         </div>
         <Container className="bg-gradient-to-b from-dark to-dark-cian pb-20 overflow-hidden">
-          {user?.events ? (
+          {/* {user?.events ? (
             <div className="relative z-10">
               <Title className="text-cian-700 my-4">
                 Seus eventos selecionados
@@ -84,7 +84,7 @@ export default function UserboardPage() {
             </div>
           ) : (
             <div>Sem eventos.</div>
-          )}
+          )} */}
         </Container>
       </>
     );

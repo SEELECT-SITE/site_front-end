@@ -69,21 +69,20 @@ export default function RetrospecSlider() {
           className="mySwiper max-h-[600px] relative"
         >
           <div className="w-110% h-24 lg:h-32 rounded-100%  absolute bg-dark top-0 z-10 -left-5% -translate-y-1/2"></div>
-          {imagens
-            .map((elem, index) => {
-              return (
-                <SwiperSlide key={index + 1} className="border-x aspect-square">
-                  <div className="h-full flex items-center">
-                    <Image
-                      src={elem.imagem}
-                      alt={elem.alt}
-                      priority={true}
-                      className="w-full object-cover"
-                    />
-                  </div>
-                </SwiperSlide>
-              );
-            })}
+          {imagens.map((elem, index) => {
+            return (
+              <SwiperSlide key={index + 1} className="border-x aspect-square">
+                <div className="h-full flex items-center">
+                  <Image
+                    src={elem.imagem}
+                    alt={elem.alt}
+                    priority={true}
+                    className="w-full object-cover"
+                  />
+                </div>
+              </SwiperSlide>
+            );
+          })}
           <div className="w-110% h-16 lg:h-32 rounded-100% absolute bg-white bottom-0 z-10 -left-5% translate-y-1/2"></div>
           <SwiperButton isEnd={isEnd} isBegin={isBegin} />
         </Swiper>

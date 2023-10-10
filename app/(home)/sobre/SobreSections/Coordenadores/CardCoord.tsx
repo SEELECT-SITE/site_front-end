@@ -46,9 +46,7 @@ export default function CardCoord({
             {nome}
           </Title>
 
-          <Text className=" text-gray-300 font-thin">
-            {cargo}
-          </Text>
+          <Text className=" text-gray-300 font-thin">{cargo}</Text>
         </div>
         <div className="absolute -z-10 w-1/2 right-0 translate-x-1/2 ">
           <Image src={deco_wave} alt="decoration" />
