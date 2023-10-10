@@ -14,7 +14,6 @@ const HeaderHome = () => {
         isHeaderOpen ? "-translate-y-0" : "-translate-y-48"
       }`}
     >
-      <NoticeHeader />
       <div className="w-full absolute bg-white z-50 m-auto flex justify-between p-4 lg:px-12 xl:px-16 2xl:px-24 items-center left-0 shadow-md shadow-black/30 h">
         <Link href="/" className="">
           <div className="w-12 lg:w-16">

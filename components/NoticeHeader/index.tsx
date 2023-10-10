@@ -6,7 +6,7 @@ const NoticeHeader = () => {
     <Link href="#">
       <div className="bg-cian-700 w-full p-2 relative text-slate-700 group hover:bg-dark-cian hover:text-white duration-150">
         <div className="gap-2 flex justify-center items-center font-bold">
-          <FaDotCircle /> Confira o evento PRE-SEELECT <FaDotCircle />
+          <FaDotCircle /> DIA 06 DE NOVEMBRO <FaDotCircle />
         </div>
       </div>
     </Link>
