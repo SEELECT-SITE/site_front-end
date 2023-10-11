@@ -14,14 +14,14 @@ import axios from "axios";
 import SelectInput from "@/components/SelectInput";
 
 const createAddEventsSchema = z.object({
-  title: z.string(),
+  title: z.string().nonempty("Coloque um titulo"),
   category: z.string(),
   place: z.string(),
 });
 
 type CreateAddEvents = z.infer<typeof createAddEventsSchema>;
 
-export default function AddEventsForms() {
+export default function AddEventsForms({ Token }: { Token: string }) {
   const {
     register,
     handleSubmit,
@@ -34,6 +34,7 @@ export default function AddEventsForms() {
   const [eventCapacity, setEventCapacity] = useState<number>(0);
 
   async function addEvent(data: CreateAddEvents) {
+    console.log(Token);
     const { category, title, place } = data;
     setErrorReq("");
     const formData = new URLSearchParams();
@@ -44,7 +45,7 @@ export default function AddEventsForms() {
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
-      Token: "d433e1980a3506f1512f0c9bc9a72abc",
+      Token: Token,
     };
 
     try {
@@ -61,14 +62,14 @@ export default function AddEventsForms() {
     <>
       <form
         onSubmit={handleSubmit(addEvent)}
-        className="w-full m-auto relative overflow-hidden p-1"
+        className="w-full m-auto relative overflow-hidden p-3 border border-slate-100 max-w-md bg-white text-dark"
       >
         <h1
           className={`text-2xl lg:mb-1 font-bold tracking-wide lg:text-3xl xl:text-4xl`}
         >
           Crie um evento
         </h1>
-        <div className="flex gap-2 lg:gap-4 my-6 lg:my-8">
+        <div className="flex flex-col gap-2 lg:gap-4 my-6 lg:my-8">
           <Input
             placeholder="Titulo da Palestra"
             errorMsg={errors.title?.message as string}

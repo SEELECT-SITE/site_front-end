@@ -7,15 +7,20 @@ import AddPlaceForms from "./components/AddPlacesForms";
 import AddEventsForms from "./components/AddEventsForms";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "@/utils/queryClient";
+import { useSession } from "next-auth/react";
 
 export default function AdminPage() {
+  const { data: session } = useSession();
   return (
     <QueryClientProvider client={queryClient}>
       <main>
         <Container>
           <Title>pagina do admin</Title>
-
-          <AddEventsForms />
+        </Container>
+        <Container className="flex flex-wrap items-stretch">
+          {session?.user?.token && (
+            <AddEventsForms Token={session?.user?.token} />
+          )}
           <AddPlaceForms />
         </Container>
       </main>{" "}

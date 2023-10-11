@@ -1,3 +1,4 @@
+"use client";
 import PresentationSection from "@/components/SECTIONS/PresentationSection";
 import Image from "next/image";
 
@@ -9,37 +10,35 @@ import Testimony from "@/components/SECTIONS/Testimony";
 
 import wave_svg from "@/public/SVG/wave-home.svg";
 import Contact from "@/components/SECTIONS/Contact";
-
-export const metadata = {
-  title: "SEELECT",
-  description:
-    "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
-};
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "@/utils/queryClient";
 
 const Home = () => {
   return (
     <>
-      <div className="pt-32 lg:py-44 bg-gradient-to-b from-dark via-dark via-40% to-dark/70">
-        <PresentationSection />
+      <QueryClientProvider client={queryClient}>
+        <div className="pt-32 lg:py-44 bg-gradient-to-b from-dark via-dark via-40% to-dark/70">
+          <PresentationSection />
 
-        <Testimony />
+          <Testimony />
 
-        <div className="w-110% -left-5% absolute -z-10 min-w-[800px] -translate-y-3/4 lg:-translate-y-1/2">
-          <Image src={wave_svg} alt={"svg de decoração"} className="w-full" />
+          <div className="w-110% -left-5% absolute -z-10 min-w-[800px] -translate-y-3/4 lg:-translate-y-1/2">
+            <Image src={wave_svg} alt={"svg de decoração"} className="w-full" />
+          </div>
         </div>
-      </div>
 
-      <Retrospec />
+        <Retrospec />
 
-      <Container>
-        <Cronograma />
-      </Container>
+        <Container>
+          <Cronograma />
+        </Container>
 
-      <Container className="bg-white w-full my-12 lg:my-32">
-        <Parceiros />
-      </Container>
+        <Container className="bg-white w-full my-12 lg:my-32">
+          <Parceiros />
+        </Container>
 
-      <Contact />
+        <Contact />
+      </QueryClientProvider>
     </>
   );
 };

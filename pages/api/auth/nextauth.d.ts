@@ -7,6 +7,7 @@ interface IUser extends DefaultUser {
   age?: number;
   course?: string;
   semestre?: string;
+  token: string;
   kit?: {
     name: "iniciante" | "medio" | "avançado" | undefined;
     n_palestras: number;

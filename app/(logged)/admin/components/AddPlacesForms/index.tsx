@@ -44,7 +44,7 @@ export default function AddPlaceForms() {
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
-      Token: "d433e1980a3506f1512f0c9bc9a72abc",
+      Token: "36d0c4ebde1c6e5dec38d4fc54b40c77",
     };
 
     try {

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import CronoSlider from "@/components/SECTIONS/Cronograma/CronoSlider";
 import Title from "@/components/Title";
@@ -5,8 +6,29 @@ import Container from "@/components/Container";
 import FloatButton from "@/components/FloatButton";
 import EventCards from "./EventsCard";
 import Decoration from "./DecorationStripes/decoration";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 function Cronograma() {
+  const { data: events, isLoading } = useQuery<any | undefined>(
+    "Places",
+    async () => {
+      const headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Token: "36d0c4ebde1c6e5dec38d4fc54b40c77",
+      };
+
+      try {
+        const { data } = await axios.get(`http://127.0.0.1:8000/api/events/`, {
+          headers,
+        });
+        return data.results;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
+
   return (
     <section className="w-full pt-12 lg:pt-24 bg-white">
       <Title className={`font-bold text-center text-dark-cian mb-10`}>
@@ -16,10 +38,19 @@ function Cronograma() {
       <CronoSlider />
       <div className="m-auto max-w-6xl">
         <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-center m-auto">
-          <EventCards />
-          <EventCards />
-          <EventCards />
-          <EventCards />
+          {events?.map((event) => {
+            return (
+              <EventCards
+                key={event.id}
+                title={event.title}
+                category={event.category}
+                number_of_inscriptions={event.number_of_inscriptions}
+                max_number_of_inscriptions={event.max_number_of_inscriptions}
+                location={event.place[0].location || ""}
+                url_location={event.place[0].url_location || ""}
+              />
+            );
+          })}
         </div>
 
         <div className="flex gap-2 py-0 rounded-lg">

@@ -1,5 +1,7 @@
 import axios from "axios";
 import NextAuth, { NextAuthOptions, User } from "next-auth";
+import { cookies } from "next/headers";
+import { setCookie } from "nookies";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { IUser } from "./nextauth";
 
@@ -15,7 +17,6 @@ export const nextAuthOptions: NextAuthOptions = {
         const formData = new URLSearchParams();
         formData.append("email", credentials?.email as string);
         formData.append("password", credentials?.password as string);
-
         const headers = {
           "Content-Type": "application/x-www-form-urlencoded",
         };
@@ -31,7 +32,7 @@ export const nextAuthOptions: NextAuthOptions = {
             const { email, auth, role, profile } = userData;
             const { first_name, last_name, ies, age, course, semester, kit } =
               profile;
-            const id = auth.id;
+
             const user: IUser = {
               email,
               name: `${first_name} ${last_name}`,
@@ -40,12 +41,10 @@ export const nextAuthOptions: NextAuthOptions = {
               course: course || "Sem curso registrado",
               ies: ies || "Sem instituição de ensino",
               kit: kit || undefined,
-
-              id: auth.token,
-
+              id: auth.id,
+              token: auth.token,
               role: role ?? "user",
             };
-            console.log(auth.token);
             return user;
           }
         } catch (error) {
@@ -62,13 +61,14 @@ export const nextAuthOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.role = user.role;
+        token.token = user.token;
         token.kit = user.kit;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
-        session.user.id = token.id;
+        session.user.token = token.token;
         session.user.name = token.name;
         session.user.ies = token.ies;
         session.user.course = token.course;
