@@ -6,7 +6,7 @@ import { cafeFont } from "@/app/fonts";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { IoMdEye } from "react-icons/io";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   valid?: boolean | undefined;
   errorMsg?: string | undefined;
   register?: UseFormRegisterReturn<string>;
