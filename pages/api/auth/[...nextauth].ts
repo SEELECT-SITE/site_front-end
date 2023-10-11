@@ -29,7 +29,7 @@ export const nextAuthOptions: NextAuthOptions = {
           if (userData && response.status) {
             console.log(userData);
             const { email, auth, role, profile } = userData;
-            const { first_name, last_name, ies, age, course, semester } =
+            const { first_name, last_name, ies, age, course, semester, kit } =
               profile;
             const id = auth.id;
             const user: IUser = {
@@ -39,9 +39,10 @@ export const nextAuthOptions: NextAuthOptions = {
               age: age || "Idade não registrada",
               course: course || "Sem curso registrado",
               ies: ies || "Sem instituição de ensino",
-              kit: { name: "iniciante", n_palestras: 2, n_workshop: 2 },
+              kit: kit || undefined,
 
-              id: id,
+              id: auth.token,
+
               role: role ?? "user",
             };
             console.log(auth.token);

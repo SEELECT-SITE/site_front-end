@@ -8,7 +8,7 @@ interface IUser extends DefaultUser {
   course?: string;
   semestre?: string;
   kit?: {
-    name: "iniciante" | "medio" | "avançado";
+    name: "iniciante" | "medio" | "avançado" | undefined;
     n_palestras: number;
     n_workshop: number;
   };

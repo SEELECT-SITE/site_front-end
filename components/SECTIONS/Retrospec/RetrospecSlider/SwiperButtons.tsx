@@ -18,8 +18,6 @@ const SwiperButtons: FunctionComponent<SwiperNavButtonsPropsType> = ({
 }) => {
   const swiper = useSwiper();
 
-  console.log(swiper.slides.length);
-
   return (
     <>
       <button

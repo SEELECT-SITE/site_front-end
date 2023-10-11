@@ -49,7 +49,6 @@ export default function FormsCadastro() {
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/auth/register/",
-        formData.toString(),
         { headers }
       );
       if (response.status === 201) {

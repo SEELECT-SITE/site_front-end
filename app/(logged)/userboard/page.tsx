@@ -14,6 +14,7 @@ import wave from "@/public/SVG/wave-home.svg";
 import { IoAlertCircleOutline } from "react-icons/io5";
 import SmallText from "@/components/SmallText";
 import { MdLogout } from "react-icons/md";
+import UserProfileForms from "./components/UserProfileForms";
 
 export default function UserboardPage() {
   const router = useRouter();
@@ -21,33 +22,13 @@ export default function UserboardPage() {
 
   if (session) {
     const { user } = session;
-
+    console.log(user);
     return (
       <>
         <div className="bg-dark-cian">
           <Container className="">
             <Text>Bem-vindo {user?.name} </Text>
-            {user?.kit ? (
-              <div className="bg-slate-600 p-2 rounded-md inline-flex flex-col space-y-4">
-                <Text>
-                  Seu kit é o{" "}
-                  <b className="border border-slate-400 rounded px-1 inline capitalize mb-2">
-                    {user.kit.name}
-                  </b>{" "}
-                </Text>
-                {user.kit.name != "avançado" && (
-                  <Link href={"#"}>
-                    <SmallText className="lg:font-normal text-yellow-400 hover:text-yellow-300 hover:underline gap-1 flex items-start">
-                      <IoAlertCircleOutline size={24} />
-                      Temos kits que abrangem mais eventos e brindes. Deseja
-                      fazer um upgrade?
-                    </SmallText>
-                  </Link>
-                )}
-              </div>
-            ) : (
-              <div>Sem kit ainda compre agora</div>
-            )}
+            <UserProfileForms id={user?.id} role={user?.role} />
           </Container>
 
           <Decoration

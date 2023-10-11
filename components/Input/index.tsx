@@ -29,7 +29,7 @@ const Input: FunctionComponent<InputProps> = ({
       className={twMerge(
         `${
           cafeFont.className
-        } relative block border rounded-lg my-4 border-black shadow-sm border-b-2 bg-white ${
+        } relative block border rounded-lg my-4 border-black shadow-sm border-b-2 bg-white min-w-[250px] ${
           valid === false && "border-b-red-500"
         }
         ${valid === true && "border-b-green-600"}
