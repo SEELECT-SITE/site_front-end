@@ -28,7 +28,6 @@ export const nextAuthOptions: NextAuthOptions = {
           );
           const userData = response.data;
           if (userData && response.status) {
-            console.log(userData);
             const { email, auth, role, profile } = userData;
             const { first_name, last_name, ies, age, course, semester, kit } =
               profile;

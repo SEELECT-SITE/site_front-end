@@ -26,6 +26,13 @@ export interface EventProps {
   inscriptions: number;
 }
 
+type kit = {
+  model: "free" | "Básico" | "Médio" | "Premium";
+  palestras: boolean;
+  workshops: number;
+  bucks_coup: boolean;
+};
+
 declare module "next-auth" {
   interface User extends IUser {}
   interface Session {

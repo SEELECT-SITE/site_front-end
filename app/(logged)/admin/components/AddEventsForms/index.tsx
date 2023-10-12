@@ -34,7 +34,6 @@ export default function AddEventsForms({ Token }: { Token: string }) {
   const [eventCapacity, setEventCapacity] = useState<number>(0);
 
   async function addEvent(data: CreateAddEvents) {
-    console.log(Token);
     const { category, title, place } = data;
     setErrorReq("");
     const formData = new URLSearchParams();
