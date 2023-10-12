@@ -8,11 +8,7 @@ interface IUser extends DefaultUser {
   course?: string;
   semestre?: string;
   token: string;
-  kit?: {
-    name: "iniciante" | "medio" | "avançado" | undefined;
-    n_palestras: number;
-    n_workshop: number;
-  };
+  kit?: Kit;
 }
 
 export interface EventProps {
@@ -20,17 +16,17 @@ export interface EventProps {
   hostedBy: string;
   date: number;
   location: { name: string; url: string };
-  tipo: "workshop" | "palestra";
+  tipo: string;
   description: string;
   max_inscriptions: number;
   inscriptions: number;
 }
 
-type kit = {
-  model: "free" | "Básico" | "Médio" | "Premium";
-  palestras: boolean;
-  workshops: number;
-  bucks_coup: boolean;
+type Kit = {
+  id: number;
+  is_payded: boolean;
+  model: string;
+  events: any[];
 };
 
 declare module "next-auth" {

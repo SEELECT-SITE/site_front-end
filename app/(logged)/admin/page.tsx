@@ -12,18 +12,14 @@ import { useSession } from "next-auth/react";
 export default function AdminPage() {
   const { data: session } = useSession();
   return (
-    <QueryClientProvider client={queryClient}>
-      <main>
-        <Container>
-          <Title>pagina do admin</Title>
-        </Container>
-        <Container className="flex flex-wrap items-stretch">
-          {session?.user?.token && (
-            <AddEventsForms Token={session?.user?.token} />
-          )}
-          <AddPlaceForms />
-        </Container>
-      </main>{" "}
-    </QueryClientProvider>
+    <main>
+      <Container>
+        <Title>pagina do admin</Title>
+      </Container>
+      <Container className="flex flex-wrap items-stretch">
+        {session?.user?.token && <AddEventsForms Token={session.user.token} />}
+        <AddPlaceForms />
+      </Container>
+    </main>
   );
 }

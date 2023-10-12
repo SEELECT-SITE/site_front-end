@@ -2,12 +2,11 @@
 import React from "react";
 import CronoSlider from "@/components/SECTIONS/Cronograma/CronoSlider";
 import Title from "@/components/Title";
-import Container from "@/components/Container";
 import FloatButton from "@/components/FloatButton";
-import EventCards from "./EventsCard";
 import Decoration from "./DecorationStripes/decoration";
 import { useQuery } from "react-query";
 import axios from "axios";
+import EventCard from "./EventsCard";
 
 function Cronograma() {
   const { data: events, isLoading } = useQuery<any | undefined>(
@@ -15,7 +14,7 @@ function Cronograma() {
     async () => {
       const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
-        Token: "5f70ec9f8ffa4f472911535674ec333e",
+        Token: "c517c544d6bdbedadfe1cca48221eb2a",
       };
 
       try {
@@ -37,18 +36,19 @@ function Cronograma() {
 
       <CronoSlider />
       <div className="m-auto max-w-6xl">
-        <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-center m-auto">
+        <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecht justify-center m-auto">
           {events?.map((event) => {
             return (
-              <EventCards
-                key={event.id}
-                title={event.title}
-                category={event.category}
-                number_of_inscriptions={event.number_of_inscriptions}
-                max_number_of_inscriptions={event.max_number_of_inscriptions}
-                location={event.place[0].location || ""}
-                url_location={event.place[0].url_location || ""}
-              />
+              <EventCard.Body>
+                <EventCard.Title title={event.title} />
+                <div className="flex">
+                  <EventCard.Location
+                    location={event.place[0].location}
+                    url_location={event.place[0].url_location}
+                  />
+                  <EventCard.Date date={Date()} />
+                </div>
+              </EventCard.Body>
             );
           })}
         </div>
