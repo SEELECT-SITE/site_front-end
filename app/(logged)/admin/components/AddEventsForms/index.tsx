@@ -4,14 +4,17 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FloatButton from "@/components/FloatButton";
 import Input from "@/components/Input";
-import Text from "@/components/Text";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
-import { scrollToElement } from "@/utils/scrollToElement";
 import axios from "axios";
 import SelectInput from "@/components/SelectInput";
+import { useQuery } from "react-query";
+
+interface OptionPlace {
+  location: string;
+  id: number | string;
+  capacity: number;
+}
 
 const createAddEventsSchema = z.object({
   title: z.string().nonempty("Coloque um titulo"),
@@ -32,6 +35,27 @@ export default function AddEventsForms({ Token }: { Token: string }) {
   const [errorReq, setErrorReq] = useState<any>("");
   const errorsDiv = useRef<HTMLDivElement | null>(null);
   const [eventCapacity, setEventCapacity] = useState<number>(0);
+
+  const { data: places, isLoading } = useQuery<OptionPlace[] | undefined>(
+    "Places",
+    async () => {
+      const headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Token: Token,
+      };
+
+      try {
+        const { data } = await axios.get(
+          `http://127.0.0.1:8000/api/events/places/`,
+          { headers }
+        );
+        return data.results;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    { refetchOnMount: false, refetchOnWindowFocus: false }
+  );
 
   async function addEvent(data: CreateAddEvents) {
     const { category, title, place } = data;
@@ -57,6 +81,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
       console.log(error);
     }
   }
+
   return (
     <>
       <form
@@ -70,24 +95,22 @@ export default function AddEventsForms({ Token }: { Token: string }) {
         </h1>
         <div className="flex flex-col gap-2 lg:gap-4 my-6 lg:my-8">
           <Input
-            placeholder="Titulo da Palestra"
+            placeholder="Titulo do Evento"
             errorMsg={errors.title?.message as string}
             type="text"
             register={register("title")}
           />
-          <Input
-            placeholder="Categoria"
-            errorMsg={errors.category?.message as string}
-            type="text"
+          <SelectInput
+            label="Tipo de Evento"
+            firstOption="Selecione um evento"
+            options={["palestra", "workshop", "minicurso"]}
             register={register("category")}
           />
-          {/* <Input
-            placeholder="Lugar"
-            errorMsg={errors.place?.message as string}
-            type="text"
-            register={register("capacity")}
-          /> */}
           <SelectInput
+            label="Lugar"
+            firstOption="Selecione um lugar"
+            type="places"
+            options={places!}
             register={register("place")}
             setCapacity={setEventCapacity}
           />

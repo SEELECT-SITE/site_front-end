@@ -3,7 +3,6 @@ import Container from "@/components/Container";
 import PriceCard from "@/components/PriceCard";
 import Paragraph from "@/components/Text";
 import Title from "@/components/Title";
-import { MdDone } from "react-icons/md";
 
 export const metadata = {
   title: "Pacotes",
@@ -23,70 +22,24 @@ export default function PacotesPage() {
         </Paragraph>
 
         <div className="flex flex-col items-center lg:flex-row lg:gap-8 2xl:gap-24 lg:justify-center lg:items-stretch ">
-
-          <PriceCard price={30} title="Pacote Básico" stars={1}>
-            <ul className="text-black font-thin italic mt-4 mb-8">
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet .
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-            </ul>
-          </PriceCard>
-
-          <PriceCard price={60} destack={true} destackText="POPULAR" title="Pacote Premium" stars={2}>
-            <ul className="font-thin italic mt-4 mb-8">
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"#84d1cf"} className="min-w-[20px]" />
-                Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
-                consectetur adipisicing elit.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"#84d1cf"} className="min-w-[20px]" />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"#84d1cf"} className="min-w-[20px]" />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"#84d1cf"} className="min-w-[20px]" />
-                Lorem ipsum dolor sit amet.
-              </li>
-            </ul>
-          </PriceCard>
-
-          <PriceCard price={120} title="Pacote VIP" stars={3}>
-            <ul className="text-black font-thin italic mt-4 mb-8">
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet .
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-            </ul>
-          </PriceCard>
+          <PriceCard
+            advantage={["Todas as palestras", "1 workshop", "Caneca Bucks"]}
+            id={"Kit Basico"}
+            title="Kit Basico"
+            price={10}
+          />
+          <PriceCard
+            advantage={["Todas as palestras", "1 workshop", "Caneca Bucks"]}
+            id={"Kit Basico"}
+            title="Kit Basico"
+            price={10}
+          />
+          <PriceCard
+            advantage={["Todas as palestras", "1 workshop", "Caneca Bucks"]}
+            id={"Kit Basico"}
+            title="Kit Basico"
+            price={10}
+          />
         </div>
       </Container>
     </>

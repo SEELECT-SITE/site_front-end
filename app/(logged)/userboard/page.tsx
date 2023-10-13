@@ -10,6 +10,16 @@ import { QueryClientProvider, useQuery } from "react-query";
 import { queryClient } from "@/utils/queryClient";
 import EventCard from "@/components/SECTIONS/Cronograma/EventsCard";
 import { Session } from "next-auth";
+import FloatButton from "@/components/FloatButton";
+import { useState } from "react";
+import { LuAlertCircle } from "react-icons/lu";
+import SelectEventsModal from "./components/SelectEventsModal";
+import useSelectEventsState from "./components/SelectEventsModal/selectEventsStore";
+import Title from "@/components/Title";
+import PriceCard from "@/components/PriceCard";
+import PayKitModal from "./components/PayKitModal";
+import usePayKitState from "./components/PayKitModal/PayKitModalStore";
+import SmallText from "@/components/SmallText";
 
 function Userboard({
   session,
@@ -18,69 +28,21 @@ function Userboard({
   session: Session;
   sessionUpdate: any;
 }) {
-  const { data: events, isLoading } = useQuery<any | undefined>(
-    "Places",
-    async () => {
-      const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Token: session.user?.token,
-      };
-
-      try {
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/events/`, {
-          headers,
-        });
-        return data.results;
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  );
-
-  function removeElem(v: number[] | undefined, matchId: number) {
-    const array = v.filter((elem) => {
-      if (elem === matchId) {
-        return;
-      } else {
-        return elem;
-      }
-    });
-    return array;
-  }
-
   const { user } = session;
-  const v = user?.kit?.events;
-  const model = user?.kit?.model;
-  var ids = v?.map((elem) => {
-    return elem.id;
-  });
-  async function removeEvent(id: number) {
-    const newids = ids ? removeElem(ids, id) : [];
-    const headers = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      Token: user?.token,
-    };
-    const formData = new URLSearchParams();
-    newids?.forEach((elem) => {
-      formData.append("events", elem.toString());
-    });
-    formData.append("model", model as string);
-    try {
-      await axios.put(
-        "http://127.0.0.1:8000/api/kits/3/",
-        formData.toString(),
-        { headers }
-      );
-      sessionUpdate();
-    } catch (e) {}
-  }
+  const { isSelectEventOpen, setIsSelectEventOpen, setSelectedKit } =
+    useSelectEventsState();
+  const { isPayKitModalOpen, setIsPayKitModalOpen } = usePayKitState();
 
   return (
     <>
-      <div className="bg-dark-cian">
+      <div className="bg-dark-cian relative">
         <Container className="">
           <Text>Bem-vindo {user?.name} </Text>
-          <UserProfileForms token={user?.token} id={user?.id} />
+          <UserProfileForms
+            token={user?.token}
+            id={user?.id}
+            sessionUpdate={sessionUpdate}
+          />
         </Container>
 
         <Decoration
@@ -91,25 +53,107 @@ function Userboard({
         />
       </div>
       <Container className="bg-gradient-to-b from-dark to-dark-cian pb-20 overflow-hidden">
-        <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecth m-auto">
-          {user?.kit?.events.map((event, index) => {
-            return (
-              <EventCard.Body key={event.title + index}>
-                <EventCard.CloseEvent
-                  onClick={(e) => {
-                    removeEvent(event.id);
+        <div>
+          {user?.kit ? (
+            <>
+              <Text>{user?.kit.model}</Text>
+              <div className="my-4">
+                <FloatButton onClick={(e) => setIsPayKitModalOpen(true)}>
+                  Efetuar pagamento
+                </FloatButton>
+                <SmallText className="flex  items-center gap-1 text-yellow-300">
+                  <LuAlertCircle />
+                  Se o pagamento já foi efetuado, ignore essa mensagem. O
+                  pagamento será confirmado em até dois dias uteis.
+                </SmallText>
+              </div>
+
+              {user?.kit?.is_payded ? (
+                <></>
+              ) : (
+                <>
+                  <FloatButton onClick={(e) => setIsSelectEventOpen(true)}>
+                    {user?.kit?.events.length > 0
+                      ? "Trocar de eventos"
+                      : "Selecione seus eventos"}
+                  </FloatButton>{" "}
+                  {isPayKitModalOpen && <PayKitModal user={user} />}
+                </>
+              )}
+              <div>
+                <Text>Seus Eventos selecionados</Text>
+                <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecth m-auto">
+                  {user?.kit?.events.map((event, index) => {
+                    return (
+                      <EventCard.Body key={event.title + index}>
+                        <EventCard.Title title={event.title} />
+                        <EventCard.Location
+                          location={event.place[0].location}
+                          url_location={event.place[0].url_location}
+                        />
+                      </EventCard.Body>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <Title>Não tem kit ainda? </Title>
+              <Text>Selecione um dos kit abaixo</Text>
+              <div className="flex gap-4 wrap items-stretch">
+                <PriceCard
+                  advantage={[
+                    "Todas as palestras",
+                    "1 workshop",
+                    "Caneca Bucks",
+                  ]}
+                  id={"KitGratuito"}
+                  title="Kit Gratuito"
+                  price={10}
+                  onClick={() => {
+                    setSelectedKit("basico");
+                    setIsSelectEventOpen(true);
                   }}
                 />
-                <EventCard.Title title={event.title} />
-                <EventCard.Location
-                  location={event.place[0].location}
-                  url_location={event.place[0].url_location}
+                <PriceCard
+                  advantage={[
+                    "Todas as palestras",
+                    "1 workshop",
+                    "Caneca Bucks",
+                  ]}
+                  id={"KitMedio"}
+                  title="Kit Medio"
+                  price={10}
+                  onClick={() => {
+                    setSelectedKit("basico");
+                    setIsSelectEventOpen(true);
+                  }}
                 />
-              </EventCard.Body>
-            );
-          })}
+                <PriceCard
+                  advantage={[
+                    "Todas as palestras",
+                    "1 workshop",
+                    "Caneca Bucks",
+                  ]}
+                  id={"Avançado"}
+                  title="Kit Avançado"
+                  price={10}
+                  destack={true}
+                  destackText="+ Custo-beneficio"
+                  onClick={() => {
+                    setSelectedKit("basico");
+                    setIsSelectEventOpen(true);
+                  }}
+                />
+              </div>
+            </>
+          )}
         </div>
       </Container>
+      {isSelectEventOpen && (
+        <SelectEventsModal user={user!} sessionUpdate={sessionUpdate} />
+      )}
     </>
   );
 }

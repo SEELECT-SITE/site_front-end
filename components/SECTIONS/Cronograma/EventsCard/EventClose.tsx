@@ -10,7 +10,7 @@ export default function EventClose({ className, ...props }: EventCloseProps) {
     <button
       {...props}
       className={twMerge(
-        "p-1 text-sm flex gap-2 items-center absolute top-2 right-2 border border-slate-400 hover:bg-slate-400 hover:text-red-600 rounded-full",
+        "p-1 text-sm flex gap-2 items-center absolute top-2 right-2 border border-slate-400 hover:bg-slate-400 hover:text-red-600 rounded-md",
         className
       )}
     >

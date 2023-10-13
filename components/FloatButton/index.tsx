@@ -18,7 +18,6 @@ export interface baseComponent extends ButtonHTMLAttributes<Element> {
 const FloatButton: FunctionComponent<baseComponent> = ({
   className,
   children,
-  onClick,
   disabled,
   shadowClassname,
   ...props

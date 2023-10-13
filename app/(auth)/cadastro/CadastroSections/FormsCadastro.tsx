@@ -38,8 +38,6 @@ export default function FormsCadastro() {
   async function createContact(data: any) {
     setErroReq({ ...erroReq, status: false });
     const formData = new URLSearchParams();
-    formData.append("first_name", data.first_name as string);
-    formData.append("last_name", data.last_name as string);
     formData.append("password", data.password as string);
     formData.append("email", data.email as string);
 
@@ -49,8 +47,10 @@ export default function FormsCadastro() {
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/auth/register/",
+        formData.toString(),
         { headers }
       );
+
       if (response.status === 201) {
         setRegisterSuccessMsg(
           "Cadastro confirmado, você será redirecionado para o Login"
@@ -60,6 +60,7 @@ export default function FormsCadastro() {
         }, 1500);
       }
     } catch (err: any) {
+      console.log(err);
       const errorKeys = Object.keys(err.response.data);
       const errosList = errorKeys.map((key) => err.response.data[key][0]) as [
         string
@@ -79,18 +80,6 @@ export default function FormsCadastro() {
         </Alert>
       )}
       <div className="flex flex-col gap-3 lg:gap-5 my-8">
-        <Input
-          placeholder="Nome"
-          errorMsg={errors.first_name?.message}
-          type="text"
-          register={register("first_name")}
-        />
-        <Input
-          placeholder="Sobrenome"
-          errorMsg={errors.last_name?.message}
-          type="text"
-          register={register("last_name")}
-        />
         <Input
           placeholder="E-mail"
           errorMsg={errors.email?.message}

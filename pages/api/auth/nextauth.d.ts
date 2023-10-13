@@ -8,7 +8,9 @@ interface IUser extends DefaultUser {
   course?: string;
   semestre?: string;
   token: string;
+  id: string;
   kit?: Kit;
+  descont?: number;
 }
 
 export interface EventProps {

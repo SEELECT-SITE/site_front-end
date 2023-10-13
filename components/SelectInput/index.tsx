@@ -1,71 +1,80 @@
 // src/components/SelectInput.tsx
 import axios from "axios";
 import React, { InputHTMLAttributes, useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { cafeFont } from "../../app/fonts";
 
-interface OptionPlace {
-  location: string;
-  id: number | string;
-  capacity: number;
-}
 export interface InputProps extends InputHTMLAttributes<HTMLSelectElement> {
   valid?: boolean | undefined;
   errorMsg?: string | undefined;
   register?: UseFormRegisterReturn<string>;
   icon?: Element;
   type?: string;
-  setCapacity: any;
+  setCapacity?: Function;
+  options: any[];
+  label: string;
+  firstOption?: string;
 }
 
-const SelectInput: React.FC<InputProps> = ({ register, setCapacity }) => {
+const SelectInput: React.FC<InputProps> = ({
+  register,
+  setCapacity,
+  options,
+  type,
+  label,
+  firstOption,
+}) => {
   const [selectedOption, setSelectedOption] = useState<number | string>("");
 
-  const { data: options, isLoading } = useQuery<OptionPlace[] | undefined>(
-    "Places",
-    async () => {
-      const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        Token: "c517c544d6bdbedadfe1cca48221eb2a",
-      };
-
-      try {
-        const { data } = await axios.get(
-          `http://127.0.0.1:8000/api/events/places/`,
-          { headers }
-        );
-        return data.results;
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  );
-
   return (
-    <select
-      className="text-dark p-4 rounded-lg"
-      value={selectedOption}
-      {...register}
-      onChange={(e) => {
-        const selectedOption = e.target.options[e.target.selectedIndex];
-        const capacity = selectedOption.getAttribute("data-capacity");
-        setCapacity(capacity);
-        setSelectedOption(e.target.value);
-      }}
-    >
-      <option value="" disabled>
-        Selecione um Lugar
-      </option>
-      {options?.map((option) => (
-        <option
-          key={option.id}
-          value={option.id}
-          data-capacity={option.capacity}
-        >
-          {`${option.location} - ${option.capacity} lugares`}
+    <div className="w-full flex flex-col my-2 ">
+      <label className="ml-2 bold">{label}</label>
+      <select
+        className={`text-dark p-4 cursor-pointer rounded-lg border border-black shadow-sm border-b-2 bg-white min-w-[250px] capitalize ${
+          selectedOption !== "" ? "border-2 border-cian-500" : ""
+        }`}
+        value={selectedOption}
+        {...register}
+        onChange={(e) => {
+          if (setCapacity) {
+            const selectedOption = e.target.options[e.target.selectedIndex];
+            const capacity = selectedOption.getAttribute("data-capacity");
+            setCapacity(capacity);
+          }
+          setSelectedOption(e.target.value);
+        }}
+      >
+        <option value="" disabled>
+          {firstOption}
         </option>
-      ))}
-    </select>
+        {type == "places" ? (
+          <>
+            {options?.map((option) => (
+              <option
+                className={`${cafeFont.className} `}
+                key={option.id}
+                value={option.id}
+                data-capacity={option.capacity}
+              >
+                {`${option.location} - ${option.capacity} lugares`}
+              </option>
+            ))}
+          </>
+        ) : (
+          <>
+            {options?.map((option, index) => (
+              <option
+                className={`${cafeFont.className} capitalize`}
+                key={option + index}
+                value={option}
+              >
+                {option}
+              </option>
+            ))}
+          </>
+        )}
+      </select>
+    </div>
   );
 };
 

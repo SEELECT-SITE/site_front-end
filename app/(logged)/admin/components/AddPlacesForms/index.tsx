@@ -8,10 +8,11 @@ import Text from "@/components/Text";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import { MdErrorOutline } from "react-icons/md";
+import { MdClose, MdErrorOutline } from "react-icons/md";
 import { scrollToElement } from "@/utils/scrollToElement";
 import axios from "axios";
 import Title from "@/components/Title";
+import removeElem from "@/utils/removeElem";
 
 const createAddPlaceFormsSchema = z.object({
   location: z.string(),
@@ -20,9 +21,24 @@ const createAddPlaceFormsSchema = z.object({
   equipaments: z.string(),
 });
 
+function SelectEquipaments() {
+  return (
+    <div>
+      <ul className="flex gap-2">
+        <li className="bg-slate-500 gap-1 p-2 rounded-md items-center flex justify-between">
+          23 cadeiras{" "}
+          <div className="p-1 rounded-3xl bg-slate-900 hover:bg-black">
+            <MdClose size={16} />
+          </div>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
 type CreateAddPlaces = z.infer<typeof createAddPlaceFormsSchema>;
 
-export default function AddPlaceForms() {
+export default function AddPlaceForms({ Token }: { Token: string }) {
   const {
     register,
     handleSubmit,
@@ -32,6 +48,16 @@ export default function AddPlaceForms() {
   });
   const [errorReq, setErrorReq] = useState<any>("");
   const errorsDiv = useRef<HTMLDivElement | null>(null);
+  const [equipaments, setEquipaments] = useState<string[]>([""]);
+
+  function toogleElements(id: string) {
+    if (equipaments.includes(id)) {
+      setEquipaments(removeElem(equipaments, id as string));
+    } else {
+      equipaments.push(id);
+      setEquipaments(equipaments);
+    }
+  }
 
   async function addPlace(data: CreateAddPlaces) {
     const { url_location, location, capacity, equipaments } = data;
@@ -44,7 +70,7 @@ export default function AddPlaceForms() {
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
-      Token: "36d0c4ebde1c6e5dec38d4fc54b40c77",
+      Token: Token,
     };
 
     try {
@@ -91,6 +117,9 @@ export default function AddPlaceForms() {
             type="text"
             register={register("equipaments")}
           />
+          <div>
+            <SelectEquipaments />
+          </div>
           {errorReq !== "" && (
             <div
               id="errorLogin"

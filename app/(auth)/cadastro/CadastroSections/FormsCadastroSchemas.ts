@@ -2,8 +2,6 @@ import { z } from "zod";
 
 export const createCadastroSchema = z
   .object({
-    first_name: z.string().nonempty("Digite seu nome"),
-    last_name: z.string().nonempty("Digite seu nome"),
     email: z
       .string()
       .nonempty("Email invalido")

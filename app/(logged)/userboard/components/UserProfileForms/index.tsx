@@ -8,7 +8,7 @@ import Input from "@/components/Input";
 import Text from "@/components/Text";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import { MdErrorOutline } from "react-icons/md";
+import { MdClose, MdErrorOutline } from "react-icons/md";
 import { scrollToElement } from "@/utils/scrollToElement";
 import axios from "axios";
 
@@ -26,9 +26,11 @@ type CreateUserProfileData = z.infer<typeof createUserProfileFormsSchema>;
 export default function UserProfileForms({
   token,
   id,
+  sessionUpdate,
 }: {
   token: string | undefined;
   id: string | undefined;
+  sessionUpdate: Function;
 }) {
   const {
     register,
@@ -38,8 +40,8 @@ export default function UserProfileForms({
     resolver: zodResolver(createUserProfileFormsSchema),
   });
 
-  const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const errorsDiv = useRef<HTMLDivElement | null>(null);
+  const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
 
   async function updateProfile(data: CreateUserProfileData) {
     const { last_name, first_name, ies, course, semester, age } = data;
@@ -62,75 +64,91 @@ export default function UserProfileForms({
         formData.toString(),
         { headers }
       );
+      sessionUpdate();
+      setIsFormOpen(false);
     } catch (error) {
       console.log(error);
     }
   }
   return (
     <>
-      <FloatButton className="flex" onClick={(e) => setIsFormOpen(true)}>
-        Editar perfil <HiPencilAlt size={18} />
-      </FloatButton>
-      <form
-        onSubmit={handleSubmit(updateProfile)}
-        className={`w-full m-auto relative overflow-hidden p-1 max-w-sm duration-300 ${
-          isFormOpen ? "block" : "hidden"
-        }`}
+      <FloatButton
+        className="flex duration-100"
+        shadowClassname=" my-6"
+        onClick={(e) => {
+          setIsFormOpen((update) => !update);
+        }}
       >
-        <div className="mb-8 border-l-2 border-dark pl-2">
-          <h1
-            className={`text-2xl lg:mb-1 font-bold tracking-wide lg:text-3xl xl:text-4xl`}
-          >
-            Atualize suas credenciais
-          </h1>
-        </div>
-        <div className="flex-col flex gap-2 lg:gap-4 my-6 lg:my-8 max-w-md">
-          <Input
-            placeholder="Nome"
-            errorMsg={errors.first_name?.message as string}
-            type="text"
-            register={register("first_name")}
-          />
-          <Input
-            placeholder="Sobrenome"
-            errorMsg={errors.last_name?.message as string}
-            type="text"
-            register={register("last_name")}
-          />
-          <Input
-            placeholder="Intituição de Ensino"
-            errorMsg={errors.ies?.message as string}
-            type="text"
-            register={register("ies")}
-          />
-          <Input
-            placeholder="Data de nascimento"
-            errorMsg={errors.age?.message as string}
-            type="text"
-            register={register("age")}
-          />
-          <Input
-            placeholder="Semestre"
-            errorMsg={errors.semester?.message as string}
-            type="text"
-            register={register("semester")}
-          />
-          <Input
-            placeholder="Curso"
-            errorMsg={errors.course?.message as string}
-            type="text"
-            register={register("course")}
-          />
-        </div>
-
-        <FloatButton
-          type="submit"
-          className="bg-cian-700 lg:text-lg text-white"
-          shadowClassname="w-full bg-black/80"
+        {isFormOpen ? (
+          <>
+            Fechar <MdClose />
+          </>
+        ) : (
+          <>
+            Editar perfil <HiPencilAlt size={18} />
+          </>
+        )}
+      </FloatButton>
+      {isFormOpen && (
+        <form
+          onSubmit={handleSubmit(updateProfile)}
+          className={`w-full m-auto relative overflow-hidden max-w-md duration-300`}
         >
-          Entrar
-        </FloatButton>
-      </form>
+          <div className="mb-8 border-l-2 border-dark pl-2">
+            <h1
+              className={`text-2xl lg:mb-1 font-bold tracking-wide lg:text-3xl xl:text-4xl`}
+            >
+              Atualize suas credenciais
+            </h1>
+          </div>
+          <div className="flex-col flex gap-2 lg:gap-4 my-6 lg:my-8 max-w-md">
+            <Input
+              placeholder="Nome"
+              errorMsg={errors.first_name?.message as string}
+              type="text"
+              register={register("first_name")}
+            />
+            <Input
+              placeholder="Sobrenome"
+              errorMsg={errors.last_name?.message as string}
+              type="text"
+              register={register("last_name")}
+            />
+            <Input
+              placeholder="Intituição de Ensino"
+              errorMsg={errors.ies?.message as string}
+              type="text"
+              register={register("ies")}
+            />
+            <Input
+              placeholder="Data de nascimento"
+              errorMsg={errors.age?.message as string}
+              type="text"
+              register={register("age")}
+            />
+            <Input
+              placeholder="Semestre"
+              errorMsg={errors.semester?.message as string}
+              type="text"
+              register={register("semester")}
+            />
+            <Input
+              placeholder="Curso"
+              errorMsg={errors.course?.message as string}
+              type="text"
+              register={register("course")}
+            />
+          </div>
+
+          <FloatButton
+            type="submit"
+            className="bg-cian-700 lg:text-lg text-white"
+            shadowClassname="w-full bg-black/80"
+          >
+            Entrar
+          </FloatButton>
+        </form>
+      )}
     </>
   );
 }

@@ -6,7 +6,7 @@ export const metadata = {
     "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
 };
 
-export default function UserboadeLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;

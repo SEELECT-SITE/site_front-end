@@ -25,7 +25,8 @@ function Cronograma() {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
+    { refetchOnMount: false, refetchOnWindowFocus: false }
   );
 
   return (
@@ -37,7 +38,7 @@ function Cronograma() {
       <CronoSlider />
       <div className="m-auto max-w-6xl">
         <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecht justify-center m-auto">
-          {events?.map((event) => {
+          {events?.map((event: any) => {
             return (
               <EventCard.Body>
                 <EventCard.Title title={event.title} />
