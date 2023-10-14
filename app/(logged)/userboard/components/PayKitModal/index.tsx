@@ -7,7 +7,7 @@ import usePayKitState from "./PayKitModalStore";
 import generatePix from "@/utils/generatePix";
 import Input from "@/components/Input";
 import formatCurrency from "@/utils/formatCurrency";
-import { MdClose } from "react-icons/md";
+import { MdClose, MdContentCopy } from "react-icons/md";
 import { LuAlertCircle } from "react-icons/lu";
 import Image from "next/image";
 import squares_deco from "@/public/SVG/squares-deco.svg";
@@ -26,7 +26,7 @@ export default function PayKitModal({
   sessionUpdate,
 }: PayKitModalProps) {
   const divPayKit = useRef<HTMLDivElement | null>(null);
-  const { isPayKitModalOpen, setIsPayKitModalOpen } = usePayKitState();
+  const { setIsPayKitModalOpen } = usePayKitState();
   const value = user?.kit?.model == "basico" ? "23" : "10";
   const pixCode = generatePix(
     "seelect@ufc.br",
@@ -35,6 +35,10 @@ export default function PayKitModal({
     value,
     user?.id!
   );
+
+  async function copyClipboard(value: string) {
+    await navigator.clipboard.writeText(value);
+  }
 
   const descont = user.descont ?? 0.0;
   return (
@@ -86,7 +90,19 @@ export default function PayKitModal({
               </Text>
             </div>
           </div>
-          <Input id={"qrCodeInput"} value={pixCode} />
+          <div className="relative rounded-lg border-2 bg-black border-black ">
+            <button
+              className="absolute z-10 right-0 top-1/2 -translate-y-1/2 bg-white h-full w-1/6 flex items-center justify-center rounded-tr-lg rounded-br-lg border-l"
+              onClick={(e) => copyClipboard(pixCode)}
+            >
+              <MdContentCopy size={20} />
+            </button>
+            <Input
+              id={"qrCodeInput"}
+              value={pixCode}
+              className="my-0 border-none"
+            />
+          </div>
         </div>
       </div>
     </div>
