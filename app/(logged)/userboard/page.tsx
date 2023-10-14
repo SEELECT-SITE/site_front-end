@@ -85,11 +85,33 @@ function Userboard({
                 <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecth m-auto">
                   {user?.kit?.events.map((event, index) => {
                     return (
-                      <EventCard.Body key={event.title + index}>
+                      <EventCard.Body
+                        key={event.title + index}
+                        className="pt- pb-12"
+                      >
+                        <div className="pb-2 text-right">
+                          <EventCard.Category
+                            category={event.category}
+                            className="mb-40"
+                          />
+                        </div>
                         <EventCard.Title title={event.title} />
-                        <EventCard.Location
-                          location={event.place[0].location}
-                          url_location={event.place[0].url_location}
+                        <div
+                          className="flex justify-between
+                        "
+                        >
+                          <EventCard.Date date={Date.now()} />
+                          <EventCard.Location
+                            location={event.place[0].location}
+                            url_location={event.place[0].url_location}
+                          />
+                        </div>
+                        <EventCard.Capacity
+                          capacity={
+                            event.max_number_of_inscriptions -
+                            event.number_of_inscriptions -
+                            21
+                          }
                         />
                       </EventCard.Body>
                     );

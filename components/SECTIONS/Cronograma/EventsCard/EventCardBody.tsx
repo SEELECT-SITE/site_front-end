@@ -17,7 +17,7 @@ export default function EventCardBody({
   return (
     <div
       className={twMerge(
-        `relative w-full bg-dark p-4 pt-12 lg:p-8 lg:pt-12 ring-inset rounded-2xl max-w-md overflow-hidden ${
+        `relative w-full bg-dark p-4 pt-12 lg:p-8 ring-inset rounded-2xl max-w-md overflow-hidden ${
           isDestack ? "ring-2 ring-cian-400" : "ring-0 ring-slate-400"
         }`,
         className
@@ -40,8 +40,8 @@ export default function EventCardBody({
         }`}
       ></span>
       <span
-        className={`absolute overflow-hidden whitespace-nowrap left-3 bg-slate-700 bottom-2 duration-200 text-center ${
-          isDestack ? "w-40 p-1 rounded-md" : "w-0 p-0 rounded-3xl"
+        className={`absolute overflow-hidden whitespace-nowrap left-3 bg-slate-700 top-4 duration-200 text-center text-sm lg:text-md ${
+          isDestack ? "lg:w-40 lg:36 p-1 rounded-md" : "w-0 p-0 rounded-3xl"
         }`}
       >
         Evento Selecionado

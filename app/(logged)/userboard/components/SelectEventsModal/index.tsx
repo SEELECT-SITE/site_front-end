@@ -90,7 +90,7 @@ export default function SelectEventsModal({
   }
 
   return (
-    <div className="fixed w-full h-full top-0 left-0 p-4 bg-white text-dark z-10">
+    <div className="fixed w-full max-h-full overflow-y-scroll top-0 left-0 p-4 bg-white text-dark z-10">
       <div className="flex justify-between w-full">
         <Text>Eventos disponiveis</Text>
         <FloatButton onClick={updateEvents}>Atualizar</FloatButton>
@@ -105,6 +105,7 @@ export default function SelectEventsModal({
               onClick={() => {
                 toogleElements(event.id);
               }}
+              className="pb-12"
             >
               <EventCard.Title title={event.title} />
               <div className="flex">
@@ -112,8 +113,15 @@ export default function SelectEventsModal({
                   location={event.place[0].location}
                   url_location={event.place[0].url_location}
                 />
-                <EventCard.Date date={Date()} />
+                <EventCard.Date date={Date.now()} />
               </div>
+              <EventCard.Capacity
+                capacity={
+                  event.max_number_of_inscriptions -
+                  event.number_of_inscriptions -
+                  21
+                }
+              />
             </EventCard.Body>
           );
         })}

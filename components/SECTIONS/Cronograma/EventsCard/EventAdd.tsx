@@ -20,17 +20,17 @@ export default function EventAdd({ className, id, ...props }: EventCloseProps) {
 
         <label
           htmlFor={id}
-          className="flex cursor-pointer items-center justify-between rounded-lg  text-sm p-1 text-transparent font-medium hover:border-gray-200 w-24"
+          className="flex cursor-pointer items-center justify-between rounded-lg text-sm p-1 text-transparent font-medium hover:border-gray-200 w-22 lg:w-24 z-10"
         >
-          <MdCheck size={20} />
+          Adicionar <MdCheck size={18} />
         </label>
-        <span className="peer-checked:hidden flex absolute top-0 right-0 p-1 text-green-500 rounded-md border border-slate-500 -z-10">
-          Adicionar <MdCheck size={20} />
+        <span className="peer-checked:hidden flex absolute top-0 right-0 p-0.5 text-green-500 rounded-md text-sm lg:text-md border border-slate-500 -z-10 items-center w-22">
+          Adicionar <MdCheck size={18} />
         </span>
 
-        <span className="peer-checked:flex hidden absolute top-0 right-0 p-1 text-red-700 border border-slate-400 bg-slate-400 rounded-md -z-10 items-center">
+        <span className="peer-checked:flex hidden absolute top-0 right-0 p-0.5 text-red-700 border border-slate-400 bg-slate-400 text-sm lg:text-md rounded-md -z-10 items-center w-22 ">
           Remover
-          <MdClose size={20} />
+          <MdClose size={18} />
         </span>
       </div>
     </>
