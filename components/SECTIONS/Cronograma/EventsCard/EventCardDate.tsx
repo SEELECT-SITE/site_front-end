@@ -2,7 +2,7 @@ import Text from "@/components/Text";
 import { numberToDayWeek } from "@/utils/formatDate";
 import { MdCalendarToday } from "react-icons/md";
 
-export default function EventCardDate({ date }: { date: number }) {
+export default function EventCardDate({ date }: { date: number | string }) {
   const objDate = new Date(date);
   return (
     <div className="flex items-center gap-1 group">
