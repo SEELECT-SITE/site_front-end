@@ -8,14 +8,6 @@ export default async function HomeLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(nextAuthOptions);
-  if (session?.user) {
-    if (session?.user?.role == "admin") {
-      redirect("/admin");
-    } else {
-      redirect("/userboard");
-    }
-  }
   return (
     <>
       <body className={`bg-white w-full min-h-screen ${cafeFont.className}`}>
