@@ -95,7 +95,7 @@ function Userboard({
                   <Text className="text-slate-300">
                     Selecione um dos kit abaixo
                   </Text>
-                  <div className="flex flex-wrap gap-4 my-6">
+                  <div className="flex flex-wrap gap-4 my-6 justify-around">
                     <PriceCard
                       stars={3}
                       onClick={() => {

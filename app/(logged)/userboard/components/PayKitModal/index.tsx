@@ -20,10 +20,22 @@ interface PayKitModalProps {
 export default function PayKitModal({ user }: PayKitModalProps) {
   const divPayKit = useRef<HTMLDivElement | null>(null);
   const { setIsPayKitModalOpen } = usePayKitState();
-  const value = user?.kit?.model == "basico" ? "0.01" : "10";
+  const getValue = () => {
+    var value = "";
+    switch (user?.kit?.model) {
+      case "Kit Básico":
+        value = "10";
+      case "Kit Médio":
+        value = "15";
+      default:
+        value = "20";
+    }
+    return value;
+  };
+  const value = getValue();
   const pixCode = generatePix(
-    "Maria Augusta Simonetti",
     "seelect@ufc.br",
+    "Maria Augusta Simonetti",
     "Fortaleza",
     value,
     user?.id!

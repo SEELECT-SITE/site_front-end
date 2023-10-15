@@ -19,7 +19,7 @@ export default function generatePix(
     ("userID" + id).length <= 9
       ? "0" + ("userID" + id).length
       : ("userID" + id).length
-  }userID${id}62070503***6304`;
+  }userID${id}6304`;
 
   return pixPayload + getCRC16_false(pixPayload, 0, pixPayload.length);
 }
