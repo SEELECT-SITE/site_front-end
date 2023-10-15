@@ -77,7 +77,7 @@ function Userboard({
           notAnimated={true}
         />
       </div>
-      {user?.name != " " && (
+      {hasUserName && (
         <>
           <Container className="bg-gradient-to-b from-dark to-dark-cian pb-20 overflow-hidden">
             <div>

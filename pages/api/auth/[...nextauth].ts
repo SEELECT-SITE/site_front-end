@@ -76,20 +76,10 @@ export const nextAuthOptions: NextAuthOptions = {
             const { first_name, last_name, ies, age, course, semester, kit } =
               profile;
 
-            const user: IUser = {
-              email,
-              name: `${first_name} ${last_name}`,
-              semestre: semester || "Sem registro",
-              age: age || "Idade não registrada",
-              course: course || "Sem curso registrado",
-              ies: ies || "Sem instituição de ensino",
-              kit: kit || undefined,
-              id: auth.id,
-              token: auth.token,
-              role: role ?? "user",
-            };
             token.role = role;
             token.token = auth.token;
+            token.age = age;
+            token.semestre = semester;
             token.kit = kit;
             token.name = `${first_name} ${last_name}`;
             token.course = course;

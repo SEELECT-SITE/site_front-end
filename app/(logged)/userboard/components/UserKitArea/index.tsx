@@ -13,7 +13,6 @@ import Title from "@/components/Title";
 import Button from "@/components/Button";
 
 export default function UserKitArea({ user }: { user: User }) {
-  const { setIsSelectEventOpen } = useSelectEventsState();
   const { isPayKitModalOpen, setIsPayKitModalOpen } = usePayKitState();
   return (
     <>

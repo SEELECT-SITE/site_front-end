@@ -80,11 +80,9 @@ export default function SelectEventsModal({
       } else {
         formData.append("user", user.id as string);
         formData.append("model", selectedKit as string);
-        await axios.post(
-          `http://127.0.0.1:8000/api/kits/`,
-          formData.toString(),
-          { headers }
-        );
+        await axios.post(`${DJANGO_URL}api/kits/`, formData.toString(), {
+          headers,
+        });
       }
 
       sessionUpdate();
