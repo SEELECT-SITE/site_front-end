@@ -7,6 +7,7 @@ import { IUser } from "./nextauth";
 import { DJANGO_URL } from "@/utils/consts";
 
 export const nextAuthOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: "credentials",
