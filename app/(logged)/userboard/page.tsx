@@ -31,7 +31,6 @@ function Userboard({
     useSelectEventsState();
   const { isUserFormsOpen, setIsUserFormsOpen } = useUserForms();
   const hasUserName = user?.name !== " ";
-  console.log(user?.token);
   useEffect(() => {
     if (!hasUserName) {
       setIsUserFormsOpen(true);

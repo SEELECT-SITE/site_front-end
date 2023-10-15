@@ -7,13 +7,18 @@ import FloatButton from "@/components/FloatButton";
 import useSelectEventsState from "../SelectEventsModal/selectEventsStore";
 
 export default function UserEvents({ user }: { user: User }) {
-  const { setIsSelectEventOpen } = useSelectEventsState();
+  const { setIsSelectEventOpen, setSelectedKit } = useSelectEventsState();
   return (
     <div>
       <Title className="border-l-2 border-cian-400 pl-2 mb-4">
         Seus Eventos selecionados
       </Title>
-      <FloatButton onClick={(e) => setIsSelectEventOpen(true)}>
+      <FloatButton
+        onClick={(e) => {
+          setIsSelectEventOpen(true);
+          setSelectedKit(user.kit?.model!);
+        }}
+      >
         {user?.kit?.events.length! > 0
           ? "Trocar de eventos"
           : "Selecione seus eventos"}

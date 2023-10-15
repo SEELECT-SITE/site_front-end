@@ -9,6 +9,7 @@ import { MdErrorOutline } from "react-icons/md";
 import axios from "axios";
 import SelectInput from "@/components/SelectInput";
 import { useQuery } from "react-query";
+import { DJANGO_URL } from "@/utils/consts";
 
 interface OptionPlace {
   location: string;
@@ -41,14 +42,14 @@ export default function AddEventsForms({ Token }: { Token: string }) {
     async () => {
       const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
+        "ngrok-skip-browser-warning": "true",
         Token: Token,
       };
 
       try {
-        const { data } = await axios.get(
-          `http://127.0.0.1:8000/api/events/places/`,
-          { headers }
-        );
+        const { data } = await axios.get(`${DJANGO_URL}api/events/places/`, {
+          headers,
+        });
         return data.results;
       } catch (error) {
         console.log(error);

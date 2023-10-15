@@ -13,6 +13,7 @@ import {
   createCadastroSchema,
 } from "./FormsCadastroSchemas";
 import { scrollToElement } from "@/utils/scrollToElement";
+import { DJANGO_URL } from "@/utils/consts";
 
 interface erroReqType {
   status: boolean;
@@ -34,7 +35,6 @@ export default function FormsCadastro() {
   });
   const errorsDiv = useRef<HTMLDivElement | null>(null);
   const [registerSuccessMsg, setRegisterSuccessMsg] = useState<string>("");
-
   async function createContact(data: any) {
     setErroReq({ ...erroReq, status: false });
     const formData = new URLSearchParams();
@@ -46,7 +46,7 @@ export default function FormsCadastro() {
     };
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/auth/register/",
+        `${DJANGO_URL}api/auth/register/`,
         formData.toString(),
         { headers }
       );

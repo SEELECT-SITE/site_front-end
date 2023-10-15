@@ -22,7 +22,6 @@ export default function getCRC16_false(
   var aux = crc & 0xffff;
   var aux_2 = (aux & 0xffff).toString(16).toUpperCase();
   var correct_vector = [];
-  console.log(aux_2);
   for (var i = 0; i < 4; i++) {
     if (aux_2[i]) {
       correct_vector.push(`${aux_2[i]}`);
@@ -30,6 +29,5 @@ export default function getCRC16_false(
       correct_vector.push("0");
     }
   }
-  console.log(correct_vector.join(""));
   return correct_vector.join("");
 }

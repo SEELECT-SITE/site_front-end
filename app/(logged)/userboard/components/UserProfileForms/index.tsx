@@ -14,6 +14,7 @@ import axios from "axios";
 import useUserForms from "./userForms";
 import Title from "@/components/Title";
 import { User } from "next-auth";
+import { DJANGO_URL } from "@/utils/consts";
 
 const createUserProfileFormsSchema = z.object({
   first_name: z.string().nonempty("Preencha o campo"),
@@ -60,7 +61,7 @@ export default function UserProfileForms({
 
     try {
       await axios.put(
-        `http://127.0.0.1:8000/api/users/user/${user.id}/profile/`,
+        `${DJANGO_URL}api/users/user/${user.id}/profile/`,
         formData.toString(),
         { headers }
       );

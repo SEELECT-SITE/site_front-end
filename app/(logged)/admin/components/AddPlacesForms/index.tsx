@@ -13,6 +13,7 @@ import { scrollToElement } from "@/utils/scrollToElement";
 import axios from "axios";
 import Title from "@/components/Title";
 import removeElem from "@/utils/removeElem";
+import { DJANGO_URL } from "@/utils/consts";
 
 const createAddPlaceFormsSchema = z.object({
   location: z.string(),
@@ -70,16 +71,16 @@ export default function AddPlaceForms({ Token }: { Token: string }) {
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
+      "ngrok-skip-browser-warning": "true",
       Token: Token,
     };
 
     try {
       await axios.post(
-        `http://127.0.0.1:8000/api/events/places/`,
+        `${DJANGO_URL}/api/events/places/`,
         formData.toString(),
         { headers }
       );
-      console.log("updated");
     } catch (error) {
       console.log(error);
     }

@@ -13,6 +13,7 @@ import Title from "@/components/Title";
 import Container from "@/components/Container";
 import { SvgCardLine } from "@/components/PriceCard";
 import { MdClose } from "react-icons/md";
+import { DJANGO_URL } from "@/utils/consts";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -30,15 +31,15 @@ export default function SelectEventsModal({
   const { setIsSelectEventOpen, selectedKit } = useSelectEventsState();
   const [selectEvents, setSelectEvents] = useState<number[]>([]);
   const { data: events, isLoading } = useQuery<any | undefined>(
-    "Places",
+    "userEvents",
     async () => {
       const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
+        "ngrok-skip-browser-warning": "true",
         Token: user?.token,
       };
-
       try {
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/events/`, {
+        const { data } = await axios.get(`${DJANGO_URL}api/events/`, {
           headers,
         });
         return data.results;
@@ -46,7 +47,7 @@ export default function SelectEventsModal({
         console.log(error);
       }
     },
-    { refetchOnMount: false, refetchOnWindowFocus: false }
+    { refetchOnWindowFocus: false }
   );
 
   function toogleElements(id: number) {
@@ -72,7 +73,7 @@ export default function SelectEventsModal({
       if (user.kit?.id) {
         formData.append("model", model as string);
         await axios.put(
-          `http://127.0.0.1:8000/api/kits/${user.kit.id}/`,
+          `${DJANGO_URL}api/kits/${user.kit.id}/`,
           formData.toString(),
           { headers }
         );
