@@ -14,7 +14,7 @@ export default function RootLayout({
       lang="en"
       className={`${menuIsOpen ? "overflow-y-hidden" : "overflow-y-auto"}`}
     >
-      <SessionProvider>{children}</SessionProvider>
+      <SessionProvider basePath="/api/auth">{children}</SessionProvider>
     </html>
   );
 }
