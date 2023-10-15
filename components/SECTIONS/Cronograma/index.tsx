@@ -7,6 +7,8 @@ import Decoration from "./DecorationStripes/decoration";
 import { useQuery } from "react-query";
 import axios from "axios";
 import EventCard from "./EventsCard";
+import { SvgCardLine } from "@/components/PriceCard";
+import { useRouter } from "next/navigation";
 
 function Cronograma() {
   const { data: events, isLoading } = useQuery<any | undefined>(
@@ -14,7 +16,7 @@ function Cronograma() {
     async () => {
       const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
-        Token: "c517c544d6bdbedadfe1cca48221eb2a",
+        Token: "68bbd535deb6c44a91940f36eb663357",
       };
 
       try {
@@ -28,6 +30,7 @@ function Cronograma() {
     },
     { refetchOnMount: false, refetchOnWindowFocus: false }
   );
+  const router = useRouter();
 
   return (
     <section className="w-full pt-12 lg:pt-24 bg-white">
@@ -38,16 +41,37 @@ function Cronograma() {
       <CronoSlider />
       <div className="m-auto max-w-6xl">
         <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecht justify-center m-auto">
-          {events?.map((event: any) => {
+          {events?.map((event: any, index: number) => {
             return (
-              <EventCard.Body>
-                <EventCard.Title title={event.title} />
-                <div className="flex">
+              <EventCard.Body
+                key={event.title + index}
+                id={event.title + index}
+                className="lg:py-12 relative justify-between flex flex-col"
+              >
+                <div>
+                  <EventCard.Title title={event.title} />
+                  <EventCard.Hoster hoster={"João Paulo II"} />
+
                   <EventCard.Location
                     location={event.place[0].location}
                     url_location={event.place[0].url_location}
                   />
-                  <EventCard.Date date={Date()} />
+                  <div className="animate-pulse bg-dark">
+                    <SvgCardLine color="#ffffff" opacity="1" />
+                  </div>
+
+                  <EventCard.Description
+                    description={
+                      "Lorem ipsum dolor sit amet. Ut vero quidem et unde corrupti aut quaerat voluptatem? 33 numquam provident ab aperiam fuga ea dolores sunt rem blanditiis libero est alias architecto ex consequatur sunt"
+                    }
+                  />
+                </div>
+
+                <div>
+                  <div className="flex flex-wrap justify-between mb-2 items-start">
+                    <EventCard.Category category={event.category} />
+                    <EventCard.Date date={Date.now()} />
+                  </div>
                 </div>
               </EventCard.Body>
             );
@@ -59,6 +83,9 @@ function Cronograma() {
           <FloatButton
             className="bg-cian-700 text-xl text-dark lg:py-6 whitespace-nowrap"
             shadowClassname="bg-black w-2/3 lg:w-1/3"
+            onClick={(e) => {
+              router.push("/cadastro");
+            }}
           >
             INSCREVA-SE
           </FloatButton>

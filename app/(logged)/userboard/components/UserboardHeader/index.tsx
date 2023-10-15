@@ -27,8 +27,7 @@ export default function UserboardHeader() {
           <button
             className="border font-bold border-red-400 px-2.5 py-1.5 rounded-full hover:bg-red-400 hover:text-white duration-100 hover:shadow-lg flex items-center gap-1"
             onClick={() => {
-              signOut({ redirect: false });
-              router.replace("/");
+              signOut({ callbackUrl: "/login" });
             }}
           >
             Sair <MdLogout />
