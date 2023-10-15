@@ -5,6 +5,8 @@ import EventCardDate from "./EventCardDate";
 import EventAdd from "./EventAdd";
 import EventCategory from "./EventCategory";
 import EventCapacity from "./EventCapacity";
+import EventCardHoster from "./EventCardHoster";
+import EventCardDescription from "./EventCardDescription";
 
 const EventCard = {
   Body: EventCardBody,
@@ -14,5 +16,7 @@ const EventCard = {
   AddEvent: EventAdd,
   Category: EventCategory,
   Capacity: EventCapacity,
+  Hoster: EventCardHoster,
+  Description: EventCardDescription,
 };
 export default EventCard;

@@ -9,6 +9,10 @@ import removeElem from "@/utils/removeElem";
 import FloatButton from "@/components/FloatButton";
 import Text from "@/components/Text";
 import useSelectEventsState from "./selectEventsStore";
+import Title from "@/components/Title";
+import Container from "@/components/Container";
+import { SvgCardLine } from "@/components/PriceCard";
+import { MdClose } from "react-icons/md";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -91,40 +95,82 @@ export default function SelectEventsModal({
 
   return (
     <div className="fixed w-full max-h-full overflow-y-scroll top-0 left-0 p-4 bg-white text-dark z-10">
-      <div className="flex justify-between w-full">
-        <Text>Eventos disponiveis</Text>
-        <FloatButton onClick={updateEvents}>Atualizar</FloatButton>
-      </div>
-
-      <div className=" flex-wrap gap-2 flex text-white relative">
-        {events?.map((event: any, index: number) => {
-          return (
-            <EventCard.Body
-              key={event.title + index}
-              id={event.title + index}
-              onClick={() => {
-                toogleElements(event.id);
-              }}
-              className="pb-12"
+      <div className="w-full relative pb-20">
+        <Container>
+          <button
+            onClick={(e) => setIsSelectEventOpen(false)}
+            className="rounded-lg border border-slate-900 p-1 text-red-600 hover:bg-slate-900 hover:text-red-400 shadow-md items-center flex gap-1 float-right"
+          >
+            Voltar
+            <MdClose size={20} />
+          </button>
+          <Title className="border-l-2 pl-2 border-cian-700">
+            Eventos disponiveis
+          </Title>
+          <div>{selectedKit} está selecionado</div>
+          <div>10 palestras</div>
+          <div>10 workshops</div>
+          <div>10 mini-cursos</div>
+        </Container>
+        <div className="fixed z-20 left-0 bottom-0 w-full">
+          <Container className="flex justify-end">
+            <FloatButton
+              onClick={updateEvents}
+              className="border border-slate-400"
+              shadowClassname="w-full lg:w-auto"
             >
-              <EventCard.Title title={event.title} />
-              <div className="flex">
-                <EventCard.Location
-                  location={event.place[0].location}
-                  url_location={event.place[0].url_location}
-                />
-                <EventCard.Date date={Date.now()} />
-              </div>
-              <EventCard.Capacity
-                capacity={
-                  event.max_number_of_inscriptions -
-                  event.number_of_inscriptions -
-                  21
-                }
-              />
-            </EventCard.Body>
-          );
-        })}
+              Atualizar Eventos
+            </FloatButton>
+          </Container>
+        </div>
+        <Container className="w-full">
+          <div className=" flex-wrap gap-y-3 lg:gap-4 flex text-white relative justify-around">
+            {events?.map((event: any, index: number) => {
+              return (
+                <EventCard.Body
+                  key={event.title + index}
+                  id={event.title + index}
+                  onClick={() => {
+                    toogleElements(event.id);
+                  }}
+                  className="lg:py-12 relative justify-between flex flex-col"
+                >
+                  <div>
+                    <EventCard.Title title={event.title} />
+                    <EventCard.Hoster hoster={"João Paulo II"} />
+
+                    <EventCard.Location
+                      location={event.place[0].location}
+                      url_location={event.place[0].url_location}
+                    />
+                    <div className="animate-pulse bg-dark">
+                      <SvgCardLine color="#ffffff" opacity="1" />
+                    </div>
+
+                    <EventCard.Description
+                      description={
+                        "Lorem ipsum dolor sit amet. Ut vero quidem et unde corrupti aut quaerat voluptatem? 33 numquam provident ab aperiam fuga ea dolores sunt rem blanditiis libero est alias architecto ex consequatur sunt"
+                      }
+                    />
+                  </div>
+
+                  <div>
+                    <div className="flex flex-wrap justify-between mb-2 items-start">
+                      <EventCard.Category category={event.category} />
+                      <EventCard.Date date={Date.now()} />
+                    </div>
+                    <EventCard.Capacity
+                      capacity={
+                        event.max_number_of_inscriptions -
+                        event.number_of_inscriptions
+                      }
+                    />
+                  </div>
+                </EventCard.Body>
+              );
+            })}
+          </div>
+        </Container>
       </div>
     </div>
   );

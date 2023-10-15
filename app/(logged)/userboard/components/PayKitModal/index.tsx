@@ -1,6 +1,6 @@
 "use client";
-import { ReactNode, useEffect, useRef, useState } from "react";
-import { Session, User } from "next-auth";
+import { ReactNode, useRef, useState } from "react";
+import { User } from "next-auth";
 import Text from "@/components/Text";
 import QRCode from "qrcode.react";
 import usePayKitState from "./PayKitModalStore";
@@ -11,35 +11,23 @@ import { MdClose, MdContentCopy } from "react-icons/md";
 import { LuAlertCircle } from "react-icons/lu";
 import Image from "next/image";
 import squares_deco from "@/public/SVG/squares-deco.svg";
+import copyClipboard from "@/utils/copyClipboard";
 
 interface PayKitModalProps {
-  className?: string;
-  children?: ReactNode;
   user: User;
-  sessionUpdate?: Function;
 }
 
-export default function PayKitModal({
-  className,
-  children,
-  user,
-  sessionUpdate,
-}: PayKitModalProps) {
+export default function PayKitModal({ user }: PayKitModalProps) {
   const divPayKit = useRef<HTMLDivElement | null>(null);
   const { setIsPayKitModalOpen } = usePayKitState();
-  const value = user?.kit?.model == "basico" ? "23" : "10";
+  const value = user?.kit?.model == "basico" ? "0.01" : "10";
   const pixCode = generatePix(
-    "seelect@ufc.br",
     "Maria Augusta Simonetti",
+    "seelect@ufc.br",
     "Fortaleza",
     value,
     user?.id!
   );
-
-  async function copyClipboard(value: string) {
-    await navigator.clipboard.writeText(value);
-  }
-
   const descont = user.descont ?? 0.0;
   return (
     <div
@@ -101,6 +89,7 @@ export default function PayKitModal({
               id={"qrCodeInput"}
               value={pixCode}
               className="my-0 border-none"
+              readOnly
             />
           </div>
         </div>

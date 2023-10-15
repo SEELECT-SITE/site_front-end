@@ -10,18 +10,19 @@ export default function EventCardLocation({
   location: string;
 }) {
   return (
-    <Link
-      title={location}
-      href={url_location}
-      className="flex items-start gap-1 "
-      target="_blank"
-    >
-      <span>
-        <MdLocationPin size={22} fill={"#84d1cf"} />
+    <Text className="capitalize lg:text-base whitespace-nowrap text-ellipsis overflow-hidden flex gap-0.5 group text-slate-300 hover:text-white">
+      <span className="group-hover:text-cian-400 text-cian-700">
+        <MdLocationPin size={20} />
       </span>
-      <Text className="font-bold uppercase lg:text-base mb-2 text-ellipsis">
+      Local:
+      <Link
+        title={location}
+        href={url_location}
+        className="flex items-start gap-0.5 mb-2 group underline underline-offset-1 hover:underline-offset-2 brightness-110"
+        target="_blank"
+      >
         {location}
-      </Text>
-    </Link>
+      </Link>
+    </Text>
   );
 }

@@ -23,12 +23,6 @@ export default function UserboardHeader() {
         </div>
       </Link>
       <ul className="font-bold text-dark-cian flex ">
-        <li className="">
-          <Link href={"/"} className="">
-            <AiFillHome />
-            Ver eventos
-          </Link>
-        </li>
         <li>
           <button
             className="border font-bold border-red-400 px-2.5 py-1.5 rounded-full hover:bg-red-400 hover:text-white duration-100 hover:shadow-lg flex items-center gap-1"

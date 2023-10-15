@@ -26,7 +26,7 @@ export function SvgCardLine({
   opacity?: string;
 }) {
   return (
-    <svg viewBox="0 0 313 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 313 12" fill="none">
       <path
         d="M312.774 6L307 0.226497L301.226 6L307 11.7735L312.774 6ZM-87.5 7H307V5H-87.5V7Z"
         fill={color || "black"}
@@ -58,11 +58,11 @@ const PriceCard: FunctionComponent<PriceCardProps> = ({
     >
       <input
         type="radio"
-        name="DeliveryOption"
-        value="DeliveryStandard2"
+        name={"kitPriceOptions"}
+        value={id}
         id={id}
         className="peer hidden [&:checked_+_label_svg]:block"
-        checked
+        readOnly={true}
       />
 
       <label
@@ -72,13 +72,13 @@ const PriceCard: FunctionComponent<PriceCardProps> = ({
         {destackText && (
           <div
             style={{ writingMode: "vertical-lr", textOrientation: "upright" }}
-            className="py-2 h-full top-1/2 -translate-y-1/2 text-sm text-cian-700 border bg-white border-cian-700 absolute"
+            className="py-2 h-full tracking-tighter top-1/2 -translate-y-1/2 text-sm text-slate-900 border font-bold bg-white border-cian-700 absolute"
           >
             {destackText}
           </div>
         )}
         <div
-          className={` h-full flex flex-col justify-between border-2 border-black/10 p-4 shadow-lg sm:px-8 lg:p-12`}
+          className={` h-full flex flex-col justify-between border-2 border-black/10 p-6 shadow-lg sm:px-8 lg:p-12`}
         >
           <div className="text-left flex justify-between">
             <Title className="text-lg xs:text-xl lg:text-2xl tracking-wide font-bold">

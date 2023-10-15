@@ -11,25 +11,26 @@ import { useRef, useState } from "react";
 import { MdClose, MdErrorOutline } from "react-icons/md";
 import { scrollToElement } from "@/utils/scrollToElement";
 import axios from "axios";
+import useUserForms from "./userForms";
+import Title from "@/components/Title";
+import { User } from "next-auth";
 
 const createUserProfileFormsSchema = z.object({
-  first_name: z.string().nonempty("Preencha o campo abaixo"),
-  last_name: z.string().nonempty("Preencha o campo abaixo"),
-  age: z.string().nonempty("Preencha o campo abaixo"),
-  ies: z.string().nonempty("Preencha o campo abaixo"),
-  course: z.string().nonempty("Preencha o campo abaixo"),
-  semester: z.string().nonempty("Preencha o campo abaixo"),
+  first_name: z.string().nonempty("Preencha o campo"),
+  last_name: z.string().nonempty("Preencha o campo"),
+  age: z.string().nonempty("Preencha o campo"),
+  ies: z.string().nonempty("Preencha o campo"),
+  course: z.string().nonempty("Preencha o campo"),
+  semester: z.string().nonempty("Preencha o campo"),
 });
 
 type CreateUserProfileData = z.infer<typeof createUserProfileFormsSchema>;
 
 export default function UserProfileForms({
-  token,
-  id,
+  user,
   sessionUpdate,
 }: {
-  token: string | undefined;
-  id: string | undefined;
+  user: User;
   sessionUpdate: Function;
 }) {
   const {
@@ -40,8 +41,7 @@ export default function UserProfileForms({
     resolver: zodResolver(createUserProfileFormsSchema),
   });
 
-  const errorsDiv = useRef<HTMLDivElement | null>(null);
-  const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
+  const { isUserFormsOpen, setIsUserFormsOpen } = useUserForms();
 
   async function updateProfile(data: CreateUserProfileData) {
     const { last_name, first_name, ies, course, semester, age } = data;
@@ -55,100 +55,87 @@ export default function UserProfileForms({
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
-      Token: token,
+      Token: user.token,
     };
 
     try {
       await axios.put(
-        `http://127.0.0.1:8000/api/users/user/${id}/profile/`,
+        `http://127.0.0.1:8000/api/users/user/${user.id}/profile/`,
         formData.toString(),
         { headers }
       );
       sessionUpdate();
-      setIsFormOpen(false);
+      setIsUserFormsOpen(false);
     } catch (error) {
       console.log(error);
     }
   }
   return (
     <>
-      <FloatButton
-        className="flex duration-100"
-        shadowClassname=" my-6"
-        onClick={(e) => {
-          setIsFormOpen((update) => !update);
-        }}
+      <form
+        onSubmit={handleSubmit(updateProfile)}
+        className={`w-full m-auto relative overflow-hidden max-w-md duration-300`}
       >
-        {isFormOpen ? (
-          <>
-            Fechar <MdClose />
-          </>
-        ) : (
-          <>
-            Editar perfil <HiPencilAlt size={18} />
-          </>
-        )}
-      </FloatButton>
-      {isFormOpen && (
-        <form
-          onSubmit={handleSubmit(updateProfile)}
-          className={`w-full m-auto relative overflow-hidden max-w-md duration-300`}
-        >
-          <div className="mb-8 border-l-2 border-dark pl-2">
-            <h1
-              className={`text-2xl lg:mb-1 font-bold tracking-wide lg:text-3xl xl:text-4xl`}
-            >
-              Atualize suas credenciais
-            </h1>
-          </div>
-          <div className="flex-col flex gap-2 lg:gap-4 my-6 lg:my-8 max-w-md">
-            <Input
-              placeholder="Nome"
-              errorMsg={errors.first_name?.message as string}
-              type="text"
-              register={register("first_name")}
-            />
-            <Input
-              placeholder="Sobrenome"
-              errorMsg={errors.last_name?.message as string}
-              type="text"
-              register={register("last_name")}
-            />
-            <Input
-              placeholder="Intituição de Ensino"
-              errorMsg={errors.ies?.message as string}
-              type="text"
-              register={register("ies")}
-            />
-            <Input
-              placeholder="Data de nascimento"
-              errorMsg={errors.age?.message as string}
-              type="text"
-              register={register("age")}
-            />
-            <Input
-              placeholder="Semestre"
-              errorMsg={errors.semester?.message as string}
-              type="text"
-              register={register("semester")}
-            />
-            <Input
-              placeholder="Curso"
-              errorMsg={errors.course?.message as string}
-              type="text"
-              register={register("course")}
-            />
-          </div>
-
-          <FloatButton
-            type="submit"
-            className="bg-cian-700 lg:text-lg text-white"
-            shadowClassname="w-full bg-black/80"
+        <div className="mb-2 border-l-2 border-cian-700 pl-2">
+          <Text
+            className={` lg:mb-1 font-bold tracking-wide lg:text-xl xl:text-2xl`}
           >
-            Entrar
-          </FloatButton>
-        </form>
-      )}
+            Atualize suas credenciais
+          </Text>
+        </div>
+        <div className="flex-col flex gap-2 lg:gap-4 my-6 lg:my-8 max-w-md">
+          <Input
+            defaultValue={user.name?.split(" ")[0] || ""}
+            placeholder="Nome"
+            errorMsg={errors.first_name?.message as string}
+            type="text"
+            register={register("first_name")}
+          />
+          <Input
+            defaultValue={user.name?.split(" ")[1] || ""}
+            placeholder="Sobrenome"
+            errorMsg={errors.last_name?.message as string}
+            type="text"
+            register={register("last_name")}
+          />
+          <Input
+            defaultValue={user.ies}
+            placeholder="Intituição de Ensino"
+            errorMsg={errors.ies?.message as string}
+            type="text"
+            register={register("ies")}
+          />
+          <Input
+            defaultValue={user.age}
+            placeholder="Data de nascimento"
+            errorMsg={errors.age?.message as string}
+            type="text"
+            register={register("age")}
+          />
+          <Input
+            defaultValue={user.semestre}
+            placeholder="Semestre"
+            errorMsg={errors.semester?.message as string}
+            type="text"
+            register={register("semester")}
+          />
+          <Input
+            defaultValue={user.course}
+            placeholder="Curso"
+            errorMsg={errors.course?.message as string}
+            type="text"
+            register={register("course")}
+          />
+        </div>
+
+        <FloatButton
+          type="submit"
+          className="bg-cian-700 lg:text-lg text-white"
+          shadowClassname="w-full bg-black/80"
+        >
+          Entrar
+        </FloatButton>
+      </form>
     </>
   );
 }

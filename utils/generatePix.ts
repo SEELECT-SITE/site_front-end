@@ -13,9 +13,13 @@ export default function generatePix(
     value.length <= 9 ? "0" + value.length : value.length
   }${value}5802BR59${
     name.length <= 9 ? "0" + name.length : name.length
-  }${name}60${
-    city.length <= 9 ? "0" + city.length : city.length
-  }${city}62110507userID${id}62070503***6304`;
+  }${name}60${city.length <= 9 ? "0" + city.length : city.length}${city}62${
+    ("0500userID" + id).length
+  }05${
+    ("userID" + id).length <= 9
+      ? "0" + ("userID" + id).length
+      : ("userID" + id).length
+  }userID${id}62070503***6304`;
 
   return pixPayload + getCRC16_false(pixPayload, 0, pixPayload.length);
 }
