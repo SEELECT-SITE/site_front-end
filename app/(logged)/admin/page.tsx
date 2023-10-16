@@ -9,6 +9,7 @@ import { QueryClientProvider } from "react-query";
 import { queryClient } from "@/utils/queryClient";
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
+import EventsAdmin from "./components/EventsAdmin.tsx";
 function Admin({
   session,
   sessionUpdate,
@@ -29,6 +30,7 @@ function Admin({
             <AddPlaceForms Token={user.token} />
           </>
         )}
+        <EventsAdmin user={user!} />
       </Container>
     </main>
   );

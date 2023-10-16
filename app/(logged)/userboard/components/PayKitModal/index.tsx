@@ -92,7 +92,7 @@ export default function PayKitModal({ user }: PayKitModalProps) {
           </div>
           <div className="relative rounded-lg border-2 bg-black border-black ">
             <button
-              className="absolute z-10 right-0 top-1/2 -translate-y-1/2 bg-white h-full w-1/6 flex items-center justify-center rounded-tr-lg rounded-br-lg border-l"
+              className="absolute z-10 right-0 top-1/2 -translate-y-1/2 bg-white h-full w-1/6 flex items-center justify-center rounded-tr-lg rounded-br-lg border-l hover:opacity-90"
               onClick={(e) => copyClipboard(pixCode)}
             >
               <MdContentCopy size={20} />

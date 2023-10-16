@@ -1,7 +1,5 @@
 import axios from "axios";
 import NextAuth, { NextAuthOptions, User } from "next-auth";
-import { cookies } from "next/headers";
-import { setCookie } from "nookies";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { IUser } from "./nextauth";
 import { DJANGO_URL } from "@/utils/consts";

@@ -37,6 +37,8 @@ function Userboard({
     }
   }, []);
 
+  console.log(user);
+
   return (
     <>
       <div className="bg-dark-cian relative">

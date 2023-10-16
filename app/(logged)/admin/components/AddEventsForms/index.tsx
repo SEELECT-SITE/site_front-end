@@ -29,6 +29,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<CreateAddEvents>({
     resolver: zodResolver(createAddEventsSchema),
