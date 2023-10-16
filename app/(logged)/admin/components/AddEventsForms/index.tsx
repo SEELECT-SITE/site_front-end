@@ -73,11 +73,9 @@ export default function AddEventsForms({ Token }: { Token: string }) {
     };
 
     try {
-      await axios.post(
-        `http://127.0.0.1:8000/api/events/`,
-        formData.toString(),
-        { headers }
-      );
+      await axios.post(`${DJANGO_URL}/api/events/`, formData.toString(), {
+        headers,
+      });
     } catch (error) {
       console.log(error);
     }
