@@ -49,7 +49,7 @@ const PriceCard: FunctionComponent<PriceCardProps> = ({
 }) => {
   return (
     <div
-      className={`relative overflow-hidden rounded-2xl shadow-sm z-10 w-full max-w-sm ${
+      className={`relative overflow-hidden rounded-2xl ring-2 ring-slate-500 ring-inset hover:shadow-md z-10 w-full max-w-sm ${
         destack
           ? "text-white bg-dark shadow-black/40 "
           : "text-black bg-white shadow-black/20"
@@ -135,10 +135,10 @@ const PriceCard: FunctionComponent<PriceCardProps> = ({
           </div>
         </div>
       </label>
-      <span className="peer-checked:w-full  w-[0%]  aspect-square bg-gradient-to-bl from-slate-700/50 to-transparent rounded-full absolute top-2 right-2 -translate-y-1/3 translate-x-1/3 pointer-events-none duration-200 invert"></span>
+      <span className="peer-hover:w-full  w-[0%]  aspect-square bg-gradient-to-bl from-slate-700/50 to-transparent rounded-full absolute top-2 right-2 -translate-y-1/3 translate-x-1/3 pointer-events-none duration-200 invert"></span>
 
-      <span className="peer-checked:flex hidden text-sm absolute top-2 right-2 p-1 text-green-500 rounded-md border bg-slate-500 z-10 items-center gap-2">
-        Selecionado <MdCheck size={16} />
+      <span className="peer-hover:flex hidden text-sm absolute top-2 right-2 p-1 text-green-500 rounded-md border bg-slate-500 z-10 items-center gap-2">
+        Selecionar <MdCheck size={16} />
       </span>
     </div>
   );

@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { InputHTMLAttributes, useEffect, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { cafeFont } from "../../app/fonts";
+import { MdErrorOutline } from "react-icons/md";
 
 export interface InputProps extends InputHTMLAttributes<HTMLSelectElement> {
   valid?: boolean | undefined;
@@ -22,12 +23,13 @@ const SelectInput: React.FC<InputProps> = ({
   options,
   type,
   label,
+  errorMsg,
   firstOption,
 }) => {
   const [selectedOption, setSelectedOption] = useState<number | string>("");
 
   return (
-    <div className="w-full flex flex-col my-2 ">
+    <div className="w-full flex flex-col my-2 relative">
       <label className="ml-2 bold">{label}</label>
       <select
         className={`text-dark p-4 cursor-pointer rounded-lg border border-black shadow-sm border-b-2 bg-white min-w-[250px] capitalize ${
@@ -74,6 +76,12 @@ const SelectInput: React.FC<InputProps> = ({
           </>
         )}
       </select>
+      {errorMsg && (
+        <span className="pointer-events-none  absolute end-4 -bottom-7 text-sm text-red-500 flex gap-1 items-start line-clamp-1 whitespace-nowrap right-0 errorReqAnimated">
+          {errorMsg}
+          <MdErrorOutline size={16} className="mt-0.5" />
+        </span>
+      )}
     </div>
   );
 };

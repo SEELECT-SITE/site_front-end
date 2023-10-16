@@ -9,6 +9,8 @@ import axios from "axios";
 import EventCard from "./EventsCard";
 import { SvgCardLine } from "@/components/PriceCard";
 import { useRouter } from "next/navigation";
+import { DJANGO_URL } from "@/utils/consts";
+import SkeletonCreator from "@/components/SkeletonCreator";
 
 function Cronograma() {
   const { data: events, isLoading } = useQuery<any | undefined>(
@@ -16,11 +18,11 @@ function Cronograma() {
     async () => {
       const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
-        Token: "68bbd535deb6c44a91940f36eb663357",
+        "ngrok-skip-browser-warning": "true",
       };
 
       try {
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/events/`, {
+        const { data } = await axios.get(`${DJANGO_URL}api/events/`, {
           headers,
         });
         return data.results;
@@ -76,6 +78,12 @@ function Cronograma() {
               </EventCard.Body>
             );
           })}
+          {isLoading && (
+            <SkeletonCreator
+              quantity={6}
+              className="w-full max-w-md h-72 rounded-xl bg-dark"
+            />
+          )}
         </div>
 
         <div className="flex gap-2 py-0 rounded-lg">

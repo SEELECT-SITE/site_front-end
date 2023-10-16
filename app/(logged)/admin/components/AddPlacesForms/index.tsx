@@ -14,12 +14,13 @@ import axios from "axios";
 import Title from "@/components/Title";
 import removeElem from "@/utils/removeElem";
 import { DJANGO_URL } from "@/utils/consts";
-import { IoMdAdd } from "react-icons/io";
+import { IoAddOutline } from "react-icons/io5";
 
 const createAddPlaceFormsSchema = z.object({
-  location: z.string().nonempty("Preencha o campo acima"),
-  url_location: z.string().nonempty("Preencha o campo acima"),
+  location: z.string().nonempty("Preencha o campo"),
+  url_location: z.string().nonempty("Preencha o campo"),
   capacity: z.number().min(1),
+  equipaments: z.string(),
 });
 
 type CreateAddPlaces = z.infer<typeof createAddPlaceFormsSchema>;
@@ -28,14 +29,17 @@ export default function AddPlaceForms({ Token }: { Token: string }) {
   const {
     register,
     handleSubmit,
+    setError,
+    getValues,
+    reset,
+    setValue,
     formState: { errors },
   } = useForm<CreateAddPlaces>({
     resolver: zodResolver(createAddPlaceFormsSchema),
   });
   const [errorReq, setErrorReq] = useState<any>("");
   const errorsDiv = useRef<HTMLDivElement | null>(null);
-  const [equipaments, setEquipaments] = useState<string[]>([""]);
-  const [equipamentInput, setEquipamentInput] = useState<string>("");
+  const [equipaments, setEquipaments] = useState<string[]>([]);
 
   function removEquipaments(id: string) {
     if (equipaments.includes(id)) {
@@ -52,8 +56,10 @@ export default function AddPlaceForms({ Token }: { Token: string }) {
     const formData = new URLSearchParams();
     formData.append("url_location", url_location);
     formData.append("location", location);
-    equipaments?.forEach((elem) => {
-      formData.append("equipaments", elem);
+    equipaments.forEach((elem) => {
+      if (elem) {
+        formData.append("equipaments", elem);
+      }
     });
     formData.append("capacity", capacity.toString());
 
@@ -71,6 +77,8 @@ export default function AddPlaceForms({ Token }: { Token: string }) {
       );
     } catch (error) {
       console.log(error);
+    } finally {
+      reset();
     }
   }
   return (
@@ -100,30 +108,60 @@ export default function AddPlaceForms({ Token }: { Token: string }) {
             type="number"
             register={register("capacity", { valueAsNumber: true })}
           />
+
           <div className="relative rounded-lg border-2 bg-black border-black ">
+            <Input
+              placeholder="Equipamentos (Ex:20 cadeiras)"
+              errorMsg={errors.equipaments?.message as string}
+              required={false}
+              register={register("equipaments")}
+              type="text"
+              className="my-0"
+            />
             <button
-              className="absolute z-10 right-0 top-1/2 -translate-y-1/2 bg-white h-full p-3 flex items-center justify-center rounded-tr-lg rounded-br-lg border-l text-dark"
               type="button"
+              className="absolute z-10 right-0 top-1/2 -translate-y-1/2 bg-white h-full p-3 flex items-center justify-center rounded-tr-lg rounded-br-lg border-l text-dark"
               onClick={(e) => {
-                if (equipamentInput) {
+                var currentEquipament = getValues("equipaments");
+                console.log(currentEquipament);
+                if (currentEquipament) {
                   var aux = equipaments;
-                  aux.push(equipamentInput);
+                  aux.push(currentEquipament);
                   setEquipaments(aux);
-                  setEquipamentInput("");
-                  console.log(aux);
+                  setValue("equipaments", "");
+                } else {
+                  setError("equipaments", {
+                    type: "manual",
+                    message: "Não pode estar vazio",
+                  });
                 }
               }}
             >
-              <IoMdAdd size={20} />
+              <IoAddOutline size={24} />
             </button>
-            <Input
-              placeholder="Equipamentos (Ex:30 Cadeiras)"
-              className="my-0 border-none"
-              onChange={(e) => {
-                setEquipamentInput(e.target.value);
-              }}
-              value={equipamentInput}
-            />
+          </div>
+          <div>
+            <ul className="flex gap-2">
+              {equipaments.map((elem, index) => {
+                return (
+                  <li
+                    key={elem + index}
+                    className="bg-slate-500 gap-1 p-2 rounded-md items-center flex justify-between"
+                  >
+                    {elem}
+                    <button
+                      type="button"
+                      className="p-1 rounded-3xl bg-slate-900 hover:bg-black"
+                      onClick={(e) => {
+                        setEquipaments(removeElem(equipaments, elem));
+                      }}
+                    >
+                      <MdClose className="pointer-events-none" size={16} />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
           <ul className="flex gap-2 flex-wrap">
             {equipaments.map((equipament, index) => {

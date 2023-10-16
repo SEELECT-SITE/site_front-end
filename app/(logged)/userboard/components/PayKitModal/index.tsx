@@ -21,16 +21,14 @@ export default function PayKitModal({ user }: PayKitModalProps) {
   const divPayKit = useRef<HTMLDivElement | null>(null);
   const { setIsPayKitModalOpen } = usePayKitState();
   const getValue = () => {
-    var value = "";
     switch (user?.kit?.model) {
       case "Kit Básico":
-        value = "10";
+        return "10";
       case "Kit Médio":
-        value = "15";
+        return "15";
       default:
-        value = "20";
+        return "20";
     }
-    return value;
   };
   const value = getValue();
   const pixCode = generatePix(
