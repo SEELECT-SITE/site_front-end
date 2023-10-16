@@ -27,7 +27,7 @@ export default function Alert({ className, children, timeout }: AlertProps) {
         <div
           style={{ animationDuration: `${timeout ?? 2500}ms` }}
           className={twMerge(
-            `fixed top-4 left-0 -translate-x-2-full p-4 bg-dark text-white rounded-lg z-50 border  alert`,
+            `fixed top-4 left-0 -translate-x-2-full p-4 bg-dark text-white rounded-lg z-50 border max-w-full alert`,
             className
           )}
         >

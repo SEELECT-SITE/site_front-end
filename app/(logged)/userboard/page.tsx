@@ -18,6 +18,7 @@ import { MdClose } from "react-icons/md";
 import { HiPencilAlt } from "react-icons/hi";
 import UserEvents from "./components/UserEvents";
 import UserKitArea from "./components/UserKitArea";
+import BannerLogin from "@/app/(auth)/login/LoginSections/BannerSign";
 
 function Userboard({
   session,
@@ -40,8 +41,8 @@ function Userboard({
   return (
     <>
       <div className="bg-dark-cian relative">
-        <Container className="">
-          {hasUserName ? (
+        {hasUserName ? (
+          <Container>
             <div className="flex justify-between">
               <Text>Bem-vindo {user?.name} </Text>
               <FloatButton
@@ -62,13 +63,26 @@ function Userboard({
                 )}
               </FloatButton>
             </div>
-          ) : (
-            <Title>Continue o seu cadastro </Title>
-          )}
-          {isUserFormsOpen && (
-            <UserProfileForms user={user!} sessionUpdate={sessionUpdate} />
-          )}
-        </Container>
+          </Container>
+        ) : (
+          <>
+            {isUserFormsOpen && (
+              <div className="flex-col-reverse flex lg:flex-row">
+                <Container className="max-w-lg 2xl:px-12 w-full">
+                  <Title className="mb-2 border-l-2 border-cian-700 pl-2">
+                    Continue o seu cadastro{" "}
+                  </Title>
+
+                  <UserProfileForms
+                    user={user!}
+                    sessionUpdate={sessionUpdate}
+                  />
+                </Container>
+                <BannerLogin />
+              </div>
+            )}
+          </>
+        )}
 
         <Decoration
           type="light"

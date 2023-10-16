@@ -5,6 +5,7 @@ import FormsCadastro from "./CadastroSections/FormsCadastro";
 import MarqueeSign from "../login/LoginSections/MarqueeSign";
 import BannerSign from "../login/LoginSections/BannerSign";
 import Text from "@/components/Text";
+import Decoration from "@/components/SECTIONS/Cronograma/DecorationStripes/decoration";
 
 export const metadata = {
   title: "Cadastro",
@@ -30,17 +31,7 @@ export default function CadastroPage() {
               </Text>
             </div>
 
-            <FloatButton
-              className="bg-white border lg:text-lg items-center border-black flex text-dark"
-              shadowClassname="w-full bg-black/80 mt-4"
-            >
-              Cadastre-se com Google <FcGoogle size={20} />
-            </FloatButton>
-            <div className="w-full max-w-md m-auto border-t-2 border-black mt-8 relative">
-              <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-white px-4">
-                ou
-              </span>
-            </div>
+            <Decoration className="h-4 my-4" />
             <FormsCadastro />
           </Container>
 

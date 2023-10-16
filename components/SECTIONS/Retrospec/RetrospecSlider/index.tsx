@@ -74,6 +74,7 @@ export default function RetrospecSlider() {
               <SwiperSlide key={index + 1} className="border-x aspect-square">
                 <div className="h-full flex items-center">
                   <Image
+                    width={1080}
                     src={elem.imagem}
                     alt={elem.alt}
                     priority={true}

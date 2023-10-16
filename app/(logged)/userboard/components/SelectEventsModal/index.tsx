@@ -36,7 +36,6 @@ export default function SelectEventsModal({
       const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
         "ngrok-skip-browser-warning": "true",
-        Token: user?.token,
       };
       try {
         const { data } = await axios.get(`${DJANGO_URL}api/events/`, {

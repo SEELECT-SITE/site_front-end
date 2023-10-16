@@ -15,14 +15,15 @@ import useUserForms from "./userForms";
 import Title from "@/components/Title";
 import { User } from "next-auth";
 import { DJANGO_URL } from "@/utils/consts";
+import SelectInput from "@/components/SelectInput";
 
 const createUserProfileFormsSchema = z.object({
   first_name: z.string().nonempty("Preencha o campo"),
   last_name: z.string().nonempty("Preencha o campo"),
-  age: z.string().nonempty("Preencha o campo"),
+  age: z.string().pipe(z.coerce.date()),
   ies: z.string().nonempty("Preencha o campo"),
   course: z.string().nonempty("Preencha o campo"),
-  semester: z.string().nonempty("Preencha o campo"),
+  semester: z.number().min(2, "Coloque o seu semestre"),
 });
 
 type CreateUserProfileData = z.infer<typeof createUserProfileFormsSchema>;
@@ -37,6 +38,7 @@ export default function UserProfileForms({
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<CreateUserProfileData>({
     resolver: zodResolver(createUserProfileFormsSchema),
@@ -51,8 +53,8 @@ export default function UserProfileForms({
     formData.append("first_name", first_name);
     formData.append("ies", ies);
     formData.append("course", course);
-    formData.append("semester", semester);
-    formData.append("age", age);
+    formData.append("semester", semester.toString());
+    formData.append("age", age.toString());
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -75,15 +77,14 @@ export default function UserProfileForms({
     <>
       <form
         onSubmit={handleSubmit(updateProfile)}
-        className={`w-full m-auto relative overflow-hidden max-w-md duration-300`}
+        className={`w-full m-auto relative max-w-md duration-300`}
       >
-        <div className="mb-2 border-l-2 border-cian-700 pl-2">
-          <Text
-            className={` lg:mb-1 font-bold tracking-wide lg:text-xl xl:text-2xl`}
-          >
-            Atualize suas credenciais
-          </Text>
-        </div>
+        <Text
+          className={` lg:mb-1 font-bold tracking-wide lg:text-xl xl:text-2xl`}
+        >
+          Atualize suas credenciais
+        </Text>
+
         <div className="flex-col flex gap-2 lg:gap-4 my-6 lg:my-8 max-w-md">
           <Input
             defaultValue={user.name?.split(" ")[0] || ""}
@@ -99,26 +100,27 @@ export default function UserProfileForms({
             type="text"
             register={register("last_name")}
           />
+
+          <SelectInput
+            register={register("ies")}
+            errorMsg={errors.ies?.message as string}
+            label=""
+            firstOption="Selecione uma instituição de ensino"
+            options={["UFC - Universidade Federal do Ceará", "Outra"]}
+          />
           <Input
             defaultValue={user.ies}
             placeholder="Intituição de Ensino"
-            errorMsg={errors.ies?.message as string}
             type="text"
             register={register("ies")}
+            errorMsg={errors.ies?.message as string}
           />
           <Input
-            defaultValue={user.age}
-            placeholder="Data de nascimento"
-            errorMsg={errors.age?.message as string}
-            type="text"
-            register={register("age")}
-          />
-          <Input
-            defaultValue={user.semestre}
+            defaultValue={user.semestre || "2"}
             placeholder="Semestre"
             errorMsg={errors.semester?.message as string}
-            type="text"
-            register={register("semester")}
+            type="number"
+            register={register("semester", { valueAsNumber: true })}
           />
           <Input
             defaultValue={user.course}

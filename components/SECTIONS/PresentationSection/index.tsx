@@ -45,8 +45,9 @@ export default function PresentationSection() {
         <figure className="m-auto w-2/3 mb-6 max-w-md">
           <Image
             src={seelect_logo}
+            width={1080}
             priority={true}
-            alt="logo da seelect"
+            alt="logo da SEELECT"
             className="lg:min-w-[360px]"
           />
         </figure>
