@@ -21,7 +21,7 @@ export default function EventCategory({
     <span
       {...props}
       className={twMerge(
-        "p-1 px-2 bg-white text-gray-500 rounded-full capitalize",
+        "p-1 text-sm lg:text-base bg-white text-gray-500 rounded-md capitalize",
         className
       )}
     >

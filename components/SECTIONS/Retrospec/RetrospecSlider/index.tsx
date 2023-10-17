@@ -84,7 +84,7 @@ export default function RetrospecSlider() {
               </SwiperSlide>
             );
           })}
-          <div className="w-110% h-16 lg:h-32 rounded-100% absolute bg-white bottom-0 z-10 -left-5% translate-y-1/2"></div>
+          <div className="w-110% h-16 lg:h-32 rounded-100% absolute bg-dark-cian bottom-0 z-10 -left-5% translate-y-1/2"></div>
           <SwiperButton isEnd={isEnd} isBegin={isBegin} />
         </Swiper>
       </div>

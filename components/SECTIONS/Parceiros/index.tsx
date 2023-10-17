@@ -9,15 +9,17 @@ function Parceiros() {
   return (
     <section className="w-full">
       <div className="relative">
-        <div className="flex items-center gap-2  mb-11">
-          <Title className={`text-3xl text-black`}>Patrocinadores</Title>
-          <div className="grow bg-cian-400 h-2 rounded-sm"></div>
-        </div>
-        <div className="absolute bottom-0 right-0 translate-x-1/3">
-          <Image src={balls_deco} alt="decoration" className="" />
+        <div className="flex items-center gap-2 mb-11">
+          <div className="bg-white/20 backdrop-blur-sm shadow-sm shadow-slate-800 border border-white/20 px-2 rounded-md">
+            <Title className={`text-3xl text-white drop-shadow-icon-sm `}>
+              Patrocinadores
+            </Title>
+          </div>
+
+          <div className="grow bg-white h-2 rounded-sm"></div>
         </div>
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center flex-wrap gap-8">
           <Link
             className="text-dark-cian hover:text-dark"
             target="_blank"
@@ -29,7 +31,7 @@ function Parceiros() {
                 src={gaudium_logo}
                 alt="icone seelect"
                 width={300}
-                className="m-auto drop-shadow-icon-sm object-fill lg:grayscale-1 -translate-y-4"
+                className="m-auto drop-shadow-icon-sm object-fill lg:grayscale-1 -translate-y-4 aspect-square"
               />
             </div>
           </Link>

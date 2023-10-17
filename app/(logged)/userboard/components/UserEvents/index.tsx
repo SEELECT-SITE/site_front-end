@@ -51,9 +51,12 @@ export default function UserEvents({ user }: { user: User }) {
               </div>
 
               <div>
-                <div className="flex flex-wrap justify-between mb-2 items-start">
+                <div className="flex flex-wrap justify-between mb-2 items-start gap-2">
                   <EventCard.Category category={event.category} />
-                  <EventCard.Date date={Date.now()} />
+                  <EventCard.Date
+                    dateStart={event.date_start}
+                    dateEnd={event.date_end}
+                  />
                 </div>
               </div>
             </EventCard.Body>

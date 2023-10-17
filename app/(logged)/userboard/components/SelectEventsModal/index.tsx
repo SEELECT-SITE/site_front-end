@@ -92,7 +92,7 @@ export default function SelectEventsModal({
   }
 
   return (
-    <div className="fixed w-full max-h-full overflow-y-scroll top-0 left-0 p-4 bg-white text-dark z-10">
+    <div className="fixed w-full min-h-full overflow-y-scroll top-0 left-0 p-4 bg-white text-dark z-10">
       <div className="w-full relative pb-20">
         <Container>
           <button
@@ -135,7 +135,7 @@ export default function SelectEventsModal({
                 >
                   <div>
                     <EventCard.Title title={event.title} />
-                    <EventCard.Hoster hoster={"João Paulo II"} />
+                    <EventCard.Hoster hoster={event.hoster || "putz"} />
 
                     <EventCard.Location
                       location={event.place[0].location}
@@ -153,9 +153,12 @@ export default function SelectEventsModal({
                   </div>
 
                   <div>
-                    <div className="flex flex-wrap justify-between mb-2 items-start">
+                    <div className="flex flex-wrap justify-between mb-2 items-start gap-2">
                       <EventCard.Category category={event.category} />
-                      <EventCard.Date date={Date.now()} />
+                      <EventCard.Date
+                        dateStart={event.date_start}
+                        dateEnd={event.date_end}
+                      />
                     </div>
                     <EventCard.Capacity
                       capacity={

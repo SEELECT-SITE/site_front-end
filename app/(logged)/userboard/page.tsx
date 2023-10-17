@@ -38,52 +38,44 @@ function Userboard({
     }
   }, []);
 
-  console.log(user);
-
   return (
     <>
       <div className="bg-dark-cian relative">
-        {hasUserName ? (
-          <Container>
-            <div className="flex justify-between">
-              <Text>Bem-vindo {user?.name} </Text>
-              <FloatButton
-                className="flex duration-100 p-1"
-                shadowClassname="my-0"
-                onClick={(e) => {
-                  setIsUserFormsOpen(!isUserFormsOpen);
-                }}
-              >
-                {isUserFormsOpen ? (
-                  <>
-                    Fechar <MdClose />
-                  </>
-                ) : (
-                  <>
-                    Editar perfil <HiPencilAlt size={18} />
-                  </>
-                )}
-              </FloatButton>
-            </div>
+        {hasUserName && (
+          <Container className="w-full flex flex-wrap justify-between gap-2">
+            <Text className="capitalize">Bem-vindo, {user?.name} </Text>
+            <FloatButton
+              className="flex duration-100 p-1"
+              shadowClassname="my-0"
+              onClick={(e) => {
+                setIsUserFormsOpen(!isUserFormsOpen);
+              }}
+            >
+              {isUserFormsOpen ? (
+                <>
+                  Fechar <MdClose />
+                </>
+              ) : (
+                <>
+                  Editar perfil <HiPencilAlt size={18} />
+                </>
+              )}
+            </FloatButton>
           </Container>
-        ) : (
-          <>
-            {isUserFormsOpen && (
-              <div className="flex-col-reverse flex lg:flex-row">
-                <Container className="max-w-lg 2xl:px-12 w-full">
-                  <Title className="mb-2 border-l-2 border-cian-700 pl-2">
-                    Continue o seu cadastro{" "}
-                  </Title>
+        )}
+        {isUserFormsOpen && (
+          <div className="w-auto lg:flex lg:flex-row-reverse ">
+            <BannerLogin />
+            <Container className="max-w-lg 2xl:px-12 w-full">
+              {!hasUserName && (
+                <Title className="mb-2 border-l-2 border-cian-700 pl-2">
+                  Continue o seu cadastro{" "}
+                </Title>
+              )}
 
-                  <UserProfileForms
-                    user={user!}
-                    sessionUpdate={sessionUpdate}
-                  />
-                </Container>
-                <BannerLogin />
-              </div>
-            )}
-          </>
+              <UserProfileForms user={user!} sessionUpdate={sessionUpdate} />
+            </Container>
+          </div>
         )}
 
         <Decoration

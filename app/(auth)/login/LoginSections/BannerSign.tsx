@@ -5,7 +5,7 @@ import loginBg from "@/public/login_bg.webp";
 
 export default function BannerLogin() {
   return (
-    <aside className=" w-full h-20 overflow-hidden flex justify-end lg:justify-center lg:items-center lg:h-full lg:px-0">
+    <aside className="relative w-full h-20 overflow-hidden flex justify-end lg:justify-center lg:items-center lg:h-full lg:px-0">
       <Link
         href="/"
         className="group rounded-full flex items-center aspect-square left-0 lg:left-auto h-full lg:h-auto lg:backdrop-blur-sm max-w-xs p-3 lg:p-8 absolute lg:z-10"
@@ -24,7 +24,7 @@ export default function BannerLogin() {
           width={1366}
           src={loginBg}
           alt="login background"
-          className="min-h-full object-cover"
+          className=" object-cover"
         />
       </div>
     </aside>

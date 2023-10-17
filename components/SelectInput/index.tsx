@@ -4,6 +4,7 @@ import React, { InputHTMLAttributes, useEffect, useState } from "react";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { cafeFont } from "../../app/fonts";
 import { MdErrorOutline } from "react-icons/md";
+import { PiAsteriskSimpleDuotone } from "react-icons/pi";
 
 export interface InputProps extends InputHTMLAttributes<HTMLSelectElement> {
   valid?: boolean | undefined;
@@ -24,6 +25,7 @@ const SelectInput: React.FC<InputProps> = ({
   type,
   label,
   errorMsg,
+  required,
   firstOption,
 }) => {
   const [selectedOption, setSelectedOption] = useState<number | string>("");
@@ -31,6 +33,11 @@ const SelectInput: React.FC<InputProps> = ({
   return (
     <div className="w-full flex flex-col my-2 relative">
       <label className="ml-2 bold">{label}</label>
+      {required && (
+        <span className="absolute right-1 top-2 -translate-y-9 text-white">
+          <PiAsteriskSimpleDuotone size={24} />
+        </span>
+      )}
       <select
         className={`text-dark p-4 cursor-pointer rounded-lg border border-black shadow-sm border-b-2 bg-white min-w-[250px] capitalize ${
           selectedOption !== "" ? "border-2 border-cian-500" : ""

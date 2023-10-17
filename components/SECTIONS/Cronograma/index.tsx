@@ -35,47 +35,50 @@ function Cronograma() {
   const router = useRouter();
 
   return (
-    <section className="w-full pt-12 lg:pt-24 bg-white">
-      <Title className={`font-bold text-center text-dark-cian mb-10`}>
-        CRONOGRAMA GERAL
-      </Title>
+    <section className="w-full py-12 lg:py-24 rounded-md backdrop-blur-sm shadow-md shadow-slate-900 bg-white/10 border border-white/20 ">
+      <Title className={`font-bold text-center mb-6`}>CRONOGRAMA GERAL</Title>
 
-      <CronoSlider />
-      <div className="m-auto max-w-6xl">
+      <div className="m-auto max-w-6xl px-2">
         <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecht justify-center m-auto">
           {events?.map((event: any, index: number) => {
             return (
-              <EventCard.Body
-                key={event.title + index}
-                id={event.title + index}
-                className="lg:py-12 relative justify-between flex flex-col"
-              >
-                <div>
-                  <EventCard.Title title={event.title} />
-                  <EventCard.Hoster hoster={"João Paulo II"} />
+              <>
+                <EventCard.Body
+                  key={event.title + index}
+                  id={event.title + index}
+                  className="lg:py-12 relative justify-between flex flex-col"
+                >
+                  <div>
+                    <EventCard.Title title={event.title} />
+                    <EventCard.Hoster hoster={"João Paulo II"} />
 
-                  <EventCard.Location
-                    location={event.place[0].location}
-                    url_location={event.place[0].url_location}
-                  />
-                  <div className="animate-pulse bg-dark">
-                    <SvgCardLine color="#ffffff" opacity="1" />
+                    <EventCard.Location
+                      location={event.place[0].location}
+                      url_location={event.place[0].url_location}
+                    />
+                    <div className="animate-pulse bg-dark">
+                      <SvgCardLine color="#ffffff" opacity="1" />
+                    </div>
+
+                    <EventCard.Capacity
+                      capacity={
+                        event.max_number_of_inscriptions -
+                        event.number_of_inscriptions
+                      }
+                    />
                   </div>
 
-                  <EventCard.Description
-                    description={
-                      "Lorem ipsum dolor sit amet. Ut vero quidem et unde corrupti aut quaerat voluptatem? 33 numquam provident ab aperiam fuga ea dolores sunt rem blanditiis libero est alias architecto ex consequatur sunt"
-                    }
-                  />
-                </div>
-
-                <div>
-                  <div className="flex flex-wrap justify-between mb-2 items-start">
-                    <EventCard.Category category={event.category} />
-                    <EventCard.Date date={Date.now()} />
+                  <div>
+                    <div className="flex flex-wrap justify-between mb-2 items-start">
+                      <EventCard.Category category={event.category} />
+                      <EventCard.Date
+                        dateStart={event.date_start}
+                        dateEnd={event.date_end}
+                      />
+                    </div>
                   </div>
-                </div>
-              </EventCard.Body>
+                </EventCard.Body>
+              </>
             );
           })}
           {isLoading && (
@@ -86,8 +89,8 @@ function Cronograma() {
           )}
         </div>
 
-        <div className="flex gap-2 py-0 rounded-lg">
-          <Decoration />
+        <div className="flex gap-2 rounded-lg">
+          <Decoration notAnimated />
           <FloatButton
             className="bg-cian-700 text-xl text-dark lg:py-6 whitespace-nowrap"
             shadowClassname="bg-black w-2/3 lg:w-1/3"

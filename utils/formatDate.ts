@@ -19,11 +19,11 @@ export function numberToMonth(index: number): string {
 export function numberToDayWeek(index: number): string {
   const daysOfWeek = [
     "Domingo",
-    "Segunda-feira",
-    "Terça-feira",
-    "Quarta-feira",
-    "Quinta-feira",
-    "Sexta-feira",
+    "Segunda",
+    "Terça",
+    "Quarta",
+    "Quinta",
+    "Sexta",
     "Sábado",
   ];
   return daysOfWeek[index];

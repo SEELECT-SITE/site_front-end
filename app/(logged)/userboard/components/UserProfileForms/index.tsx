@@ -14,8 +14,9 @@ import axios from "axios";
 import useUserForms from "./userForms";
 import Title from "@/components/Title";
 import { User } from "next-auth";
-import { DJANGO_URL } from "@/utils/consts";
+import { DJANGO_URL, IES_CEARA, UFC_COURSES } from "@/utils/consts";
 import SelectInput from "@/components/SelectInput";
+import validateCPF from "@/utils/validateCPF";
 
 const createUserProfileFormsSchema = z.object({
   first_name: z.string().nonempty("Preencha o campo"),
@@ -23,7 +24,20 @@ const createUserProfileFormsSchema = z.object({
   age: z.string().pipe(z.coerce.date()),
   ies: z.string().nonempty("Preencha o campo"),
   course: z.string().nonempty("Preencha o campo"),
-  semester: z.number().min(2, "Coloque o seu semestre"),
+  semester: z
+    .number()
+    .min(1, "Coloque um valor válido")
+    .max(20)
+    .nonnegative({ message: "Coloque um valor válido" }),
+  cpf: z
+    .string()
+    .nonempty("Preencha o campo")
+    .refine(
+      (data) => {
+        return validateCPF(data);
+      },
+      { message: "Coloque um CPF válido" }
+    ),
 });
 
 type CreateUserProfileData = z.infer<typeof createUserProfileFormsSchema>;
@@ -38,13 +52,12 @@ export default function UserProfileForms({
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm<CreateUserProfileData>({
     resolver: zodResolver(createUserProfileFormsSchema),
   });
 
-  const { isUserFormsOpen, setIsUserFormsOpen } = useUserForms();
+  const { setIsUserFormsOpen } = useUserForms();
 
   async function updateProfile(data: CreateUserProfileData) {
     const { last_name, first_name, ies, course, semester, age } = data;
@@ -54,7 +67,7 @@ export default function UserProfileForms({
     formData.append("ies", ies);
     formData.append("course", course);
     formData.append("semester", semester.toString());
-    formData.append("age", age.toString());
+    formData.append("age", (18).toString());
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -91,6 +104,7 @@ export default function UserProfileForms({
             placeholder="Nome"
             errorMsg={errors.first_name?.message as string}
             type="text"
+            required
             register={register("first_name")}
           />
           <Input
@@ -98,36 +112,49 @@ export default function UserProfileForms({
             placeholder="Sobrenome"
             errorMsg={errors.last_name?.message as string}
             type="text"
+            required
             register={register("last_name")}
+          />
+          <Input
+            defaultValue={user.name?.split(" ")[1] || ""}
+            placeholder="Data de nascimento"
+            errorMsg={errors.age?.message as string}
+            type="date"
+            required
+            register={register("age")}
           />
 
           <SelectInput
+            required
             register={register("ies")}
             errorMsg={errors.ies?.message as string}
             label=""
             firstOption="Selecione uma instituição de ensino"
-            options={["UFC - Universidade Federal do Ceará", "Outra"]}
+            options={IES_CEARA}
+          />
+          <SelectInput
+            required
+            register={register("course")}
+            errorMsg={errors.course?.message as string}
+            label=""
+            firstOption="Selecione um curso"
+            options={UFC_COURSES}
           />
           <Input
-            defaultValue={user.ies}
-            placeholder="Intituição de Ensino"
-            type="text"
-            register={register("ies")}
-            errorMsg={errors.ies?.message as string}
-          />
-          <Input
-            defaultValue={user.semestre || "2"}
+            max={20}
+            min={1}
+            defaultValue={user.semestre}
             placeholder="Semestre"
             errorMsg={errors.semester?.message as string}
             type="number"
+            required
             register={register("semester", { valueAsNumber: true })}
           />
           <Input
-            defaultValue={user.course}
-            placeholder="Curso"
-            errorMsg={errors.course?.message as string}
-            type="text"
-            register={register("course")}
+            placeholder="CPF - Apenas os numeros."
+            errorMsg={errors.cpf?.message as string}
+            required
+            register={register("cpf")}
           />
         </div>
 
