@@ -7,6 +7,7 @@ import EventCategory from "./EventCategory";
 import EventCapacity from "./EventCapacity";
 import EventCardHoster from "./EventCardHoster";
 import EventCardDescription from "./EventCardDescription";
+import EventDelete from "./EventDelete";
 
 const EventCard = {
   Body: EventCardBody,
@@ -18,5 +19,6 @@ const EventCard = {
   Capacity: EventCapacity,
   Hoster: EventCardHoster,
   Description: EventCardDescription,
+  Delete: EventDelete,
 };
 export default EventCard;

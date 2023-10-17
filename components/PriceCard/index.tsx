@@ -80,28 +80,31 @@ const PriceCard: FunctionComponent<PriceCardProps> = ({
         <div
           className={` h-full flex flex-col justify-between border-2 border-black/10 p-6 shadow-lg sm:px-8 lg:p-12`}
         >
-          <div className="text-left flex justify-between">
-            <Title className="text-lg xs:text-xl lg:text-2xl tracking-wide font-bold">
-              {title}
-            </Title>
-            <ThunderIcons quantity={stars || 0} />
-          </div>
           <div>
-            <div className="mt-6">
-              <Text className="xs:text-lg font-bold">Benefícios</Text>
+            <div className="text-left flex justify-between">
+              <Title className="text-lg xs:text-xl lg:text-2xl tracking-wide font-bold">
+                {title}
+              </Title>
+              <ThunderIcons quantity={stars || 0} />
             </div>
-            <ul className="my-2">
-              {advantage.map((elem) => {
-                return (
-                  <li className="flex gap-1 mt-2 text-sm">
-                    <MdDone size={18} fill={"green"} />
-                    {elem}
-                  </li>
-                );
-              })}
-            </ul>
+            <div>
+              <div className="mt-6">
+                <Text className="xs:text-lg font-bold">Benefícios</Text>
+              </div>
+              <ul className="my-2">
+                {advantage.map((elem) => {
+                  if (!elem) return <></>;
+                  return (
+                    <li className="flex gap-1 mt-2 text-sm">
+                      <MdDone size={18} fill={"green"} />
+                      {elem}
+                    </li>
+                  );
+                })}
+              </ul>
 
-            {children}
+              {children}
+            </div>
           </div>
 
           <div>

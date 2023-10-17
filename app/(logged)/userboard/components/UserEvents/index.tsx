@@ -49,15 +49,18 @@ export default function UserEvents({ user }: { user: User }) {
                   }
                 />
               </div>
-
-              <div>
-                <div className="flex flex-wrap justify-between mb-2 items-start gap-2">
-                  <EventCard.Category category={event.category} />
-                  <EventCard.Date
-                    dateStart={event.date_start}
-                    dateEnd={event.date_end}
-                  />
-                </div>
+              <EventCard.Capacity
+                capacity={
+                  event.max_number_of_inscriptions -
+                  event.number_of_inscriptions
+                }
+              />
+              <div className="flex flex-wrap justify-between mb-2 items-start gap-2">
+                <EventCard.Category category={event.category} />
+                <EventCard.Date
+                  dateStart={event.date_start}
+                  dateEnd={event.date_end}
+                />
               </div>
             </EventCard.Body>
           );

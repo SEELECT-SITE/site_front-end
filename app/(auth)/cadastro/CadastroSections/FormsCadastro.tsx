@@ -60,7 +60,6 @@ export default function FormsCadastro() {
         }, 1500);
       }
     } catch (err: any) {
-      console.log(err);
       const errorKeys = Object.keys(err.response.data);
       const errosList = errorKeys.map((key) => err.response.data[key][0]) as [
         string

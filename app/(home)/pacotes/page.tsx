@@ -1,11 +1,14 @@
 "use client";
+import KitsAvaliable from "@/app/(logged)/userboard/components/KitsAvaliabe";
 import Container from "@/components/Container";
 import PriceCard from "@/components/PriceCard";
 import Paragraph from "@/components/Text";
 import Title from "@/components/Title";
+import { queryClient } from "@/utils/queryClient";
 import { useRouter } from "next/navigation";
+import { QueryClientProvider } from "react-query";
 
-export default function PacotesPage() {
+function Pacotes() {
   const router = useRouter();
   return (
     <>
@@ -17,51 +20,16 @@ export default function PacotesPage() {
           Veja a melhor dentre as 3 opções abaixo:
         </Paragraph>
 
-        <div className="mt-8 flex gap-3 items-stretch lg:flex lg:gap-4 2xl:gap-8 justify-center flex-wrap lg:items-stretch ">
-          <PriceCard
-            onClick={() => router.push("/login")}
-            stars={3}
-            price={20.0}
-            destack={true}
-            destackText="+ Custo benefício"
-            title={"Kit Avançado"}
-            id={"kitavançado1"}
-            advantage={[
-              "Todas as Palestras",
-              "4 Minicursos/Workshop",
-              "Um copo Buck's Exclusivo",
-            ]}
-          />
-          <PriceCard
-            onClick={() => router.push("/login")}
-            stars={2}
-            price={15.0}
-            title={"Kit Médio"}
-            id={"kitmedio1"}
-            advantage={[
-              "Todas as Palestras",
-              "3 Minicursos/Workshop",
-              "Um copo Buck's Exclusivo",
-            ]}
-          />
-          <PriceCard
-            onClick={() => router.push("/login")}
-            stars={1}
-            price={10.0}
-            title={"Kit Básico"}
-            id={"kitbasico1"}
-            advantage={["Todas as Palestras", "Um Minicurso ou um Workshop"]}
-          />
-
-          <PriceCard
-            onClick={() => router.push("/login")}
-            price={0.0}
-            title={"Kit Gratuito"}
-            id={"kitgratuito1"}
-            advantage={["Palestra dos patrocinadores + 1 palestra"]}
-          />
-        </div>
+        <KitsAvaliable />
       </Container>
     </>
+  );
+}
+
+export default function PacotesPage() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Pacotes />
+    </QueryClientProvider>
   );
 }

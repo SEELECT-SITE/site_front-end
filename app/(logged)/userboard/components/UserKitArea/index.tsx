@@ -11,6 +11,7 @@ import { LuAlertCircle } from "react-icons/lu";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import Title from "@/components/Title";
 import Button from "@/components/Button";
+import getKitById from "@/utils/getKitsByID";
 
 export default function UserKitArea({ user }: { user: User }) {
   const { isPayKitModalOpen, setIsPayKitModalOpen } = usePayKitState();
@@ -19,7 +20,7 @@ export default function UserKitArea({ user }: { user: User }) {
       {!user?.kit?.is_payded && (
         <div className="pb-8">
           <Title className="border-l-2 border-cian-400 pl-2">
-            {user?.kit?.model}
+            {getKitById(user?.kit?.model)}
           </Title>
           <div className="my-4 flex justify-between items-center p-3 bg-slate-800 rounded-md max-w-md ">
             <Text className="flex items-center  text-red-400 text-sm">

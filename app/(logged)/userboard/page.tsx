@@ -19,6 +19,7 @@ import { HiPencilAlt } from "react-icons/hi";
 import UserEvents from "./components/UserEvents";
 import UserKitArea from "./components/UserKitArea";
 import BannerLogin from "@/app/(auth)/login/LoginSections/BannerSign";
+import KitsAvaliable from "./components/KitsAvaliabe";
 
 function Userboard({
   session,
@@ -28,8 +29,7 @@ function Userboard({
   sessionUpdate: any;
 }) {
   const { user } = session;
-  const { isSelectEventOpen, setIsSelectEventOpen, setSelectedKit } =
-    useSelectEventsState();
+  const { isSelectEventOpen } = useSelectEventsState();
   const { isUserFormsOpen, setIsUserFormsOpen } = useUserForms();
   const hasUserName = user?.name !== " ";
   useEffect(() => {
@@ -37,7 +37,6 @@ function Userboard({
       setIsUserFormsOpen(true);
     }
   }, []);
-
   return (
     <>
       <div className="bg-dark-cian relative">
@@ -95,72 +94,7 @@ function Userboard({
                   <UserEvents user={user} />
                 </>
               ) : (
-                <>
-                  <Title className="border-l-2 pl-2 border-cian-400">
-                    Não tem kit ainda?{" "}
-                  </Title>
-                  <Text className="text-slate-300">
-                    Selecione um dos kit abaixo
-                  </Text>
-                  <div className="flex flex-wrap gap-4 my-6 justify-around">
-                    <PriceCard
-                      stars={3}
-                      onClick={() => {
-                        setIsSelectEventOpen(true);
-                        setSelectedKit("Kit Avançado");
-                      }}
-                      price={20.0}
-                      destack={true}
-                      destackText="+ Custo benefício"
-                      title={"Kit Avançado"}
-                      id={"kitavançado1"}
-                      advantage={[
-                        "Todas as Palestras",
-                        "4 Minicursos/Workshop",
-                        "Um copo Buck's Exclusivo",
-                      ]}
-                    />
-                    <PriceCard
-                      stars={2}
-                      onClick={() => {
-                        setIsSelectEventOpen(true);
-                        setSelectedKit("Kit Médio");
-                      }}
-                      price={15.0}
-                      title={"Kit Médio"}
-                      id={"kitmedio1"}
-                      advantage={[
-                        "Todas as Palestras",
-                        "3 Minicursos/Workshop",
-                        "Um copo Buck's Exclusivo",
-                      ]}
-                    />
-                    <PriceCard
-                      stars={1}
-                      onClick={() => {
-                        setIsSelectEventOpen(true);
-                        setSelectedKit("Kit Básico");
-                      }}
-                      price={10.0}
-                      title={"Kit Básico"}
-                      id={"kitbasico1"}
-                      advantage={[
-                        "Todas as Palestras",
-                        "Um Minicurso ou um Workshop",
-                      ]}
-                    />
-                    <PriceCard
-                      onClick={() => {
-                        setIsSelectEventOpen(true);
-                        setSelectedKit("Kit Gratuito");
-                      }}
-                      price={0.0}
-                      title={"Kit Gratuito"}
-                      id={"kitgratuito1"}
-                      advantage={["Palestra dos patrocinadores + 1 palestra"]}
-                    />
-                  </div>
-                </>
+                <KitsAvaliable title={true} />
               )}
             </div>
           </Container>

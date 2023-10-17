@@ -3,8 +3,8 @@ import { create } from "zustand";
 type SelectEventProps = {
   isSelectEventOpen: boolean;
   setIsSelectEventOpen: (update: boolean) => void;
-  selectedKit: string;
-  setSelectedKit: (update: string) => void;
+  selectedKit: any;
+  setSelectedKit: (update: any) => void;
 };
 
 const useSelectEventsState = create<SelectEventProps>((set) => ({
@@ -12,8 +12,8 @@ const useSelectEventsState = create<SelectEventProps>((set) => ({
   setIsSelectEventOpen: (update: boolean) => {
     set((state) => ({ isSelectEventOpen: update }));
   },
-  selectedKit: "gratuito",
-  setSelectedKit: (update: string) => {
+  selectedKit: {},
+  setSelectedKit: (update: any) => {
     set((state) => ({ selectedKit: update }));
   },
 }));

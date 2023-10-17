@@ -2,7 +2,6 @@
 import { FunctionComponent, InputHTMLAttributes, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { MdErrorOutline } from "react-icons/md";
-import { PiAsteriskSimpleDuotone } from "react-icons/pi";
 import { cafeFont } from "@/app/fonts";
 import { UseFormRegisterReturn } from "react-hook-form";
 import { IoMdEye } from "react-icons/io";
@@ -64,7 +63,6 @@ const Input: FunctionComponent<InputProps> = ({
 
       <span className="pointer-events-none opacity-100 text-white -top-4 text-base absolute start-1 -translate-y-1/2 p-1 transition-all peer-placeholder-shown:start-2.5 peer-placeholder-shown:opacity-50 peer-placeholder-shown:top-1/2 peer-focus:-top-4 peer-focus:opacity-100 peer-focus:start-1 peer-focus:text-base mix-blend-difference flex">
         {props.placeholder}
-        {required && <PiAsteriskSimpleDuotone size={18} />}
       </span>
 
       {errorMsg && (

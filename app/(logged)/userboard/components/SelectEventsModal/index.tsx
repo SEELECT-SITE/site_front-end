@@ -14,6 +14,7 @@ import Container from "@/components/Container";
 import { SvgCardLine } from "@/components/PriceCard";
 import { MdClose } from "react-icons/md";
 import { DJANGO_URL } from "@/utils/consts";
+import getKitById from "@/utils/getKitsByID";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -30,6 +31,7 @@ export default function SelectEventsModal({
 }: SelectEventsModalProps) {
   const { setIsSelectEventOpen, selectedKit } = useSelectEventsState();
   const [selectEvents, setSelectEvents] = useState<number[]>([]);
+  const [workshopSelect, setWorkshopSelect] = useState<number>();
   const { data: events, isLoading } = useQuery<any | undefined>(
     "userEvents",
     async () => {
@@ -78,12 +80,11 @@ export default function SelectEventsModal({
         );
       } else {
         formData.append("user", user.id as string);
-        formData.append("model", selectedKit as string);
+        formData.append("model", selectedKit.id.toString());
         await axios.post(`${DJANGO_URL}api/kits/`, formData.toString(), {
           headers,
         });
       }
-
       sessionUpdate();
     } catch (e) {
     } finally {
@@ -105,10 +106,26 @@ export default function SelectEventsModal({
           <Title className="border-l-2 pl-2 border-cian-700">
             Eventos disponiveis
           </Title>
-          <div>{selectedKit} está selecionado</div>
-          <div>10 palestras</div>
-          <div>10 workshops</div>
-          <div>10 mini-cursos</div>
+          <div>
+            {user?.kit?.id ? getKitById(user.kit.id) : selectedKit.model} está
+            selecionado
+          </div>
+          <div>
+            <Text>Você tem direito a</Text>
+            <ul>
+              {[
+                selectedKit.all_speeches
+                  ? "Todas as Palestras"
+                  : "Palestra patrocinadas + 1 palestra",
+                selectedKit.workshops
+                  ? `${selectedKit.workshops} Minicursos/Workshop`
+                  : "",
+                selectedKit.bucks_coup ? "Um copo Buck's Exclusivo" : "",
+              ].map((elem) => {
+                return <li>{elem}</li>;
+              })}
+            </ul>
+          </div>
         </Container>
         <div className="fixed z-20 left-0 bottom-0 w-full">
           <Container className="flex justify-end">
@@ -131,6 +148,10 @@ export default function SelectEventsModal({
                   onClick={() => {
                     toogleElements(event.id);
                   }}
+                  capacity={
+                    event.max_number_of_inscriptions -
+                    event.number_of_inscriptions
+                  }
                   className="lg:py-12 relative justify-between flex flex-col"
                 >
                   <div>

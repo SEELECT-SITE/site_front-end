@@ -10,6 +10,8 @@ import { queryClient } from "@/utils/queryClient";
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
 import EventsAdmin from "./components/EventsAdmin.tsx";
+import Alert from "@/components/Alert";
+import useAlertAdminState from "./components/alertAdminStore";
 function Admin({
   session,
   sessionUpdate,
@@ -18,8 +20,16 @@ function Admin({
   sessionUpdate: any;
 }) {
   const { user } = session;
+  const { isAlertAdminOpen, alertMsg } = useAlertAdminState();
+
   return (
     <main>
+      {isAlertAdminOpen && (
+        <Alert timeout={4000} className="border-green-400">
+          {alertMsg}
+        </Alert>
+      )}
+
       <Container>
         <Title>pagina do admin</Title>
       </Container>
@@ -30,8 +40,9 @@ function Admin({
             <AddPlaceForms Token={user.token} />
           </>
         )}
-        <EventsAdmin user={user!} />
       </Container>
+
+      <EventsAdmin user={user!} />
     </main>
   );
 }
