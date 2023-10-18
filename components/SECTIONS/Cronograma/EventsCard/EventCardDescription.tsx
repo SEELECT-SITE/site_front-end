@@ -1,6 +1,7 @@
 import Text from "@/components/Text";
 import Link from "next/link";
 import { BiRadioCircle } from "react-icons/bi";
+import { twMerge } from "tailwind-merge";
 
 export default function EventCardDescription({
   description,
@@ -10,8 +11,9 @@ export default function EventCardDescription({
   className?: string;
 }) {
   return (
-    <Text className="capitalize text-ellipsis flex gap-0.5 py-3 ">
-      {description}
-    </Text>
+    <div className="py-3">
+      <b>Descrição</b>
+      <Text className={twMerge("font-thin", className)}>{description}</Text>
+    </div>
   );
 }

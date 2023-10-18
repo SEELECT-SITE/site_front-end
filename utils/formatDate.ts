@@ -1,30 +1,6 @@
-export function numberToMonth(index: number): string {
-  const months = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
-  ];
-  return months[index];
-}
+import moment from "moment";
+import "moment/locale/pt-br";
 
-export function numberToDayWeek(index: number): string {
-  const daysOfWeek = [
-    "Domingo",
-    "Segunda",
-    "Terça",
-    "Quarta",
-    "Quinta",
-    "Sexta",
-    "Sábado",
-  ];
-  return daysOfWeek[index];
-}
+const momento = moment;
+
+export default momento;

@@ -21,7 +21,7 @@ export default function EventCardBody({
   return (
     <div
       className={twMerge(
-        `relative w-full  p-4 py-12 lg:p-8 ring-inset rounded-2xl max-w-md overflow-hidden ${
+        `relative w-full p-4 py-12 lg:p-8 ring-inset rounded-2xl max-w-md overflow-hidden ${
           isDestack ? "ring-2 ring-cian-400" : "ring-0 ring-slate-400"
         } ${
           capacity! <= 0 || disable

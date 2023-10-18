@@ -20,6 +20,7 @@ import UserEvents from "./components/UserEvents";
 import UserKitArea from "./components/UserKitArea";
 import BannerLogin from "@/app/(auth)/login/LoginSections/BannerSign";
 import KitsAvaliable from "./components/KitsAvaliabe";
+import useUserboardState from "./components/userboardStore/PayKitModalStore";
 
 function Userboard({
   session,
@@ -30,13 +31,20 @@ function Userboard({
 }) {
   const { user } = session;
   const { isSelectEventOpen } = useSelectEventsState();
+  const { kitsValues, getKitsValues } = useUserboardState();
+
   const { isUserFormsOpen, setIsUserFormsOpen } = useUserForms();
   const hasUserName = user?.name !== " ";
+
   useEffect(() => {
     if (!hasUserName) {
       setIsUserFormsOpen(true);
     }
+    if (kitsValues == "") {
+      getKitsValues();
+    }
   }, []);
+
   return (
     <>
       <div className="bg-dark-cian relative">

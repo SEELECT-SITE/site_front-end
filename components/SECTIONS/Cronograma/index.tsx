@@ -42,43 +42,45 @@ function Cronograma() {
         <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecht justify-center m-auto">
           {events?.map((event: any, index: number) => {
             return (
-              <>
-                <EventCard.Body
-                  key={event.title + index}
-                  id={event.title + index}
-                  className="lg:py-12 relative justify-between flex flex-col"
-                >
-                  <div>
-                    <EventCard.Title title={event.title} />
-                    <EventCard.Hoster hoster={"João Paulo II"} />
+              <EventCard.Body
+                key={event.title + index}
+                id={event.title + index}
+                className="lg:py-12 relative justify-between flex flex-col"
+              >
+                <div>
+                  <EventCard.Title title={event.title} />
+                  <EventCard.Hoster hoster={"João Paulo II"} />
 
-                    <EventCard.Location
-                      location={event.place[0].location}
-                      url_location={event.place[0].url_location}
-                    />
-                    <div className="animate-pulse bg-dark">
-                      <SvgCardLine color="#ffffff" opacity="1" />
-                    </div>
-
-                    <EventCard.Capacity
-                      capacity={
-                        event.max_number_of_inscriptions -
-                        event.number_of_inscriptions
-                      }
-                    />
+                  <EventCard.Location
+                    location={event.place[0].location}
+                    url_location={event.place[0].url_location}
+                  />
+                  <div className="animate-pulse bg-dark">
+                    <SvgCardLine color="#ffffff" opacity="1" />
                   </div>
 
-                  <div>
-                    <div className="flex flex-wrap justify-between mb-2 items-start">
-                      <EventCard.Category category={event.category} />
-                      <EventCard.Date
-                        dateStart={event.date_start}
-                        dateEnd={event.date_end}
-                      />
-                    </div>
+                  <EventCard.Capacity
+                    capacity={
+                      event.max_number_of_inscriptions -
+                      event.number_of_inscriptions
+                    }
+                  />
+                </div>
+
+                <div>
+                  <div className="flex flex-wrap justify-between mb-2 items-start">
+                    <EventCard.Category category={event.category} />
+                    {Object.values(event.date).map((date) => {
+                      return (
+                        <EventCard.Date
+                          dateStart={date?.start}
+                          dateEnd={date?.end}
+                        />
+                      );
+                    })}
                   </div>
-                </EventCard.Body>
-              </>
+                </div>
+              </EventCard.Body>
             );
           })}
           {isLoading && (

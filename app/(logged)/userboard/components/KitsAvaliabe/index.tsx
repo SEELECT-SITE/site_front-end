@@ -6,9 +6,11 @@ import PriceCard from "@/components/PriceCard";
 import { useQuery } from "react-query";
 import { DJANGO_URL } from "@/utils/consts";
 import axios from "axios";
+import useUserboardState from "../userboardStore/PayKitModalStore";
 
 export default function KitsAvaliable({ title }: { title?: boolean }) {
   const { setIsSelectEventOpen, setSelectedKit } = useSelectEventsState();
+  const { kitsValues, setKitsValues } = useUserboardState();
   const { data: kits, isLoading } = useQuery<any | undefined>(
     "kits",
     async () => {
@@ -16,10 +18,14 @@ export default function KitsAvaliable({ title }: { title?: boolean }) {
         "Content-Type": "application/x-www-form-urlencoded",
         "ngrok-skip-browser-warning": "true",
       };
+      if (kitsValues != "") {
+        return kitsValues;
+      }
       try {
         const { data } = await axios.get(`${DJANGO_URL}api/kits/models/`, {
           headers,
         });
+        setKitsValues(data.results);
         return data.results;
       } catch (error) {
         console.log(error);
@@ -43,7 +49,6 @@ export default function KitsAvaliable({ title }: { title?: boolean }) {
       <div className="flex flex-wrap gap-4 my-6 justify-around">
         {!isLoading &&
           kits.reverse().map((kit: any) => {
-            console.log(kit);
             return (
               <PriceCard
                 key={kit.title + kit.id}

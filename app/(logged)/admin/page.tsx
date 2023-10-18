@@ -20,6 +20,7 @@ function Admin({
   sessionUpdate: any;
 }) {
   const { user } = session;
+
   const { isAlertAdminOpen, alertMsg } = useAlertAdminState();
 
   return (

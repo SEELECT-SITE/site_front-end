@@ -10,6 +10,10 @@ import axios from "axios";
 import SelectInput from "@/components/SelectInput";
 import { useQuery } from "react-query";
 import { DJANGO_URL } from "@/utils/consts";
+import SmallText from "@/components/SmallText";
+import MultipleInputs from "@/components/SECTIONS/DatePicker";
+import DatePicker from "@/components/SECTIONS/DatePicker";
+import momento from "@/utils/formatDate";
 
 interface OptionPlace {
   location: string;
@@ -18,9 +22,11 @@ interface OptionPlace {
 }
 
 const createAddEventsSchema = z.object({
-  title: z.string().nonempty("Coloque um titulo"),
-  category: z.string(),
-  place: z.string(),
+  title: z.string().nonempty("Preencha o campo"),
+  category: z.string().nonempty("Preencha o campo"),
+  place: z.string().nonempty("Preencha o campo"),
+  host: z.string().nonempty("Preencha o campo"),
+  descriptions: z.string().nonempty("Preencha o campo"),
 });
 
 type CreateAddEvents = z.infer<typeof createAddEventsSchema>;
@@ -30,6 +36,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<CreateAddEvents>({
     resolver: zodResolver(createAddEventsSchema),
@@ -37,6 +44,8 @@ export default function AddEventsForms({ Token }: { Token: string }) {
   const [errorReq, setErrorReq] = useState<any>("");
   const errorsDiv = useRef<HTMLDivElement | null>(null);
   const [eventCapacity, setEventCapacity] = useState<number>(0);
+  const [dates, setDates] = useState<string[]>([]);
+  const [date, setDate] = useState<string>("");
 
   const { data: places, isLoading } = useQuery<OptionPlace[] | undefined>(
     "Places",
@@ -60,25 +69,48 @@ export default function AddEventsForms({ Token }: { Token: string }) {
   );
 
   async function addEvent(data: CreateAddEvents) {
-    const { category, title, place } = data;
+    const { category, title, place, host } = data;
     setErrorReq("");
+
+    if (dates.length % 2 != 0 || dates.length == 0) {
+      setErrorReq("Coloque um par de datas");
+      return;
+    }
+
+    var eventDates = "{";
+    for (var i = 0; i < dates.length; i += 2) {
+      var wrongDate = momento(dates[i]).isAfter(dates[i + 1]);
+
+      if (wrongDate) {
+        setErrorReq("Horarios invertidos");
+        return;
+      }
+      console.log(dates);
+      eventDates += `"${i / 2}": {"start": "${dates[i / 2]}","end": "${
+        dates[i / 2 + 1]
+      }"}${i + 2 >= dates.length ? "}" : ","} `;
+    }
+
     const formData = new URLSearchParams();
     formData.append("category", category);
     formData.append("title", title);
-    formData.append("places", place);
+    formData.append("place", place);
+    formData.append("host", host);
     formData.append("max_number_of_inscriptions", [eventCapacity].toString());
-
+    formData.append("date", eventDates);
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       Token: Token,
     };
-
     try {
       await axios.post(`${DJANGO_URL}/api/events/`, formData.toString(), {
         headers,
       });
     } catch (error) {
       console.log(error);
+    } finally {
+      setDates([]);
+      reset();
     }
   }
 
@@ -86,6 +118,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
     <>
       <form
         onSubmit={handleSubmit(addEvent)}
+        onKeyDown={(e) => {}}
         className="w-full m-auto relative overflow-hidden p-3 border border-slate-100 max-w-md bg-white text-dark"
       >
         <h1
@@ -100,14 +133,41 @@ export default function AddEventsForms({ Token }: { Token: string }) {
             type="text"
             register={register("title")}
           />
+          <Input
+            placeholder="Falicitadores (Ex:Manuel, Chico e Whindersson)"
+            errorMsg={errors.title?.message as string}
+            type="text"
+            register={register("host")}
+          />
+          <Input
+            placeholder="Descrição"
+            errorMsg={errors.title?.message as string}
+            type="text"
+            register={register("descriptions")}
+          />
+          <DatePicker
+            buttonType="button"
+            min="2023-11-06T07:00"
+            max="2023-11-11T20:00"
+            value="2023-11-06T07:00"
+            placeholder="Datas"
+            type="datetime-local"
+            setCurrentValue={setDate}
+            setValues={setDates}
+            currentValue={date}
+            values={dates}
+          />
+
           <SelectInput
             label="Tipo de Evento"
+            errorMsg={errors.category?.message as string}
             firstOption="Selecione um evento"
             options={["palestra", "workshop", "minicurso"]}
             register={register("category")}
           />
           <SelectInput
             label="Lugar"
+            errorMsg={errors.place?.message as string}
             firstOption="Selecione um lugar"
             type="places"
             options={places!}

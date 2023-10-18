@@ -1,43 +1,29 @@
 import Text from "@/components/Text";
-import { numberToDayWeek } from "@/utils/formatDate";
+import momento from "@/utils/formatDate";
+
 import { MdCalendarToday } from "react-icons/md";
 
 export default function EventCardDate({
   dateStart,
   dateEnd,
 }: {
-  dateStart: number | string;
-  dateEnd: number | string;
+  dateStart: string;
+  dateEnd: string;
 }) {
-  const objDateStart = new Date(dateStart);
-  const objDateEnd = new Date(dateEnd);
+  const dataStart = momento(dateStart);
+  const dataEnd = momento(dateEnd);
+
   return (
     <div className="flex items-center gap-1 group">
       <MdCalendarToday
         size={18}
         className="group-hover:text-cian-400 text-cian-700"
       />
-      <Text className=" lg:text-base">
-        {`${numberToDayWeek(objDateStart.getDay())} ${objDateStart.getDate()}/${
-          objDateStart.getMonth() + 1
-        } de ${
-          objDateStart.getHours() < 9
-            ? "0" + objDateStart.getHours()
-            : objDateStart.getHours()
-        }:${
-          objDateEnd.getMinutes() < 9
-            ? "0" + objDateEnd.getMinutes()
-            : objDateEnd.getMinutes()
-        } às ${
-          objDateEnd.getHours() < 9
-            ? "0" + objDateEnd.getHours()
-            : objDateEnd.getHours()
-        }:${
-          objDateEnd.getMinutes() < 9
-            ? "0" + objDateEnd.getMinutes()
-            : objDateEnd.getMinutes()
-        }`}
-      </Text>
+      <Text className=" lg:text-base capitalize">{`${
+        dataStart.format("dddd").replace("-", " ").split(" ")[0]
+      } ${dataStart.format("DD/MM")} de ${dataStart.format(
+        "LT"
+      )} às ${dataEnd.format("LT")}`}</Text>
     </div>
   );
 }

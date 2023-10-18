@@ -1,8 +1,22 @@
-export default function isEventOverlap(eventA: any, eventB: any) {
-  const startA = new Date(eventA.startTime);
-  const endA = new Date(eventA.endTime);
-  const startB = new Date(eventB.startTime);
-  const endB = new Date(eventB.endTime);
+export default function eventoEstaEntreEventos(
+  novoEvento: any[],
+  eventos: any[]
+): boolean {
+  for (const horarioNovoEvento of novoEvento) {
+    for (const evento of eventos) {
+      const [eventoInicio, eventoFim] = evento;
+      const [horarioInicio, horarioFim] = horarioNovoEvento;
 
-  return startA < endB && endA > startB;
+      if (
+        (horarioInicio >= eventoInicio && horarioInicio <= eventoFim) ||
+        (horarioFim >= eventoInicio && horarioFim <= eventoFim) ||
+        (horarioFim <= eventoFim && horarioInicio >= eventoInicio) ||
+        (horarioFim >= eventoFim && horarioInicio <= eventoInicio)
+      ) {
+        return true; // O novo evento está entre os horários de um evento existente
+      }
+    }
+  }
+
+  return false; // O novo evento não está entre os horários de nenhum evento existente
 }

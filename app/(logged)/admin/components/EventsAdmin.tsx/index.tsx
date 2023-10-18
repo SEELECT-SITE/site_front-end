@@ -103,7 +103,7 @@ export default function EventsAdmin({
                   />
                   <div>
                     <EventCard.Title title={event.title} />
-                    <EventCard.Hoster hoster={"João Paulo II"} />
+                    <EventCard.Hoster hoster={event.host} />
 
                     <EventCard.Location
                       location={event.place[0].location}
@@ -116,10 +116,16 @@ export default function EventsAdmin({
 
                   <div className="flex flex-wrap justify-between mb-2 items-start">
                     <EventCard.Category category={event.category} />
-                    <EventCard.Date
-                      dateStart={event.date_start}
-                      dateEnd={event.date_end}
-                    />
+                    <div>
+                      {Object.values(event.date).map((date) => {
+                        return (
+                          <EventCard.Date
+                            dateStart={date?.start}
+                            dateEnd={date?.end}
+                          />
+                        );
+                      })}
+                    </div>
                   </div>
                   <EventCard.Capacity
                     capacity={

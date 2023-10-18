@@ -36,17 +36,16 @@ export default function AddPlaceForms({ Token }: { Token: string }) {
   });
 
   async function addPlace(data: CreateAddPlaces) {
-    console.log("teste");
     const { url_location, location, capacity } = data;
     const formData = new URLSearchParams();
+    var aux_equipaments = equipaments;
     formData.append("url_location", url_location);
     formData.append("location", location);
-    equipaments.forEach((elem) => {
-      if (elem) {
-        formData.append("equipaments", elem);
-      }
-    });
     formData.append("capacity", capacity.toString());
+    if (currentEquipament.value != "") {
+      aux_equipaments.push(currentEquipament.value);
+    }
+    formData.append("equipament", aux_equipaments.toString());
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -64,6 +63,11 @@ export default function AddPlaceForms({ Token }: { Token: string }) {
       console.log(error);
     } finally {
       reset();
+      setEquipaments([]);
+      setCurrentEquipament({
+        value: "",
+        error: "",
+      });
     }
   }
   return (

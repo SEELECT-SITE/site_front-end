@@ -15,6 +15,8 @@ import { SvgCardLine } from "@/components/PriceCard";
 import { MdClose } from "react-icons/md";
 import { DJANGO_URL } from "@/utils/consts";
 import getKitById from "@/utils/getKitsByID";
+import useUserboardState from "../userboardStore/PayKitModalStore";
+import isEventOverlap from "@/utils/isEventOverlap";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -24,14 +26,16 @@ interface SelectEventsModalProps {
 }
 
 export default function SelectEventsModal({
-  className,
-  children,
   user,
   sessionUpdate,
 }: SelectEventsModalProps) {
-  const { setIsSelectEventOpen, selectedKit } = useSelectEventsState();
+  const { setIsSelectEventOpen } = useSelectEventsState();
   const [selectEvents, setSelectEvents] = useState<number[]>([]);
-  const [workshopSelect, setWorkshopSelect] = useState<number>();
+  const [eventTimes, setEventTimes] = useState<any[]>([]);
+  const { kitsValues } = useUserboardState();
+  const [numberOfSelectWorkshops, setNumberOfSelectWorkshops] =
+    useState<number>(0);
+  const kitModelId = user?.kit?.model ? user.kit.model - 1 : 0;
   const { data: events, isLoading } = useQuery<any | undefined>(
     "userEvents",
     async () => {
@@ -43,7 +47,13 @@ export default function SelectEventsModal({
         const { data } = await axios.get(`${DJANGO_URL}api/events/`, {
           headers,
         });
-        return data.results;
+        var aux = data.results;
+
+        aux.sort(
+          (a: any, b: any) =>
+            new Date(a.date["0"].start) - new Date(b.date["0"].start)
+        );
+        return aux;
       } catch (error) {
         console.log(error);
       }
@@ -51,12 +61,25 @@ export default function SelectEventsModal({
     { refetchOnWindowFocus: false }
   );
 
-  function toogleElements(id: number) {
+  useEffect(() => {
+    setSelectEvents([]);
+  }, []);
+
+  function toogleElements(id: number, dates: any[]) {
     if (selectEvents.includes(id)) {
       setSelectEvents(removeElem(selectEvents, id));
-    } else {
+      var newVector = eventTimes.filter((date) => {
+        return date.toString() !== dates.toString();
+      });
+      console.log(newVector);
+      setEventTimes(newVector);
+    } else if (!isEventOverlap(eventTimes, dates)) {
+      console.log(isEventOverlap(eventTimes, dates));
+
       selectEvents.push(id);
       setSelectEvents(selectEvents);
+      eventTimes.push(dates);
+      setEventTimes(eventTimes);
     }
   }
 
@@ -80,7 +103,7 @@ export default function SelectEventsModal({
         );
       } else {
         formData.append("user", user.id as string);
-        formData.append("model", selectedKit.id.toString());
+        formData.append("model", kitsValues[kitModelId].id.toString());
         await axios.post(`${DJANGO_URL}api/kits/`, formData.toString(), {
           headers,
         });
@@ -93,8 +116,8 @@ export default function SelectEventsModal({
   }
 
   return (
-    <div className="fixed w-full min-h-full overflow-y-scroll top-0 left-0 p-4 bg-white text-dark z-10">
-      <div className="w-full relative pb-20">
+    <div className="fixed w-full h-screen overflow-y-scroll  top-0 left-0 p-4 bg-white text-dark z-10">
+      <div className=" overflow-hidden relative pb-20">
         <Container>
           <button
             onClick={(e) => setIsSelectEventOpen(false)}
@@ -106,23 +129,24 @@ export default function SelectEventsModal({
           <Title className="border-l-2 pl-2 border-cian-700">
             Eventos disponiveis
           </Title>
+          <Text className="underline inline-flex bg-dark rounded-md shadow-md text-white p-1">
+            {kitsValues[kitModelId].model} está selecionado
+          </Text>
           <div>
-            {user?.kit?.id ? getKitById(user.kit.id) : selectedKit.model} está
-            selecionado
-          </div>
-          <div>
-            <Text>Você tem direito a</Text>
+            <Text className="Font-bold">Você tem direito a:</Text>
             <ul>
               {[
-                selectedKit.all_speeches
+                kitsValues[kitModelId].all_speeches
                   ? "Todas as Palestras"
                   : "Palestra patrocinadas + 1 palestra",
-                selectedKit.workshops
-                  ? `${selectedKit.workshops} Minicursos/Workshop`
+                kitsValues[kitModelId].workshops
+                  ? `${kitsValues[kitModelId].workshops} Minicursos/Workshop`
                   : "",
-                selectedKit.bucks_coup ? "Um copo Buck's Exclusivo" : "",
+                kitsValues[kitModelId].bucks_coup
+                  ? "Um copo Buck's Exclusivo"
+                  : "",
               ].map((elem) => {
-                return <li>{elem}</li>;
+                return <li className="flex">{elem}</li>;
               })}
             </ul>
           </div>
@@ -130,6 +154,9 @@ export default function SelectEventsModal({
         <div className="fixed z-20 left-0 bottom-0 w-full">
           <Container className="flex justify-end">
             <FloatButton
+              disabled={
+                numberOfSelectWorkshops != kitsValues[kitModelId].workshops
+              }
               onClick={updateEvents}
               className="border border-slate-400"
               shadowClassname="w-full lg:w-auto"
@@ -141,12 +168,31 @@ export default function SelectEventsModal({
         <Container className="w-full">
           <div className=" flex-wrap gap-y-3 lg:gap-4 flex text-white relative justify-around">
             {events?.map((event: any, index: number) => {
+              const eventDates = Object.values(event.date).map((date) => {
+                return [date?.start, date?.end];
+              });
               return (
                 <EventCard.Body
+                  disable={
+                    (numberOfSelectWorkshops >=
+                      kitsValues[kitModelId].workshops &&
+                      !selectEvents.includes(event.id) &&
+                      ["workshop", "minicurso"].includes(event.category)) ||
+                    (isEventOverlap(eventTimes, eventDates) &&
+                      !selectEvents.includes(event.id))
+                  }
                   key={event.title + index}
                   id={event.title + index}
                   onClick={() => {
-                    toogleElements(event.id);
+                    console.log(eventDates);
+                    toogleElements(event.id, eventDates);
+                    if (["workshop", "minicurso"].includes(event.category)) {
+                      if (selectEvents.includes(event.id)) {
+                        setNumberOfSelectWorkshops((value) => value - 1);
+                      } else {
+                        setNumberOfSelectWorkshops((value) => value + 1);
+                      }
+                    }
                   }}
                   capacity={
                     event.max_number_of_inscriptions -
@@ -156,7 +202,7 @@ export default function SelectEventsModal({
                 >
                   <div>
                     <EventCard.Title title={event.title} />
-                    <EventCard.Hoster hoster={event.hoster || "putz"} />
+                    <EventCard.Hoster hoster={event.host} />
 
                     <EventCard.Location
                       location={event.place[0].location}
@@ -167,8 +213,10 @@ export default function SelectEventsModal({
                     </div>
 
                     <EventCard.Description
+                      className="line-clamp-2 text-ellipsis  hover:line-clamp-none"
                       description={
-                        "Lorem ipsum dolor sit amet. Ut vero quidem et unde corrupti aut quaerat voluptatem? 33 numquam provident ab aperiam fuga ea dolores sunt rem blanditiis libero est alias architecto ex consequatur sunt"
+                        "Lorem ipsum dolor sit amet. Ut vero quidem et unde corrupti aut quaerat voluptatem? 33 numquam provident ab aperiam fuga ea dolores sunt rem blanditiis libero est alias architecto ex consequatur sunt" +
+                        event.description
                       }
                     />
                   </div>
@@ -176,10 +224,16 @@ export default function SelectEventsModal({
                   <div>
                     <div className="flex flex-wrap justify-between mb-2 items-start gap-2">
                       <EventCard.Category category={event.category} />
-                      <EventCard.Date
-                        dateStart={event.date_start}
-                        dateEnd={event.date_end}
-                      />
+                      <div>
+                        {Object.values(event.date).map((date) => {
+                          return (
+                            <EventCard.Date
+                              dateStart={date?.start}
+                              dateEnd={date?.end}
+                            />
+                          );
+                        })}
+                      </div>
                     </div>
                     <EventCard.Capacity
                       capacity={
