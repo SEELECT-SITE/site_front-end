@@ -11,9 +11,16 @@ export default function EventCardDescription({
   className?: string;
 }) {
   return (
-    <div className="py-3">
+    <div className="py-3 group">
       <b>Descrição</b>
-      <Text className={twMerge("font-thin", className)}>{description}</Text>
+      <Text
+        className={twMerge(
+          "font-thin w-full whitespace-pre-wrap line-clamp-2 group-hover:line-clamp-none",
+          className
+        )}
+      >
+        {description}
+      </Text>
     </div>
   );
 }

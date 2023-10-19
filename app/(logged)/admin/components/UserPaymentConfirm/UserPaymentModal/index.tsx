@@ -18,7 +18,7 @@ export default function UserPaymentModal({
   triggerFn: Function;
 }) {
   const divConfirmPayment = useRef<HTMLDivElement | null>(null);
-  const { setIsUserPayModalOpen, userKitModelPrice, userID, userKitID } =
+  const { setIsUserPayModalOpen, userKitModel, userID, userKitID } =
     useUserPaymentStore();
   const { setIsAlertAdminOpen, setAlertMsg } = useAlertAdminState();
 
@@ -53,8 +53,9 @@ export default function UserPaymentModal({
       >
         <div className="flex flex-col justify-between relative overflow-hidden bg-white rounded-md max-w-md z-10 p-4">
           <Text className="text-dark">
-            Dejesa confirmar o pagamento de {formatCurrency(userKitModelPrice)}{" "}
-            para o usúario de ID {userID}?
+            Dejesa confirmar o pagamento de{" "}
+            {formatCurrency(userKitModel?.price ?? 25)} para o usúario de ID{" "}
+            {userID}?
           </Text>
           <div className=" my-4 flex flex-wrap">
             <SmallText>Clique duas vezes pra confirmar o pagamento</SmallText>

@@ -37,7 +37,7 @@ export default function DeleteModal({
       Token: token,
     };
     try {
-      await axios.delete(`${DJANGO_URL}api/events/${eventDeleteID}`, {
+      await axios.delete(`${DJANGO_URL}api/events/${eventDeleteID}/`, {
         headers,
       });
     } catch (e) {
@@ -68,15 +68,13 @@ export default function DeleteModal({
               onDoubleClick={async (e) => {
                 try {
                   await deleteEvent();
+                  setIsAlertAdminOpen(true);
                   triggerFn();
                   setAlertMsg("Evento deletado");
-                  setIsAlertAdminOpen(true);
-
                   setIsDeleteModalOpen(false);
                 } catch (e) {
                   setAlertMsg("Erro Inesperado");
                   setIsAlertAdminOpen(true);
-
                   setIsDeleteModalOpen(false);
                 } finally {
                   setTimeout(() => {

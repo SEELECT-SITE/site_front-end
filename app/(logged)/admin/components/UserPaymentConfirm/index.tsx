@@ -28,16 +28,15 @@ export default function UserPaymentConfirm({
   children,
   user,
 }: UserPaymentConfirmProps) {
-  const [isEventsOpen, setIsEventsOpen] = useState<boolean>(false);
+  const [isPaymentOpen, setIsPaymentOpen] = useState<boolean>(false);
   const {
     setIsUserPayModalOpen,
     setUserID,
     isUserPayModalOpen,
-    setUserKitModelPrice,
+    setUserKitModel,
     setUserKitID,
   } = useUserPaymentStore();
 
-  const {} = useDeleteModalState();
   const {
     data: usersPayment,
     isLoading,
@@ -68,40 +67,53 @@ export default function UserPaymentConfirm({
         <UserPaymentModal triggerFn={refetch} token={user.token} />
       )}
       <Container className="flex gap-4 items-center">
-        <Title>Eventos</Title>
+        <Title>Usuarios Pagantes</Title>
         <FloatButton
           className="flex duration-100 p-1"
           shadowClassname="my-0"
           onClick={(e) => {
-            setIsEventsOpen(!isEventsOpen);
+            setIsPaymentOpen(!isPaymentOpen);
           }}
         >
-          {isEventsOpen ? (
+          {isPaymentOpen ? (
             <>
               Fechar <MdClose />
             </>
           ) : (
             <>
-              Ver eventos <HiPencilAlt size={18} />
+              Ver pagamentos <HiPencilAlt size={18} />
             </>
           )}
         </FloatButton>
       </Container>
 
       <div className="w-full relative pb-20 ">
-        <Container className="">
-          {usersPayment?.map((kit: any, index: number) => {
-            if (kit.model_detail.id == 1) return;
-            return (
-              <div
-                className="bg-white p-1 gap-1 rounded-lg text-dark flex flex-wrap my-4 justify-between"
-                key={index + kit.user * index}
-              >
-                <Text>userID: {kit.user}</Text>
-                <Text>{kit.model_detail.model}</Text>
-                <Text>
+        {isPaymentOpen && (
+          <Container className="">
+            {usersPayment?.map((kit: any, index: number) => {
+              if (kit.model_detail.id == 1) return;
+              return (
+                <div
+                  className="bg-white p-1 gap-1 rounded-lg text-dark flex flex-wrap my-4 justify-between"
+                  key={index + kit.user * index}
+                >
+                  <Text>userID: {kit.user}</Text>
+                  <Text>{kit.model_detail.model}</Text>
                   {kit.is_payed ? (
-                    <div>Pagamento confirmado</div>
+                    <div className="bg-slate-800 text-orange-400 p-1 rounded-md">
+                      Pagamento Confirmado. Trocar estado de pagamento?
+                      <button
+                        className="bg-white text-green-700 rounded px-1 hover:bg-slate-300"
+                        onClick={(e) => {
+                          setIsUserPayModalOpen(true);
+                          setUserID(kit.user);
+                          setUserKitModel(kit.model_detail);
+                          setUserKitID(kit.id);
+                        }}
+                      >
+                        Trocar
+                      </button>
+                    </div>
                   ) : (
                     <div className="bg-slate-800 text-orange-400 p-1 rounded-md">
                       Pagamento pendente. Confirmar pagamento?{" "}
@@ -110,7 +122,7 @@ export default function UserPaymentConfirm({
                         onClick={(e) => {
                           setIsUserPayModalOpen(true);
                           setUserID(kit.user);
-                          setUserKitModelPrice(kit.model_detail.price);
+                          setUserKitModel(kit.model_detail);
                           setUserKitID(kit.id);
                         }}
                       >
@@ -118,11 +130,11 @@ export default function UserPaymentConfirm({
                       </button>
                     </div>
                   )}
-                </Text>
-              </div>
-            );
-          })}
-        </Container>
+                </div>
+              );
+            })}
+          </Container>
+        )}
       </div>
     </>
   );

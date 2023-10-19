@@ -21,6 +21,7 @@ function Admin({
   sessionUpdate: any;
 }) {
   const { user } = session;
+  console.log(user?.token);
   const { isAlertAdminOpen, alertMsg } = useAlertAdminState();
   return (
     <main>

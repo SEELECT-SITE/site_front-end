@@ -1,3 +1,4 @@
+import { Kit } from "@/pages/api/auth/nextauth";
 import { create } from "zustand";
 
 type deleteModalProp = {
@@ -7,8 +8,8 @@ type deleteModalProp = {
   setUserID: (update: number) => void;
   userKitID: number;
   setUserKitID: (update: number) => void;
-  userKitModelPrice: number;
-  setUserKitModelPrice: (update: number) => void;
+  userKitModel: any;
+  setUserKitModel: (update: any) => void;
 };
 
 const useUserPaymentStore = create<deleteModalProp>((set) => ({
@@ -24,9 +25,9 @@ const useUserPaymentStore = create<deleteModalProp>((set) => ({
   setUserKitID: (update: number) => {
     set((state) => ({ userKitID: update }));
   },
-  userKitModelPrice: 0,
-  setUserKitModelPrice: (update: number) => {
-    set((state) => ({ userKitModelPrice: update }));
+  userKitModel: null,
+  setUserKitModel: (update: any) => {
+    set((state) => ({ userKitModel: update }));
   },
 }));
 
