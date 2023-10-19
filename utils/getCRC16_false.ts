@@ -26,7 +26,7 @@ export default function getCRC16_false(
     if (aux_2[i]) {
       correct_vector.push(`${aux_2[i]}`);
     } else {
-      correct_vector.push("0");
+      correct_vector.unshift("0");
     }
   }
   return correct_vector.join("");

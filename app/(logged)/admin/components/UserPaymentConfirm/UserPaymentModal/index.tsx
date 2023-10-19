@@ -23,17 +23,18 @@ export default function UserPaymentModal({
   const { setIsAlertAdminOpen, setAlertMsg } = useAlertAdminState();
 
   async function ConfirmPayment() {
-    const formData = new URLSearchParams();
-    formData.append("is_payed", "true");
-
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       Token: token,
     };
     try {
-      await axios.post(`${DJANGO_URL}api/kits/${userKitID}/confirm_payment/`, {
-        headers,
-      });
+      await axios.post(
+        `${DJANGO_URL}api/kits/${userKitID}/confirm_payment/`,
+        "",
+        {
+          headers,
+        }
+      );
     } catch (e) {
       console.log(e);
     }

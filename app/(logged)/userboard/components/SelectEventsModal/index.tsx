@@ -79,7 +79,6 @@ export default function SelectEventsModal({
     } else if (!isEventOverlap(eventTimes, dates)) {
       eventTimes.push(dates);
       setEventTimes(eventTimes);
-      console.log(eventTimes[0], dates);
       selectEvents.push(id);
       setSelectEvents(selectEvents);
     }
@@ -89,7 +88,7 @@ export default function SelectEventsModal({
     const model = user.kit?.model;
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
-      Token: user?.token,
+      Token: user.token,
     };
     const formData = new URLSearchParams();
     selectEvents?.forEach((elem) => {
@@ -196,7 +195,6 @@ export default function SelectEventsModal({
                   key={"eventoid" + event.id + index}
                   id={"eventoid" + event.id + index}
                   onClick={() => {
-                    console.log(numberOfSelectWorkshops);
                     if (["workshop", "minicurso"].includes(event.category)) {
                       if (selectEvents.includes(event.id)) {
                         setNumberOfSelectWorkshops((value) => value - 1);

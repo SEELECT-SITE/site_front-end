@@ -8,10 +8,10 @@ export default function isEventOverlap(
       const [horarioInicio, horarioFim] = horarioNovoEvento;
 
       if (
-        (horarioInicio > eventoInicio && horarioInicio < eventoFim) ||
-        (horarioFim > eventoInicio && horarioFim < eventoFim) ||
-        (horarioFim < eventoFim && horarioInicio > eventoInicio) ||
-        (horarioFim > eventoFim && horarioInicio < eventoInicio)
+        (horarioInicio >= eventoInicio && horarioInicio <= eventoFim) ||
+        (horarioFim >= eventoInicio && horarioFim <= eventoFim) ||
+        (horarioFim <= eventoFim && horarioInicio >= eventoInicio) ||
+        (horarioFim >= eventoFim && horarioInicio <= eventoInicio)
       ) {
         return true; // O novo evento está entre os horários de um evento existente
       }

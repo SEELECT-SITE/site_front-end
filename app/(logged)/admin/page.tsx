@@ -22,7 +22,6 @@ function Admin({
 }) {
   const { user } = session;
   const { isAlertAdminOpen, alertMsg } = useAlertAdminState();
-  console.log(user?.token);
   return (
     <main>
       {isAlertAdminOpen && (

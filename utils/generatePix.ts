@@ -7,7 +7,7 @@ export default function generatePix(
   value: string,
   identificador: string
 ): string {
-  const pixPayload = `00020126${22 + codePix.length}0014br.gov.bcb.pix01${
+  const pixPayload = `00020126${22 + codePix.length}0014BR.GOV.BCB.PIX01${
     codePix.length <= 9 ? "0" + codePix.length : codePix.length
   }${codePix}52040000530398654${
     value.length <= 9 ? "0" + value.length : value.length

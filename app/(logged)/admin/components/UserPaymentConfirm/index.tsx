@@ -91,11 +91,11 @@ export default function UserPaymentConfirm({
       <div className="w-full relative pb-20 ">
         <Container className="">
           {usersPayment?.map((kit: any, index: number) => {
-            if (kit.model_detail.id == 1) return <></>;
+            if (kit.model_detail.id == 1) return;
             return (
               <div
                 className="bg-white p-1 gap-1 rounded-lg text-dark flex flex-wrap my-4 justify-between"
-                key={index + kit.user}
+                key={index + kit.user * index}
               >
                 <Text>userID: {kit.user}</Text>
                 <Text>{kit.model_detail.model}</Text>

@@ -20,7 +20,7 @@ interface PayKitModalProps {
 export default function PayKitModal({ user }: PayKitModalProps) {
   const divPayKit = useRef<HTMLDivElement | null>(null);
   const { setIsPayKitModalOpen } = usePayKitState();
-
+  //@ts-ignore
   const value = formatCurrency(user.kit?.model_detail.price)
     .replace(",", ".")
     .slice(3);
@@ -30,7 +30,7 @@ export default function PayKitModal({ user }: PayKitModalProps) {
     "Maria Augusta Simonetti",
     "Fortaleza",
     value ?? "25.00",
-    `ID${user.id}Kit${user.kit.model}`
+    `ID${user.id}Kit${user?.kit!.model}`
   );
   const descont = user.descont ?? 0.0;
   return (
