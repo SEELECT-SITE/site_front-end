@@ -18,16 +18,30 @@ export interface EventProps {
   hostedBy: string;
   date: number;
   location: { name: string; url: string };
-  tipo: string;
   description: string;
-  max_inscriptions: number;
-  inscriptions: number;
+
+  id: number;
+  host: string;
+  number_of_inscriptions: number;
+  max_number_of_inscriptions: number;
+  date: any;
+  description: "";
+  place: any;
 }
 
 type Kit = {
   id: number;
-  is_payded: boolean;
-  model: string;
+  is_payed: boolean;
+  model: number;
+  model_detail: {
+    id: number;
+    model: string;
+    price: 25;
+    all_speeches: boolean;
+    workshops: number;
+    bucks_coup: boolean;
+    description: string;
+  };
   events: any[];
 };
 

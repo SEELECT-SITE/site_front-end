@@ -20,23 +20,17 @@ interface PayKitModalProps {
 export default function PayKitModal({ user }: PayKitModalProps) {
   const divPayKit = useRef<HTMLDivElement | null>(null);
   const { setIsPayKitModalOpen } = usePayKitState();
-  const getValue = () => {
-    switch (user?.kit?.model) {
-      case "Kit Básico":
-        return "10";
-      case "Kit Médio":
-        return "15";
-      default:
-        return "20";
-    }
-  };
-  const value = getValue();
+
+  const value = formatCurrency(user.kit?.model_detail.price)
+    .replace(",", ".")
+    .slice(3);
+
   const pixCode = generatePix(
     "seelect@ufc.br",
     "Maria Augusta Simonetti",
     "Fortaleza",
-    value,
-    user?.id!
+    value ?? "25.00",
+    `ID${user.id}Kit${user.kit.model}`
   );
   const descont = user.descont ?? 0.0;
   return (

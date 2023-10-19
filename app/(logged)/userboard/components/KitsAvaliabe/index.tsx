@@ -55,7 +55,7 @@ export default function KitsAvaliable({ title }: { title?: boolean }) {
                 stars={kit.id - 1}
                 onClick={() => {
                   setIsSelectEventOpen(true);
-                  setSelectedKit(kit);
+                  setSelectedKit(kit.id);
                 }}
                 price={kit.price}
                 destack={kit.id == 4}

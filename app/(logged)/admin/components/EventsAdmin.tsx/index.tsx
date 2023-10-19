@@ -120,7 +120,9 @@ export default function EventsAdmin({
                       {Object.values(event.date).map((date) => {
                         return (
                           <EventCard.Date
+                            //@ts-ignore
                             dateStart={date?.start}
+                            //@ts-ignore
                             dateEnd={date?.end}
                           />
                         );

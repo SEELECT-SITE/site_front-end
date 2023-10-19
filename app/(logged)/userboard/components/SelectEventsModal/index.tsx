@@ -1,8 +1,7 @@
 "use client";
-import { twMerge } from "tailwind-merge";
 import { ReactNode, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { Session, User } from "next-auth";
+import { User } from "next-auth";
 import axios from "axios";
 import EventCard from "@/components/SECTIONS/Cronograma/EventsCard";
 import removeElem from "@/utils/removeElem";
@@ -14,9 +13,9 @@ import Container from "@/components/Container";
 import { SvgCardLine } from "@/components/PriceCard";
 import { MdClose } from "react-icons/md";
 import { DJANGO_URL } from "@/utils/consts";
-import getKitById from "@/utils/getKitsByID";
 import useUserboardState from "../userboardStore/PayKitModalStore";
 import isEventOverlap from "@/utils/isEventOverlap";
+import SkeletonCreator from "@/components/SkeletonCreator";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -29,13 +28,15 @@ export default function SelectEventsModal({
   user,
   sessionUpdate,
 }: SelectEventsModalProps) {
-  const { setIsSelectEventOpen } = useSelectEventsState();
+  const { setIsSelectEventOpen, selectedKit } = useSelectEventsState();
   const [selectEvents, setSelectEvents] = useState<number[]>([]);
   const [eventTimes, setEventTimes] = useState<any[]>([]);
   const { kitsValues } = useUserboardState();
   const [numberOfSelectWorkshops, setNumberOfSelectWorkshops] =
     useState<number>(0);
-  const kitModelId = user?.kit?.model ? user.kit.model - 1 : 0;
+  //@ts-ignore
+
+  const kitModelId = user?.kit?.model ? user.kit.model - 1 : selectedKit - 1;
   const { data: events, isLoading } = useQuery<any | undefined>(
     "userEvents",
     async () => {
@@ -51,6 +52,8 @@ export default function SelectEventsModal({
 
         aux.sort(
           (a: any, b: any) =>
+            //@ts-ignore
+
             new Date(a.date["0"].start) - new Date(b.date["0"].start)
         );
         return aux;
@@ -63,23 +66,22 @@ export default function SelectEventsModal({
 
   useEffect(() => {
     setSelectEvents([]);
+    setNumberOfSelectWorkshops(0);
   }, []);
 
   function toogleElements(id: number, dates: any[]) {
     if (selectEvents.includes(id)) {
-      setSelectEvents(removeElem(selectEvents, id));
       var newVector = eventTimes.filter((date) => {
         return date.toString() !== dates.toString();
       });
-      console.log(newVector);
       setEventTimes(newVector);
+      setSelectEvents(removeElem(selectEvents, id));
     } else if (!isEventOverlap(eventTimes, dates)) {
-      console.log(isEventOverlap(eventTimes, dates));
-
-      selectEvents.push(id);
-      setSelectEvents(selectEvents);
       eventTimes.push(dates);
       setEventTimes(eventTimes);
+      console.log(eventTimes[0], dates);
+      selectEvents.push(id);
+      setSelectEvents(selectEvents);
     }
   }
 
@@ -95,7 +97,7 @@ export default function SelectEventsModal({
     });
     try {
       if (user.kit?.id) {
-        formData.append("model", model as string);
+        formData.append("model", model!.toString());
         await axios.put(
           `${DJANGO_URL}api/kits/${user.kit.id}/`,
           formData.toString(),
@@ -169,23 +171,32 @@ export default function SelectEventsModal({
           <div className=" flex-wrap gap-y-3 lg:gap-4 flex text-white relative justify-around">
             {events?.map((event: any, index: number) => {
               const eventDates = Object.values(event.date).map((date) => {
+                //@ts-ignore
+
                 return [date?.start, date?.end];
               });
+              function isDisable() {
+                if (!selectEvents.includes(event.id)) {
+                  if (
+                    numberOfSelectWorkshops >=
+                      kitsValues[kitModelId].workshops &&
+                    ["workshop", "minicurso"].includes(event.category)
+                  ) {
+                    return true;
+                  } else if (isEventOverlap(eventTimes, eventDates)) {
+                    return true;
+                  }
+                  return false;
+                }
+              }
+
               return (
                 <EventCard.Body
-                  disable={
-                    (numberOfSelectWorkshops >=
-                      kitsValues[kitModelId].workshops &&
-                      !selectEvents.includes(event.id) &&
-                      ["workshop", "minicurso"].includes(event.category)) ||
-                    (isEventOverlap(eventTimes, eventDates) &&
-                      !selectEvents.includes(event.id))
-                  }
-                  key={event.title + index}
-                  id={event.title + index}
+                  disable={isDisable()}
+                  key={"eventoid" + event.id + index}
+                  id={"eventoid" + event.id + index}
                   onClick={() => {
-                    console.log(eventDates);
-                    toogleElements(event.id, eventDates);
+                    console.log(numberOfSelectWorkshops);
                     if (["workshop", "minicurso"].includes(event.category)) {
                       if (selectEvents.includes(event.id)) {
                         setNumberOfSelectWorkshops((value) => value - 1);
@@ -193,6 +204,7 @@ export default function SelectEventsModal({
                         setNumberOfSelectWorkshops((value) => value + 1);
                       }
                     }
+                    toogleElements(event.id, eventDates);
                   }}
                   capacity={
                     event.max_number_of_inscriptions -
@@ -228,7 +240,11 @@ export default function SelectEventsModal({
                         {Object.values(event.date).map((date) => {
                           return (
                             <EventCard.Date
+                              //@ts-ignore
+
                               dateStart={date?.start}
+                              //@ts-ignore
+
                               dateEnd={date?.end}
                             />
                           );

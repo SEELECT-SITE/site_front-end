@@ -12,16 +12,33 @@ import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import Title from "@/components/Title";
 import Button from "@/components/Button";
 import getKitById from "@/utils/getKitsByID";
+import useUserboardState from "../userboardStore/PayKitModalStore";
 
 export default function UserKitArea({ user }: { user: User }) {
   const { isPayKitModalOpen, setIsPayKitModalOpen } = usePayKitState();
+  const { kitsValues } = useUserboardState();
+  console.log(user.kit?.is_payed);
   return (
     <>
-      {!user?.kit?.is_payded && (
+      <Title className="border-l-2 border-cian-400 pl-2">
+        {kitsValues != "" && kitsValues[user?.kit?.model! - 1 ?? 1].model}
+      </Title>
+      <Text className="Font-bold">Você tem direito a:</Text>
+      <ul>
+        {[
+          user.kit?.model_detail.all_speeches
+            ? "Todas as Palestras"
+            : "Palestra patrocinadas + 1 palestra",
+          user.kit?.model_detail.workshops
+            ? `${user.kit?.model_detail.workshops} Minicursos/Workshop`
+            : "",
+          user.kit?.model_detail.bucks_coup ? "Um copo Buck's Exclusivo" : "",
+        ].map((elem) => {
+          return <li className="flex">{elem}</li>;
+        })}
+      </ul>
+      {!user?.kit?.is_payed && (
         <div className="pb-8">
-          <Title className="border-l-2 border-cian-400 pl-2">
-            {getKitById(user?.kit?.model)}
-          </Title>
           <div className="my-4 flex justify-between items-center p-3 bg-slate-800 rounded-md max-w-md ">
             <Text className="flex items-center  text-red-400 text-sm">
               <RiMoneyDollarCircleLine size={22} />

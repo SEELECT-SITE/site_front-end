@@ -55,9 +55,10 @@ function Cronograma() {
                     location={event.place[0].location}
                     url_location={event.place[0].url_location}
                   />
-                  <div className="animate-pulse bg-dark">
+                  <div className="animate-pulse">
                     <SvgCardLine color="#ffffff" opacity="1" />
                   </div>
+                  <EventCard.Description description={event.description} />
 
                   <EventCard.Capacity
                     capacity={
@@ -67,13 +68,15 @@ function Cronograma() {
                   />
                 </div>
 
-                <div>
-                  <div className="flex flex-wrap justify-between mb-2 items-start">
-                    <EventCard.Category category={event.category} />
+                <div className="flex flex-wrap justify-between mb-2 items-start">
+                  <EventCard.Category category={event.category} />
+                  <div>
                     {Object.values(event.date).map((date) => {
                       return (
                         <EventCard.Date
+                          //@ts-ignore
                           dateStart={date?.start}
+                          //@ts-ignore
                           dateEnd={date?.end}
                         />
                       );

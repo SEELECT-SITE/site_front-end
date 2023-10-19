@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import EventsAdmin from "./components/EventsAdmin.tsx";
 import Alert from "@/components/Alert";
 import useAlertAdminState from "./components/alertAdminStore";
+import UserPaymentConfirm from "./components/UserPaymentConfirm";
 function Admin({
   session,
   sessionUpdate,
@@ -20,9 +21,8 @@ function Admin({
   sessionUpdate: any;
 }) {
   const { user } = session;
-
   const { isAlertAdminOpen, alertMsg } = useAlertAdminState();
-
+  console.log(user?.token);
   return (
     <main>
       {isAlertAdminOpen && (
@@ -44,6 +44,7 @@ function Admin({
       </Container>
 
       <EventsAdmin user={user!} />
+      <UserPaymentConfirm user={user!} />
     </main>
   );
 }

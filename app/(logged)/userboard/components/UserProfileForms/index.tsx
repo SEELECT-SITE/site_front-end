@@ -21,7 +21,7 @@ import validateCPF from "@/utils/validateCPF";
 const createUserProfileFormsSchema = z.object({
   first_name: z.string().nonempty("Preencha o campo"),
   last_name: z.string().nonempty("Preencha o campo"),
-  age: z.string().pipe(z.coerce.date()),
+  birthday: z.string().pipe(z.coerce.date()),
   ies: z.string().nonempty("Preencha o campo"),
   course: z.string().nonempty("Preencha o campo"),
   semester: z
@@ -60,14 +60,16 @@ export default function UserProfileForms({
   const { setIsUserFormsOpen } = useUserForms();
 
   async function updateProfile(data: CreateUserProfileData) {
-    const { last_name, first_name, ies, course, semester, age } = data;
+    const { last_name, first_name, ies, course, semester, birthday, cpf } =
+      data;
     const formData = new URLSearchParams();
     formData.append("last_name", last_name);
     formData.append("first_name", first_name);
     formData.append("ies", ies);
     formData.append("course", course);
     formData.append("semester", semester.toString());
-    formData.append("age", (18).toString());
+    //formData.append("birthday", birthday.toString());
+    formData.append("cpf", cpf);
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -118,10 +120,10 @@ export default function UserProfileForms({
           <Input
             defaultValue={user.name?.split(" ")[1] || ""}
             placeholder="Data de nascimento"
-            errorMsg={errors.age?.message as string}
+            errorMsg={errors.birthday?.message as string}
             type="date"
             required
-            register={register("age")}
+            register={register("birthday")}
           />
 
           <SelectInput

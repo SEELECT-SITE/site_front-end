@@ -5,7 +5,7 @@ export default function generatePix(
   name: string,
   city: string,
   value: string,
-  id: string
+  identificador: string
 ): string {
   const pixPayload = `00020126${22 + codePix.length}0014br.gov.bcb.pix01${
     codePix.length <= 9 ? "0" + codePix.length : codePix.length
@@ -14,12 +14,12 @@ export default function generatePix(
   }${value}5802BR59${
     name.length <= 9 ? "0" + name.length : name.length
   }${name}60${city.length <= 9 ? "0" + city.length : city.length}${city}62${
-    ("0500userID" + id).length
+    ("0500" + identificador).length
   }05${
-    ("userID" + id).length <= 9
-      ? "0" + ("userID" + id).length
-      : ("userID" + id).length
-  }userID${id}6304`;
+    identificador.length <= 9
+      ? "0" + identificador.length
+      : identificador.length
+  }${identificador}6304`;
 
   return pixPayload + getCRC16_false(pixPayload, 0, pixPayload.length);
 }

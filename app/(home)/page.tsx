@@ -2,6 +2,7 @@
 import PresentationSection from "@/components/SECTIONS/PresentationSection";
 import Image from "next/image";
 import techno_wave from "@/public/SVG/techno-wave.svg";
+import ball_deco from "@/public/SVG/elipse-deco.svg";
 import Parceiros from "@/components/SECTIONS/Parceiros";
 import Container from "@/components/Container";
 import Cronograma from "@/components/SECTIONS/Cronograma";
@@ -32,11 +33,18 @@ const Home = () => {
             <Cronograma />
           </Container>
 
-          <div className="absolute top-3/5 lg:top-2/3 left-0 w-2-full rotate-45 -z-10">
+          <div className="absolute h-full top-52 lg:to-32 -right-6 translate-x-1/2 w-2-full lg:w-1/2 lg:translate-x-1/4 grayscale -z-10">
+            <Image
+              src={ball_deco}
+              alt={"svg de decoração"}
+              className="w-full object-cover "
+            />
+          </div>
+          <div className="absolute top-3/5 lg:top-2/3 left-0 w-[400%] lg:w-2-full rotate-45 -z-10">
             <Image
               src={techno_wave}
               alt={"svg de decoração"}
-              className="w-full object-cover min-h-[1300px] -translate-x-1/2 lg:-translate-x-1/3"
+              className="w-full object-cover min-h-[1300px] -translate-x-2/3 lg:-translate-x-1/3"
             />
           </div>
           <Container className="w-full lg:py-32">

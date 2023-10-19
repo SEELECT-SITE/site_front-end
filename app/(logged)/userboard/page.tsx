@@ -12,7 +12,6 @@ import { useEffect } from "react";
 import SelectEventsModal from "./components/SelectEventsModal";
 import useSelectEventsState from "./components/SelectEventsModal/selectEventsStore";
 import Title from "@/components/Title";
-import PriceCard from "@/components/PriceCard";
 import useUserForms from "./components/UserProfileForms/userForms";
 import { MdClose } from "react-icons/md";
 import { HiPencilAlt } from "react-icons/hi";
@@ -21,6 +20,7 @@ import UserKitArea from "./components/UserKitArea";
 import BannerLogin from "@/app/(auth)/login/LoginSections/BannerSign";
 import KitsAvaliable from "./components/KitsAvaliabe";
 import useUserboardState from "./components/userboardStore/PayKitModalStore";
+import SkeletonCreator from "@/components/SkeletonCreator";
 
 function Userboard({
   session,
@@ -124,5 +124,26 @@ export default function UserboardPage() {
       </QueryClientProvider>
     );
   }
-  return <div>Carregando..</div>;
+  return (
+    <div>
+      <Container className="w-full p-4 bg-dark-cian">
+        <SkeletonCreator
+          quantity={1}
+          className="rounded-lg bg-slate-600 h-16 w-72"
+        />
+      </Container>
+      <Container className="bg-gradient-to-b from-dark to-dark-cian pb-20 overflow-hidden">
+        <SkeletonCreator
+          quantity={1}
+          className="rounded-lg bg-slate-600 h-16 w-72 my-12"
+        />
+        <div className="w-full flex flex-wrap justify-between gap-4">
+          <SkeletonCreator
+            quantity={6}
+            className="rounded-lg bg-slate-600 h-72 w-full max-w-md"
+          />
+        </div>
+      </Container>
+    </div>
+  );
 }

@@ -57,10 +57,20 @@ export default function UserEvents({ user }: { user: User }) {
               />
               <div className="flex flex-wrap justify-between mb-2 items-start gap-2">
                 <EventCard.Category category={event.category} />
-                <EventCard.Date
-                  dateStart={event.date_start}
-                  dateEnd={event.date_end}
-                />
+                <div>
+                  {Object.values(event.date).map((date) => {
+                    return (
+                      <EventCard.Date
+                        //@ts-ignore
+
+                        dateStart={date?.start}
+                        //@ts-ignore
+
+                        dateEnd={date?.end}
+                      />
+                    );
+                  })}
+                </div>
               </div>
             </EventCard.Body>
           );
