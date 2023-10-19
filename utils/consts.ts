@@ -1,4 +1,4 @@
-export const DJANGO_URL = "https://70ac-200-19-186-128.ngrok-free.app";
+export const DJANGO_URL = "https://70ac-200-19-186-128.ngrok-free.app/";
 
 export const IES_CEARA = [
   "Universidade Federal do Ceará (UFC)",
