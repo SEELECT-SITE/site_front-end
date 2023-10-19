@@ -108,14 +108,14 @@ export default function AddEventsForms({ Token }: { Token: string }) {
       Token: Token,
     };
     try {
-      /* await axios.post(`${DJANGO_URL}/api/events/`, formData.toString(), {
+      await axios.post(`${DJANGO_URL}/api/events/`, formData.toString(), {
         headers,
-      }); */
+      });
     } catch (error) {
       console.log(error);
     } finally {
-      /* setDates([]);
-      reset(); */
+      setDates([]);
+      reset();
     }
   }
 
