@@ -69,7 +69,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
   );
 
   async function addEvent(data: CreateAddEvents) {
-    const { category, title, place, host } = data;
+    const { category, title, place, host, descriptions } = data;
     setErrorReq("");
 
     if (dates.length % 2 != 0 || dates.length == 0) {
@@ -97,7 +97,9 @@ export default function AddEventsForms({ Token }: { Token: string }) {
     formData.append("place", place);
     formData.append("host", host);
     formData.append("max_number_of_inscriptions", [eventCapacity].toString());
+    formData.append("descriptions", descriptions);
     formData.append("date", eventDates);
+
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       Token: Token,

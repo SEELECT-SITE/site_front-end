@@ -32,7 +32,6 @@ function Userboard({
   const { user } = session;
   const { isSelectEventOpen } = useSelectEventsState();
   const { kitsValues, getKitsValues } = useUserboardState();
-
   const { isUserFormsOpen, setIsUserFormsOpen } = useUserForms();
   const hasUserName = user?.name !== " ";
 
