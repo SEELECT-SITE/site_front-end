@@ -26,7 +26,7 @@ const createAddEventsSchema = z.object({
   category: z.string().nonempty("Preencha o campo"),
   place: z.string().nonempty("Preencha o campo"),
   host: z.string().nonempty("Preencha o campo"),
-  descriptions: z.string().nonempty("Preencha o campo"),
+  description: z.string().nonempty("Preencha o campo"),
 });
 
 type CreateAddEvents = z.infer<typeof createAddEventsSchema>;
@@ -69,7 +69,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
   );
 
   async function addEvent(data: CreateAddEvents) {
-    const { category, title, place, host, descriptions } = data;
+    const { category, title, place, host, description } = data;
     setErrorReq("");
 
     if (dates.length % 2 != 0 || dates.length == 0) {
@@ -97,7 +97,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
     formData.append("place", place);
     formData.append("host", host);
     formData.append("max_number_of_inscriptions", [eventCapacity].toString());
-    formData.append("descriptions", descriptions);
+    formData.append("description", description);
     formData.append("date", eventDates);
 
     const headers = {
@@ -137,15 +137,15 @@ export default function AddEventsForms({ Token }: { Token: string }) {
           />
           <Input
             placeholder="Falicitadores (Ex:Manuel, Chico e Whindersson)"
-            errorMsg={errors.title?.message as string}
+            errorMsg={errors.host?.message as string}
             type="text"
             register={register("host")}
           />
           <Input
             placeholder="Descrição"
-            errorMsg={errors.title?.message as string}
+            errorMsg={errors.description?.message as string}
             type="text"
-            register={register("descriptions")}
+            register={register("description")}
           />
           <DatePicker
             buttonType="button"

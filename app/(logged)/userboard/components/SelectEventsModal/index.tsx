@@ -169,20 +169,26 @@ export default function SelectEventsModal({
         <Container className="w-full">
           <div className=" flex-wrap gap-y-3 lg:gap-4 flex text-white relative justify-around">
             {events?.map((event: any, index: number) => {
+              console.log(event.title.split("$")[1]);
               const eventDates = Object.values(event.date).map((date) => {
                 //@ts-ignore
 
                 return [date?.start, date?.end];
               });
+
               function isDisable() {
                 if (!selectEvents.includes(event.id)) {
+                  if (isEventOverlap(eventTimes, eventDates)) {
+                    return true;
+                  }
+                  if (event.title.split("$")[1] == "patrocinado") {
+                    return false;
+                  }
                   if (
                     numberOfSelectWorkshops >=
                       kitsValues[kitModelId].workshops &&
                     ["workshop", "minicurso"].includes(event.category)
                   ) {
-                    return true;
-                  } else if (isEventOverlap(eventTimes, eventDates)) {
                     return true;
                   }
                   return false;
@@ -211,7 +217,7 @@ export default function SelectEventsModal({
                   className="lg:py-12 relative justify-between flex flex-col"
                 >
                   <div>
-                    <EventCard.Title title={event.title} />
+                    <EventCard.Title title={event.title.split("$")[0]} />
                     <EventCard.Hoster hoster={event.host} />
 
                     <EventCard.Location
@@ -224,10 +230,7 @@ export default function SelectEventsModal({
 
                     <EventCard.Description
                       className="line-clamp-2 text-ellipsis  hover:line-clamp-none"
-                      description={
-                        "Lorem ipsum dolor sit amet. Ut vero quidem et unde corrupti aut quaerat voluptatem? 33 numquam provident ab aperiam fuga ea dolores sunt rem blanditiis libero est alias architecto ex consequatur sunt" +
-                        event.description
-                      }
+                      description={event.description}
                     />
                   </div>
 
