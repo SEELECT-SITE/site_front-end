@@ -18,7 +18,7 @@ const createLoginSchema = z.object({
     .nonempty("Insira um email"),
   password: z
     .string()
-    .min(8, "Senha invalida")
+    .min(6, "Senha invalida")
     .nonempty("O nome é obrigatorio"),
 });
 

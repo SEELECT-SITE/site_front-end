@@ -1,17 +1,32 @@
+import momento from "./formatDate";
+
 export default function isEventOverlap(
   novoEvento: any[],
   eventos: any[]
 ): boolean {
+  if (!eventos || !novoEvento) {
+    return false;
+  }
   for (const horarioNovoEvento of novoEvento) {
     for (const evento of eventos) {
-      const [eventoInicio, eventoFim] = evento;
-      const [horarioInicio, horarioFim] = horarioNovoEvento;
+      var [eventoInicio, eventoFim] = evento;
+      var [horarioInicio, horarioFim] = horarioNovoEvento;
+      eventoInicio = momento(eventoInicio);
+      eventoFim = momento(eventoFim);
+      horarioInicio = momento(horarioInicio);
+      horarioFim = momento(horarioFim);
+
+      if (eventoFim.isSame(horarioFim) && eventoInicio.isSame(horarioInicio)) {
+        return true;
+      }
+
+      eventoInicio.add("1", "minute");
+      horarioInicio.add("1", "minute");
 
       if (
-        (horarioInicio >= eventoInicio && horarioInicio <= eventoFim) ||
-        (horarioFim >= eventoInicio && horarioFim <= eventoFim) ||
-        (horarioFim <= eventoFim && horarioInicio >= eventoInicio) ||
-        (horarioFim >= eventoFim && horarioInicio <= eventoInicio)
+        (horarioInicio.isAfter(eventoInicio) &&
+          horarioInicio.isBefore(eventoFim)) ||
+        (horarioFim.isAfter(eventoInicio) && horarioFim.isBefore(eventoFim))
       ) {
         return true; // O novo evento está entre os horários de um evento existente
       }

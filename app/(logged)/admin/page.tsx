@@ -1,7 +1,5 @@
 "use client";
-import Button from "@/components/Button";
 import Container from "@/components/Container";
-import Input from "@/components/Input";
 import Title from "@/components/Title";
 import AddPlaceForms from "./components/AddPlacesForms";
 import AddEventsForms from "./components/AddEventsForms";
@@ -13,15 +11,8 @@ import EventsAdmin from "./components/EventsAdmin.tsx";
 import Alert from "@/components/Alert";
 import useAlertAdminState from "./components/alertAdminStore";
 import UserPaymentConfirm from "./components/UserPaymentConfirm";
-function Admin({
-  session,
-  sessionUpdate,
-}: {
-  session: Session;
-  sessionUpdate: any;
-}) {
+function Admin({ session }: { session: Session }) {
   const { user } = session;
-  console.log(user?.token);
   const { isAlertAdminOpen, alertMsg } = useAlertAdminState();
   return (
     <main>
@@ -54,7 +45,7 @@ export default function AdminPage() {
   if (session) {
     return (
       <QueryClientProvider client={queryClient}>
-        <Admin session={session} sessionUpdate={sessionUpdate} />
+        <Admin session={session} />
       </QueryClientProvider>
     );
   }

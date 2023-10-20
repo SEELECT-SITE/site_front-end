@@ -12,6 +12,7 @@ import { LuAlertCircle } from "react-icons/lu";
 import Image from "next/image";
 import squares_deco from "@/public/SVG/squares-deco.svg";
 import copyClipboard from "@/utils/copyClipboard";
+import useAlertAdminState from "@/app/(logged)/admin/components/alertAdminStore";
 
 interface PayKitModalProps {
   user: User;
@@ -19,12 +20,16 @@ interface PayKitModalProps {
 
 export default function PayKitModal({ user }: PayKitModalProps) {
   const divPayKit = useRef<HTMLDivElement | null>(null);
+  const [isPixCopied, setIsPixCopied] = useState<boolean>(false);
   const { setIsPayKitModalOpen } = usePayKitState();
   //@ts-ignore
-  const value = formatCurrency(user.kit?.model_detail.price)
+  const discount = user.kit?.discount ?? 0.0;
+  const value = formatCurrency(
+    user.kit?.model_detail.price! * (1 - discount / 100)
+  )
     .replace(",", ".")
     .slice(3);
-
+  console.log(value);
   const pixCode = generatePix(
     "seelect@ufc.br",
     "Maria Augusta Simonetti",
@@ -32,7 +37,7 @@ export default function PayKitModal({ user }: PayKitModalProps) {
     value ?? "25.00",
     `ID${user.id}Kit${user?.kit!.model}`
   );
-  const descont = user.descont ?? 0.0;
+
   return (
     <div
       onClick={(e) => {
@@ -47,12 +52,20 @@ export default function PayKitModal({ user }: PayKitModalProps) {
         <div className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 -z-10">
           <Image src={squares_deco} alt="decoration" />
         </div>
+        <div
+          className={`absolute w-full left-0 top-0 bg-slate-800 text-2xl py-3 text-white text-center rounded-b-lg border-2 border-slate-300 z-10 duration-200  ${
+            isPixCopied ? "-translate-y-1" : "-translate-y-full"
+          }`}
+        >
+          Código PIX Copiado
+        </div>
+
         <div className="bg-white/20 backdrop-blur-[2px] p-3">
           <div className="flex justify-between w-full py-4 items-start">
             <div className="">
               <Text className="font-bold">O Valor do Kit é</Text>
               <div className="bg-dark-cian text-center text-2xl p-2 font-bold text-white mt-1 w-full rounded-md">
-                {formatCurrency(parseFloat(value) / (1 + descont))}
+                {formatCurrency(parseFloat(value))}
               </div>
             </div>
 
@@ -63,12 +76,12 @@ export default function PayKitModal({ user }: PayKitModalProps) {
               <MdClose size={20} />
             </button>
           </div>
-          {user.descont && (
+          {user.kit?.discount && (
             <div className="inline-flex bg-slate-900 rounded-md text-yellow-200 items-center gap-1 p-1 my-2">
               <span>
                 <LuAlertCircle size={18} />
               </span>{" "}
-              Desconto de {descont * 100}% já aplicado
+              Desconto de {discount}% já aplicado
             </div>
           )}
           <div className="p-2 border-cian-400 border-2 shadow-md aspect-square shadow-black/50 bg-white">
@@ -85,7 +98,13 @@ export default function PayKitModal({ user }: PayKitModalProps) {
           <div className="relative rounded-lg border-2 bg-black border-black ">
             <button
               className="absolute z-10 right-0 top-1/2 -translate-y-1/2 bg-white h-full w-1/6 flex items-center justify-center rounded-tr-lg rounded-br-lg border-l hover:opacity-90"
-              onClick={(e) => copyClipboard(pixCode)}
+              onClick={(e) => {
+                copyClipboard(pixCode);
+                setIsPixCopied(true);
+                setTimeout(() => {
+                  setIsPixCopied(false);
+                }, 2000);
+              }}
             >
               <MdContentCopy size={20} />
             </button>

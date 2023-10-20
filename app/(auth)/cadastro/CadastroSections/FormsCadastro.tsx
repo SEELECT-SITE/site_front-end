@@ -52,12 +52,7 @@ export default function FormsCadastro() {
       );
 
       if (response.status === 201) {
-        setRegisterSuccessMsg(
-          "Cadastro confirmado, você será redirecionado para o Login"
-        );
-        setTimeout(() => {
-          router.replace("/login");
-        }, 1500);
+        setRegisterSuccessMsg("CONFIRA SEU EMAIL PARA CONFIRMAR O CADASTRO");
       }
     } catch (err: any) {
       const errorKeys = Object.keys(err.response.data);

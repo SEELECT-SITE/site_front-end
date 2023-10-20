@@ -7,6 +7,7 @@ import { useQuery } from "react-query";
 import { DJANGO_URL } from "@/utils/consts";
 import axios from "axios";
 import useUserboardState from "../userboardStore/PayKitModalStore";
+import SkeletonCreator from "@/components/SkeletonCreator";
 
 export default function KitsAvaliable({ title }: { title?: boolean }) {
   const { setIsSelectEventOpen, setSelectedKit } = useSelectEventsState();
@@ -48,30 +49,38 @@ export default function KitsAvaliable({ title }: { title?: boolean }) {
 
       <div className="flex flex-wrap gap-4 my-6 justify-around">
         {!isLoading &&
-          kits.reverse().map((kit: any) => {
-            return (
-              <PriceCard
-                key={kit.title + kit.id}
-                stars={kit.id - 1}
-                onClick={() => {
-                  setIsSelectEventOpen(true);
-                  setSelectedKit(kit.id);
-                }}
-                price={kit.price}
-                destack={kit.id == 4}
-                destackText={kit.id == 4 ? "+ Custo Benéficio" : ""}
-                title={kit.model}
-                id={kit.id + kit.model}
-                advantage={[
-                  kit.all_speeches
-                    ? "Todas as Palestras"
-                    : "Palestra patrocinadas + 1 palestra",
-                  kit.workshops ? `${kit.workshops} Minicursos/Workshop` : "",
-                  kit.bucks_coup ? "Um copo Buck's Exclusivo" : "",
-                ]}
-              />
-            );
-          })}
+          kits
+            .map((kit: any) => {
+              return (
+                <PriceCard
+                  key={kit.title + kit.id}
+                  stars={kit.id - 1}
+                  onClick={() => {
+                    setIsSelectEventOpen(true);
+                    setSelectedKit(kit.id);
+                  }}
+                  price={kit.price}
+                  destack={kit.id == 4}
+                  destackText={kit.id == 4 ? "+ Custo Benéficio" : ""}
+                  title={kit.model}
+                  id={kit.id + kit.model}
+                  advantage={[
+                    kit.all_speeches
+                      ? "Todas as Palestras"
+                      : "Palestra patrocinadas + 1 palestra",
+                    kit.workshops ? `${kit.workshops} Minicursos/Workshop` : "",
+                    kit.bucks_coup ? "Um copo Buck's Exclusivo" : "",
+                  ]}
+                />
+              );
+            })
+            .reverse()}
+        {isLoading && (
+          <SkeletonCreator
+            quantity={4}
+            className="w-full max-w-md h-60 rounded-xl bg-dark"
+          />
+        )}
       </div>
     </>
   );

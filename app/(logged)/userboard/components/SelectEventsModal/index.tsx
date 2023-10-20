@@ -15,7 +15,10 @@ import { MdClose } from "react-icons/md";
 import { DJANGO_URL } from "@/utils/consts";
 import useUserboardState from "../userboardStore/PayKitModalStore";
 import isEventOverlap from "@/utils/isEventOverlap";
+import RadioGroup from "@/components/RadioGroup";
+import momento from "@/utils/formatDate";
 import SkeletonCreator from "@/components/SkeletonCreator";
+import { useRouter } from "next/navigation";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -30,13 +33,15 @@ export default function SelectEventsModal({
 }: SelectEventsModalProps) {
   const { setIsSelectEventOpen, selectedKit } = useSelectEventsState();
   const [selectEvents, setSelectEvents] = useState<number[]>([]);
-  const [eventTimes, setEventTimes] = useState<any[]>([]);
+  const [dayOfWeek, setDayOfWeek] = useState<string>("complet");
+  const [eventsTimePicked, setEventsTimePicked] = useState<any[]>([]);
   const { kitsValues } = useUserboardState();
   const [numberOfSelectWorkshops, setNumberOfSelectWorkshops] =
     useState<number>(0);
+  const [numberOfSelectedSpeeches, setNumberOfSelectedSpeeches] =
+    useState<number>(0);
   //@ts-ignore
 
-  const kitModelId = user?.kit?.model ? user.kit.model - 1 : selectedKit - 1;
   const { data: events, isLoading } = useQuery<any | undefined>(
     "userEvents",
     async () => {
@@ -53,7 +58,6 @@ export default function SelectEventsModal({
         aux.sort(
           (a: any, b: any) =>
             //@ts-ignore
-
             new Date(a.date["0"].start) - new Date(b.date["0"].start)
         );
         return aux;
@@ -63,29 +67,37 @@ export default function SelectEventsModal({
     },
     { refetchOnWindowFocus: false }
   );
-
+  const router = useRouter();
   useEffect(() => {
     setSelectEvents([]);
     setNumberOfSelectWorkshops(0);
   }, []);
-
   function toogleElements(id: number, dates: any[]) {
     if (selectEvents.includes(id)) {
-      var newVector = eventTimes.filter((date) => {
-        return date.toString() !== dates.toString();
+      var newVector: any[] = eventsTimePicked;
+      dates.forEach((date) => {
+        newVector = newVector.filter((currentDate) => {
+          return currentDate[0] != date[0] || currentDate[1] != date[1];
+        });
       });
-      setEventTimes(newVector);
+      setEventsTimePicked(newVector);
       setSelectEvents(removeElem(selectEvents, id));
-    } else if (!isEventOverlap(eventTimes, dates)) {
-      eventTimes.push(dates);
-      setEventTimes(eventTimes);
+    } else {
+      var newVector: any[] = eventsTimePicked;
+
+      dates.forEach((date) => {
+        console.log(newVector.push(date));
+        newVector.push(date);
+      });
+      setEventsTimePicked(newVector);
       selectEvents.push(id);
-      setSelectEvents(selectEvents);
+      setSelectEvents(removeElem(selectEvents, 0));
     }
   }
+  const kitModelId = selectedKit ? selectedKit - 1 : user.kit!.model - 1;
 
   async function updateEvents() {
-    const model = user.kit?.model;
+    const model = kitModelId + 1;
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       Token: user.token,
@@ -95,21 +107,23 @@ export default function SelectEventsModal({
       formData.append("events", elem.toString());
     });
     try {
+      console.log(user.id);
       if (user.kit?.id) {
         formData.append("model", model!.toString());
         await axios.put(
-          `${DJANGO_URL}api/kits/${user.kit.id}/`,
+          `${DJANGO_URL}api/kits/${user.kit?.id}/`,
           formData.toString(),
           { headers }
         );
       } else {
         formData.append("user", user.id as string);
-        formData.append("model", kitsValues[kitModelId].id.toString());
+        formData.append("model", (kitModelId + 1).toString());
         await axios.post(`${DJANGO_URL}api/kits/`, formData.toString(), {
           headers,
         });
       }
       sessionUpdate();
+      router.refresh();
     } catch (e) {
     } finally {
       setIsSelectEventOpen(false);
@@ -127,6 +141,7 @@ export default function SelectEventsModal({
             Voltar
             <MdClose size={20} />
           </button>
+
           <Title className="border-l-2 pl-2 border-cian-700">
             Eventos disponiveis
           </Title>
@@ -151,6 +166,20 @@ export default function SelectEventsModal({
               })}
             </ul>
           </div>
+          <RadioGroup
+            className="my-4"
+            onChange={(e) => setDayOfWeek(e.target.value)}
+            label="Dias"
+            options={[
+              { title: "Segunda", value: "segunda-feira" },
+              { title: "Terça", value: "terça-feira" },
+              { title: "Quarta", value: "quarta-feira" },
+              { title: "Quinta", value: "quinta-feira" },
+              { title: "Sexta", value: "sexta-feira" },
+              { title: "Todos os dias", value: "complet" },
+            ]}
+            groupName={"dias da semana"}
+          />
         </Container>
         <div className="fixed z-20 left-0 bottom-0 w-full">
           <Container className="flex justify-end">
@@ -169,19 +198,22 @@ export default function SelectEventsModal({
         <Container className="w-full">
           <div className=" flex-wrap gap-y-3 lg:gap-4 flex text-white relative justify-around">
             {events?.map((event: any, index: number) => {
-              console.log(event.title.split("$")[1]);
               const eventDates = Object.values(event.date).map((date) => {
                 //@ts-ignore
-
                 return [date?.start, date?.end];
               });
+              const daysOfWeekEvent = eventDates.map((elem) => {
+                return momento(elem[0]).format("dddd");
+              });
 
-              function isDisable() {
+              function isDisable(eventsTimePicked: any): boolean {
+                if (selectEvents.includes(event.id)) return false;
+
                 if (!selectEvents.includes(event.id)) {
-                  if (isEventOverlap(eventTimes, eventDates)) {
+                  if (isEventOverlap(eventDates, eventsTimePicked)) {
                     return true;
                   }
-                  if (event.title.split("$")[1] == "patrocinado") {
+                  if (event.title.split("$")[1] == "patrocinador") {
                     return false;
                   }
                   if (
@@ -191,13 +223,26 @@ export default function SelectEventsModal({
                   ) {
                     return true;
                   }
-                  return false;
+                  if (
+                    numberOfSelectWorkshops >=
+                      kitsValues[kitModelId].workshops &&
+                    ["workshop", "minicurso"].includes(event.category)
+                  ) {
+                    return true;
+                  }
+                  if (
+                    !kitsValues[kitModelId].all_speeches &&
+                    numberOfSelectedSpeeches >= 1
+                  ) {
+                    return true;
+                  }
                 }
+                return false;
               }
 
               return (
                 <EventCard.Body
-                  disable={isDisable()}
+                  disable={isDisable(eventsTimePicked)}
                   key={"eventoid" + event.id + index}
                   id={"eventoid" + event.id + index}
                   onClick={() => {
@@ -208,13 +253,31 @@ export default function SelectEventsModal({
                         setNumberOfSelectWorkshops((value) => value + 1);
                       }
                     }
+                    if (
+                      "palestra" == event.category &&
+                      !kitsValues[kitModelId].all_speeches &&
+                      event.title.split("$")[1] != "patrocinador"
+                    ) {
+                      if (selectEvents.includes(event.id)) {
+                        setNumberOfSelectedSpeeches((value) => value - 1);
+                      } else {
+                        setNumberOfSelectedSpeeches((value) => value + 1);
+                      }
+                    }
                     toogleElements(event.id, eventDates);
                   }}
                   capacity={
                     event.max_number_of_inscriptions -
                     event.number_of_inscriptions
                   }
-                  className="lg:py-12 relative justify-between flex flex-col"
+                  className={`lg:py-12 duration-200 relative justify-between flex flex-col ${
+                    daysOfWeekEvent.includes(dayOfWeek)
+                      ? ""
+                      : dayOfWeek == "complet"
+                      ? "flex"
+                      : "hidden"
+                  }
+                  } `}
                 >
                   <div>
                     <EventCard.Title title={event.title.split("$")[0]} />
@@ -262,6 +325,12 @@ export default function SelectEventsModal({
                 </EventCard.Body>
               );
             })}
+            {isLoading && (
+              <SkeletonCreator
+                quantity={6}
+                className="w-full max-w-md h-72 rounded-xl bg-dark"
+              />
+            )}
           </div>
         </Container>
       </div>

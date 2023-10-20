@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import CronoSlider from "@/components/SECTIONS/Cronograma/CronoSlider";
+import React, { useState } from "react";
 import Title from "@/components/Title";
 import FloatButton from "@/components/FloatButton";
 import Decoration from "./DecorationStripes/decoration";
@@ -11,6 +10,8 @@ import { SvgCardLine } from "@/components/PriceCard";
 import { useRouter } from "next/navigation";
 import { DJANGO_URL } from "@/utils/consts";
 import SkeletonCreator from "@/components/SkeletonCreator";
+import momento from "@/utils/formatDate";
+import RadioGroup from "@/components/RadioGroup";
 
 function Cronograma() {
   const { data: events, isLoading } = useQuery<any | undefined>(
@@ -33,22 +34,57 @@ function Cronograma() {
     { refetchOnMount: false, refetchOnWindowFocus: false }
   );
   const router = useRouter();
+  const [dayOfWeek, setDayOfWeek] = useState<string>("complet");
 
   return (
     <section className="w-full py-12 lg:py-24 rounded-md backdrop-blur-sm shadow-md shadow-slate-900 bg-white/10 border border-white/20 ">
       <Title className={`font-bold text-center mb-6`}>CRONOGRAMA GERAL</Title>
 
       <div className="m-auto max-w-6xl px-2">
+        <div className="flex w-full justify-center">
+          <RadioGroup
+            className=" m-auto"
+            onChange={(e) => setDayOfWeek(e.target.value)}
+            label="Dias"
+            options={[
+              { title: "Segunda", value: "segunda-feira" },
+              { title: "Terça", value: "terça-feira" },
+              { title: "Quarta", value: "quarta-feira" },
+              { title: "Quinta", value: "quinta-feira" },
+              { title: "Sexta", value: "sexta-feira" },
+              { title: "Todos os dias", value: "complet" },
+            ]}
+            groupName={"dias da semana"}
+          />
+        </div>
+
         <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecht justify-center m-auto">
           {events?.map((event: any, index: number) => {
+            const eventDates = Object.values(event.date).map((date) => {
+              //@ts-ignore
+              return [date?.start, date?.end];
+            });
+            if (event.title.split("$")[0] == "ABERTURA GAUDIUM") {
+              console.log(momento(eventDates[0][0]).format("dddd"));
+            }
+            const daysOfWeekEvent = eventDates.map((elem) => {
+              return momento(elem[0]).format("dddd");
+            });
             return (
               <EventCard.Body
                 key={event.title + index}
                 id={event.title + index}
-                className="lg:py-12 relative justify-between flex flex-col"
+                className={`lg:py-12 duration-200 relative justify-between flex flex-col ${
+                  daysOfWeekEvent.includes(dayOfWeek)
+                    ? ""
+                    : dayOfWeek == "complet"
+                    ? "flex"
+                    : "hidden"
+                }
+                  } `}
               >
                 <div>
-                  <EventCard.Title title={event.title} />
+                  <EventCard.Title title={event.title.split("$")[0]} />
                   <EventCard.Hoster hoster={"João Paulo II"} />
 
                   <EventCard.Location

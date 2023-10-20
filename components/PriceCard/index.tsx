@@ -139,10 +139,6 @@ const PriceCard: FunctionComponent<PriceCardProps> = ({
         </div>
       </label>
       <span className="peer-hover:w-full  w-[0%]  aspect-square bg-gradient-to-bl from-slate-700/50 to-transparent rounded-full absolute top-2 right-2 -translate-y-1/3 translate-x-1/3 pointer-events-none duration-200 invert"></span>
-
-      <span className="peer-hover:flex hidden text-sm absolute top-2 right-2 p-1 text-green-500 rounded-md border bg-slate-500 z-10 items-center gap-2">
-        Selecionar <MdCheck size={16} />
-      </span>
     </div>
   );
 };

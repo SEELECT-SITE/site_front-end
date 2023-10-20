@@ -14,6 +14,7 @@ export default function UserEvents({ user }: { user: User }) {
         Seus Eventos selecionados
       </Title>
       <FloatButton
+        className="p-1"
         onClick={(e) => {
           setIsSelectEventOpen(true);
           setSelectedKit(user.kit?.model!);
@@ -24,57 +25,64 @@ export default function UserEvents({ user }: { user: User }) {
           : "Selecione seus eventos"}
       </FloatButton>
       <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecth m-auto justify-around">
-        {user?.kit?.events.map((event, index) => {
-          return (
-            <EventCard.Body
-              key={event.title + index}
-              id={event.title + index}
-              className="lg:py-12 relative justify-between flex flex-col"
-            >
-              <div>
-                <EventCard.Title title={event.title} />
-                <EventCard.Hoster hoster={"João Paulo II"} />
+        {user?.kit?.events
+          .sort(
+            (a: any, b: any) =>
+              //@ts-ignore
 
-                <EventCard.Location
-                  location={event.place[0].location}
-                  url_location={event.place[0].url_location}
-                />
-                <div className="animate-pulse bg-dark">
-                  <SvgCardLine color="#ffffff" opacity="1" />
+              new Date(a.date["0"].start) - new Date(b.date["0"].start)
+          )
+          .map((event, index) => {
+            return (
+              <EventCard.Body
+                key={event.title + index}
+                id={event.title + index}
+                className="lg:py-12 relative justify-between flex flex-col"
+              >
+                <div>
+                  <EventCard.Title title={event.title.split("$")[0]} />
+                  <EventCard.Hoster hoster={"João Paulo II"} />
+
+                  <EventCard.Location
+                    location={event.place[0].location}
+                    url_location={event.place[0].url_location}
+                  />
+                  <div className="animate-pulse bg-dark">
+                    <SvgCardLine color="#ffffff" opacity="1" />
+                  </div>
+
+                  <EventCard.Description
+                    description={
+                      "Lorem ipsum dolor sit amet. Ut vero quidem et unde corrupti aut quaerat voluptatem? 33 numquam provident ab aperiam fuga ea dolores sunt rem blanditiis libero est alias architecto ex consequatur sunt"
+                    }
+                  />
                 </div>
-
-                <EventCard.Description
-                  description={
-                    "Lorem ipsum dolor sit amet. Ut vero quidem et unde corrupti aut quaerat voluptatem? 33 numquam provident ab aperiam fuga ea dolores sunt rem blanditiis libero est alias architecto ex consequatur sunt"
+                <EventCard.Capacity
+                  capacity={
+                    event.max_number_of_inscriptions -
+                    event.number_of_inscriptions
                   }
                 />
-              </div>
-              <EventCard.Capacity
-                capacity={
-                  event.max_number_of_inscriptions -
-                  event.number_of_inscriptions
-                }
-              />
-              <div className="flex flex-wrap justify-between mb-2 items-start gap-2">
-                <EventCard.Category category={event.category} />
-                <div>
-                  {Object.values(event.date).map((date) => {
-                    return (
-                      <EventCard.Date
-                        //@ts-ignore
+                <div className="flex flex-wrap justify-between mb-2 items-start gap-2">
+                  <EventCard.Category category={event.category} />
+                  <div>
+                    {Object.values(event.date).map((date) => {
+                      return (
+                        <EventCard.Date
+                          //@ts-ignore
 
-                        dateStart={date?.start}
-                        //@ts-ignore
+                          dateStart={date?.start}
+                          //@ts-ignore
 
-                        dateEnd={date?.end}
-                      />
-                    );
-                  })}
+                          dateEnd={date?.end}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            </EventCard.Body>
-          );
-        })}
+              </EventCard.Body>
+            );
+          })}
       </div>
     </div>
   );

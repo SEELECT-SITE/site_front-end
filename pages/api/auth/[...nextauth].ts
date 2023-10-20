@@ -71,15 +71,14 @@ export const nextAuthOptions: NextAuthOptions = {
           );
           const userData = response.data;
           if (userData && response.status) {
-            const { email, auth, role, profile } = userData;
-            const { first_name, last_name, ies, age, course, semester, kit } =
+            const { auth, role, profile } = userData;
+            const { first_name, last_name, ies, age, course, semester } =
               profile;
 
             token.role = role;
             token.token = auth.token;
             token.age = age;
             token.semestre = semester;
-            token.kit = kit;
             token.name = `${first_name} ${last_name}`;
             token.course = course;
             token.ies = ies;
@@ -93,7 +92,6 @@ export const nextAuthOptions: NextAuthOptions = {
       if (user) {
         token.role = user.role;
         token.token = user.token;
-        token.kit = user.kit;
         token.name = user.name;
         token.course = user.course;
         token.ies = user.ies;
@@ -102,14 +100,26 @@ export const nextAuthOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
+      const headers = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        Token: token?.token,
+      };
+      const response = await axios.get(
+        `${DJANGO_URL}api/users/${token.role}/${token.id}/`,
+        { headers }
+      );
+      const userData = response.data;
       if (session.user) {
         session.user.token = token.token;
         session.user.name = token.name;
         session.user.ies = token.ies;
         session.user.course = token.course;
-        session.user.kit = token.kit;
         session.user.id = token.id;
+        if (userData && response.status) {
+          session.user.kit = userData.profile.kit;
+        }
       }
+
       return session;
     },
   },

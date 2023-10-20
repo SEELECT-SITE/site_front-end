@@ -13,16 +13,32 @@ import Title from "@/components/Title";
 import Button from "@/components/Button";
 import getKitById from "@/utils/getKitsByID";
 import useUserboardState from "../userboardStore/PayKitModalStore";
+import KitsAvaliable from "../KitsAvaliabe";
+import { useState } from "react";
 
 export default function UserKitArea({ user }: { user: User }) {
   const { isPayKitModalOpen, setIsPayKitModalOpen } = usePayKitState();
   const { kitsValues } = useUserboardState();
-  console.log(user.kit?.is_payed);
+  const [isChooseKitOpen, setIsChooseKitOpen] = useState<boolean>(false);
   return (
     <>
       <Title className="border-l-2 border-cian-400 pl-2">
         {kitsValues != "" && kitsValues[user?.kit?.model! - 1 ?? 1].model}
       </Title>
+      {user?.kit?.model == 1 && (
+        <>
+          <FloatButton
+            className="p-1"
+            shadowClassname="my-1"
+            onClick={(e) => {
+              setIsChooseKitOpen(!isChooseKitOpen);
+            }}
+          >
+            Trocar de Kit
+          </FloatButton>
+          {isChooseKitOpen && <KitsAvaliable />}
+        </>
+      )}
       <Text className="Font-bold">Você tem direito a:</Text>
       <ul>
         {[

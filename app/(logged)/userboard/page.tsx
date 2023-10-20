@@ -98,10 +98,13 @@ function Userboard({
               {user?.kit ? (
                 <>
                   <UserKitArea user={user} />
+
                   <UserEvents user={user} />
                 </>
               ) : (
-                <KitsAvaliable title={true} />
+                <>
+                  <KitsAvaliable title={true} />
+                </>
               )}
             </div>
           </Container>

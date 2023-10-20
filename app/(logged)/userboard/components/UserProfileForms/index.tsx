@@ -6,22 +6,18 @@ import FloatButton from "@/components/FloatButton";
 import { HiPencilAlt } from "react-icons/hi";
 import Input from "@/components/Input";
 import Text from "@/components/Text";
-import { useRouter } from "next/navigation";
-import { useRef, useState } from "react";
-import { MdClose, MdErrorOutline } from "react-icons/md";
-import { scrollToElement } from "@/utils/scrollToElement";
 import axios from "axios";
 import useUserForms from "./userForms";
-import Title from "@/components/Title";
 import { User } from "next-auth";
 import { DJANGO_URL, IES_CEARA, UFC_COURSES } from "@/utils/consts";
 import SelectInput from "@/components/SelectInput";
 import validateCPF from "@/utils/validateCPF";
+import momento from "@/utils/formatDate";
 
 const createUserProfileFormsSchema = z.object({
   first_name: z.string().nonempty("Preencha o campo"),
   last_name: z.string().nonempty("Preencha o campo"),
-  birthday: z.string().pipe(z.coerce.date()),
+  birthday: z.string().nonempty("Preencha o campo"),
   ies: z.string().nonempty("Preencha o campo"),
   course: z.string().nonempty("Preencha o campo"),
   semester: z
@@ -62,13 +58,14 @@ export default function UserProfileForms({
   async function updateProfile(data: CreateUserProfileData) {
     const { last_name, first_name, ies, course, semester, birthday, cpf } =
       data;
+    console.log(momento(birthday));
     const formData = new URLSearchParams();
     formData.append("last_name", last_name);
     formData.append("first_name", first_name);
     formData.append("ies", ies);
     formData.append("course", course);
     formData.append("semester", semester.toString());
-    //formData.append("birthday", birthday.toString());
+    formData.append("birthday", birthday.toString());
     formData.append("cpf", cpf);
 
     const headers = {
@@ -154,6 +151,8 @@ export default function UserProfileForms({
           />
           <Input
             placeholder="CPF - Apenas os numeros."
+            maxLength={11}
+            minLength={11}
             errorMsg={errors.cpf?.message as string}
             required
             register={register("cpf")}

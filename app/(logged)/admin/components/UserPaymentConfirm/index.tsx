@@ -29,19 +29,10 @@ export default function UserPaymentConfirm({
   user,
 }: UserPaymentConfirmProps) {
   const [isPaymentOpen, setIsPaymentOpen] = useState<boolean>(false);
-  const {
-    setIsUserPayModalOpen,
-    setUserID,
-    isUserPayModalOpen,
-    setUserKitModel,
-    setUserKitID,
-  } = useUserPaymentStore();
+  const { setIsUserPayModalOpen, setUserKit, isUserPayModalOpen } =
+    useUserPaymentStore();
 
-  const {
-    data: usersPayment,
-    isLoading,
-    refetch,
-  } = useQuery<any | undefined>(
+  const { data: usersPayment, refetch } = useQuery<any | undefined>(
     "adminUserPay",
     async () => {
       const headers = {
@@ -106,9 +97,7 @@ export default function UserPaymentConfirm({
                         className="bg-white text-green-700 rounded px-1 hover:bg-slate-300"
                         onClick={(e) => {
                           setIsUserPayModalOpen(true);
-                          setUserID(kit.user);
-                          setUserKitModel(kit.model_detail);
-                          setUserKitID(kit.id);
+                          setUserKit(kit);
                         }}
                       >
                         Trocar
@@ -121,9 +110,7 @@ export default function UserPaymentConfirm({
                         className="bg-white text-green-700 rounded px-1 hover:bg-slate-300"
                         onClick={(e) => {
                           setIsUserPayModalOpen(true);
-                          setUserID(kit.user);
-                          setUserKitModel(kit.model_detail);
-                          setUserKitID(kit.id);
+                          setUserKit(kit);
                         }}
                       >
                         Confirmar

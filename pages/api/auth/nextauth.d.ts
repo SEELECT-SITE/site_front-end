@@ -31,6 +31,8 @@ export interface EventProps {
 
 type Kit = {
   id: number;
+  user?: number;
+  discount: number;
   is_payed: boolean;
   model: number;
   model_detail: {
