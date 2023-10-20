@@ -20,7 +20,7 @@ function Pacotes() {
           Veja a melhor dentre as 3 opções abaixo:
         </Paragraph>
 
-        <KitsAvaliable />
+        <KitsAvaliable onClick={() => router.push("./login")} />
       </Container>
     </>
   );

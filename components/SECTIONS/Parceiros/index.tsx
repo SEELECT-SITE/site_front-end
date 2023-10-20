@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import gaudium_logo from "@/public/parceiros/gaudium_logo.png";
+import tecnovetti_logo from "@/public/parceiros/LOGO_TECNOVETTI.png";
 import Title from "@/components/Title";
-import balls_deco from "@/public/SVG/square-balls.svg";
 import Link from "next/link";
 
 function Parceiros() {
@@ -19,7 +19,7 @@ function Parceiros() {
           <div className="grow bg-white h-2 rounded-sm"></div>
         </div>
 
-        <div className="flex items-center justify-center flex-wrap gap-8">
+        <div className="flex items-center justify-evenly flex-wrap gap-8">
           <Link
             className="text-dark-cian hover:text-dark"
             target="_blank"
@@ -32,6 +32,21 @@ function Parceiros() {
                 alt="icone seelect"
                 width={300}
                 className="m-auto drop-shadow-icon-sm object-fill lg:grayscale-1 -translate-y-4 aspect-square"
+              />
+            </div>
+          </Link>
+          <Link
+            className="text-dark-cian hover:text-dark"
+            target="_blank"
+            href={"https://www.linkedin.com/company/tecnovettifortaleza/"}
+            title="Ir para linkedIn"
+          >
+            <div className="group rounded-full p-6 border-2 border-slate-700 bg-white hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
+              <Image
+                src={tecnovetti_logo}
+                alt="logo tecnovetti"
+                width={300}
+                className="m-auto drop-shadow-icon-sm p-4  aspect-square"
               />
             </div>
           </Link>

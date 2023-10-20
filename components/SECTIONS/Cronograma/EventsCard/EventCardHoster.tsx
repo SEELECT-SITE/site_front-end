@@ -8,8 +8,7 @@ export default function EventCardHoster({ hoster }: { hoster: string }) {
       <span className="group-hover:text-cian-400 text-cian-700">
         <FaUserCircle size={20} />
       </span>
-      Facilitador:
-      {hoster}
+      {`Facilitador: ${hoster}`}
     </Text>
   );
 }

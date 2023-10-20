@@ -9,7 +9,13 @@ import axios from "axios";
 import useUserboardState from "../userboardStore/PayKitModalStore";
 import SkeletonCreator from "@/components/SkeletonCreator";
 
-export default function KitsAvaliable({ title }: { title?: boolean }) {
+export default function KitsAvaliable({
+  title,
+  onClick,
+}: {
+  title?: boolean;
+  onClick?: Function;
+}) {
   const { setIsSelectEventOpen, setSelectedKit } = useSelectEventsState();
   const { kitsValues, setKitsValues } = useUserboardState();
   const { data: kits, isLoading } = useQuery<any | undefined>(
@@ -56,6 +62,9 @@ export default function KitsAvaliable({ title }: { title?: boolean }) {
                   key={kit.title + kit.id}
                   stars={kit.id - 1}
                   onClick={() => {
+                    {
+                      onClick && onClick();
+                    }
                     setIsSelectEventOpen(true);
                     setSelectedKit(kit.id);
                   }}
@@ -67,7 +76,7 @@ export default function KitsAvaliable({ title }: { title?: boolean }) {
                   advantage={[
                     kit.all_speeches
                       ? "Todas as Palestras"
-                      : "Palestra patrocinadas + 1 palestra",
+                      : "Palestra patrocinadas + 1 palestra a sua escolha",
                     kit.workshops ? `${kit.workshops} Minicursos/Workshop` : "",
                     kit.bucks_coup ? "Um copo Buck's Exclusivo" : "",
                   ]}

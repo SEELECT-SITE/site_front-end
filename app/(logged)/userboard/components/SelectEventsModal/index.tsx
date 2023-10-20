@@ -12,6 +12,7 @@ import Title from "@/components/Title";
 import Container from "@/components/Container";
 import { SvgCardLine } from "@/components/PriceCard";
 import { MdClose } from "react-icons/md";
+import { FiAlertCircle } from "react-icons/fi";
 import { DJANGO_URL } from "@/utils/consts";
 import useUserboardState from "../userboardStore/PayKitModalStore";
 import isEventOverlap from "@/utils/isEventOverlap";
@@ -19,6 +20,7 @@ import RadioGroup from "@/components/RadioGroup";
 import momento from "@/utils/formatDate";
 import SkeletonCreator from "@/components/SkeletonCreator";
 import { useRouter } from "next/navigation";
+import Alert from "@/components/Alert";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -35,6 +37,8 @@ export default function SelectEventsModal({
   const [selectEvents, setSelectEvents] = useState<number[]>([]);
   const [dayOfWeek, setDayOfWeek] = useState<string>("complet");
   const [eventsTimePicked, setEventsTimePicked] = useState<any[]>([]);
+  const [adviceReaded, setAdviceReaded] = useState<boolean>(false);
+  const [adviceReadedMsg, setAdviceReadedMsg] = useState<string>("");
   const { kitsValues } = useUserboardState();
   const [numberOfSelectWorkshops, setNumberOfSelectWorkshops] =
     useState<number>(0);
@@ -86,7 +90,6 @@ export default function SelectEventsModal({
       var newVector: any[] = eventsTimePicked;
 
       dates.forEach((date) => {
-        console.log(newVector.push(date));
         newVector.push(date);
       });
       setEventsTimePicked(newVector);
@@ -97,6 +100,15 @@ export default function SelectEventsModal({
   const kitModelId = selectedKit ? selectedKit - 1 : user.kit!.model - 1;
 
   async function updateEvents() {
+    if (!adviceReaded) {
+      setAdviceReadedMsg(
+        "Marque a opção no topo da pagina, confirmando que entendeu o aviso."
+      );
+      setTimeout(() => {
+        setAdviceReadedMsg("");
+      }, 4000);
+      return;
+    }
     const model = kitModelId + 1;
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -107,7 +119,6 @@ export default function SelectEventsModal({
       formData.append("events", elem.toString());
     });
     try {
-      console.log(user.id);
       if (user.kit?.id) {
         formData.append("model", model!.toString());
         await axios.put(
@@ -148,38 +159,83 @@ export default function SelectEventsModal({
           <Text className="underline inline-flex bg-dark rounded-md shadow-md text-white p-1">
             {kitsValues[kitModelId].model} está selecionado
           </Text>
-          <div>
-            <Text className="Font-bold">Você tem direito a:</Text>
-            <ul>
-              {[
-                kitsValues[kitModelId].all_speeches
-                  ? "Todas as Palestras"
-                  : "Palestra patrocinadas + 1 palestra",
-                kitsValues[kitModelId].workshops
-                  ? `${kitsValues[kitModelId].workshops} Minicursos/Workshop`
-                  : "",
-                kitsValues[kitModelId].bucks_coup
-                  ? "Um copo Buck's Exclusivo"
-                  : "",
-              ].map((elem) => {
-                return <li className="flex">{elem}</li>;
-              })}
-            </ul>
+          <div className="flex flex-wrap gap-4">
+            <div className="p-2 shadow-md border border-slate-300 rounded-md flex max-w-sm my-2 flex-col">
+              <Text className="Font-bold">Você tem direito a:</Text>
+              <ul>
+                {[
+                  kitsValues[kitModelId].all_speeches
+                    ? "Todas as Palestras"
+                    : "Palestra patrocinadas + 1 palestra",
+                  kitsValues[kitModelId].workshops
+                    ? `${kitsValues[kitModelId].workshops} Minicursos/Workshop`
+                    : "",
+                  kitsValues[kitModelId].bucks_coup
+                    ? "Um copo Buck's Exclusivo"
+                    : "",
+                ].map((elem) => {
+                  return (
+                    <li className="flex border-l border-slate-800 pl-1 my-2">
+                      {elem}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            <div className="flex flex-col gap-2 max-w-md rounded-md my-2 p-2 bg-slate-900 text-yellow-200">
+              <div className="flex gap-1">
+                <span>
+                  <FiAlertCircle size={22} />
+                </span>{" "}
+                Para kits pagos, a alteração após essa seleção só poderar ser
+                feita por meio de email. Podendo assim não garantir a sua vagas
+                nos eventos selecionados.
+              </div>
+              <div className="w-full ml-5">
+                <label
+                  htmlFor="MarketingAccept"
+                  className="flex gap-2 p-1 text-dark"
+                >
+                  <input
+                    checked={adviceReaded}
+                    onClick={(e) => setAdviceReaded(!adviceReaded)}
+                    type="checkbox"
+                    id="MarketingAccept"
+                    name="marketing_accept"
+                    className="h-5 w-5 rounded-full overflow-hidden checked:bg-cyan-700 shadow-sm"
+                  />
+
+                  <span className="text-white">Marque se leu o aviso</span>
+                </label>
+              </div>
+            </div>
           </div>
-          <RadioGroup
-            className="my-4"
-            onChange={(e) => setDayOfWeek(e.target.value)}
-            label="Dias"
-            options={[
-              { title: "Segunda", value: "segunda-feira" },
-              { title: "Terça", value: "terça-feira" },
-              { title: "Quarta", value: "quarta-feira" },
-              { title: "Quinta", value: "quinta-feira" },
-              { title: "Sexta", value: "sexta-feira" },
-              { title: "Todos os dias", value: "complet" },
-            ]}
-            groupName={"dias da semana"}
-          />
+
+          <div>
+            <RadioGroup
+              className="my-2"
+              onChange={(e) => setDayOfWeek(e.target.value)}
+              label="Dias"
+              options={[
+                { title: "Segunda", value: "segunda-feira" },
+                { title: "Terça", value: "terça-feira" },
+                { title: "Quarta", value: "quarta-feira" },
+                { title: "Quinta", value: "quinta-feira" },
+                { title: "Sexta", value: "sexta-feira" },
+                { title: "Todos os dias", value: "complet" },
+              ]}
+              groupName={"dias da semana"}
+            />
+          </div>
+          {adviceReadedMsg !== "" && (
+            <Alert
+              timeout={4000}
+              className="border-green-400 bg-slate-950 text-red-300"
+            >
+              {adviceReadedMsg}
+            </Alert>
+          )}
         </Container>
         <div className="fixed z-20 left-0 bottom-0 w-full">
           <Container className="flex justify-end">

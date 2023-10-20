@@ -85,7 +85,7 @@ function Cronograma() {
               >
                 <div>
                   <EventCard.Title title={event.title.split("$")[0]} />
-                  <EventCard.Hoster hoster={"João Paulo II"} />
+                  <EventCard.Hoster hoster={event.host} />
 
                   <EventCard.Location
                     location={event.place[0].location}

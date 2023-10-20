@@ -41,7 +41,7 @@ export default function UserEvents({ user }: { user: User }) {
               >
                 <div>
                   <EventCard.Title title={event.title.split("$")[0]} />
-                  <EventCard.Hoster hoster={"João Paulo II"} />
+                  <EventCard.Hoster hoster={event.host} />
 
                   <EventCard.Location
                     location={event.place[0].location}
@@ -51,11 +51,7 @@ export default function UserEvents({ user }: { user: User }) {
                     <SvgCardLine color="#ffffff" opacity="1" />
                   </div>
 
-                  <EventCard.Description
-                    description={
-                      "Lorem ipsum dolor sit amet. Ut vero quidem et unde corrupti aut quaerat voluptatem? 33 numquam provident ab aperiam fuga ea dolores sunt rem blanditiis libero est alias architecto ex consequatur sunt"
-                    }
-                  />
+                  <EventCard.Description description={event.description} />
                 </div>
                 <EventCard.Capacity
                   capacity={

@@ -39,8 +39,8 @@ export default function UserKitArea({ user }: { user: User }) {
           {isChooseKitOpen && <KitsAvaliable />}
         </>
       )}
-      <Text className="Font-bold">Você tem direito a:</Text>
-      <ul>
+      <Text className="font-bold mt-4">Você tem direito a:</Text>
+      <ul className="mb-4">
         {[
           user.kit?.model_detail.all_speeches
             ? "Todas as Palestras"
@@ -53,7 +53,7 @@ export default function UserKitArea({ user }: { user: User }) {
           return <li className="flex">{elem}</li>;
         })}
       </ul>
-      {!user?.kit?.is_payed && (
+      {!user?.kit?.is_payed && user.kit?.model != 1 && (
         <div className="pb-8">
           <div className="my-4 flex justify-between items-center p-3 bg-slate-800 rounded-md max-w-md ">
             <Text className="flex items-center  text-red-400 text-sm">
