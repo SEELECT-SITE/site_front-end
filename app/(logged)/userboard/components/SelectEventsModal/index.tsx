@@ -114,6 +114,16 @@ export default function SelectEventsModal({
       }, 4000);
       return;
     }
+    if (
+      numberOfSelectedSpeeches + numberOfSelectWorkshops < 1 &&
+      adviceReadedMsg !=
+        "Você não está selecionando nenhum dos eventos pagos antes de salvar o kit. Se deseja continuar clique novamente em Atualizar Eventos"
+    ) {
+      setAdviceReadedMsg(
+        "Você não está selecionando nenhum dos eventos pagos antes de salvar o kit. Se deseja continuar clique novamente em Atualizar Eventos"
+      );
+      return;
+    }
     const model = kitModelId + 1;
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -124,6 +134,7 @@ export default function SelectEventsModal({
       formData.append("events", elem.toString());
     });
     try {
+      ("");
       if (user.kit?.id) {
         formData.append("model", model!.toString());
         await axios.put(
@@ -238,7 +249,7 @@ export default function SelectEventsModal({
           </div>
           {adviceReadedMsg !== "" && (
             <Alert
-              timeout={4000}
+              timeout={6000}
               className="border-green-400 bottom-8 max-w-full top- bg-slate-950 text-red-300"
             >
               {adviceReadedMsg}
