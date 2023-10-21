@@ -2,10 +2,12 @@
 import KitsAvaliable from "@/app/(logged)/userboard/components/KitsAvaliabe";
 import Container from "@/components/Container";
 import PriceCard from "@/components/PriceCard";
+import SmallText from "@/components/SmallText";
 import Paragraph from "@/components/Text";
 import Title from "@/components/Title";
 import { queryClient } from "@/utils/queryClient";
 import { useRouter } from "next/navigation";
+import { LuAlertCircle } from "react-icons/lu";
 import { QueryClientProvider } from "react-query";
 
 function Pacotes() {
@@ -19,6 +21,14 @@ function Pacotes() {
         <Paragraph className="text-black/40 text-sm text-center">
           Veja a melhor dentre as 3 opções abaixo:
         </Paragraph>
+        <div className="flex justify-center">
+          <SmallText className="inline-flex text-center my-2 p-2 rounded-lg m-auto items-start gap-1 text-yellow-200 bg-slate-900">
+            <span>
+              <LuAlertCircle size={18} />
+            </span>
+            <b> Primeiro Lote</b> disponível valído até dia 30/10/2023
+          </SmallText>
+        </div>
 
         <KitsAvaliable onClick={() => router.push("./login")} />
       </Container>

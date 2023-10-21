@@ -8,6 +8,8 @@ import { DJANGO_URL } from "@/utils/consts";
 import axios from "axios";
 import useUserboardState from "../userboardStore/PayKitModalStore";
 import SkeletonCreator from "@/components/SkeletonCreator";
+import SmallText from "@/components/SmallText";
+import { LuAlertCircle } from "react-icons/lu";
 
 export default function KitsAvaliable({
   title,
@@ -45,9 +47,15 @@ export default function KitsAvaliable({
       {title ? (
         <>
           <Title className="border-l-2 pl-2 border-cian-400">
-            Não tem kit ainda?{" "}
+            Não tem kit ainda?
           </Title>
           <Text className="text-slate-300">Selecione um dos kit abaixo</Text>
+          <SmallText className="inline-flex text-center my-2 p-2 rounded-lg m-auto items-start gap-1 text-yellow-200 bg-slate-900">
+            <span>
+              <LuAlertCircle size={18} />
+            </span>
+            1º Lote disponível valído até dia 30/10/2023
+          </SmallText>
         </>
       ) : (
         <></>
