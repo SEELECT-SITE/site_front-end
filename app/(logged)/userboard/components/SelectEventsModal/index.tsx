@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { User } from "next-auth";
 import axios from "axios";
@@ -21,6 +21,7 @@ import momento from "@/utils/formatDate";
 import SkeletonCreator from "@/components/SkeletonCreator";
 import { useRouter } from "next/navigation";
 import Alert from "@/components/Alert";
+import { scrollToElement } from "@/utils/scrollToElement";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -35,6 +36,8 @@ export default function SelectEventsModal({
 }: SelectEventsModalProps) {
   const { setIsSelectEventOpen, selectedKit } = useSelectEventsState();
   const [selectEvents, setSelectEvents] = useState<number[]>([]);
+  const concernAlertDiv = useRef<HTMLDivElement | null>(null);
+
   const [dayOfWeek, setDayOfWeek] = useState<string>("complet");
   const [eventsTimePicked, setEventsTimePicked] = useState<any[]>([]);
   const [adviceReaded, setAdviceReaded] = useState<boolean>(false);
@@ -76,6 +79,7 @@ export default function SelectEventsModal({
     setSelectEvents([]);
     setNumberOfSelectWorkshops(0);
   }, []);
+
   function toogleElements(id: number, dates: any[]) {
     if (selectEvents.includes(id)) {
       var newVector: any[] = eventsTimePicked;
@@ -101,6 +105,7 @@ export default function SelectEventsModal({
 
   async function updateEvents() {
     if (!adviceReaded) {
+      scrollToElement(concernAlertDiv);
       setAdviceReadedMsg(
         "Marque a opção no topo da pagina, confirmando que entendeu o aviso."
       );
@@ -183,14 +188,17 @@ export default function SelectEventsModal({
               </ul>
             </div>
 
-            <div className="flex flex-col gap-2 max-w-md rounded-md my-2 p-2 bg-slate-900 text-yellow-200">
+            <div
+              ref={concernAlertDiv}
+              className="flex focus:bg-red-900 flex-col gap-2 max-w-md rounded-md my-2 p-2 bg-slate-900 text-yellow-200"
+            >
               <div className="flex gap-1">
                 <span>
                   <FiAlertCircle size={22} />
                 </span>{" "}
-                Para kits pagos, a alteração após essa seleção só poderar ser
-                feita por meio de email. Podendo assim não garantir a sua vagas
-                nos eventos selecionados.
+                Para kits pagos, a alteração do kit após essa seleção só poderar
+                ser feita por meio de email. Podendo assim não garantir a sua
+                vagas nos eventos selecionados.
               </div>
               <div className="w-full ml-5">
                 <label
@@ -231,7 +239,7 @@ export default function SelectEventsModal({
           {adviceReadedMsg !== "" && (
             <Alert
               timeout={4000}
-              className="border-green-400 bg-slate-950 text-red-300"
+              className="border-green-400 bottom-8 max-w-full top- bg-slate-950 text-red-300"
             >
               {adviceReadedMsg}
             </Alert>
@@ -240,9 +248,6 @@ export default function SelectEventsModal({
         <div className="fixed z-20 left-0 bottom-0 w-full">
           <Container className="flex justify-end">
             <FloatButton
-              disabled={
-                numberOfSelectWorkshops != kitsValues[kitModelId].workshops
-              }
               onClick={updateEvents}
               className="border border-slate-400"
               shadowClassname="w-full lg:w-auto"

@@ -19,6 +19,12 @@ export default function isEventOverlap(
       if (eventoFim.isSame(horarioFim) && eventoInicio.isSame(horarioInicio)) {
         return true;
       }
+      if (
+        horarioInicio.isBefore(eventoInicio) &&
+        horarioFim.isSame(eventoFim)
+      ) {
+        return true;
+      }
 
       eventoInicio.add("1", "minute");
       horarioInicio.add("1", "minute");
