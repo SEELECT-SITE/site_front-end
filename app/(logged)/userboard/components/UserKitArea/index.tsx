@@ -1,9 +1,6 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import Text from "@/components/Text";
 import { User } from "next-auth";
-import EventCard from "@/components/SECTIONS/Cronograma/EventsCard";
 import FloatButton from "@/components/FloatButton";
-import useSelectEventsState from "../SelectEventsModal/selectEventsStore";
 import PayKitModal from "../PayKitModal";
 import usePayKitState from "../PayKitModal/PayKitModalStore";
 import SmallText from "@/components/SmallText";
@@ -11,7 +8,6 @@ import { LuAlertCircle } from "react-icons/lu";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import Title from "@/components/Title";
 import Button from "@/components/Button";
-import getKitById from "@/utils/getKitsByID";
 import useUserboardState from "../userboardStore/PayKitModalStore";
 import KitsAvaliable from "../KitsAvaliabe";
 import { useState } from "react";

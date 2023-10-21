@@ -36,7 +36,11 @@ export default function UserPaymentConfirm({
   const { setIsUserPayModalOpen, setUserKit, isUserPayModalOpen } =
     useUserPaymentStore();
 
-  const { data: usersPayment, refetch } = useQuery<any | undefined>(
+  const {
+    data: usersPayment,
+    isLoading,
+    refetch,
+  } = useQuery<any | undefined>(
     "adminUserPay",
     async () => {
       const headers = {
@@ -85,9 +89,11 @@ export default function UserPaymentConfirm({
             </>
           )}
         </FloatButton>
-        <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
-          Pagamentos efetuados: {kitsPayed} de {usersPayment.length}
-        </span>
+        {!isLoading && (
+          <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
+            Pagamentos efetuados: {kitsPayed} de {usersPayment.length}
+          </span>
+        )}
       </Container>
 
       <div className="w-full relative pb-20">
