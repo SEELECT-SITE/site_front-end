@@ -26,13 +26,11 @@ interface UserPaymentConfirmProps {
   user: User;
 }
 
-export default function UserPaymentConfirm({
-  className,
-  children,
-  user,
-}: UserPaymentConfirmProps) {
+export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
   const [isPaymentOpen, setIsPaymentOpen] = useState<boolean>(false);
   const [kitsPayed, setKitsPayed] = useState<number>(0);
+  const [totalKits, setTotalKits] = useState<number>(0);
+
   const { setIsUserPayModalOpen, setUserKit, isUserPayModalOpen } =
     useUserPaymentStore();
 
@@ -53,12 +51,20 @@ export default function UserPaymentConfirm({
           headers,
         });
         var payeds = 0;
+        var allPaydeKits = 0;
         data.results.forEach((elem: any) => {
           if (elem.is_payed) {
             payeds++;
           }
+          if (elem.model != 1) {
+            allPaydeKits++;
+          }
+          switch (elem.model) {
+            case 2:
+          }
         });
         setKitsPayed(payeds);
+        setTotalKits(allPaydeKits);
         return data.results;
       } catch (error) {}
     },
@@ -70,29 +76,74 @@ export default function UserPaymentConfirm({
       {isUserPayModalOpen && (
         <UserPaymentModal triggerFn={refetch} token={user.token} />
       )}
-      <Container className="flex gap-4 items-center flex-wrap justify-between">
-        <Title>Usuarios Pagantes</Title>
-        <FloatButton
-          className="flex duration-100 p-1"
-          shadowClassname="my-0"
-          onClick={(e) => {
-            setIsPaymentOpen(!isPaymentOpen);
-          }}
-        >
-          {isPaymentOpen ? (
-            <>
-              Fechar <MdClose />
-            </>
-          ) : (
-            <>
-              Ver pagamentos <HiPencilAlt size={18} />
-            </>
-          )}
-        </FloatButton>
+      <Container>
+        <div className="w-full flex gap-4 my-4 items-center flex-wrap justify-between">
+          <Title>Usuarios Pagantes</Title>
+          <FloatButton
+            className="flex duration-100 p-1"
+            shadowClassname="my-0"
+            onClick={(e) => {
+              setIsPaymentOpen(!isPaymentOpen);
+            }}
+          >
+            {isPaymentOpen ? (
+              <>
+                Fechar <MdClose />
+              </>
+            ) : (
+              <>
+                Ver pagamentos <HiPencilAlt size={18} />
+              </>
+            )}
+          </FloatButton>
+        </div>
         {!isLoading && (
-          <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
-            Pagamentos efetuados: {kitsPayed} de {usersPayment.length}
-          </span>
+          <div className="w-full flex gap-2 flex-wrap">
+            <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
+              Pagamentos efetuados: {kitsPayed} de {totalKits}
+            </span>
+            <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
+              {`Kits Premium ${
+                usersPayment.filter((elem: any) => {
+                  return elem.model == 4 && elem.is_payed == true;
+                }).length
+              } de ${
+                usersPayment.filter((elem: any) => {
+                  return elem.model == 4;
+                }).length
+              }`}
+            </span>
+            <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
+              {`Kits Médios ${
+                usersPayment.filter((elem: any) => {
+                  return elem.model == 3 && elem.is_payed == true;
+                }).length
+              } de ${
+                usersPayment.filter((elem: any) => {
+                  return elem.model == 3;
+                }).length
+              }`}
+            </span>
+            <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
+              {`Kits Básicos ${
+                usersPayment.filter((elem: any) => {
+                  return elem.model == 2 && elem.is_payed == true;
+                }).length
+              } de ${
+                usersPayment.filter((elem: any) => {
+                  return elem.model == 2;
+                }).length
+              }`}
+            </span>
+            <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
+              Kits gratuitos{" "}
+              {
+                usersPayment.filter((elem: any) => {
+                  return elem.model == 1;
+                }).length
+              }
+            </span>
+          </div>
         )}
       </Container>
 
@@ -103,6 +154,7 @@ export default function UserPaymentConfirm({
               .sort((a: any, b: any) => a.user - b.user)
               ?.map((kit: any, index: number) => {
                 if (kit.model_detail.id == 1) return;
+                if (kit.is_payed) return;
                 return (
                   <div
                     className="bg-white p-2 py-3 gap-1 hover:bg-slate-200 rounded-lg text-dark flex flex-wrap my-2 justify-between"

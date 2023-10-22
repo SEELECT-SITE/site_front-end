@@ -167,7 +167,13 @@ export default function AddEventsForms({ Token }: { Token: string }) {
             label="Tipo de Evento"
             errorMsg={errors.category?.message as string}
             firstOption="Selecione um evento"
-            options={["palestra", "workshop", "minicurso"]}
+            options={[
+              "palestra",
+              "workshop",
+              "minicurso",
+              "mesa redonda",
+              "visita técnica",
+            ]}
             register={register("category")}
           />
           <SelectInput
