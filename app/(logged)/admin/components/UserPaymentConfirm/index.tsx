@@ -24,7 +24,6 @@ export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
   const [isPaymentOpen, setIsPaymentOpen] = useState<boolean>(false);
   const [kitsPayed, setKitsPayed] = useState<number>(0);
   const [totalKits, setTotalKits] = useState<number>(0);
-  console.log(user.token);
   const { setIsUserPayModalOpen, setUserKit, isUserPayModalOpen } =
     useUserPaymentStore();
 
@@ -148,29 +147,29 @@ export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
               .sort((a: any, b: any) => a.user - b.user)
               ?.map((kit: any, index: number) => {
                 if (kit.model_detail.id == 1) return;
+                if (!kit.is_payed)
+                  return (
+                    <div
+                      className="bg-white p-2 py-3 gap-1 hover:bg-slate-200 rounded-lg text-dark flex flex-wrap my-2 justify-between"
+                      key={index + kit.user * index}
+                    >
+                      <Text>userID: {kit.user}</Text>
+                      <Text>{kit.model_detail.model}</Text>
 
-                return (
-                  <div
-                    className="bg-white p-2 py-3 gap-1 hover:bg-slate-200 rounded-lg text-dark flex flex-wrap my-2 justify-between"
-                    key={index + kit.user * index}
-                  >
-                    <Text>userID: {kit.user}</Text>
-                    <Text>{kit.model_detail.model}</Text>
-
-                    <div className="bg-slate-800 gap-2 flex text-orange-400 p-1 rounded-md">
-                      Pagamento pendente. Confirmar pagamento?{" "}
-                      <button
-                        className="bg-white text-green-700 rounded px-1 hover:bg-slate-300"
-                        onClick={(e) => {
-                          setIsUserPayModalOpen(true);
-                          setUserKit(kit);
-                        }}
-                      >
-                        Confirmar
-                      </button>
+                      <div className="bg-slate-800 gap-2 flex text-orange-400 p-1 rounded-md">
+                        Pagamento pendente. Confirmar pagamento?{" "}
+                        <button
+                          className="bg-white text-green-700 rounded px-1 hover:bg-slate-300"
+                          onClick={(e) => {
+                            setIsUserPayModalOpen(true);
+                            setUserKit(kit);
+                          }}
+                        >
+                          Confirmar
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                );
+                  );
               })}
             <div className="border-l-2 pl-2 mt-12 w-full py-3 font-bold flex gap-2 text-white">
               <Text> Kits com Pagamento confirmado</Text>

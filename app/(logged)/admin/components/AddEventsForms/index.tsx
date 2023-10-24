@@ -85,14 +85,10 @@ export default function AddEventsForms({ Token }: { Token: string }) {
         setErrorReq("Horarios invertidos");
         return;
       }
-      console.log(i, i + 1);
       eventDates += `"${i / 2}": {"start": "${dates[i]}", "end": "${
         dates[i + 1]
       }"}${i + 2 >= dates.length ? "}" : ","} `;
-
-      console.log(eventDates);
     }
-    console.log(JSON.parse(eventDates));
 
     const formData = new URLSearchParams();
     formData.append("category", category);
