@@ -1,21 +1,10 @@
 "use client";
-import { ReactNode, useRef, useState } from "react";
-import { User } from "next-auth";
+import { useRef } from "react";
 import Text from "@/components/Text";
-import QRCode from "qrcode.react";
-import generatePix from "@/utils/generatePix";
-import Input from "@/components/Input";
-import formatCurrency from "@/utils/formatCurrency";
-import { MdClose, MdContentCopy } from "react-icons/md";
-import { LuAlertCircle } from "react-icons/lu";
-import Image from "next/image";
-import squares_deco from "@/public/SVG/squares-deco.svg";
-import copyClipboard from "@/utils/copyClipboard";
 import useDeleteModalState from "./deleteModalStore";
 import EventDelete from "@/components/SECTIONS/Cronograma/EventsCard/EventDelete";
 import axios from "axios";
 import { DJANGO_URL } from "@/utils/consts";
-import Alert from "@/components/Alert";
 import useAlertAdminState from "../../alertAdminStore";
 import SmallText from "@/components/SmallText";
 

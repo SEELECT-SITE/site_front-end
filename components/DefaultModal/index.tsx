@@ -2,18 +2,20 @@
 import { ReactNode, useRef, useState } from "react";
 import EventCard from "../SECTIONS/Cronograma/EventsCard";
 import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 
 export default function DefaultModal({
   children,
-  externalModalIsOpen,
-  setExternalModalIsOpen,
+  modalIsOpen,
+  className,
+  setModalIsOpen,
 }: {
+  setModalIsOpen: (state: boolean) => void;
+  className?: string;
   children?: ReactNode;
-  setExternalModalIsOpen?: Function;
-  externalModalIsOpen?: boolean;
+  modalIsOpen: boolean;
 }) {
   const divModal = useRef<HTMLDivElement | null>(null);
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
 
   return (
     <>
@@ -25,7 +27,10 @@ export default function DefaultModal({
             }
           }}
           ref={divModal}
-          className="fixed w-full h-full z-[9999] flex top-0 left-0 p-4 backdrop-blur-sm bg-dark/20 text-dark  items-center justify-center"
+          className={twMerge(
+            "fixed w-full h-full z-[9999] flex top-0 left-0 p-4 backdrop-blur-sm bg-dark/20 text-dark  items-center justify-center",
+            className
+          )}
         >
           <div className="flex flex-col justify-between items-center relative overflow-hidden bg-white rounded-md max-w-md z-10 border-4 border-white">
             <EventCard.Delete

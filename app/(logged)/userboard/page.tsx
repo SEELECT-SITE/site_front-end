@@ -104,7 +104,7 @@ function Userboard({
                 <>
                   <UserKitArea user={user} />
 
-                  <UserEvents user={user} />
+                  <UserEvents user={user} sessionUpdate={sessionUpdate} />
                 </>
               ) : (
                 <>
