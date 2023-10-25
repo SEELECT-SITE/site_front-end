@@ -34,7 +34,9 @@ export default function EventCapacity({
         "Lotado "
       ) : (
         <>
-          {isUnderTen ? `Restam apenas ${capacity} Vagas` : `${capacity} Vagas`}
+          {isUnderTen
+            ? `Restam apenas ${capacity} Vagas`
+            : `Algumas vagas restantes`}
         </>
       )}
     </span>

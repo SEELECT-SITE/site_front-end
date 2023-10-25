@@ -14,6 +14,7 @@ import DeleteModal from "./DeleteModal";
 import FloatButton from "@/components/FloatButton";
 import { MdClose } from "react-icons/md";
 import { HiPencilAlt } from "react-icons/hi";
+import RadioGroup from "@/components/RadioGroup";
 
 interface EventsAdminProps {
   className?: string;
@@ -27,7 +28,7 @@ export default function EventsAdmin({
   user,
 }: EventsAdminProps) {
   const [isEventsOpen, setIsEventsOpen] = useState<boolean>(false);
-
+  const [categoryEvent, setCategoryEvent] = useState<string>("todos");
   const {
     isDeleteModalOpen,
     setIsDeleteModalOpen,
@@ -86,13 +87,38 @@ export default function EventsAdmin({
       )}
       {isEventsOpen && (
         <div className="w-full relative pb-20 ">
+          <Container>
+            {" "}
+            <div className="flex w-full justify-center">
+              <RadioGroup
+                className=" m-auto"
+                onChange={(e) => {
+                  setCategoryEvent(e.target.value);
+                }}
+                label="Dias"
+                options={[
+                  { title: "Workshop", value: "workshop" },
+                  { title: "Mini-curso", value: "minicurso" },
+                  { title: "Palestra", value: "palestra" },
+                  { title: "Todos", value: "todos" },
+                ]}
+                groupName={"categoryEvents"}
+              />
+            </div>
+          </Container>
           <Container className="flex flex-wrap gap-4 lg:gap-6">
             {events?.map((event: any, index: number) => {
               return (
                 <EventCard.Body
                   key={event.title + index}
                   id={event.title + index}
-                  className="lg:py-12 relative justify-between flex flex-col text-white border gap-2"
+                  className={`lg:py-12 relative justify-between flex-col text-white border gap-2 ${
+                    event.category == categoryEvent
+                      ? "flex"
+                      : categoryEvent == "todos"
+                      ? "flex"
+                      : "hidden"
+                  }`}
                 >
                   <EventCard.Delete
                     onClick={(e) => {
@@ -120,6 +146,8 @@ export default function EventsAdmin({
                       {Object.values(event.date).map((date) => {
                         return (
                           <EventCard.Date
+                            //@ts-ignore
+                            key={date + Math.random()}
                             //@ts-ignore
                             dateStart={date?.start}
                             //@ts-ignore

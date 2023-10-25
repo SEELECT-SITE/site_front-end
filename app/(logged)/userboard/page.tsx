@@ -95,15 +95,6 @@ function Userboard({
           className="rounded-none"
           notAnimated={true}
         />
-        <DefaultModal>
-          <Image src={banner_vts} width={1080} alt="banner vts" />
-          <Link
-            href={"https://forms.gle/54YWJEmmu5QuaU8p9"}
-            className="absolute bottom-2 text-center text-lg font-bold text-white  z-10 p-4 rounded-lg border hover:bg-cian-400 bg-cian-700"
-          >
-            CLIQUE AQUI E INSCREVA-SE
-          </Link>
-        </DefaultModal>
       </div>
       {hasUserName && (
         <>

@@ -64,9 +64,7 @@ function Cronograma() {
               //@ts-ignore
               return [date?.start, date?.end];
             });
-            if (event.title.split("$")[0] == "ABERTURA GAUDIUM") {
-              console.log(momento(eventDates[0][0]).format("dddd"));
-            }
+
             const daysOfWeekEvent = eventDates.map((elem) => {
               return momento(elem[0]).format("dddd");
             });
