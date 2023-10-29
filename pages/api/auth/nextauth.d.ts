@@ -38,7 +38,7 @@ type Kit = {
   model_detail: {
     id: number;
     model: string;
-    price: 25;
+    price: number;
     all_speeches: boolean;
     workshops: number;
     bucks_coup: boolean;

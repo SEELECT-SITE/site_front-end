@@ -158,10 +158,9 @@ export default function EventsAdmin({
                     </div>
                   </div>
                   <EventCard.Capacity
-                    capacity={
-                      event.max_number_of_inscriptions -
-                      event.number_of_inscriptions
-                    }
+                    admin={true}
+                    limit={event.max_number_of_inscriptions}
+                    capacity={event.number_of_inscriptions}
                   />
                 </EventCard.Body>
               );

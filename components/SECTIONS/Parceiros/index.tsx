@@ -31,7 +31,7 @@ function Parceiros() {
                 src={gaudium_logo}
                 alt="icone seelect"
                 width={300}
-                className="m-auto drop-shadow-icon-sm object-fill lg:grayscale-1 -translate-y-4 aspect-square"
+                className="m-auto drop-shadow-icon-sm scale-90 lg:grayscale-1 -translate-y-4 aspect-square"
               />
             </div>
           </Link>
@@ -41,12 +41,12 @@ function Parceiros() {
             href={"https://www.linkedin.com/company/tecnovettifortaleza/"}
             title="Ir para linkedIn"
           >
-            <div className="group rounded-full p-6 border-2 border-slate-700 bg-white hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
+            <div className="group rounded-full p-6 border-2 aspect-square flex items-center border-slate-700 bg-white hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
               <Image
                 src={tecnovetti_logo}
                 alt="logo tecnovetti"
                 width={300}
-                className="m-auto drop-shadow-icon-sm p-4  aspect-square"
+                className="m-auto drop-shadow-icon-sm scale-110 p-4"
               />
             </div>
           </Link>

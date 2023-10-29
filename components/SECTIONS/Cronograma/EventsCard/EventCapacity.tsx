@@ -1,18 +1,17 @@
 "use client";
-import {
-  ButtonHTMLAttributes,
-  HTMLAttributes,
-  InputHTMLAttributes,
-} from "react";
-import { MdCheck, MdClose } from "react-icons/md";
+import { HTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface EventCapacityProps extends HTMLAttributes<HTMLElement> {
   capacity: number;
+  admin?: boolean;
+  limit?: number;
 }
 
 export default function EventCapacity({
   className,
+  admin,
+  limit,
   id,
   capacity,
   ...props
@@ -30,8 +29,10 @@ export default function EventCapacity({
         className
       )}
     >
-      {isFull ? (
-        "Lotado "
+      {admin ? (
+        `${capacity} inscritos de ${limit} vagas`
+      ) : isFull ? (
+        "Lotado"
       ) : (
         <>
           {isUnderTen

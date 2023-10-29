@@ -13,7 +13,7 @@ export default function PresentationSection() {
   return (
     <section>
       <Container className="flex relative z-10 flex-col-reverse lg:flex-row lg:items-center">
-        <div className="">
+        <section title="Descrição" className="">
           <div className="backdrop-blur-md p-2 rounded-md">
             <h1
               className={`text-2xl mb-3 lg:mb-6 font-bold tracking-wide lg:text-4xl xl:text-5xl -ml-2`}
@@ -40,7 +40,7 @@ export default function PresentationSection() {
               </FloatButton>
             </Link>
           </div>
-        </div>
+        </section>
 
         <figure className="m-auto w-2/3 mb-6 max-w-md">
           <Image
