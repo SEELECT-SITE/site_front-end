@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { useQuery } from "react-query";
 import { User } from "next-auth";
 import axios from "axios";
@@ -43,7 +43,6 @@ export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
         const { data } = await axios.get(`${DJANGO_URL}api/kits/`, {
           headers,
         });
-        console.log(data.results[67]);
         return data.results;
       } catch (error) {}
     },
@@ -78,33 +77,6 @@ export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
               }`}
             </span>
             <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
-              {`Total arrecadado até o momento ${formatCurrency(
-                usersPayment.reduce((total: number, elem: any) => {
-                  if (elem.is_payed) {
-                    total +=
-                      elem.model_detail.price * (1 - elem.discount / 100);
-                  }
-                  return total;
-                }, 0)
-              )} de ${formatCurrency(
-                usersPayment.reduce((total: number, elem: any) => {
-                  total += elem.model_detail.price * (1 - elem.discount / 100);
-
-                  return total;
-                }, 0)
-              )} pendente.`}
-            </span>
-            <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
-              {`Desconto efetivamente aplicado ${formatCurrency(
-                usersPayment.reduce((total: number, elem: any) => {
-                  if (elem.discount) {
-                    total += (elem.model_detail.price * elem.discount) / 100;
-                  }
-                  return total;
-                }, 0)
-              )}`}
-            </span>
-            <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
               {`Kits Médios ${
                 usersPayment.filter((elem: any) => {
                   return elem.model == 3 && elem.is_payed == true;
@@ -133,6 +105,73 @@ export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
                   return elem.model == 1;
                 }).length
               }
+            </span>
+            <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
+              Kits de virada de lote{" "}
+              {
+                usersPayment.filter(
+                  (elem: any) =>
+                    elem.is_payed &&
+                    momento(elem.date_created).isAfter("10/29/2023")
+                ).length
+              }
+            </span>
+            <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
+              {`Total arrecadado até o momento ${formatCurrency(
+                usersPayment.reduce((total: number, elem: any) => {
+                  if (elem.is_payed) {
+                    total +=
+                      (momento(elem.date_created).isBefore("10/30/2023")
+                        ? elem.model_detail.price - 5
+                        : elem.model_detail.price) *
+                      (1 - elem.discount / 100);
+                  }
+                  return total;
+                }, 0)
+              )} de ${formatCurrency(
+                usersPayment.reduce((total: number, elem: any) => {
+                  total +=
+                    (momento(elem.date_created).isBefore("10/29/2023")
+                      ? elem.model_detail.price - 5
+                      : elem.model_detail.price) *
+                    (1 - elem.discount / 100);
+
+                  return total;
+                }, 0)
+              )}.`}
+            </span>
+            <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
+              {`Total arrecadado até o momento ${formatCurrency(
+                usersPayment.reduce((total: number, elem: any) => {
+                  if (
+                    elem.is_payed &&
+                    momento(elem.date_created).isAfter("10/29/2023")
+                  ) {
+                    total +=
+                      elem.model_detail.price * (1 - elem.discount / 100);
+                  }
+                  return total;
+                }, 0)
+              )} de ${formatCurrency(
+                usersPayment.reduce((total: number, elem: any) => {
+                  if (momento(elem.date_created).isAfter("10/29/2023")) {
+                    total +=
+                      elem.model_detail.price * (1 - elem.discount / 100);
+                  }
+
+                  return total;
+                }, 0)
+              )}.`}
+            </span>
+            <span className="flex text-left my-2 p-2 rounded-lg items-start gap-1 text-yellow-200 bg-slate-800 border">
+              {`Desconto efetivamente aplicado ${formatCurrency(
+                usersPayment.reduce((total: number, elem: any) => {
+                  if (elem.discount) {
+                    total += (elem.model_detail.price * elem.discount) / 100;
+                  }
+                  return total;
+                }, 0)
+              )}`}
             </span>
           </div>
         )}

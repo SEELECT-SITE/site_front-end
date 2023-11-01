@@ -10,6 +10,7 @@ import SmallText from "@/components/SmallText";
 import useUserPaymentStore from "./userPaymentModalStore";
 import Button from "@/components/Button";
 import { LuAlertCircle } from "react-icons/lu";
+import momento from "@/utils/formatDate";
 
 export default function UserPaymentModal({
   token,
@@ -61,7 +62,10 @@ export default function UserPaymentModal({
             Dejesa{" "}
             {userKit.is_payed ? "reverter pagamento" : "confirmar pagamento"} de{" "}
             {formatCurrency(
-              userKit?.model_detail.price * (1 - userKit.discount / 100)
+              (momento(userKit.date_created).isBefore("10/30/2023")
+                ? userKit.model_detail.price - 5
+                : userKit.model_detail.price) *
+                (1 - userKit.discount / 100)
             )}{" "}
             para o usúario de ID {userKit.user}?
           </Text>

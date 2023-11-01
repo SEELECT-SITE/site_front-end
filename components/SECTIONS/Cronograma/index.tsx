@@ -26,7 +26,14 @@ function Cronograma() {
         const { data } = await axios.get(`${DJANGO_URL}api/events/`, {
           headers,
         });
-        return data.results;
+        var aux = data.results;
+
+        aux.sort(
+          (a: any, b: any) =>
+            //@ts-ignore
+            new Date(a.date["0"].start) - new Date(b.date["0"].start)
+        );
+        return aux;
       } catch (error) {
         console.log(error);
       }

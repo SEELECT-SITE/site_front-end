@@ -29,7 +29,6 @@ export default function PayKitModal({ user }: PayKitModalProps) {
   )
     .replace(",", ".")
     .slice(3);
-  console.log(value);
   const pixCode = generatePix(
     "seelect@ufc.br",
     "Maria Augusta Simonetti",
@@ -76,7 +75,7 @@ export default function PayKitModal({ user }: PayKitModalProps) {
               <MdClose size={20} />
             </button>
           </div>
-          {user.kit?.discount && (
+          {user.kit?.discount != 0 && (
             <div className="inline-flex bg-slate-900 rounded-md text-yellow-200 items-center gap-1 p-1 my-2">
               <span>
                 <LuAlertCircle size={18} />

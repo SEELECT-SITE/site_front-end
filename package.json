@@ -19,6 +19,7 @@
     "icons": "^1.0.0",
     "moment": "^2.29.4",
     "next": "^13.4.10",
+    "nodemailer": "^6.9.7",
     "postcss": "8.4.23",
     "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.1.1",
+    "@types/nodemailer": "^6.4.13",
     "next-auth": "^4.22.4",
     "react-hook-form": "^7.45.2",
     "react-icons": "^4.9.0",
