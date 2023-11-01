@@ -12,8 +12,15 @@ import wave_svg from "@/public/SVG/wave-home.svg";
 import Contact from "@/components/SECTIONS/Contact";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "@/utils/queryClient";
+import DefaultModal from "@/components/DefaultModal";
+import { useState } from "react";
+import FloatButton from "@/components/FloatButton";
+import Link from "next/link";
+import kitItens from "@/public/kits.png";
 
 const Home = () => {
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
@@ -47,11 +54,20 @@ const Home = () => {
               className="w-full object-cover min-h-[1300px] -translate-x-2/3 lg:-translate-x-1/3"
             />
           </div>
+
           <Container className="w-full lg:py-32">
             <Parceiros />
           </Container>
           <Contact />
         </div>
+        <DefaultModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
+          <Image src={kitItens} alt={"kits items"} />
+          <div className="absolute bottom-2 left-0 px-3 w-full">
+            <Link href={"https://forms.gle/MKM7BHpFEuhSbPBu6"}>
+              <FloatButton shadowClassname="w-full">Veja Mais</FloatButton>
+            </Link>
+          </div>
+        </DefaultModal>
       </QueryClientProvider>
     </>
   );

@@ -8,7 +8,7 @@ import { QueryClientProvider } from "react-query";
 import { queryClient } from "@/utils/queryClient";
 import { Session } from "next-auth";
 import FloatButton from "@/components/FloatButton";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SelectEventsModal from "./components/SelectEventsModal";
 import useSelectEventsState from "./components/SelectEventsModal/selectEventsStore";
 import Title from "@/components/Title";
@@ -17,15 +17,14 @@ import { MdClose } from "react-icons/md";
 import { HiPencilAlt } from "react-icons/hi";
 import UserEvents from "./components/UserEvents";
 import UserKitArea from "./components/UserKitArea";
+import kitItens from "@/public/kits.png";
 import BannerLogin from "@/app/(auth)/login/LoginSections/BannerSign";
 import KitsAvaliable from "./components/KitsAvaliabe";
 import useUserboardState from "./components/userboardStore/PayKitModalStore";
 import SkeletonCreator from "@/components/SkeletonCreator";
 import DefaultModal from "@/components/DefaultModal";
-import banner_vts from "@/public/banner_vts.png";
-
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 function Userboard({
   session,
@@ -124,10 +123,19 @@ function Userboard({
 
 export default function UserboardPage() {
   const { data: session, update: sessionUpdate } = useSession();
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
   if (session) {
     return (
       <QueryClientProvider client={queryClient}>
         <Userboard session={session} sessionUpdate={sessionUpdate} />
+        <DefaultModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
+          <Image src={kitItens} alt={"kits items"} />
+          <div className="absolute bottom-2 left-0 px-3 w-full">
+            <Link href={"https://forms.gle/MKM7BHpFEuhSbPBu6"}>
+              <FloatButton shadowClassname="w-full">Veja Mais</FloatButton>
+            </Link>
+          </div>
+        </DefaultModal>
       </QueryClientProvider>
     );
   }

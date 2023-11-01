@@ -50,12 +50,12 @@ export default function KitsAvaliable({
             Não tem kit ainda?
           </Title>
           <Text className="text-slate-300">Selecione um dos kit abaixo</Text>
-          <SmallText className="inline-flex text-center my-2 p-2 rounded-lg m-auto items-start gap-1 text-yellow-200 bg-slate-900">
+          {/*  <SmallText className="inline-flex text-center my-2 p-2 rounded-lg m-auto items-start gap-1 text-yellow-200 bg-slate-900">
             <span>
               <LuAlertCircle size={18} />
             </span>
             1º Lote disponível valído até dia 30/10/2023
-          </SmallText>
+          </SmallText> */}
         </>
       ) : (
         <></>
