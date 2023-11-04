@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import gaudium_logo from "@/public/parceiros/gaudium_logo.png";
 import tecnovetti_logo from "@/public/parceiros/LOGO_TECNOVETTI.png";
+import autocore_logo from "@/public/parceiros/autocore_logo.png";
 import Title from "@/components/Title";
 import Link from "next/link";
 
@@ -47,6 +48,21 @@ function Parceiros() {
                 alt="logo tecnovetti"
                 width={300}
                 className="m-auto drop-shadow-icon-sm scale-110 p-4"
+              />
+            </div>
+          </Link>
+          <Link
+            className="text-dark-cian hover:text-dark"
+            target="_blank"
+            href={"https://www.autocorerobotica.com.br/"}
+            title="Ir para site"
+          >
+            <div className="group bg-[#fff] rounded-full p-6 border-2 aspect-square flex items-center border-slate-700  hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
+              <Image
+                src={autocore_logo}
+                alt="logo auto core"
+                width={300}
+                className="m-auto scale-110 p-4"
               />
             </div>
           </Link>
