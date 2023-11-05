@@ -10,6 +10,7 @@ import useUserboardState from "../userboardStore/PayKitModalStore";
 import SkeletonCreator from "@/components/SkeletonCreator";
 import SmallText from "@/components/SmallText";
 import { LuAlertCircle } from "react-icons/lu";
+import momento from "@/utils/formatDate";
 
 export default function KitsAvaliable({
   title,
@@ -42,9 +43,18 @@ export default function KitsAvaliable({
     },
     { refetchOnWindowFocus: false }
   );
+  if (momento().isAfter("11/06/2023")) {
+    return (
+      <div className="h-[5vh]">
+        <Title className="border-l-2 pl-2 border-cian-400">
+          Inscrições encerradas
+        </Title>
+      </div>
+    );
+  }
   return (
     <>
-      {title ? (
+      {title && (
         <>
           <Title className="border-l-2 pl-2 border-cian-400">
             Não tem kit ainda?
@@ -57,8 +67,6 @@ export default function KitsAvaliable({
             1º Lote disponível valído até dia 30/10/2023
           </SmallText> */}
         </>
-      ) : (
-        <></>
       )}
 
       <div className="flex flex-wrap gap-4 my-6 justify-around">

@@ -1,13 +1,10 @@
 "use client";
 import KitsAvaliable from "@/app/(logged)/userboard/components/KitsAvaliabe";
 import Container from "@/components/Container";
-import PriceCard from "@/components/PriceCard";
-import SmallText from "@/components/SmallText";
 import Paragraph from "@/components/Text";
 import Title from "@/components/Title";
 import { queryClient } from "@/utils/queryClient";
 import { useRouter } from "next/navigation";
-import { LuAlertCircle } from "react-icons/lu";
 import { QueryClientProvider } from "react-query";
 
 function Pacotes() {

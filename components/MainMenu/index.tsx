@@ -11,6 +11,7 @@ import {
 import { IoIosPeople, IoMdArrowForward } from "react-icons/io";
 import { MdAddShoppingCart } from "react-icons/md";
 import Badge from "../Badge";
+import momento from "@/utils/formatDate";
 
 export default function MainMenu() {
   const { menuIsOpen, setMenuIsOpen } = useGlobalState();
@@ -54,20 +55,22 @@ export default function MainMenu() {
               </button>
             </li>
 
-            <li className="">
-              <button
-                onClick={(e) => setMenuIsOpen(!menuIsOpen)}
-                className="w-full"
-              >
-                <Link
-                  href={"/pacotes"}
-                  className="active:opacity-30 flex gap-2 items-center w-full pb-4 hover:opacity-80 border-b-2 border-dark-cian hover:border-cian-700 hover:text-cian-700"
+            {momento().isBefore("11/06/2023") && (
+              <li className="">
+                <button
+                  onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+                  className="w-full"
                 >
-                  <MdAddShoppingCart />
-                  Pacotes
-                </Link>
-              </button>
-            </li>
+                  <Link
+                    href={"/pacotes"}
+                    className="active:opacity-30 flex gap-2 items-center w-full pb-4 hover:opacity-80 border-b-2 border-dark-cian hover:border-cian-700 hover:text-cian-700"
+                  >
+                    <MdAddShoppingCart />
+                    Pacotes
+                  </Link>
+                </button>
+              </li>
+            )}
             <li className="">
               <button
                 onClick={(e) => setMenuIsOpen(!menuIsOpen)}
@@ -95,7 +98,7 @@ export default function MainMenu() {
                   className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:opacity-30 duration-150 w-full"
                   onClick={(e) => setMenuIsOpen(!menuIsOpen)}
                 >
-                  INSCREVA-SE
+                  LOGIN
                 </Button>
               </Link>
               {/* </Badge> */}
@@ -131,14 +134,16 @@ export default function MainMenu() {
               Sobre
             </Link>
           </li>
-          <li className="flex">
-            <Link
-              href="/pacotes"
-              className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
-            >
-              Pacotes
-            </Link>
-          </li>
+          {momento().isBefore("11/06/2023") && (
+            <li className="flex">
+              <Link
+                href="/pacotes"
+                className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
+              >
+                Pacotes
+              </Link>
+            </li>
+          )}
           <li className="flex">
             <Link
               href="/contato"
@@ -156,7 +161,7 @@ export default function MainMenu() {
             > */}
             <Button className="p-0 rounded-full m-0 bg-dark text-white">
               <Link href="/login" className="flex p-3 px-8 gap-1 items-center">
-                Inscreva-se <IoMdArrowForward />
+                Login <IoMdArrowForward />
               </Link>
             </Button>
             {/* </Badge> */}

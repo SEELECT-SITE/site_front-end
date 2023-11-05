@@ -41,7 +41,7 @@ function Cronograma() {
     { refetchOnMount: false, refetchOnWindowFocus: false }
   );
   const router = useRouter();
-  const [dayOfWeek, setDayOfWeek] = useState<string>("complet");
+  const [dayOfWeek, setDayOfWeek] = useState<string>("segunda-feira");
 
   return (
     <section className="w-full py-12 lg:py-24 rounded-md backdrop-blur-sm shadow-md shadow-slate-900 bg-white/10 border border-white/20 ">

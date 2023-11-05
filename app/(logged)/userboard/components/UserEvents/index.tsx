@@ -15,6 +15,7 @@ import EventDelete from "@/components/SECTIONS/Cronograma/EventsCard/EventDelete
 import Text from "@/components/Text";
 import SmallText from "@/components/SmallText";
 import removeElem from "@/utils/removeElem";
+import momento from "@/utils/formatDate";
 
 export default function UserEvents({
   user,
@@ -83,21 +84,23 @@ export default function UserEvents({
           </div>
         )}
       </DefaultModal>
-
       <Title className="border-l-2 border-cian-400 pl-2 mb-4">
         Seus Eventos selecionados
       </Title>
-      <FloatButton
-        className="p-1"
-        onClick={(e) => {
-          setIsSelectEventOpen(true);
-          setSelectedKit(user.kit?.model!);
-        }}
-      >
-        {user?.kit?.events.length! > 0
-          ? "Trocar de eventos"
-          : "Selecione seus eventos"}
-      </FloatButton>
+      {momento().isBefore("11/06/2023") && (
+        <FloatButton
+          className="p-1"
+          onClick={(e) => {
+            setIsSelectEventOpen(true);
+            setSelectedKit(user.kit?.model!);
+          }}
+        >
+          {user?.kit?.events.length! > 0
+            ? "Trocar de eventos"
+            : "Selecione seus eventos"}
+        </FloatButton>
+      )}
+
       <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecth m-auto justify-around">
         {user?.kit?.events
           .sort(
@@ -113,14 +116,16 @@ export default function UserEvents({
                 id={event.title + index}
                 className="lg:py-12 relative justify-between flex flex-col"
               >
-                <EventCard.Delete
-                  message="Remover"
-                  className="top-4"
-                  onClick={(e) => {
-                    setModalIsOpen(true);
-                    setRemoveEvent(event);
-                  }}
-                />
+                {momento().isBefore("11/06/2023") && (
+                  <EventCard.Delete
+                    message="Remover"
+                    className="top-4"
+                    onClick={(e) => {
+                      setModalIsOpen(true);
+                      setRemoveEvent(event);
+                    }}
+                  />
+                )}
                 <div>
                   <EventCard.Title title={event.title.split("$")[0]} />
                   <EventCard.Hoster hoster={event.host} />

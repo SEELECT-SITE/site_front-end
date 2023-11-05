@@ -25,6 +25,7 @@ import SkeletonCreator from "@/components/SkeletonCreator";
 import DefaultModal from "@/components/DefaultModal";
 import Image from "next/image";
 import Link from "next/link";
+import momento from "@/utils/formatDate";
 
 function Userboard({
   session,
@@ -112,7 +113,7 @@ function Userboard({
               )}
             </div>
           </Container>
-          {isSelectEventOpen && (
+          {isSelectEventOpen && momento().isBefore("11/06/2023") && (
             <SelectEventsModal user={user!} sessionUpdate={sessionUpdate} />
           )}
         </>

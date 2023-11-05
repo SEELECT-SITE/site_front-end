@@ -4,6 +4,7 @@ import Container from "@/components/Container";
 import FormsLogin from "./LoginSections/FormsLogin";
 import MarqueeLogin from "./LoginSections/MarqueeSign";
 import BannerLogin from "./LoginSections/BannerSign";
+import momento from "@/utils/formatDate";
 
 export const metadata = {
   title: "Login",
@@ -20,12 +21,14 @@ export default function Login() {
           <Container className="w-full m-auto max-w-lg 2xl:p-8">
             <FormsLogin />
             <div className="flex flex-wrap w-full max-w-sm m-auto justify-between mt-2 ">
-              <Link
-                href="/cadastro"
-                className="hover:underline text-black p-1 text-sm hover:text-white hover:bg-black"
-              >
-                Não tem conta? <b>Cadastre-se</b>
-              </Link>
+              {momento().isBefore("11/06/2023") && (
+                <Link
+                  href="/cadastro"
+                  className="hover:underline text-black p-1 text-sm hover:text-white hover:bg-black"
+                >
+                  Não tem conta? <b>Cadastre-se</b>
+                </Link>
+              )}
               <Link
                 href="/forgetpassword"
                 className="hover:underline text-black p-1 text-sm hover:text-white hover:bg-black"
