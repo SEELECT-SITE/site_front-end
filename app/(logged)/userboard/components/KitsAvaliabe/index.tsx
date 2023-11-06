@@ -43,7 +43,7 @@ export default function KitsAvaliable({
     },
     { refetchOnWindowFocus: false }
   );
-  if (momento().isAfter("11/06/2023")) {
+  if (false) {
     return (
       <div className="h-[5vh]">
         <Title className="border-l-2 pl-2 border-cian-400">
