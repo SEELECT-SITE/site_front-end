@@ -12,8 +12,5 @@ export default function CadastroLayout({
 }: {
   children: React.ReactNode;
 }) {
-  if (momento().isAfter("11/06/2023")) {
-    redirect("/");
-  }
   return <>{children}</>;
 }

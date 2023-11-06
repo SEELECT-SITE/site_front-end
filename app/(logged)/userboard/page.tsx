@@ -113,7 +113,7 @@ function Userboard({
               )}
             </div>
           </Container>
-          {isSelectEventOpen && momento().isBefore("11/06/2023") && (
+          {isSelectEventOpen && (
             <SelectEventsModal user={user!} sessionUpdate={sessionUpdate} />
           )}
         </>

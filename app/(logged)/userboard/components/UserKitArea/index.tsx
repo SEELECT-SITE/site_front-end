@@ -22,20 +22,19 @@ export default function UserKitArea({ user }: { user: User }) {
       <Title className="border-l-2 border-cian-400 pl-2">
         {kitsValues != "" && kitsValues[user?.kit?.model! - 1 ?? 1].model}
       </Title>
-      {user?.kit?.model == 1 && momento().isBefore("11/06/2023") && (
-        <>
-          <FloatButton
-            className="p-1"
-            shadowClassname="my-1"
-            onClick={(e) => {
-              setIsChooseKitOpen(!isChooseKitOpen);
-            }}
-          >
-            Trocar de Kit
-          </FloatButton>
-          {isChooseKitOpen && <KitsAvaliable />}
-        </>
-      )}
+
+      <>
+        <FloatButton
+          className="p-1"
+          shadowClassname="my-1"
+          onClick={(e) => {
+            setIsChooseKitOpen(!isChooseKitOpen);
+          }}
+        >
+          Trocar de Kit
+        </FloatButton>
+        {isChooseKitOpen && <KitsAvaliable />}
+      </>
       <Text className="font-bold mt-4">Você tem direito a:</Text>
       <ul className="mb-4">
         {[
