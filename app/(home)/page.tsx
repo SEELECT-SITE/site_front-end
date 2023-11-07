@@ -1,47 +1,74 @@
+"use client";
 import PresentationSection from "@/components/SECTIONS/PresentationSection";
 import Image from "next/image";
-
+import techno_wave from "@/public/SVG/techno-wave.svg";
+import ball_deco from "@/public/SVG/elipse-deco.svg";
 import Parceiros from "@/components/SECTIONS/Parceiros";
 import Container from "@/components/Container";
 import Cronograma from "@/components/SECTIONS/Cronograma";
 import Retrospec from "@/components/SECTIONS/Retrospec";
-import Contact from "@/components/SECTIONS/Contact";
 import Testimony from "@/components/SECTIONS/Testimony";
-
 import wave_svg from "@/public/SVG/wave-home.svg";
-
-export const metadata = {
-  title: "SEELECT",
-  description:
-    "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
-};
+import Contact from "@/components/SECTIONS/Contact";
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "@/utils/queryClient";
+import DefaultModal from "@/components/DefaultModal";
+import { useState } from "react";
+import FloatButton from "@/components/FloatButton";
+import Link from "next/link";
+import kitItens from "@/public/kits.png";
 
 const Home = () => {
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
+
   return (
     <>
-      <div className="pt-32 lg:py-44 bg-gradient-to-b from-dark via-dark via-40% to-dark/70">
-        <PresentationSection />
+      <QueryClientProvider client={queryClient}>
+        <div className="pt-32 lg:py-44 bg-gradient-to-b from-dark via-dark via-40% to-dark/70">
+          <PresentationSection />
 
-        <Container className="lg:mt-16">
           <Testimony />
-        </Container>
 
-        <div className="w-110% -left-5% absolute -z-10 min-w-[800px] -translate-y-3/4 lg:-translate-y-1/2">
-          <Image src={wave_svg} alt={"svg de decoração"} className="w-full" />
+          <div className="w-110% -left-5% absolute -z-10 min-w-[800px] -translate-y-3/4 lg:-translate-y-1/2">
+            <Image src={wave_svg} alt={"svg de decoração"} className="w-full" />
+          </div>
         </div>
-      </div>
 
-      <Retrospec />
+        <Retrospec />
+        <div className="relative z-10 bg-gradient-to-b from-dark-cian via-dark/90 via-60% to-dark overflow-hidden">
+          <Container>
+            <Cronograma />
+          </Container>
 
-      <Container>
-        <Cronograma />
-      </Container>
+          <div className="absolute h-full top-52 lg:to-32 -right-6 translate-x-1/2 w-2-full lg:w-1/2 lg:translate-x-1/4 grayscale -z-10">
+            <Image
+              src={ball_deco}
+              alt={"svg de decoração"}
+              className="w-full object-cover "
+            />
+          </div>
+          <div className="absolute top-3/5 lg:top-2/3 left-0 w-[400%] lg:w-2-full rotate-45 -z-10">
+            <Image
+              src={techno_wave}
+              alt={"svg de decoração"}
+              className="w-full object-cover min-h-[1300px] -translate-x-2/3 lg:-translate-x-1/3"
+            />
+          </div>
 
-      <Container className="bg-white w-full my-12 lg:my-32">
-        <Parceiros />
-      </Container>
-
-      <Contact />
+          <Container className="w-full lg:py-32">
+            <Parceiros />
+          </Container>
+          <Contact />
+        </div>
+        <DefaultModal modalIsOpen={modalIsOpen} setModalIsOpen={setModalIsOpen}>
+          <Image src={kitItens} alt={"kits items"} />
+          <div className="absolute bottom-2 left-0 px-3 w-full">
+            <Link href={"https://forms.gle/MKM7BHpFEuhSbPBu6"}>
+              <FloatButton shadowClassname="w-full">Veja Mais</FloatButton>
+            </Link>
+          </div>
+        </DefaultModal>
+      </QueryClientProvider>
     </>
   );
 };

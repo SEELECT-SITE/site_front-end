@@ -1,0 +1,14 @@
+.alert {
+  animation: slideAlert 3s ease-in-out;
+}
+
+@keyframes slideAlert {
+  0%,
+  100% {
+    transform: TranslateX(-102%);
+  }
+  12%,
+  88% {
+    transform: TranslateX(calc(2% + 8px));
+  }
+}

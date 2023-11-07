@@ -25,10 +25,15 @@ module.exports = {
       },
       animation: {
         "login-deco": "login-deco 20s ease-in-out infinite",
+        "marquee-slide": "marquee-slide 20s ease-in-out infinite",
       },
       keyframes: {
         "login-deco": {
           "0%, 100%": { transform: "translateX(-25%)" },
+          "50%": { transform: "translateX(0%)" },
+        },
+        "marquee-slide": {
+          "0%, 100%": { transform: "translateX(-100%)" },
           "50%": { transform: "translateX(0%)" },
         },
       },
@@ -49,7 +54,7 @@ module.exports = {
       },
       dropShadow: {
         "icon-xl": "12px 12px 0px rgba(0, 0, 0, 0.25)",
-        icon: "8px 8px 0px #0009",
+        icon: "6px 6px 1px #0003",
         "icon-sm": "2px 2px 0px rgba(0, 0, 0, 0.40)",
         xlc: ["1px 1px 1px #0005", "-1px -1px 1px #0003"],
       },
@@ -57,6 +62,8 @@ module.exports = {
         xs: "350px",
       },
       borderRadius: {
+        "4xl": "2rem",
+        "5xl": "3rem",
         "100%": "100%",
       },
       spacing: {

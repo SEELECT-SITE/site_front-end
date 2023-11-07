@@ -10,7 +10,7 @@ const SmallText: FunctionComponent<TextProps> = ({ children, className }) => {
   return (
     <small
       className={twMerge(
-        "lg:text-sm lg:font-thin m-0 p-0 tracking-wide",
+        "lg:font-thin m-0 p-0 tracking-wide",
         className
       )}
     >

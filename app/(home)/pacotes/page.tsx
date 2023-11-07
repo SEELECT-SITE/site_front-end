@@ -1,17 +1,14 @@
-import Badge from "@/components/Badge";
+"use client";
+import KitsAvaliable from "@/app/(logged)/userboard/components/KitsAvaliabe";
 import Container from "@/components/Container";
-import PriceCard from "@/components/PriceCard";
 import Paragraph from "@/components/Text";
 import Title from "@/components/Title";
-import { MdDone } from "react-icons/md";
+import { queryClient } from "@/utils/queryClient";
+import { useRouter } from "next/navigation";
+import { QueryClientProvider } from "react-query";
 
-export const metadata = {
-  title: "Pacotes",
-  description:
-    "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
-};
-
-export default function PacotesPage() {
+function Pacotes() {
+  const router = useRouter();
   return (
     <>
       <Container className="w-full pt-32 lg:py-32 2xl:py-38 bg-white">
@@ -21,74 +18,25 @@ export default function PacotesPage() {
         <Paragraph className="text-black/40 text-sm text-center">
           Veja a melhor dentre as 3 opções abaixo:
         </Paragraph>
+        {/* <div className="flex justify-center">
+          <SmallText className="inline-flex text-center my-2 p-2 rounded-lg m-auto items-start gap-1 text-yellow-200 bg-slate-900">
+            <span>
+              <LuAlertCircle size={18} />
+            </span>
+            <b> Primeiro Lote</b> disponível valído até dia 30/10/2023
+          </SmallText>
+        </div> */}
 
-        <div className="flex flex-col items-center lg:flex-row lg:gap-8 2xl:gap-24 lg:justify-center lg:items-stretch ">
-
-          <PriceCard price={30} title="Pacote Básico" stars={1}>
-            <ul className="text-black font-thin italic mt-4 mb-8">
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet .
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-            </ul>
-          </PriceCard>
-
-          <PriceCard price={60} destack={true} destackText="POPULAR" title="Pacote Premium" stars={2}>
-            <ul className="font-thin italic mt-4 mb-8">
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"#84d1cf"} className="min-w-[20px]" />
-                Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
-                consectetur adipisicing elit.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"#84d1cf"} className="min-w-[20px]" />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"#84d1cf"} className="min-w-[20px]" />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"#84d1cf"} className="min-w-[20px]" />
-                Lorem ipsum dolor sit amet.
-              </li>
-            </ul>
-          </PriceCard>
-
-          <PriceCard price={120} title="Pacote VIP" stars={3}>
-            <ul className="text-black font-thin italic mt-4 mb-8">
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet .
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-              <li className="flex gap-1 mt-2 text-sm">
-                <MdDone size={18} fill={"green"} />
-                Lorem ipsum dolor sit amet.
-              </li>
-            </ul>
-          </PriceCard>
-        </div>
+        <KitsAvaliable onClick={() => router.push("./login")} />
       </Container>
     </>
+  );
+}
+
+export default function PacotesPage() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Pacotes />
+    </QueryClientProvider>
   );
 }
