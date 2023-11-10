@@ -12,7 +12,7 @@ export default function isEventDisable(
   numberOfSelectWorkshops: number
 ) {
   if (momento().isAfter(eventDates[0][0])) {
-    /* return true; */
+    return true;
   }
   if (selectEvents.includes(event.id)) return false;
 
