@@ -15,13 +15,13 @@ import { MdClose } from "react-icons/md";
 import { FiAlertCircle } from "react-icons/fi";
 import { DJANGO_URL } from "@/utils/consts";
 import useUserboardState from "../userboardStore/PayKitModalStore";
-import isEventOverlap from "@/utils/isEventOverlap";
 import RadioGroup from "@/components/RadioGroup";
 import momento from "@/utils/formatDate";
 import SkeletonCreator from "@/components/SkeletonCreator";
 import { useRouter } from "next/navigation";
 import Alert from "@/components/Alert";
 import { scrollToElement } from "@/utils/scrollToElement";
+import isEventDisable from "./isEventDisable";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -35,7 +35,12 @@ export default function SelectEventsModal({
   sessionUpdate,
 }: SelectEventsModalProps) {
   const { setIsSelectEventOpen, selectedKit } = useSelectEventsState();
-  const [selectEvents, setSelectEvents] = useState<number[]>([]);
+  const [selectEvents, setSelectEvents] = useState<number[]>(
+    user.kit?.events.map((elem: any) => {
+      return elem.id;
+    }) || []
+  );
+
   const concernAlertDiv = useRef<HTMLDivElement | null>(null);
 
   const [dayOfWeek, setDayOfWeek] = useState<string>("complet");
@@ -47,8 +52,6 @@ export default function SelectEventsModal({
     useState<number>(0);
   const [numberOfSelectedSpeeches, setNumberOfSelectedSpeeches] =
     useState<number>(0);
-  //@ts-ignore
-
   const { data: events, isLoading } = useQuery<any | undefined>(
     "userEvents",
     async () => {
@@ -74,9 +77,8 @@ export default function SelectEventsModal({
     },
     { refetchOnWindowFocus: false }
   );
-  const router = useRouter();
+
   useEffect(() => {
-    setSelectEvents([]);
     setNumberOfSelectWorkshops(0);
   }, []);
 
@@ -101,6 +103,7 @@ export default function SelectEventsModal({
       setSelectEvents(removeElem(selectEvents, 0));
     }
   }
+
   const kitModelId = selectedKit ? selectedKit - 1 : user.kit!.model - 1;
 
   async function updateEvents() {
@@ -134,7 +137,6 @@ export default function SelectEventsModal({
       formData.append("events", elem.toString());
     });
     try {
-      ("");
       if (user.kit?.id) {
         formData.append("model", model!.toString());
         await axios.put(
@@ -150,7 +152,6 @@ export default function SelectEventsModal({
         });
       }
       sessionUpdate();
-      router.refresh();
     } catch (e) {
     } finally {
       setIsSelectEventOpen(false);
@@ -277,44 +278,18 @@ export default function SelectEventsModal({
               const daysOfWeekEvent = eventDates.map((elem) => {
                 return momento(elem[0]).format("dddd");
               });
-
-              function isDisable(eventsTimePicked: any): boolean {
-                if (selectEvents.includes(event.id)) return false;
-
-                if (!selectEvents.includes(event.id)) {
-                  if (isEventOverlap(eventDates, eventsTimePicked)) {
-                    return true;
-                  }
-                  if (event.title.split("$")[1] == "patrocinador") {
-                    return false;
-                  }
-                  if (
-                    numberOfSelectWorkshops >=
-                      kitsValues[kitModelId].workshops &&
-                    ["workshop", "minicurso"].includes(event.category)
-                  ) {
-                    return true;
-                  }
-                  if (
-                    numberOfSelectWorkshops >=
-                      kitsValues[kitModelId].workshops &&
-                    ["workshop", "minicurso"].includes(event.category)
-                  ) {
-                    return true;
-                  }
-                  if (
-                    !kitsValues[kitModelId].all_speeches &&
-                    numberOfSelectedSpeeches >= 1
-                  ) {
-                    return true;
-                  }
-                }
-                return false;
-              }
-
               return (
                 <EventCard.Body
-                  disable={isDisable(eventsTimePicked)}
+                  defaultChecked={selectEvents.includes(event.id)}
+                  disable={isEventDisable(
+                    event,
+                    eventDates,
+                    selectEvents,
+                    eventsTimePicked,
+                    kitsValues[kitModelId],
+                    numberOfSelectedSpeeches,
+                    numberOfSelectWorkshops
+                  )}
                   key={"eventoid" + event.id + index}
                   id={"eventoid" + event.id + index}
                   onClick={() => {
