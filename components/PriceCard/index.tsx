@@ -30,7 +30,7 @@ export function SvgCardLine({
       <path
         d="M312.774 6L307 0.226497L301.226 6L307 11.7735L312.774 6ZM-87.5 7H307V5H-87.5V7Z"
         fill={color || "black"}
-        fill-opacity={opacity || "0.1"}
+        fillOpacity={opacity || "0.1"}
       />
     </svg>
   );
@@ -92,10 +92,10 @@ const PriceCard: FunctionComponent<PriceCardProps> = ({
                 <Text className="xs:text-lg font-bold">Benefícios</Text>
               </div>
               <ul className="my-2">
-                {advantage.map((elem) => {
-                  if (!elem) return <></>;
+                {advantage.map((elem, index) => {
+                  if (!elem) return <div key={`null-${index}`}></div>;
                   return (
-                    <li className="flex gap-1 mt-2 text-sm">
+                    <li key={elem} className="flex gap-1 mt-2 text-sm">
                       <MdDone size={18} fill={"green"} />
                       {elem}
                     </li>

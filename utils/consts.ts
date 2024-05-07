@@ -1,4 +1,4 @@
-export const DJANGO_URL = "https://b77c-200-19-186-128.ngrok-free.app/";
+export const DJANGO_URL = "http://127.0.0.1:8000/";
 
 //https:70ac-200-19-186-128.ngrok-free.app
 export const IES_CEARA = [

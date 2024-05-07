@@ -72,10 +72,10 @@ export default function KitsAvaliable({
       <div className="flex flex-wrap gap-4 my-6 justify-around">
         {!isLoading &&
           kits
-            .map((kit: any) => {
+            .map((kit: any, index: number) => {
               return (
                 <PriceCard
-                  key={kit.title + kit.id}
+                  key={`kit-${index}`}
                   stars={kit.id - 1}
                   onClick={() => {
                     {

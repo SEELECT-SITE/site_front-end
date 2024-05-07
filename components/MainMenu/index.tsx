@@ -55,7 +55,7 @@ export default function MainMenu() {
               </button>
             </li>
 
-            {momento().isBefore("11/06/2023") && (
+            {momento().isBefore("2023-11-06") && (
               <li className="">
                 <button
                   onClick={(e) => setMenuIsOpen(!menuIsOpen)}
@@ -134,7 +134,7 @@ export default function MainMenu() {
               Sobre
             </Link>
           </li>
-          {momento().isBefore("11/06/2023") && (
+          {momento().isBefore("2023-11-06") && (
             <li className="flex">
               <Link
                 href="/pacotes"

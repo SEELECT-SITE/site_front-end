@@ -116,6 +116,8 @@ function Cronograma() {
                       return (
                         <EventCard.Date
                           //@ts-ignore
+                          key={date?.start + date?.end}
+                          //@ts-ignore
                           dateStart={date?.start}
                           //@ts-ignore
                           dateEnd={date?.end}

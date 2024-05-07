@@ -22,6 +22,7 @@ import { useRouter } from "next/navigation";
 import Alert from "@/components/Alert";
 import { scrollToElement } from "@/utils/scrollToElement";
 import isEventDisable from "./isEventDisable";
+import ts from "typescript";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -192,7 +193,10 @@ export default function SelectEventsModal({
                     : "",
                 ].map((elem) => {
                   return (
-                    <li className="flex border-l border-slate-800 pl-1 my-2">
+                    <li
+                      key={elem}
+                      className="flex border-l border-slate-800 pl-1 my-2"
+                    >
                       {elem}
                     </li>
                   );
@@ -219,7 +223,7 @@ export default function SelectEventsModal({
                 >
                   <input
                     checked={adviceReaded}
-                    onClick={(e) => setAdviceReaded(!adviceReaded)}
+                    onChange={(e) => setAdviceReaded(!adviceReaded)}
                     type="checkbox"
                     id="MarketingAccept"
                     name="marketing_accept"
@@ -351,6 +355,8 @@ export default function SelectEventsModal({
                         {Object.values(event.date).map((date) => {
                           return (
                             <EventCard.Date
+                              //@ts-ignore
+                              key={date?.start + date?.end}
                               //@ts-ignore
 
                               dateStart={date?.start}
