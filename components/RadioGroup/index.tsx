@@ -18,7 +18,7 @@ const RadioGroup: FunctionComponent<RadioGroupProps> = ({
   ...props
 }) => {
   return (
-    <fieldset className="flex flex-wrap items-center justify-center">
+    <fieldset className="flex flex-wrap gap-1 items-center justify-center">
       <legend className="sr-only">{label}</legend>
       {options.map((elem: any, index: number) => {
         return (

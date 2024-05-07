@@ -11,18 +11,17 @@ import useSelectEventsState from "./selectEventsStore";
 import Title from "@/components/Title";
 import Container from "@/components/Container";
 import { SvgCardLine } from "@/components/PriceCard";
-import { MdClose } from "react-icons/md";
-import { FiAlertCircle } from "react-icons/fi";
 import { DJANGO_URL } from "@/utils/consts";
 import useUserboardState from "../userboardStore/PayKitModalStore";
-import RadioGroup from "@/components/RadioGroup";
 import momento from "@/utils/formatDate";
 import SkeletonCreator from "@/components/SkeletonCreator";
-import { useRouter } from "next/navigation";
 import Alert from "@/components/Alert";
 import { scrollToElement } from "@/utils/scrollToElement";
 import isEventDisable from "./isEventDisable";
-import ts from "typescript";
+import AdviceKitChange from "./adviceKitChange";
+import FilterDaysEvents from "./filterDaysEvents";
+import SelectedKitAdvantages from "./selectedKitAdvantages";
+import CloseModalButton from "./closeModalButton";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -35,7 +34,8 @@ export default function SelectEventsModal({
   user,
   sessionUpdate,
 }: SelectEventsModalProps) {
-  const { setIsSelectEventOpen, selectedKit } = useSelectEventsState();
+  const { setIsSelectEventOpen, selectedKit, adviceReaded, dayOfWeek } =
+    useSelectEventsState();
   const [selectEvents, setSelectEvents] = useState<number[]>(
     user.kit?.events.map((elem: any) => {
       return elem.id;
@@ -43,10 +43,7 @@ export default function SelectEventsModal({
   );
 
   const concernAlertDiv = useRef<HTMLDivElement | null>(null);
-
-  const [dayOfWeek, setDayOfWeek] = useState<string>("complet");
   const [eventsTimePicked, setEventsTimePicked] = useState<any[]>([]);
-  const [adviceReaded, setAdviceReaded] = useState<boolean>(false);
   const [adviceReadedMsg, setAdviceReadedMsg] = useState<string>("");
   const { kitsValues } = useUserboardState();
   const [numberOfSelectWorkshops, setNumberOfSelectWorkshops] =
@@ -163,104 +160,36 @@ export default function SelectEventsModal({
     <div className="fixed w-full h-screen overflow-y-scroll  top-0 left-0 p-4 bg-white text-dark z-10">
       <div className=" overflow-hidden relative pb-20">
         <Container>
-          <button
-            onClick={(e) => setIsSelectEventOpen(false)}
-            className="rounded-lg border border-slate-900 p-1 text-red-600 hover:bg-slate-900 hover:text-red-400 shadow-md items-center flex gap-1 float-right"
-          >
-            Voltar
-            <MdClose size={20} />
-          </button>
-
+          <CloseModalButton />
           <Title className="border-l-2 pl-2 border-cian-700">
             Eventos disponiveis
           </Title>
-          <Text className="underline inline-flex bg-dark rounded-md shadow-md text-white p-1">
+          <Text className="underline inline-flex bg-dark rounded-md shadow-md text-white px-2 py-1 my-2">
             {kitsValues[kitModelId].model} está selecionado
           </Text>
+
           <div className="flex flex-wrap gap-4">
-            <div className="p-2 shadow-md border border-slate-300 rounded-md flex max-w-sm my-2 flex-col">
-              <Text className="Font-bold">Você tem direito a:</Text>
-              <ul>
-                {[
-                  kitsValues[kitModelId].all_speeches
-                    ? "Todas as Palestras"
-                    : "Palestra patrocinadas + 1 palestra",
-                  kitsValues[kitModelId].workshops
-                    ? `${kitsValues[kitModelId].workshops} Minicursos/Workshop`
-                    : "",
-                  kitsValues[kitModelId].bucks_coup
-                    ? "Um copo Buck's Exclusivo"
-                    : "",
-                ].map((elem) => {
-                  return (
-                    <li
-                      key={elem}
-                      className="flex border-l border-slate-800 pl-1 my-2"
-                    >
-                      {elem}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+            <SelectedKitAdvantages kit={kitsValues[kitModelId]} />
 
             <div
               ref={concernAlertDiv}
               className="flex focus:bg-red-900 flex-col gap-2 max-w-md rounded-md my-2 p-2 bg-slate-900 text-yellow-200"
             >
-              <div className="flex gap-1">
-                <span>
-                  <FiAlertCircle size={22} />
-                </span>{" "}
-                Para kits pagos, a alteração do kit após essa seleção só poderar
-                ser feita por meio de email. Podendo assim não garantir a sua
-                vagas nos eventos selecionados.
-              </div>
-              <div className="w-full ml-5">
-                <label
-                  htmlFor="MarketingAccept"
-                  className="flex gap-2 p-1 text-dark"
-                >
-                  <input
-                    checked={adviceReaded}
-                    onChange={(e) => setAdviceReaded(!adviceReaded)}
-                    type="checkbox"
-                    id="MarketingAccept"
-                    name="marketing_accept"
-                    className="h-5 w-5 rounded-full overflow-hidden checked:bg-cyan-700 shadow-sm"
-                  />
-
-                  <span className="text-white">Marque se leu o aviso</span>
-                </label>
-              </div>
+              <AdviceKitChange />
             </div>
           </div>
 
-          <div>
-            <RadioGroup
-              className="my-2"
-              onChange={(e) => setDayOfWeek(e.target.value)}
-              label="Dias"
-              options={[
-                { title: "Segunda", value: "segunda-feira" },
-                { title: "Terça", value: "terça-feira" },
-                { title: "Quarta", value: "quarta-feira" },
-                { title: "Quinta", value: "quinta-feira" },
-                { title: "Sexta", value: "sexta-feira" },
-                { title: "Todos os dias", value: "complet" },
-              ]}
-              groupName={"dias da semana"}
-            />
-          </div>
+          <FilterDaysEvents />
           {adviceReadedMsg !== "" && (
             <Alert
               timeout={6000}
-              className="border-green-400 bottom-8 max-w-full top- bg-slate-950 text-red-300"
+              className="border-green-400 bottom-8 max-w-full bg-slate-950 text-red-300"
             >
               {adviceReadedMsg}
             </Alert>
           )}
         </Container>
+
         <div className="fixed z-20 left-0 bottom-0 w-full">
           <Container className="flex justify-end">
             <FloatButton
@@ -272,9 +201,10 @@ export default function SelectEventsModal({
             </FloatButton>
           </Container>
         </div>
+
         <Container className="w-full">
           <div className=" flex-wrap gap-y-3 lg:gap-4 flex text-white relative justify-around">
-            {events?.map((event: any, index: number) => {
+            {events?.map((event: any) => {
               const eventDates = Object.values(event.date).map((date) => {
                 //@ts-ignore
                 return [date?.start, date?.end];
@@ -282,6 +212,29 @@ export default function SelectEventsModal({
               const daysOfWeekEvent = eventDates.map((elem) => {
                 return momento(elem[0]).format("dddd");
               });
+
+              const handleClick = () => {
+                if (["workshop", "minicurso"].includes(event.category)) {
+                  if (selectEvents.includes(event.id)) {
+                    setNumberOfSelectWorkshops((value) => value - 1);
+                  } else {
+                    setNumberOfSelectWorkshops((value) => value + 1);
+                  }
+                }
+                if (
+                  "palestra" == event.category &&
+                  !kitsValues[kitModelId].all_speeches &&
+                  event.title.split("$")[1] != "patrocinador"
+                ) {
+                  if (selectEvents.includes(event.id)) {
+                    setNumberOfSelectedSpeeches((value) => value - 1);
+                  } else {
+                    setNumberOfSelectedSpeeches((value) => value + 1);
+                  }
+                }
+                toogleElements(event.id, eventDates);
+              };
+
               return (
                 <EventCard.Body
                   defaultChecked={selectEvents.includes(event.id)}
@@ -294,38 +247,17 @@ export default function SelectEventsModal({
                     numberOfSelectedSpeeches,
                     numberOfSelectWorkshops
                   )}
-                  key={"eventoid" + event.id + index}
-                  id={"eventoid" + event.id + index}
-                  onClick={() => {
-                    if (["workshop", "minicurso"].includes(event.category)) {
-                      if (selectEvents.includes(event.id)) {
-                        setNumberOfSelectWorkshops((value) => value - 1);
-                      } else {
-                        setNumberOfSelectWorkshops((value) => value + 1);
-                      }
-                    }
-                    if (
-                      "palestra" == event.category &&
-                      !kitsValues[kitModelId].all_speeches &&
-                      event.title.split("$")[1] != "patrocinador"
-                    ) {
-                      if (selectEvents.includes(event.id)) {
-                        setNumberOfSelectedSpeeches((value) => value - 1);
-                      } else {
-                        setNumberOfSelectedSpeeches((value) => value + 1);
-                      }
-                    }
-                    toogleElements(event.id, eventDates);
-                  }}
+                  key={"eventoid" + event.id}
+                  id={"eventoid" + event.id}
+                  onClick={handleClick}
                   capacity={
                     event.max_number_of_inscriptions -
                     event.number_of_inscriptions
                   }
                   className={`lg:py-12 duration-200 relative justify-between flex flex-col ${
-                    daysOfWeekEvent.includes(dayOfWeek)
+                    daysOfWeekEvent.includes(dayOfWeek) ||
+                    dayOfWeek == "allDays"
                       ? ""
-                      : dayOfWeek == "complet"
-                      ? "flex"
                       : "hidden"
                   }
                   } `}
@@ -358,10 +290,8 @@ export default function SelectEventsModal({
                               //@ts-ignore
                               key={date?.start + date?.end}
                               //@ts-ignore
-
                               dateStart={date?.start}
                               //@ts-ignore
-
                               dateEnd={date?.end}
                             />
                           );

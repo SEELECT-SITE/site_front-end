@@ -10,8 +10,8 @@ export default function EventCardDate({
   dateStart: string;
   dateEnd: string;
 }) {
-  const startDateObj = momento(dateStart).utc();
-  const endDateObj = momento(dateEnd).utc();
+  const startDateObj = momento(dateStart);
+  const endDateObj = momento(dateEnd);
 
   return (
     <div className="flex items-center gap-1 group">

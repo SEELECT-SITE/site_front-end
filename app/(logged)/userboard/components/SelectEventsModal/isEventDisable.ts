@@ -11,33 +11,29 @@ export default function isEventDisable(
   numberOfSelectedSpeeches: number,
   numberOfSelectWorkshops: number
 ) {
-  if (momento().isAfter(eventDates[0][0])) {
+  /* if (momento().isAfter(eventDates[0][0])) {
     return true;
-  }
+  } */
   if (selectEvents.includes(event.id)) return false;
 
-  if (!selectEvents.includes(event.id)) {
-    if (isEventOverlap(eventDates, eventsTimePicked)) {
-      return true;
-    }
-    if (event.title.split("$")[1] == "patrocinador") {
-      return false;
-    }
-    if (
-      numberOfSelectWorkshops >= kit.workshops &&
-      ["workshop", "minicurso"].includes(event.category)
-    ) {
-      return true;
-    }
-    if (
-      numberOfSelectWorkshops >= kit.workshops &&
-      ["workshop", "minicurso"].includes(event.category)
-    ) {
-      return true;
-    }
-    if (kit.all_speeches && numberOfSelectedSpeeches >= 1) {
-      return true;
-    }
+  if (isEventOverlap(eventDates, eventsTimePicked)) return true;
+
+  if (event.title.split("$")[1] == "patrocinador") return false;
+
+  if (
+    numberOfSelectWorkshops >= kit.workshops &&
+    ["workshop", "minicurso"].includes(event.category)
+  ) {
+    return true;
   }
+
+  if (
+    numberOfSelectWorkshops >= kit.workshops &&
+    ["workshop", "minicurso"].includes(event.category)
+  ) {
+    return true;
+  }
+  if (kit.all_speeches && numberOfSelectedSpeeches >= 1) return true;
+
   return false;
 }
