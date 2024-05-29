@@ -22,6 +22,7 @@ import AdviceKitChange from "./adviceKitChange";
 import FilterDaysEvents from "./filterDaysEvents";
 import SelectedKitAdvantages from "./selectedKitAdvantages";
 import CloseModalButton from "./closeModalButton";
+import { EventProps } from "@/pages/api/auth/nextauth";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -58,17 +59,20 @@ export default function SelectEventsModal({
         "ngrok-skip-browser-warning": "true",
       };
       try {
-        const { data } = await axios.get(`${DJANGO_URL}api/events/`, {
-          headers,
-        });
-        var aux = data.results;
-
-        aux.sort(
-          (a: any, b: any) =>
-            //@ts-ignore
-            new Date(a.date["0"].start) - new Date(b.date["0"].start)
+        const { data } = await axios.get<{ results: [EventProps] }>(
+          `${DJANGO_URL}api/events/`,
+          {
+            headers,
+          }
         );
-        return aux;
+        var event = data.results;
+
+        event.sort(
+          (a: any, b: any) =>
+            new Date(a.date["0"].start).getTime() -
+            new Date(b.date["0"].start).getTime()
+        );
+        return event;
       } catch (error) {
         console.log(error);
       }

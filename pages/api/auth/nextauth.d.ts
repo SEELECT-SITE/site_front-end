@@ -24,7 +24,7 @@ export interface EventProps {
   host: string;
   number_of_inscriptions: number;
   max_number_of_inscriptions: number;
-  date: any;
+  date: { $date: { start: string; end: string } };
   description: "";
   place: any;
 }

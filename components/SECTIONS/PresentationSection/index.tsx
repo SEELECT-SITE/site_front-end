@@ -18,7 +18,7 @@ export default function PresentationSection() {
             <h1
               className={`text-2xl mb-3 lg:mb-6 font-bold tracking-wide lg:text-4xl xl:text-5xl -ml-2`}
             >
-              TERCEIRA SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELÉTRICA E
+              QUARTA SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELÉTRICA E
               TELECOMUNICAÇÕES.
             </h1>
           </div>
