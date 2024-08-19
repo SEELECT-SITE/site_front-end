@@ -33,6 +33,42 @@ export const IES_CEARA = [
 export const feedbacks = [
   {
     feedback:
+      "Achei que a organização e o palestrante que trouxeram contribuiu para o conhecimento daqueles que estavam presentes.",
+    stars: 5,
+    tipo: "Palestras",
+  },
+  {
+    feedback:
+      "A palestra foi muito interessante, deu um panorama legal sobre o funcionamento de uma empresa de TI. A interação com o público foi bem interessante.",
+    stars: 4,
+    tipo: "Palestras",
+  },
+  {
+    feedback:
+      "Excelente! Acho que seria muito bom se tivessem outros dias do workshop. (Minicurso). Esse facilitador é uma excelente oportunidade para a próxima SEELECT.",
+    stars: 5,
+    tipo: "Workshop",
+  },
+  {
+    feedback:
+      "Os três dias foram muito bons. As aulas trouxeram vários conhecimentos novos para mim.",
+    stars: 4,
+    tipo: "Workshop",
+  },
+  {
+    feedback:
+      "Facilitadora muito gente boa e demonstrava ter bastante domínio sobre o assunto abordado. O local estava bem organizado e climatizado.",
+    stars: 5,
+    tipo: "Palestras",
+  },
+  {
+    feedback:
+      "A palestra foi maravilhosa, a gama de conhecimento passado foi muito bom e bem produtivo.",
+    stars: 5,
+    tipo: "Palestras",
+  },
+  {
+    feedback:
       "Excelente forma de mostrar como funciona a gestão de projetos no mercado de trabalho.",
     stars: 5,
     tipo: "Palestras",

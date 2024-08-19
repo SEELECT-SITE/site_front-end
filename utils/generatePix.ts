@@ -5,7 +5,7 @@ export default function generatePix(
   name: string,
   city: string,
   value: string,
-  identificador: string
+  identificador: string,
 ): string {
   /* https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Regulamento_Pix/II_ManualdePadroesparaIniciacaodoPix.pdf */
 
