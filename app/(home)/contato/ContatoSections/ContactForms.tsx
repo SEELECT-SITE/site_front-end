@@ -3,13 +3,19 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import wave_contato from "@/public/SVG/wave-contato.svg";
+import FloatButton from "@/components/FloatButton";
+import Input from "@/components/Input";
+import TextAreaInput from "@/components/TextAreaInput";
+import Decoration from "@/components/SECTIONS/Cronograma/DecorationStripes/decoration";
+import Image from "next/image";
+import axios from "axios";
 
 const createContactSchema = z.object({
   email: z
     .string()
     .nonempty("O email é obrigatorio")
     .email("Formato de e-mail invalido"),
-  nome: z
+  name: z
     .string()
     .nonempty("O nome é obrigatorio")
     .transform((name) => {
@@ -21,19 +27,14 @@ const createContactSchema = z.object({
         })
         .join(" ");
     }),
-  telefone: z.coerce
+  phone: z.coerce
     .number({ invalid_type_error: "Digite um numero valido" })
     .gte(10000000, "Digite um numero valido")
     .lte(9999999999999, "Digite um numero valido"),
+  message: z.string(),
 });
 
 type CreateContactData = z.infer<typeof createContactSchema>;
-
-import FloatButton from "@/components/FloatButton";
-import Input from "@/components/Input";
-import TextAreaInput from "@/components/TextAreaInput";
-import Decoration from "@/components/SECTIONS/Cronograma/DecorationStripes/decoration";
-import Image from "next/image";
 
 export default function ContactForms() {
   const {
@@ -45,7 +46,7 @@ export default function ContactForms() {
   });
 
   function createContact(data: any) {
-    console.log(data);
+    const response = axios.post("/api/contactEmail", data);
   }
   return (
     <form
@@ -60,8 +61,8 @@ export default function ContactForms() {
       <Input
         placeholder="Nome"
         type="text"
-        errorMsg={errors.nome?.message as string}
-        register={register("nome")}
+        errorMsg={errors.name?.message as string}
+        register={register("name")}
         className=" border-cian-400"
       />
       <Input
@@ -73,12 +74,17 @@ export default function ContactForms() {
       />
       <Input
         placeholder="Telefone"
-        errorMsg={errors.telefone?.message as string}
+        errorMsg={errors.phone?.message as string}
         type="text"
-        register={register("telefone")}
+        register={register("phone")}
         className=" border-cian-400"
       />
-      <TextAreaInput label="Mensagem" rows={4} className=" border-cian-400" />
+      <TextAreaInput
+        register={register("message")}
+        label="Mensagem"
+        rows={4}
+        className=" border-cian-400"
+      />
       <FloatButton type="submit" className=" text-xl" shadowClassname="w-full">
         Enviar
       </FloatButton>

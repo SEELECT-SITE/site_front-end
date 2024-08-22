@@ -10,8 +10,8 @@ export default function EventCardDate({
   dateStart: string;
   dateEnd: string;
 }) {
-  const dataStart = momento(dateStart);
-  const dataEnd = momento(dateEnd);
+  const startDateObj = momento(dateStart);
+  const endDateObj = momento(dateEnd);
 
   return (
     <div className="flex items-center gap-1 group">
@@ -20,10 +20,10 @@ export default function EventCardDate({
         className="group-hover:text-cian-400 text-cian-700"
       />
       <Text className=" lg:text-base capitalize">{`${
-        dataStart.format("dddd").replace("-", " ").split(" ")[0]
-      } ${dataStart.format("DD/MM")} de ${dataStart.format(
+        startDateObj.format("dddd").replace("-", " ").split(" ")[0]
+      } ${startDateObj.format("DD/MM")} de ${startDateObj.format(
         "LT"
-      )} às ${dataEnd.format("LT")}`}</Text>
+      )} às ${endDateObj.format("LT")}`}</Text>
     </div>
   );
 }

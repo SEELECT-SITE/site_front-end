@@ -31,7 +31,7 @@ export default function UserPaymentModal({
     const formData = new URLSearchParams();
     formData.append(
       "is_payed",
-      paymentState.charAt(0).toUpperCase() + paymentState.slice(1)
+      paymentState.charAt(0).toUpperCase() + paymentState.slice(1),
     );
     try {
       await axios.post(
@@ -39,7 +39,7 @@ export default function UserPaymentModal({
         formData,
         {
           headers,
-        }
+        },
       );
     } catch (e) {
       console.log(e);
@@ -55,35 +55,35 @@ export default function UserPaymentModal({
           }
         }}
         ref={divConfirmPayment}
-        className="fixed w-full h-full flex top-0 left-0 p-4 backdrop-blur-sm bg-dark/20 text-dark z-10 items-start justify-center"
+        className="fixed left-0 top-0 z-10 flex h-full w-full items-start justify-center bg-dark/20 p-4 text-dark backdrop-blur-sm"
       >
-        <div className="flex flex-col justify-between relative overflow-hidden bg-white rounded-md max-w-md z-10 p-4">
+        <div className="relative z-10 flex max-w-md flex-col justify-between overflow-hidden rounded-md bg-white p-4">
           <Text className="text-dark">
-            Dejesa{" "}
+            Deseja{" "}
             {userKit.is_payed ? "reverter pagamento" : "confirmar pagamento"} de{" "}
             {formatCurrency(
               (momento(userKit.date_created).isBefore("10/30/2023")
                 ? userKit.model_detail.price - 5
                 : userKit.model_detail.price) *
-                (1 - userKit.discount / 100)
+                (1 - userKit.discount / 100),
             )}{" "}
             para o usúario de ID {userKit.user}?
           </Text>
           {userKit.discount != 0 && (
-            <div className="inline-flex bg-slate-900 rounded-md text-yellow-200 items-center gap-1 p-1 my-2">
+            <div className="my-2 inline-flex items-center gap-1 rounded-md bg-slate-900 p-1 text-yellow-200">
               <span>
                 <LuAlertCircle size={18} />
               </span>{" "}
               Desconto de {userKit.discount}% já aplicado
             </div>
           )}
-          <div className=" my-4 flex flex-wrap">
+          <div className="my-4 flex flex-wrap">
             <SmallText>
               Clique duas vezes pra{" "}
               {userKit.is_payed ? "Reverter pagamento" : "Confirmar pagamento"}
             </SmallText>
             <Button
-              className="text-md right- relative grow w-full bg-green-700 text-white p-2 hover:bg-green-900"
+              className="text-md right- relative w-full grow bg-green-700 p-2 text-white hover:bg-green-900"
               title="Clique duas vezes para Confirmar"
               onDoubleClick={async (e) => {
                 try {
@@ -111,7 +111,7 @@ export default function UserPaymentModal({
           </div>
 
           <EventDelete
-            className="text-md w-full right- relative bg-red-500 text-white hover:opacity-90"
+            className="text-md right- relative w-full bg-red-500 text-white hover:opacity-90"
             message="CANCELAR"
             onClick={(e) => {
               setIsUserPayModalOpen(false);

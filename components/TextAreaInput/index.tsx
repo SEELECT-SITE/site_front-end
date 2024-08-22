@@ -29,7 +29,7 @@ export default function TextAreaInput({
         {...register}
         {...props}
         className={twMerge(
-          "mt-2 p-2 w-full outline-none border border-black border-b-2 focus:ring-2 rounded-lg bg-white text-dark align-top shadow-sm sm:text-sm",
+          "mt-2 p-2 w-full outline-none border border-black border-b-2 focus:ring-2 rounded-lg bg-white text-dark align-top shadow-sm ",
           props.className
         )}
       ></textarea>

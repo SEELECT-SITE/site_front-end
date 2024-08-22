@@ -1,8 +1,10 @@
 "use client";
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode, useRef } from "react";
 import EventCard from "../SECTIONS/Cronograma/EventsCard";
-import Link from "next/link";
 import { twMerge } from "tailwind-merge";
+{
+  /* Para usar esse modal basta colocar o*/
+}
 
 export default function DefaultModal({
   children,

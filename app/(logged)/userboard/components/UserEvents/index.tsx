@@ -87,19 +87,18 @@ export default function UserEvents({
       <Title className="border-l-2 border-cian-400 pl-2 mb-4">
         Seus Eventos selecionados
       </Title>
-      {momento().isBefore("11/06/2023") && (
-        <FloatButton
-          className="p-1"
-          onClick={(e) => {
-            setIsSelectEventOpen(true);
-            setSelectedKit(user.kit?.model!);
-          }}
-        >
-          {user?.kit?.events.length! > 0
-            ? "Trocar de eventos"
-            : "Selecione seus eventos"}
-        </FloatButton>
-      )}
+
+      <FloatButton
+        className="p-1"
+        onClick={(e) => {
+          setIsSelectEventOpen(true);
+          setSelectedKit(user.kit?.model!);
+        }}
+      >
+        {user?.kit?.events.length! > 0
+          ? "Trocar de eventos"
+          : "Selecione seus eventos"}
+      </FloatButton>
 
       <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecth m-auto justify-around">
         {user?.kit?.events
@@ -116,16 +115,15 @@ export default function UserEvents({
                 id={event.title + index}
                 className="lg:py-12 relative justify-between flex flex-col"
               >
-                {momento().isBefore("11/06/2023") && (
-                  <EventCard.Delete
-                    message="Remover"
-                    className="top-4"
-                    onClick={(e) => {
-                      setModalIsOpen(true);
-                      setRemoveEvent(event);
-                    }}
-                  />
-                )}
+                <EventCard.Delete
+                  message="Remover"
+                  className="top-4"
+                  onClick={(e) => {
+                    setModalIsOpen(true);
+                    setRemoveEvent(event);
+                  }}
+                />
+
                 <div>
                   <EventCard.Title title={event.title.split("$")[0]} />
                   <EventCard.Hoster hoster={event.host} />

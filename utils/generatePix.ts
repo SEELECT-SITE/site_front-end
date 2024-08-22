@@ -5,8 +5,10 @@ export default function generatePix(
   name: string,
   city: string,
   value: string,
-  identificador: string
+  identificador: string,
 ): string {
+  /* https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Regulamento_Pix/II_ManualdePadroesparaIniciacaodoPix.pdf */
+
   const pixPayload = `00020126${22 + codePix.length}0014BR.GOV.BCB.PIX01${
     codePix.length <= 9 ? "0" + codePix.length : codePix.length
   }${codePix}52040000530398654${

@@ -112,7 +112,7 @@ export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
                 usersPayment.filter(
                   (elem: any) =>
                     elem.is_payed &&
-                    momento(elem.date_created).isAfter("10/29/2023")
+                    momento(elem.date_created).isAfter("2023-29-10")
                 ).length
               }
             </span>
@@ -121,7 +121,7 @@ export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
                 usersPayment.reduce((total: number, elem: any) => {
                   if (elem.is_payed) {
                     total +=
-                      (momento(elem.date_created).isBefore("10/30/2023")
+                      (momento(elem.date_created).isBefore("2023-30-10")
                         ? elem.model_detail.price - 5
                         : elem.model_detail.price) *
                       (1 - elem.discount / 100);
@@ -131,7 +131,7 @@ export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
               )} de ${formatCurrency(
                 usersPayment.reduce((total: number, elem: any) => {
                   total +=
-                    (momento(elem.date_created).isBefore("10/29/2023")
+                    (momento(elem.date_created).isBefore("2023-30-10")
                       ? elem.model_detail.price - 5
                       : elem.model_detail.price) *
                     (1 - elem.discount / 100);
@@ -145,7 +145,7 @@ export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
                 usersPayment.reduce((total: number, elem: any) => {
                   if (
                     elem.is_payed &&
-                    momento(elem.date_created).isAfter("10/29/2023")
+                    momento(elem.date_created).isAfter("2023-29-10")
                   ) {
                     total +=
                       elem.model_detail.price * (1 - elem.discount / 100);
@@ -154,7 +154,7 @@ export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
                 }, 0)
               )} de ${formatCurrency(
                 usersPayment.reduce((total: number, elem: any) => {
-                  if (momento(elem.date_created).isAfter("10/29/2023")) {
+                  if (momento(elem.date_created).isAfter("2023-29-10")) {
                     total +=
                       elem.model_detail.price * (1 - elem.discount / 100);
                   }

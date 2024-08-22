@@ -43,7 +43,7 @@ export default function KitsAvaliable({
     },
     { refetchOnWindowFocus: false }
   );
-  if (momento().isAfter("11/06/2023")) {
+  if (false) {
     return (
       <div className="h-[5vh]">
         <Title className="border-l-2 pl-2 border-cian-400">
@@ -72,10 +72,10 @@ export default function KitsAvaliable({
       <div className="flex flex-wrap gap-4 my-6 justify-around">
         {!isLoading &&
           kits
-            .map((kit: any) => {
+            .map((kit: any, index: number) => {
               return (
                 <PriceCard
-                  key={kit.title + kit.id}
+                  key={`kit-${index}`}
                   stars={kit.id - 1}
                   onClick={() => {
                     {

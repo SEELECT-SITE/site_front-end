@@ -41,24 +41,26 @@ export default function FormsLogin() {
     const formData = new URLSearchParams();
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
+      "ngrok-skip-browser-warning": "true",
     };
 
     formData.append("email", email as string);
     setIsSeding(true);
     try {
-      await axios.post(
+      const response = await axios.post(
         `${DJANGO_URL}api/auth/forget_password/`,
         formData.toString(),
         {
           headers,
         }
       );
+      console.log(response);
     } catch (err: any) {
       const errorKeys = Object.keys(err.response.data);
 
       scrollToElement(errorsDiv);
     } finally {
-      router.push("./login");
+      /* router.push("./login"); */
       setIsSeding(false);
     }
   }

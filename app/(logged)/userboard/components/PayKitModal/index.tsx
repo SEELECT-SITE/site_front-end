@@ -25,7 +25,7 @@ export default function PayKitModal({ user }: PayKitModalProps) {
   //@ts-ignore
   const discount = user.kit?.discount ?? 0.0;
   const value = formatCurrency(
-    user.kit?.model_detail.price! * (1 - discount / 100)
+    user.kit?.model_detail.price! * (1 - discount / 100),
   )
     .replace(",", ".")
     .slice(3);
@@ -34,7 +34,7 @@ export default function PayKitModal({ user }: PayKitModalProps) {
     "Maria Augusta Simonetti",
     "Fortaleza",
     value ?? "25.00",
-    `ID${user.id}Kit${user?.kit!.model}`
+    `ID${user.id}Kit${user?.kit!.model}`,
   );
 
   return (
@@ -45,58 +45,58 @@ export default function PayKitModal({ user }: PayKitModalProps) {
         }
       }}
       ref={divPayKit}
-      className="fixed w-full h-full flex top-0 left-0 p-4 backdrop-blur-sm bg-dark/20 text-dark z-10 items-start justify-center"
+      className="fixed left-0 top-0 z-10 flex h-full w-full items-start justify-center bg-dark/20 p-4 text-dark backdrop-blur-sm"
     >
-      <div className="flex flex-col justify-between relative overflow-hidden bg-white rounded-md max-w-md z-10">
-        <div className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 -z-10">
+      <div className="relative z-10 flex max-w-md flex-col justify-between overflow-hidden rounded-md bg-white">
+        <div className="absolute right-0 top-0 -z-10 -translate-y-1/2 translate-x-1/2">
           <Image src={squares_deco} alt="decoration" />
         </div>
         <div
-          className={`absolute w-full left-0 top-0 bg-slate-800 text-2xl py-3 text-white text-center rounded-b-lg border-2 border-slate-300 z-10 duration-200  ${
+          className={`absolute left-0 top-0 z-10 w-full rounded-b-lg border-2 border-slate-300 bg-slate-800 py-3 text-center text-2xl text-white duration-200 ${
             isPixCopied ? "-translate-y-1" : "-translate-y-full"
           }`}
         >
           Código PIX Copiado
         </div>
 
-        <div className="bg-white/20 backdrop-blur-[2px] p-3">
-          <div className="flex justify-between w-full py-4 items-start">
+        <div className="bg-white/20 p-3 backdrop-blur-[2px]">
+          <div className="flex w-full items-start justify-between py-4">
             <div className="">
               <Text className="font-bold">O Valor do Kit é</Text>
-              <div className="bg-dark-cian text-center text-2xl p-2 font-bold text-white mt-1 w-full rounded-md">
+              <div className="mt-1 w-full rounded-md bg-dark-cian p-2 text-center text-2xl font-bold text-white">
                 {formatCurrency(parseFloat(value))}
               </div>
             </div>
 
             <button
               onClick={(e) => setIsPayKitModalOpen(false)}
-              className="rounded-full border border-slate-900 p-1 text-red-600 hover:bg-slate-900 hover:text-red-400 shadow-md"
+              className="rounded-full border border-slate-900 p-1 text-red-600 shadow-md hover:bg-slate-900 hover:text-red-400"
             >
               <MdClose size={20} />
             </button>
           </div>
           {user.kit?.discount != 0 && (
-            <div className="inline-flex bg-slate-900 rounded-md text-yellow-200 items-center gap-1 p-1 my-2">
+            <div className="my-2 inline-flex items-center gap-1 rounded-md bg-slate-900 p-1 text-yellow-200">
               <span>
                 <LuAlertCircle size={18} />
               </span>{" "}
               Desconto de {discount}% já aplicado
             </div>
           )}
-          <div className="p-2 border-cian-400 border-2 shadow-md aspect-square shadow-black/50 bg-white">
+          <div className="aspect-square border-2 border-cian-400 bg-white p-2 shadow-md shadow-black/50">
             <QRCode size={300} value={pixCode} />
           </div>
-          <div className="mt-3 mb-0">
-            <div className="h-1 w-full bg-slate-900 translate-y-3 "></div>
-            <div className="-translate-y-2 flex w-full justify-center">
-              <Text className="p-1 bg-white  text-center z-10 center">
+          <div className="mb-0 mt-3">
+            <div className="h-1 w-full translate-y-3 bg-slate-900"></div>
+            <div className="flex w-full -translate-y-2 justify-center">
+              <Text className="center z-10 bg-white p-1 text-center">
                 ou copie o código
               </Text>
             </div>
           </div>
-          <div className="relative rounded-lg border-2 bg-black border-black ">
+          <div className="relative rounded-lg border-2 border-black bg-black">
             <button
-              className="absolute z-10 right-0 top-1/2 -translate-y-1/2 bg-white h-full w-1/6 flex items-center justify-center rounded-tr-lg rounded-br-lg border-l hover:opacity-90"
+              className="absolute right-0 top-1/2 z-10 flex h-full w-1/6 -translate-y-1/2 items-center justify-center rounded-br-lg rounded-tr-lg border-l bg-white hover:opacity-90"
               onClick={(e) => {
                 copyClipboard(pixCode);
                 setIsPixCopied(true);

@@ -16,15 +16,15 @@ interface IUser extends DefaultUser {
 export interface EventProps {
   title: string;
   hostedBy: string;
+  category: string;
   date: number;
   location: { name: string; url: string };
   description: string;
-
   id: number;
   host: string;
   number_of_inscriptions: number;
   max_number_of_inscriptions: number;
-  date: any;
+  date: { $date: { start: string; end: string } };
   description: "";
   place: any;
 }
