@@ -1,27 +1,45 @@
-import getCRC16_false from "./getCRC16_false";
+import getCRC16IBM47 from "./getCRC16IBM47";
 
 export default function generatePix(
-  codePix: string,
+  pixCode: string,
   name: string,
   city: string,
   value: string,
-  identificador: string,
+  identificador: string
 ): string {
-  /* https://www.bcb.gov.br/content/estabilidadefinanceira/pix/Regulamento_Pix/II_ManualdePadroesparaIniciacaodoPix.pdf */
+  // Define constants for limits and formatting
+  const nameLimit = 25;
 
-  const pixPayload = `00020126${22 + codePix.length}0014BR.GOV.BCB.PIX01${
-    codePix.length <= 9 ? "0" + codePix.length : codePix.length
-  }${codePix}52040000530398654${
-    value.length <= 9 ? "0" + value.length : value.length
-  }${value}5802BR59${
-    name.length <= 9 ? "0" + name.length : name.length
-  }${name}60${city.length <= 9 ? "0" + city.length : city.length}${city}62${
-    ("0500" + identificador).length
-  }05${
-    identificador.length <= 9
-      ? "0" + identificador.length
-      : identificador.length
-  }${identificador}6304`;
+  // Format name by limiting its length and removing special characters
+  const nameFormatted = name
+    .substring(0, nameLimit)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 
-  return pixPayload + getCRC16_false(pixPayload, 0, pixPayload.length);
+  // Helper function to format lengths with leading zeros
+  const formatLength = (input: string): string =>
+    input.length <= 9 ? "0" + input.length : String(input.length);
+
+  // Helper function to format data blocks
+  const formatDataBlock = (id: string, content: string): string =>
+    `${id}${formatLength(content)}${content}`;
+
+  // Construct the PIX payload using helper functions
+  const pixPayload = [
+    "000201",
+    `26${22 + pixCode.length}`, // BR.GOV.BCB.PIX segment
+    formatDataBlock("00", "BR.GOV.BCB.PIX"),
+    formatDataBlock("01", pixCode.toUpperCase()),
+    "52040000", // Merchant category code (default to 0000)
+    "5303986", // Currency (986 for BRL)
+    formatDataBlock("54", value),
+    "5802BR", // Country code
+    formatDataBlock("59", nameFormatted),
+    formatDataBlock("60", city),
+    formatDataBlock("62", `05${formatLength(identificador)}${identificador}`),
+    "6304", // CRC16 placeholder
+  ].join("");
+
+  // Append CRC16 checksum to the payload
+  return pixPayload + getCRC16IBM47(pixPayload, 0, pixPayload.length);
 }

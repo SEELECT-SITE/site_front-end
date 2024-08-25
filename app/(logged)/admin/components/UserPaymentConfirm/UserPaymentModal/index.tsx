@@ -31,15 +31,15 @@ export default function UserPaymentModal({
     const formData = new URLSearchParams();
     formData.append(
       "is_payed",
-      paymentState.charAt(0).toUpperCase() + paymentState.slice(1),
+      paymentState.charAt(0).toUpperCase() + paymentState.slice(1)
     );
     try {
       await axios.post(
-        `${DJANGO_URL}api/kits/${userKit.id}/confirm_payement/`,
+        `${DJANGO_URL}api/kits/${userKit.id}/confirm_payment/`,
         formData,
         {
           headers,
-        },
+        }
       );
     } catch (e) {
       console.log(e);
@@ -65,7 +65,7 @@ export default function UserPaymentModal({
               (momento(userKit.date_created).isBefore("10/30/2023")
                 ? userKit.model_detail.price - 5
                 : userKit.model_detail.price) *
-                (1 - userKit.discount / 100),
+                (1 - userKit.discount / 100)
             )}{" "}
             para o usúario de ID {userKit.user}?
           </Text>

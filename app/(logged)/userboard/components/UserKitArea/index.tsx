@@ -46,7 +46,11 @@ export default function UserKitArea({ user }: { user: User }) {
             : "",
           user.kit?.model_detail.bucks_coup ? "Um copo Buck's Exclusivo" : "",
         ].map((elem) => {
-          return <li className="flex">{elem}</li>;
+          return (
+            <li className="flex" key={elem}>
+              {elem}
+            </li>
+          );
         })}
       </ul>
       {!user?.kit?.is_payed && user.kit?.model != 1 && (

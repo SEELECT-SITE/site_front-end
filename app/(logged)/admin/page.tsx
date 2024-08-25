@@ -41,7 +41,7 @@ function Admin({ session }: { session: Session }) {
 }
 
 export default function AdminPage() {
-  const { data: session, update: sessionUpdate } = useSession();
+  const { data: session } = useSession();
   if (session) {
     return (
       <QueryClientProvider client={queryClient}>

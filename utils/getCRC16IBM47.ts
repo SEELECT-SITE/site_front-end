@@ -1,4 +1,4 @@
-export default function getCRC16_false(
+export default function getCRC16IBM47(
   data: string,
   offset: number,
   length: number

@@ -3,14 +3,9 @@ import useGlobalState from "@/stores/menuStore";
 import Link from "next/link";
 import Button from "../Button";
 import MenuButton from "../MenuButton";
-import {
-  AiFillHome,
-  AiOutlineInfoCircle,
-  AiOutlineLogin,
-} from "react-icons/ai";
+import { AiFillHome, AiOutlineInfoCircle } from "react-icons/ai";
 import { IoIosPeople, IoMdArrowForward } from "react-icons/io";
 import { MdAddShoppingCart } from "react-icons/md";
-import Badge from "../Badge";
 import momento from "@/utils/formatDate";
 
 export default function MainMenu() {
@@ -87,21 +82,14 @@ export default function MainMenu() {
             </li>
 
             <li>
-              <Badge
-                value="EM BREVE"
-                className={
-                  "top-0 -translate-y-1/2 text-xl p-1 text-white bg-cian-700 rounded-md left-2"
-                }
-              >
-                <Link href={"/login"}>
-                  <Button
-                    className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:opacity-30 duration-150 w-full"
-                    onClick={(e) => setMenuIsOpen(!menuIsOpen)}
-                  >
-                    LOGIN
-                  </Button>
-                </Link>
-              </Badge>
+              <Link href={"/login"}>
+                <Button
+                  className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:opacity-30 duration-150 w-full"
+                  onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+                >
+                  LOGIN
+                </Button>
+              </Link>
             </li>
           </ul>
         </div>
@@ -153,24 +141,11 @@ export default function MainMenu() {
             </Link>
           </li>
           <li className="p-2">
-            <Badge
-              value="EM BREVE"
-              className={
-                "top-0 -translate-y-1/2 p-1 text-white bg-cian-700 rounded-md left-2"
-              }
-            >
-              <Button
-                className="p-0 rounded-full m-0 bg-dark text-white"
-                disabled
-              >
-                <Link
-                  href="/login"
-                  className="flex p-3 px-8 gap-1 items-center"
-                >
-                  Login <IoMdArrowForward />
-                </Link>
-              </Button>
-            </Badge>
+            <Button className="p-0 rounded-full m-0 bg-dark text-white">
+              <Link href="/login" className="flex p-3 px-8 gap-1 items-center">
+                Login <IoMdArrowForward />
+              </Link>
+            </Button>
           </li>
         </ul>
       </div>

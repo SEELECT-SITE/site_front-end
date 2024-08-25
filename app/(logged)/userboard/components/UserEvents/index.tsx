@@ -151,6 +151,8 @@ export default function UserEvents({
                       return (
                         <EventCard.Date
                           //@ts-ignore
+                          key={(date?.start + date?.end, event.title)}
+                          //@ts-ignore
 
                           dateStart={date?.start}
                           //@ts-ignore

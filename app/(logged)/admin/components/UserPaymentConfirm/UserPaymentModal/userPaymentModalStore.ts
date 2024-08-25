@@ -1,4 +1,3 @@
-import { Kit } from "@/pages/api/auth/nextauth";
 import { create } from "zustand";
 
 type deleteModalProp = {
