@@ -17,10 +17,6 @@ export default async function HomeLayout({
     }
   }
   return (
-    <>
-      <body className={`bg-white w-full min-h-screen ${cafeFont.className}`}>
-        {children}
-      </body>
-    </>
+    <body className={`bg-white w-full ${cafeFont.className}`}>{children}</body>
   );
 }
