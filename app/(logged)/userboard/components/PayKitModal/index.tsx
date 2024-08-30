@@ -25,7 +25,7 @@ export default function PayKitModal({ user }: PayKitModalProps) {
   //@ts-ignore
   const discount = user.kit?.discount ?? 0.0;
   const value = formatCurrency(
-    user.kit?.model_detail.price! * (1 - discount / 100),
+    user.kit?.model_detail.price! * (1 - discount / 100)
   )
     .replace(",", ".")
     .slice(3);
@@ -34,7 +34,7 @@ export default function PayKitModal({ user }: PayKitModalProps) {
     "Maria Augusta Simonetti",
     "Fortaleza",
     value ?? "25.00",
-    `ID${user.id}Kit${user?.kit!.model}`,
+    `ID${user.id}Kit${user?.kit!.model}`
   );
 
   return (

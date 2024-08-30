@@ -14,11 +14,11 @@ export default function PresentationSection() {
     <section>
       <Container className="flex relative z-10 flex-col-reverse lg:flex-row lg:items-center">
         <section title="Descrição" className="">
-          <div className="backdrop-blur-md p-2 rounded-md">
+          <div className="backdrop-blur-md p-2 -translate-x-2 rounded-md">
             <h1
-              className={`text-2xl mb-3 lg:mb-6 font-bold tracking-wide lg:text-4xl xl:text-5xl -ml-2`}
+              className={`text-2xl mb-3 lg:mb-6 font-bold tracking-wide lg:text-4xl xl:text-5xl`}
             >
-              QUARTA SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELÉTRICA E
+              IV SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELÉTRICA E
               TELECOMUNICAÇÕES.
             </h1>
           </div>

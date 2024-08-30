@@ -12,12 +12,15 @@ import { IoIosPeople, IoMdArrowForward } from "react-icons/io";
 import { MdAddShoppingCart } from "react-icons/md";
 import Badge from "../Badge";
 import momento from "@/utils/formatDate";
+import { useRouter } from "next/navigation";
 
 export default function MainMenu() {
   const { menuIsOpen, setMenuIsOpen } = useGlobalState();
+  const router = useRouter();
 
   return (
     <>
+      {/* Mobile Menu */}
       <div className="flex items-center lg:hidden">
         <div
           className={`duration-500 ${
@@ -93,14 +96,16 @@ export default function MainMenu() {
                   "top-0 -translate-y-1/2 text-xl p-1 text-white bg-cian-700 rounded-md left-2"
                 }
               >
-                <Link href={"/login"}>
-                  <Button
-                    className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:opacity-30 duration-150 w-full"
-                    onClick={(e) => setMenuIsOpen(!menuIsOpen)}
-                  >
-                    LOGIN
-                  </Button>
-                </Link>
+                <Button
+                  className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:opacity-30 duration-150 w-full"
+                  onClick={(e) => {
+                    setMenuIsOpen(!menuIsOpen);
+                    router.push("/login");
+                  }}
+                  disabled
+                >
+                  LOGIN
+                </Button>
               </Badge>
             </li>
           </ul>
@@ -108,13 +113,13 @@ export default function MainMenu() {
 
         <button
           id="animate_menu_btn"
-          className="active:bg- w-10 h-full mr-2 hover:bg- hover:opacity-80 active:opacity-30 duration-150 border- cursor-pointer"
+          className="active:bg- w-10 h-full mr-2 hover:bg- hover:opacity-80 active:opacity-30 duration-150 cursor-pointer"
           onClick={(e) => setMenuIsOpen(!menuIsOpen)}
         >
           <MenuButton size={42} open={!menuIsOpen} />
         </button>
       </div>
-
+      {/* Desktop Menu */}
       <div className="hidden lg:inline">
         <ul className="flex gap-5 text-lg text-dark font-bold ">
           {" "}
@@ -160,15 +165,11 @@ export default function MainMenu() {
               }
             >
               <Button
-                className="p-0 rounded-full m-0 bg-dark text-white"
+                className="rounded-full m-0 bg-dark text-white flex p-3 px-8 gap-1 items-center"
+                onClick={(e) => router.push("/login")}
                 disabled
               >
-                <Link
-                  href="/login"
-                  className="flex p-3 px-8 gap-1 items-center"
-                >
-                  Login <IoMdArrowForward />
-                </Link>
+                Login <IoMdArrowForward />
               </Button>
             </Badge>
           </li>
