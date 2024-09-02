@@ -9,11 +9,9 @@ import { MdErrorOutline } from "react-icons/md";
 import axios from "axios";
 import SelectInput from "@/components/SelectInput";
 import { useQuery } from "react-query";
-import { DJANGO_URL } from "@/utils/consts";
-import SmallText from "@/components/SmallText";
-import MultipleInputs from "@/components/SECTIONS/DatePicker";
 import DatePicker from "@/components/SECTIONS/DatePicker";
 import momento from "@/utils/formatDate";
+import { axiosClient } from "@/lib/utils";
 
 interface OptionPlace {
   location: string;
@@ -57,7 +55,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
       };
 
       try {
-        const { data } = await axios.get(`${DJANGO_URL}api/events/places/`, {
+        const { data } = await axiosClient.get(`api/events/places/`, {
           headers,
         });
         return data.results;
@@ -104,7 +102,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
       Token: Token,
     };
     try {
-      await axios.post(`${DJANGO_URL}/api/events/`, formData.toString(), {
+      await axiosClient.post(`/api/events/`, formData.toString(), {
         headers,
       });
     } catch (error) {

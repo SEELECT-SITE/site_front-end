@@ -5,17 +5,14 @@ import { SvgCardLine } from "@/components/PriceCard";
 import Title from "@/components/Title";
 import FloatButton from "@/components/FloatButton";
 import useSelectEventsState from "../SelectEventsModal/selectEventsStore";
-import { useQuery } from "react-query";
 import axios from "axios";
-import { DJANGO_URL } from "@/utils/consts";
 import { useState } from "react";
-import DeleteModal from "@/app/(logged)/admin/components/EventsAdmin.tsx/DeleteModal";
 import DefaultModal from "@/components/DefaultModal";
 import EventDelete from "@/components/SECTIONS/Cronograma/EventsCard/EventDelete";
 import Text from "@/components/Text";
 import SmallText from "@/components/SmallText";
 import removeElem from "@/utils/removeElem";
-import momento from "@/utils/formatDate";
+import { axiosClient } from "@/lib/utils";
 
 export default function UserEvents({
   user,
@@ -43,11 +40,9 @@ export default function UserEvents({
       formData.append("events", elem.toString());
     });
     try {
-      await axios.put(
-        `${DJANGO_URL}api/kits/${user.kit?.id}/`,
-        formData.toString(),
-        { headers }
-      );
+      await axiosClient.put(`api/kits/${user.kit?.id}/`, formData.toString(), {
+        headers,
+      });
     } catch (e) {
       console.log(e);
     } finally {

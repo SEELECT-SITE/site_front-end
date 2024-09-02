@@ -67,11 +67,7 @@ export default function CoordenacaoSection() {
           <figure className="m-auto lg:w-1/2 lg:rotate-90 -z-10 left-0 absolute lg:top-1/2 top-1/3 lg:max-w-md">
             <Image src={square_balls} priority={true} alt="decoration" />
           </figure>
-          {coordenadores
-            .sort(() => Math.random() - 0.5)
-            .map((Card, index) => {
-              return Card;
-            })}
+          {coordenadores.sort(() => Math.random() - 0.5)}
         </div>
       </Container>
     </section>

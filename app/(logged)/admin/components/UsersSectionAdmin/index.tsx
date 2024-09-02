@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { User } from "next-auth";
 import axios from "axios";
-import { DJANGO_URL } from "@/utils/consts";
+import { axiosClient } from "@/lib/utils";
 
 interface EventsAdminProps {
   className?: string;
@@ -31,7 +31,7 @@ export default function EventsAdmin({
         Token: user?.token,
       };
       try {
-        const { data } = await axios.get(`${DJANGO_URL}api/users/`, {
+        const { data } = await axiosClient.get(`api/users/`, {
           headers,
         });
         return data.results;

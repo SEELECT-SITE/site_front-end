@@ -1,20 +1,19 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { useQuery } from "react-query";
 import { User } from "next-auth";
 import axios from "axios";
 import EventCard from "@/components/SECTIONS/Cronograma/EventsCard";
-import removeElem from "@/utils/removeElem";
 import Title from "@/components/Title";
 import Container from "@/components/Container";
 import { SvgCardLine } from "@/components/PriceCard";
-import { DJANGO_URL } from "@/utils/consts";
 import useDeleteModalState from "./DeleteModal/deleteModalStore";
 import DeleteModal from "./DeleteModal";
 import FloatButton from "@/components/FloatButton";
 import { MdClose } from "react-icons/md";
 import { HiPencilAlt } from "react-icons/hi";
 import RadioGroup from "@/components/RadioGroup";
+import { axiosClient } from "@/lib/utils";
 
 interface EventsAdminProps {
   className?: string;
@@ -48,7 +47,7 @@ export default function EventsAdmin({
         Token: user?.token,
       };
       try {
-        const { data } = await axios.get(`${DJANGO_URL}api/events/`, {
+        const { data } = await axiosClient.get(`api/events/`, {
           headers,
         });
         return data.results;
@@ -116,8 +115,8 @@ export default function EventsAdmin({
                     event.category == categoryEvent
                       ? "flex"
                       : categoryEvent == "todos"
-                      ? "flex"
-                      : "hidden"
+                        ? "flex"
+                        : "hidden"
                   }`}
                 >
                   <EventCard.Delete

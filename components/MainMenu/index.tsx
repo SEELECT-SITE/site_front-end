@@ -148,7 +148,6 @@ export default function MainMenu() {
             <Button
               className="rounded-full m-0 bg-dark text-white flex p-3 px-8 gap-1 items-center"
               onClick={(e) => router.push("/login")}
-              disabled
             >
               Login <IoMdArrowForward />
             </Button>

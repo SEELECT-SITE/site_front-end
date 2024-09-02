@@ -1,8 +1,9 @@
 import axios from "axios";
-import NextAuth, { NextAuthOptions, User } from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { IUser } from "./nextauth";
-import { DJANGO_URL } from "@/utils/consts";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const nextAuthOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -22,8 +23,9 @@ export const nextAuthOptions: NextAuthOptions = {
           "Content-Type": "application/x-www-form-urlencoded",
         };
         try {
+          console.log(`${API_URL}api/auth/login/`);
           const response = await axios.post(
-            `${DJANGO_URL}api/auth/login/`,
+            `${API_URL}api/auth/login/`,
             formData.toString(),
             { headers }
           );
@@ -66,7 +68,7 @@ export const nextAuthOptions: NextAuthOptions = {
         };
         try {
           const response = await axios.get(
-            `${DJANGO_URL}api/users/${token.role}/${token.id}/`,
+            `${API_URL}api/users/${token.role}/${token.id}/`,
             { headers }
           );
           const userData = response.data;
@@ -105,7 +107,7 @@ export const nextAuthOptions: NextAuthOptions = {
         Token: token?.token,
       };
       const response = await axios.get(
-        `${DJANGO_URL}api/users/${token.role}/${token.id}/`,
+        `${API_URL}api/users/${token.role}/${token.id}/`,
         { headers }
       );
       const userData = response.data;

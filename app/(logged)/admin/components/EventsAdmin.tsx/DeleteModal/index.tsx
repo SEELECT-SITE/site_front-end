@@ -4,9 +4,9 @@ import Text from "@/components/Text";
 import useDeleteModalState from "./deleteModalStore";
 import EventDelete from "@/components/SECTIONS/Cronograma/EventsCard/EventDelete";
 import axios from "axios";
-import { DJANGO_URL } from "@/utils/consts";
 import useAlertAdminState from "../../alertAdminStore";
 import SmallText from "@/components/SmallText";
+import { axiosClient } from "@/lib/utils";
 
 export default function DeleteModal({
   token,
@@ -26,7 +26,7 @@ export default function DeleteModal({
       Token: token,
     };
     try {
-      await axios.delete(`${DJANGO_URL}api/events/${eventDeleteID}/`, {
+      await axiosClient.delete(`api/events/${eventDeleteID}/`, {
         headers,
       });
     } catch (e) {

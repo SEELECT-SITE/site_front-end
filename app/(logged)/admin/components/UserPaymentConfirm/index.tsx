@@ -5,7 +5,6 @@ import { User } from "next-auth";
 import axios from "axios";
 import Title from "@/components/Title";
 import Container from "@/components/Container";
-import { DJANGO_URL } from "@/utils/consts";
 import FloatButton from "@/components/FloatButton";
 import { MdClose } from "react-icons/md";
 import { GiPayMoney } from "react-icons/gi";
@@ -15,6 +14,7 @@ import useUserPaymentStore from "./UserPaymentModal/userPaymentModalStore";
 import UserPaymentModal from "./UserPaymentModal";
 import formatCurrency from "@/utils/formatCurrency";
 import momento from "@/utils/formatDate";
+import { axiosClient } from "@/lib/utils";
 
 interface UserPaymentConfirmProps {
   className?: string;
@@ -40,7 +40,7 @@ export default function UserPaymentConfirm({ user }: UserPaymentConfirmProps) {
         Token: user?.token,
       };
       try {
-        const { data } = await axios.get(`${DJANGO_URL}api/kits/`, {
+        const { data } = await axiosClient.get(`api/kits/`, {
           headers,
         });
         return data.results;

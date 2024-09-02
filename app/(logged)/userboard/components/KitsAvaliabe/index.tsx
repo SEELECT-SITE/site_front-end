@@ -1,16 +1,11 @@
 import Text from "@/components/Text";
-import { User } from "next-auth";
 import useSelectEventsState from "../SelectEventsModal/selectEventsStore";
 import Title from "@/components/Title";
 import PriceCard from "@/components/PriceCard";
 import { useQuery } from "react-query";
-import { DJANGO_URL } from "@/utils/consts";
-import axios from "axios";
 import useUserboardState from "../userboardStore/PayKitModalStore";
 import SkeletonCreator from "@/components/SkeletonCreator";
-import SmallText from "@/components/SmallText";
-import { LuAlertCircle } from "react-icons/lu";
-import momento from "@/utils/formatDate";
+import { axiosClient } from "@/lib/utils";
 
 export default function KitsAvaliable({
   title,
@@ -32,7 +27,7 @@ export default function KitsAvaliable({
         return kitsValues;
       }
       try {
-        const { data } = await axios.get(`${DJANGO_URL}api/kits/models/`, {
+        const { data } = await axiosClient.get(`api/kits/models/`, {
           headers,
         });
         setKitsValues(data.results);

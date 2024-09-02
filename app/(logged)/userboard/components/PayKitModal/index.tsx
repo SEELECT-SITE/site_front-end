@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { User } from "next-auth";
 import Text from "@/components/Text";
 import QRCode from "qrcode.react";
@@ -12,7 +12,6 @@ import { LuAlertCircle } from "react-icons/lu";
 import Image from "next/image";
 import squares_deco from "@/public/SVG/squares-deco.svg";
 import copyClipboard from "@/utils/copyClipboard";
-import useAlertAdminState from "@/app/(logged)/admin/components/alertAdminStore";
 
 interface PayKitModalProps {
   user: User;

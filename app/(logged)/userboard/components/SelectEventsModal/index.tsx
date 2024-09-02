@@ -11,7 +11,6 @@ import useSelectEventsState from "./selectEventsStore";
 import Title from "@/components/Title";
 import Container from "@/components/Container";
 import { SvgCardLine } from "@/components/PriceCard";
-import { DJANGO_URL } from "@/utils/consts";
 import useUserboardState from "../userboardStore/PayKitModalStore";
 import momento from "@/utils/formatDate";
 import SkeletonCreator from "@/components/SkeletonCreator";
@@ -23,6 +22,7 @@ import FilterDaysEvents from "./filterDaysEvents";
 import SelectedKitAdvantages from "./selectedKitAdvantages";
 import CloseModalButton from "./closeModalButton";
 import { EventProps } from "@/pages/api/auth/nextauth";
+import { axiosClient } from "@/lib/utils";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -59,8 +59,8 @@ export default function SelectEventsModal({
         "ngrok-skip-browser-warning": "true",
       };
       try {
-        const { data } = await axios.get<{ results: [EventProps] }>(
-          `${DJANGO_URL}api/events/`,
+        const { data } = await axiosClient.get<{ results: [EventProps] }>(
+          `api/events/`,
           {
             headers,
           }
@@ -141,15 +141,15 @@ export default function SelectEventsModal({
     try {
       if (user.kit?.id) {
         formData.append("model", model!.toString());
-        await axios.put(
-          `${DJANGO_URL}api/kits/${user.kit?.id}/`,
+        await axiosClient.put(
+          `api/kits/${user.kit?.id}/`,
           formData.toString(),
           { headers }
         );
       } else {
         formData.append("user", user.id as string);
         formData.append("model", (kitModelId + 1).toString());
-        await axios.post(`${DJANGO_URL}api/kits/`, formData.toString(), {
+        await axiosClient.post(`api/kits/`, formData.toString(), {
           headers,
         });
       }

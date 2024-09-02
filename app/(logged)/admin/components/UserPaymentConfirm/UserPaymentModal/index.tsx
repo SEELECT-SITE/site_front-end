@@ -4,13 +4,13 @@ import Text from "@/components/Text";
 import formatCurrency from "@/utils/formatCurrency";
 import EventDelete from "@/components/SECTIONS/Cronograma/EventsCard/EventDelete";
 import axios from "axios";
-import { DJANGO_URL } from "@/utils/consts";
 import useAlertAdminState from "../../alertAdminStore";
 import SmallText from "@/components/SmallText";
 import useUserPaymentStore from "./userPaymentModalStore";
 import Button from "@/components/Button";
 import { LuAlertCircle } from "react-icons/lu";
 import momento from "@/utils/formatDate";
+import { axiosClient } from "@/lib/utils";
 
 export default function UserPaymentModal({
   token,
@@ -34,8 +34,8 @@ export default function UserPaymentModal({
       paymentState.charAt(0).toUpperCase() + paymentState.slice(1)
     );
     try {
-      await axios.post(
-        `${DJANGO_URL}api/kits/${userKit.id}/confirm_payment/`,
+      await axiosClient.post(
+        `api/kits/${userKit.id}/confirm_payment/`,
         formData,
         {
           headers,

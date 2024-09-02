@@ -9,8 +9,8 @@ import { useRef, useState } from "react";
 import { MdClose, MdErrorOutline } from "react-icons/md";
 import axios from "axios";
 import removeElem from "@/utils/removeElem";
-import { DJANGO_URL } from "@/utils/consts";
 import { IoAddOutline } from "react-icons/io5";
+import { axiosClient } from "@/lib/utils";
 
 const createAddPlaceFormsSchema = z.object({
   location: z.string().nonempty("Preencha o campo"),
@@ -54,11 +54,9 @@ export default function AddPlaceForms({ Token }: { Token: string }) {
     };
 
     try {
-      await axios.post(
-        `${DJANGO_URL}/api/events/places/`,
-        formData.toString(),
-        { headers }
-      );
+      await axiosClient.post(`/api/events/places/`, formData.toString(), {
+        headers,
+      });
     } catch (error) {
       console.log(error);
     } finally {

@@ -9,10 +9,11 @@ import Text from "@/components/Text";
 import axios from "axios";
 import useUserForms from "./userForms";
 import { User } from "next-auth";
-import { DJANGO_URL, IES_CEARA, UFC_COURSES } from "@/utils/consts";
+import { IES_CEARA, UFC_COURSES } from "@/utils/consts";
 import SelectInput from "@/components/SelectInput";
 import validateCPF from "@/utils/validateCPF";
 import momento from "@/utils/formatDate";
+import { axiosClient } from "@/lib/utils";
 
 const createUserProfileFormsSchema = z.object({
   first_name: z.string().nonempty("Preencha o campo"),
@@ -74,8 +75,8 @@ export default function UserProfileForms({
     };
 
     try {
-      await axios.put(
-        `${DJANGO_URL}api/users/user/${user.id}/profile/`,
+      await axiosClient.put(
+        `users/user/${user.id}/profile/`,
         formData.toString(),
         { headers }
       );

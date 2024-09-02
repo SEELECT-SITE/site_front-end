@@ -1,4 +1,4 @@
-import { DJANGO_URL } from "@/utils/consts";
+import { axiosClient } from "@/lib/utils";
 import axios from "axios";
 import { create } from "zustand";
 
@@ -19,9 +19,10 @@ const useUserboardState = create<UserboardProps>((set) => ({
       "ngrok-skip-browser-warning": "true",
     };
     try {
-      const { data } = await axios.get(`${DJANGO_URL}api/kits/models/`, {
+      const { data } = await axiosClient.get(`/api/kits/models/`, {
         headers,
       });
+
       set((state) => ({ kitsValues: data.results }));
     } catch (error) {
       console.log(error);
