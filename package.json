@@ -15,20 +15,31 @@
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
+    "debug": "^4.3.4",
     "icons": "^1.0.0",
+    "moment": "^2.29.4",
     "next": "^13.4.10",
+    "nodemailer": "^6.9.7",
     "postcss": "8.4.23",
+    "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "supports-color": "^8.1.1",
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
-    "@originjs/vite-plugin-commonjs": "^1.0.1",
+    "@hookform/resolvers": "^3.1.1",
+    "@types/nodemailer": "^6.4.13",
+    "next-auth": "^4.22.4",
+    "prettier": "^3.3.0",
+    "prettier-plugin-tailwindcss": "^0.6.1",
+    "react-hook-form": "^7.45.2",
     "react-icons": "^4.9.0",
     "react-query": "^3.39.3",
-    "swiper": "^10.0.4"
+    "swiper": "^10.0.4",
+    "zod": "^3.21.4"
   }
 }

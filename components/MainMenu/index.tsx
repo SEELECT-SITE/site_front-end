@@ -9,13 +9,18 @@ import {
   AiOutlineLogin,
 } from "react-icons/ai";
 import { IoIosPeople, IoMdArrowForward } from "react-icons/io";
-import { MdAddShoppingCart, MdShoppingCartCheckout } from "react-icons/md";
+import { MdAddShoppingCart } from "react-icons/md";
+import Badge from "../Badge";
+import momento from "@/utils/formatDate";
+import { useRouter } from "next/navigation";
 
 export default function MainMenu() {
   const { menuIsOpen, setMenuIsOpen } = useGlobalState();
+  const router = useRouter();
 
   return (
     <>
+      {/* Mobile Menu */}
       <div className="flex items-center lg:hidden">
         <div
           className={`duration-500 ${
@@ -23,102 +28,150 @@ export default function MainMenu() {
           } min-h-screen absolute w-full top-0 bg-white flex border-l-2 border-m-dark flex-col px-4 justify-center `}
         >
           <ul className="font-bold text-dark-cian text-2xl flex flex-col  gap-y-12 h-full">
-            <Link href={"/"}>
-              <li className="pb-4 border-b-2 border-dark-cian w-full hover:border-cian-700 hover:text-cian-700">
-                <button
-                  onClick={(e) => setMenuIsOpen(!menuIsOpen)}
-                  className="flex gap-2 items-center hover:opacity-80 active:scale-95 w-full"
+            <li className="">
+              <button
+                onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+                className="w-full"
+              >
+                <Link
+                  href={"/"}
+                  className="active:opacity-30 flex gap-2 items-center w-full pb-4 hover:opacity-80 border-b-2 border-dark-cian hover:border-cian-700 hover:text-cian-700"
                 >
                   <AiFillHome />
-                  Pagina Inicial
-                </button>
-              </li>
-            </Link>
-            <Link href={"/sobre"}>
-              {" "}
-              <li className="pb-4 border-b-2 border-dark-cian w-full hover:border-cian-700 hover:text-cian-700">
-                <button
-                  onClick={(e) => setMenuIsOpen(!menuIsOpen)}
-                  className="flex gap-2 items-center hover:opacity-80 active:scale-95 w-full"
+                  Home
+                </Link>
+              </button>
+            </li>
+
+            <li className="">
+              <button
+                onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+                className="w-full"
+              >
+                <Link
+                  href={"/sobre"}
+                  className="active:opacity-30 flex gap-2 items-center w-full pb-4 hover:opacity-80 border-b-2 border-dark-cian hover:border-cian-700 hover:text-cian-700"
                 >
                   <AiOutlineInfoCircle />
                   Sobre
-                </button>
-              </li>
-            </Link>
-            <Link href={"/pacotes"}>
-              {" "}
-              <li className="pb-4 border-b-2 border-dark-cian w-full hover:border-cian-700 hover:text-cian-700">
+                </Link>
+              </button>
+            </li>
+
+            {momento().isBefore("2023-11-06") && (
+              <li className="">
                 <button
                   onClick={(e) => setMenuIsOpen(!menuIsOpen)}
-                  className="flex gap-2 items-center w-full"
+                  className="w-full"
                 >
-                  <MdAddShoppingCart />
-                  Pacotes
+                  <Link
+                    href={"/pacotes"}
+                    className="active:opacity-30 flex gap-2 items-center w-full pb-4 hover:opacity-80 border-b-2 border-dark-cian hover:border-cian-700 hover:text-cian-700"
+                  >
+                    <MdAddShoppingCart />
+                    Pacotes
+                  </Link>
                 </button>
               </li>
-            </Link>
-            <Link href={"/contato"}>
-              <li className="pb-4 border-b-2 border-dark-cian w-full hover:border-cian-700 hover:text-cian-700">
-                <button
-                  onClick={(e) => setMenuIsOpen(!menuIsOpen)}
-                  className="flex gap-2 items-center hover:opacity-80 active:scale-95 w-full"
+            )}
+            <li className="">
+              <button
+                onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+                className="w-full"
+              >
+                <Link
+                  href={"/contato"}
+                  className="active:opacity-30 flex gap-2 items-center w-full pb-4 hover:opacity-80 border-b-2 border-dark-cian hover:border-cian-700 hover:text-cian-700"
                 >
                   <IoIosPeople />
                   Contato
-                </button>
-              </li>
-            </Link>
+                </Link>
+              </button>
+            </li>
 
-            <Link href={"/pacotes"}>
-              <li>
+            <li>
+              <Badge
+                value="EM BREVE"
+                className={
+                  "top-0 -translate-y-1/2 text-xl p-1 text-white bg-cian-700 rounded-md left-2"
+                }
+              >
                 <Button
-                  className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:scale-95 duration-150 w-full"
-                  onClick={(e) => setMenuIsOpen(!menuIsOpen)}
+                  className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:opacity-30 duration-150 w-full"
+                  onClick={(e) => {
+                    setMenuIsOpen(!menuIsOpen);
+                    router.push("/login");
+                  }}
+                  disabled
                 >
-                  INSCREVA-SE
+                  LOGIN
                 </Button>
-              </li>
-            </Link>
+              </Badge>
+            </li>
           </ul>
         </div>
 
         <button
           id="animate_menu_btn"
-          className="active:bg- w-10 h-full mr-2 hover:bg- hover:opacity-80 active:scale-95 duration-150 border- cursor-pointer"
+          className="active:bg- w-10 h-full mr-2 hover:bg- hover:opacity-80 active:opacity-30 duration-150 cursor-pointer"
           onClick={(e) => setMenuIsOpen(!menuIsOpen)}
         >
           <MenuButton size={42} open={!menuIsOpen} />
         </button>
       </div>
-
+      {/* Desktop Menu */}
       <div className="hidden lg:inline">
         <ul className="flex gap-5 text-lg text-dark font-bold ">
-          <Link href="/">
-            {" "}
-            <li className="p-5 hover:opacity-60 hover:scale-105 active:scale-95">
+          {" "}
+          <li className="flex">
+            <Link
+              href="/"
+              className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
+            >
               Home
-            </li>
-          </Link>
-          <Link href="/sobre">
-            <li className="p-5 hover:opacity-60 hover:scale-105 active:scale-95">
+            </Link>
+          </li>
+          <li className="flex">
+            <Link
+              href="/sobre"
+              className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
+            >
               Sobre
+            </Link>
+          </li>
+          {momento().isBefore("2023-11-06") && (
+            <li className="flex">
+              <Link
+                href="/pacotes"
+                className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
+              >
+                Pacotes
+              </Link>
             </li>
-          </Link>
-          <Link href="/pacotes">
-            <li className="p-5 hover:opacity-60 hover:scale-105 active:scale-95">
-              Pacotes
-            </li>
-          </Link>
-          <li className="p-5 hover:opacity-60 hover:scale-105 active:scale-95">
-            <Link href="/contato">Contato</Link>
+          )}
+          <li className="flex">
+            <Link
+              href="/contato"
+              className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
+            >
+              Contato
+            </Link>
           </li>
           <li className="p-2">
-            <Button className="p-0 rounded-full m-0 bg-dark text-white">
-              <Link href="/" className="flex p-3 px-8 gap-1 items-center">
-                Inscreva-se <IoMdArrowForward />
-              </Link>
-            </Button>
+            <Badge
+              value="EM BREVE"
+              className={
+                "top-0 -translate-y-1/2 p-1 text-white bg-cian-700 rounded-md left-2"
+              }
+            >
+              <Button
+                className="rounded-full m-0 bg-dark text-white flex p-3 px-8 gap-1 items-center"
+                onClick={(e) => router.push("/login")}
+                disabled
+              >
+                Login <IoMdArrowForward />
+              </Button>
+            </Badge>
           </li>
         </ul>
       </div>

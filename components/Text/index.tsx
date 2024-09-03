@@ -8,9 +8,7 @@ interface TextProps {
 
 const Text: FunctionComponent<TextProps> = ({ children, className }) => {
   return (
-    <p className={twMerge("text-sm lg:text-base tracking-wide", className)}>
-      {children}
-    </p>
+    <p className={twMerge("lg:text-lg tracking-wide", className)}>{children}</p>
   );
 };
 
