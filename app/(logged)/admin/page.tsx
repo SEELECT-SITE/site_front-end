@@ -1,16 +1,16 @@
 "use client";
 import Container from "@/components/Container";
 import Title from "@/components/Title";
-import AddPlaceForms from "./components/AddPlacesForms";
-import AddEventsForms from "./components/AddEventsForms";
+import AddPlaceForms from "./admin-components/AddPlacesForms";
+import AddEventsForms from "./admin-components/AddEventsForms";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "@/utils/queryClient";
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
-import EventsAdmin from "./components/EventsAdmin.tsx";
+import EventsAdmin from "./admin-components/EventsAdmin.tsx";
 import Alert from "@/components/Alert";
-import useAlertAdminState from "./components/alertAdminStore";
-import UserPaymentConfirm from "./components/UserPaymentConfirm";
+import useAlertAdminState from "./admin-components/alertAdminStore";
+import UserPaymentConfirm from "./admin-components/UserPaymentConfirm";
 function Admin({ session }: { session: Session }) {
   const { user } = session;
   const { isAlertAdminOpen, alertMsg } = useAlertAdminState();
