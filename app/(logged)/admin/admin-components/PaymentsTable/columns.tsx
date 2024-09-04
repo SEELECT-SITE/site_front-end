@@ -12,73 +12,89 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Checkbox } from "@/components/ui/checkbox";
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
+import { Kit } from "@/pages/api/auth/nextauth";
+import useUserPaymentStore from "../UserPaymentConfirm/UserPaymentModal/userPaymentModalStore";
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Kit>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    accessorKey: "email",
+    id: "user",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
+        <div className="flex justify-center w-full">
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            userId
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      );
+    },
+    accessorKey: "user",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const userKit = row.original;
+      return (
+        <div className="font-medium text-center">
+          {userKit.user?.toString()}
+        </div>
       );
     },
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    id: "is_payed",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-center w-full">
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Pagamento
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      );
+    },
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
+      const userKit = row.original;
+      const isPaid = userKit.is_payed ? "Pago" : "Pendente";
+
+      return <div className="font-medium text-center">{isPaid}</div>;
+    },
+    accessorKey: "Pagamento",
+  },
+  {
+    id: "price",
+    accessorKey: "Preço",
+    header: () => <div className="text-center">Preço</div>,
+    cell: ({ row }) => {
+      const userKit = row.original;
+      const amount = parseFloat(userKit.model_detail.price.toString());
+      const formatted = new Intl.NumberFormat("pt-BR", {
         style: "currency",
-        currency: "USD",
+        currency: "BRL",
       }).format(amount);
 
-      return <div className="text-right font-medium">{formatted}</div>;
+      return <div className="text-center font-medium">{formatted}</div>;
+    },
+  },
+  {
+    id: "model_detail",
+    accessorKey: "Modelo Kit",
+    header: "Modelo Kit",
+    cell: ({ row }) => {
+      const userKit = row.original;
+      return <div className="font-medium">{userKit.model_detail.model}</div>;
     },
   },
   {
     id: "actions",
+    accessorKey: "Ações",
     cell: ({ row }) => {
-      const payment = row.original;
-
+      const kit = row.original;
+      const { setIsUserPayModalOpen, setUserKit } = useUserPaymentStore();
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -88,15 +104,17 @@ export const columns: ColumnDef<Payment>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={(e) => {
+                setUserKit(kit);
+                setIsUserPayModalOpen(true);
+              }}
             >
-              Copy payment ID
+              Confirmar pagamento
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>Apagar Kit</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

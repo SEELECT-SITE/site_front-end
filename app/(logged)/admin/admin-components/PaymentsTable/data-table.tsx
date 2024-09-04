@@ -66,15 +66,17 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Encontre por ID do usuário..."
+          value={
+            (table.getColumn("is_payed")?.getFilterValue() as string) ?? ""
+          }
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("is_payed")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
       </div>
-      <DropdownMenu>
+      {/* <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button className="ml-auto">Columns</Button>
         </DropdownMenuTrigger>
@@ -90,12 +92,12 @@ export function DataTable<TData, TValue>({
                   checked={column.getIsVisible()}
                   onCheckedChange={(value) => column.toggleVisibility(!!value)}
                 >
-                  {column.id}
+                  {column.columnDef?.accessorKey}
                 </DropdownMenuCheckboxItem>
               );
             })}
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu> */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>

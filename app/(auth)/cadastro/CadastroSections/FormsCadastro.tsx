@@ -13,7 +13,7 @@ import {
   createCadastroSchema,
 } from "./FormsCadastroSchemas";
 import { scrollToElement } from "@/utils/scrollToElement";
-import { DJANGO_URL } from "@/utils/consts";
+import { axiosClient } from "@/lib/utils";
 
 interface erroReqType {
   status: boolean;
@@ -49,13 +49,13 @@ export default function FormsCadastro() {
       setSendb(true);
       setRegisterSuccessMsg("CONFIRA SEU EMAIL PARA CONFIRMAR O CADASTRO");
 
-      await axios.post(`${DJANGO_URL}api/auth/register/`, formData.toString(), {
+      await axiosClient.post(`/api/auth/register/`, formData.toString(), {
         headers,
       });
     } catch (err: any) {
       const errorKeys = Object.keys(err.response.data);
       const errosList = errorKeys.map((key) => err.response.data[key][0]) as [
-        string
+        string,
       ];
       setErroReq({ status: true, errors: errosList });
       scrollToElement(errorsDiv);
