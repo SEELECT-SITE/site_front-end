@@ -5,7 +5,7 @@ import { DataTable } from "../admin-components/PaymentsTable/data-table";
 import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import { queryClient } from "@/utils/queryClient";
-import { axiosClient } from "@/lib/utils";
+import { axiosClient, transformKitsToTable } from "@/lib/utils";
 import UserPaymentModal from "../admin-components/UserPaymentConfirm/UserPaymentModal";
 import useUserPaymentStore from "../admin-components/UserPaymentConfirm/UserPaymentModal/userPaymentModalStore";
 
@@ -29,7 +29,8 @@ function PaymentsTable({ session }: { session: Session }) {
         const { data } = await axiosClient.get(`api/kits/`, {
           headers,
         });
-        return data.results;
+        const tableKits = transformKitsToTable(data.results);
+        return tableKits;
       } catch (error) {}
     },
     { refetchOnWindowFocus: false }

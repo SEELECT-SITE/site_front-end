@@ -12,11 +12,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Kit } from "@/pages/api/auth/nextauth";
+import { KitToTable } from "@/pages/api/auth/nextauth";
 import useUserPaymentStore from "../UserPaymentConfirm/UserPaymentModal/userPaymentModalStore";
+import momento from "@/utils/formatDate";
 
-export const columns: ColumnDef<Kit>[] = [
+export const columns: ColumnDef<KitToTable>[] = [
   {
+    accessorKey: "user",
     id: "user",
     header: ({ column }) => {
       return (
@@ -25,25 +27,22 @@ export const columns: ColumnDef<Kit>[] = [
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            userId
+            ID do Usuário
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         </div>
       );
     },
-    accessorKey: "user",
     enableHiding: false,
-    cell: ({ row }) => {
-      const userKit = row.original;
-      return (
-        <div className="font-medium text-center">
-          {userKit.user?.toString()}
-        </div>
-      );
-    },
   },
   {
     id: "is_payed",
+    accessorKey: "is_payed",
+    header: "Pagamento",
+  },
+  {
+    id: "date_created",
+    accessorKey: "date_created",
     header: ({ column }) => {
       return (
         <div className="flex justify-center w-full">
@@ -51,27 +50,26 @@ export const columns: ColumnDef<Kit>[] = [
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Pagamento
+            Data de Criação
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         </div>
       );
     },
     cell: ({ row }) => {
-      const userKit = row.original;
-      const isPaid = userKit.is_payed ? "Pago" : "Pendente";
+      const date_created = new Date(row.original.date_created);
+      const formatted_date = momento(date_created).calendar();
 
-      return <div className="font-medium text-center">{isPaid}</div>;
+      return <div className="text-center font-medium">{formatted_date}</div>;
     },
-    accessorKey: "Pagamento",
   },
   {
     id: "price",
-    accessorKey: "Preço",
-    header: () => <div className="text-center">Preço</div>,
+    accessorKey: "price",
+    header: "Preço",
     cell: ({ row }) => {
       const userKit = row.original;
-      const amount = parseFloat(userKit.model_detail.price.toString());
+      const amount = parseFloat(userKit.price.toString());
       const formatted = new Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL",
@@ -81,13 +79,9 @@ export const columns: ColumnDef<Kit>[] = [
     },
   },
   {
-    id: "model_detail",
-    accessorKey: "Modelo Kit",
+    id: "model_type",
+    accessorKey: "model_type",
     header: "Modelo Kit",
-    cell: ({ row }) => {
-      const userKit = row.original;
-      return <div className="font-medium">{userKit.model_detail.model}</div>;
-    },
   },
   {
     id: "actions",

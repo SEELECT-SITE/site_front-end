@@ -70,9 +70,9 @@ export function DataTable<TData, TValue>({
           value={
             (table.getColumn("is_payed")?.getFilterValue() as string) ?? ""
           }
-          onChange={(event) =>
-            table.getColumn("is_payed")?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => {
+            table.getColumn("is_payed")?.setFilterValue(event.target.value);
+          }}
           className="max-w-sm"
         />
       </div>
