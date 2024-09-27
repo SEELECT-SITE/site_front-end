@@ -35,23 +35,26 @@ export default function FormsCadastro() {
   });
   const errorsDiv = useRef<HTMLDivElement | null>(null);
   const [registerSuccessMsg, setRegisterSuccessMsg] = useState<string>("");
-  const [sendb, setSendb] = useState<boolean>(false);
+  const [sendButtonStatus, setSendButtonStatus] = useState<boolean>(false);
   async function createContact(data: any) {
     setErroReq({ ...erroReq, status: false });
     const formData = new URLSearchParams();
-    formData.append("password", data.password as string);
-    formData.append("email", data.email as string);
+    const email = data.email;
+    formData.append("password", data.password);
+    formData.append("email", email.toLowerCase());
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
     };
     try {
-      setSendb(true);
+      setSendButtonStatus(true);
       setRegisterSuccessMsg("CONFIRA SEU EMAIL PARA CONFIRMAR O CADASTRO");
 
       await axiosClient.post(`/api/auth/register/`, formData.toString(), {
         headers,
       });
+      setSendButtonStatus(false);
+      router.push("./login");
     } catch (err: any) {
       const errorKeys = Object.keys(err.response.data);
       const errosList = errorKeys.map((key) => err.response.data[key][0]) as [
@@ -59,9 +62,6 @@ export default function FormsCadastro() {
       ];
       setErroReq({ status: true, errors: errosList });
       scrollToElement(errorsDiv);
-    } finally {
-      setSendb(false);
-      router.push("./login");
     }
   }
   return (
@@ -113,7 +113,7 @@ export default function FormsCadastro() {
       </div>
 
       <FloatButton
-        disabled={sendb}
+        disabled={sendButtonStatus}
         type="submit"
         className="bg-cian-700 lg:text-lg text-white"
         shadowClassname="w-full bg-black/80 mt-4"
