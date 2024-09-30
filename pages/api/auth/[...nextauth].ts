@@ -23,7 +23,6 @@ export const nextAuthOptions: NextAuthOptions = {
           "Content-Type": "application/x-www-form-urlencoded",
         };
         try {
-          console.log(`${API_URL}api/auth/login/`);
           const response = await axios.post(
             `${API_URL}api/auth/login/`,
             formData.toString(),

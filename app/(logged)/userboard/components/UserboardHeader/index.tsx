@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Seelect_icon from "@/public/icone_seelect-light-cian.webp";
 import { MdLogout } from "react-icons/md";
-import { AiFillHome } from "react-icons/ai";
 
 export default function UserboardHeader() {
   const router = useRouter();

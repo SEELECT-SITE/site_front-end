@@ -47,6 +47,9 @@ function Userboard({
   return (
     <>
       <div className="bg-dark-cian relative">
+        {isSelectEventOpen && (
+          <SelectEventsModal user={user!} sessionUpdate={sessionUpdate} />
+        )}
         {hasUserName && (
           <Container className="w-full flex flex-wrap justify-between gap-2">
             <Text className="capitalize">Bem-vindo, {user?.name} </Text>
@@ -102,15 +105,10 @@ function Userboard({
                   <UserEvents user={user} sessionUpdate={sessionUpdate} />
                 </>
               ) : (
-                <>
-                  <KitsAvaliable title={true} />
-                </>
+                <KitsAvaliable title={true} />
               )}
             </div>
           </Container>
-          {isSelectEventOpen && (
-            <SelectEventsModal user={user!} sessionUpdate={sessionUpdate} />
-          )}
         </>
       )}
     </>

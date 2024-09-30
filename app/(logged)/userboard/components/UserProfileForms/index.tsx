@@ -165,7 +165,7 @@ export default function UserProfileForms({
           className="bg-cian-700 lg:text-lg text-white"
           shadowClassname="w-full bg-black/80"
         >
-          Entrar
+          Atualizar
         </FloatButton>
       </form>
     </>

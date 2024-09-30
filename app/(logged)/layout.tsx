@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { cafeFont } from "../fonts";
 import { nextAuthOptions } from "@/pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
+import { Toaster } from "@/components/ui/toaster";
 import Footer from "@/components/Footer";
 
 export default async function LoggedLayout({
@@ -19,6 +20,7 @@ export default async function LoggedLayout({
     >
       {children}
       <Footer />
+      <Toaster />
     </body>
   );
 }

@@ -14,7 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const { name, email, phone, message } = req.body;
     const mailOptions = {
       from: process.env.EMAIL_USER,
-      to: "seelect2023@gmail.com",
+      to: process.env.EMAIL_USER,
       subject: "Uma pessoa está interessada no nosso evento! To Redirect",
       text: `O usuário ${name} preencheu o formulário!
       Seu telefone é: ${phone}

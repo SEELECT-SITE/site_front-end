@@ -9,32 +9,15 @@ import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import Title from "@/components/Title";
 import Button from "@/components/Button";
 import useUserboardState from "../userboardStore/PayKitModalStore";
-import KitsAvaliable from "../KitsAvaliabe";
-import { useState } from "react";
-import momento from "@/utils/formatDate";
 
 export default function UserKitArea({ user }: { user: User }) {
   const { isPayKitModalOpen, setIsPayKitModalOpen } = usePayKitState();
   const { kitsValues } = useUserboardState();
-  const [isChooseKitOpen, setIsChooseKitOpen] = useState<boolean>(false);
   return (
     <>
       <Title className="border-l-2 border-cian-400 pl-2">
         {kitsValues != "" && kitsValues[user?.kit?.model! - 1 ?? 1].model}
       </Title>
-
-      <>
-        <FloatButton
-          className="p-1"
-          shadowClassname="my-1"
-          onClick={(e) => {
-            setIsChooseKitOpen(!isChooseKitOpen);
-          }}
-        >
-          Trocar de Kit
-        </FloatButton>
-        {isChooseKitOpen && <KitsAvaliable />}
-      </>
       <Text className="font-bold mt-4">Você tem direito a:</Text>
       <ul className="mb-4">
         {[

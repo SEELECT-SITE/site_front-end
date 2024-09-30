@@ -64,7 +64,7 @@ export default function KitsAvaliable({
         </>
       )}
 
-      <div className="flex flex-wrap gap-4 my-6 justify-around">
+      <div className="flex flex-wrap gap-4 my-6 justify-around relative -z-0">
         {!isLoading &&
           kits
             .map((kit: any, index: number) => {

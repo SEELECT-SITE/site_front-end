@@ -13,8 +13,8 @@ export const axiosClient = axios.create({ baseURL: urlApi });
 
 export function transformKitsToTable(kits: Kit[]): KitToTable[] {
   return kits.map((kit) => ({
-    user: kit.user,
-    is_payed: kit.is_payed ? "Pago" : "Pendente",
+    user: kit.user?.toString(),
+    is_payed: kit.is_payed,
     price: kit.model_detail.price,
     model_type: kit.model_detail.model,
     date_created: new Date(kit.date_created).getTime(),

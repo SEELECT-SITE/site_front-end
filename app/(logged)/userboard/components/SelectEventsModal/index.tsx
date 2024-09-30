@@ -23,6 +23,7 @@ import SelectedKitAdvantages from "./selectedKitAdvantages";
 import CloseModalButton from "./closeModalButton";
 import { EventProps } from "@/pages/api/auth/nextauth";
 import { axiosClient } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 interface SelectEventsModalProps {
   className?: string;
@@ -42,7 +43,7 @@ export default function SelectEventsModal({
       return elem.id;
     }) || []
   );
-
+  const { toast } = useToast();
   const concernAlertDiv = useRef<HTMLDivElement | null>(null);
   const [eventsTimePicked, setEventsTimePicked] = useState<any[]>([]);
   const [adviceReadedMsg, setAdviceReadedMsg] = useState<string>("");
@@ -111,9 +112,10 @@ export default function SelectEventsModal({
   async function updateEvents() {
     if (!adviceReaded) {
       scrollToElement(concernAlertDiv);
-      setAdviceReadedMsg(
-        "Marque a opção no topo da pagina, confirmando que entendeu o aviso."
-      );
+      toast({
+        title: "Alerta",
+        description: "Marque a opção de que leu o aviso no topo da página",
+      });
       setTimeout(() => {
         setAdviceReadedMsg("");
       }, 4000);
@@ -124,9 +126,10 @@ export default function SelectEventsModal({
       adviceReadedMsg !=
         "Você não está selecionando nenhum dos eventos pagos antes de salvar o kit. Se deseja continuar clique novamente em Atualizar Eventos"
     ) {
-      setAdviceReadedMsg(
-        "Você não está selecionando nenhum dos eventos pagos antes de salvar o kit. Se deseja continuar clique novamente em Atualizar Eventos"
-      );
+      toast({
+        description:
+          "Você não está selecionando nenhum dos eventos pagos antes de salvar o kit. Se deseja continuar clique novamente em Atualizar Eventos",
+      });
       return;
     }
     const model = kitModelId + 1;
@@ -161,7 +164,7 @@ export default function SelectEventsModal({
   }
 
   return (
-    <div className="fixed w-full h-screen overflow-y-scroll  top-0 left-0 p-4 bg-white text-dark z-10">
+    <div className="fixed w-full h-screen overflow-y-scroll top-0 left-0 p-4 bg-white text-dark z-10">
       <div className=" overflow-hidden relative pb-20">
         <Container>
           <CloseModalButton />

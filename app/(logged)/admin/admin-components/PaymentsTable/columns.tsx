@@ -22,15 +22,13 @@ export const columns: ColumnDef<KitToTable>[] = [
     id: "user",
     header: ({ column }) => {
       return (
-        <div className="flex justify-center w-full">
-          <Button
-            variant="ghost"
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            ID do Usuário
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        </div>
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          ID do Usuário
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
       );
     },
     enableHiding: false,
@@ -39,6 +37,13 @@ export const columns: ColumnDef<KitToTable>[] = [
     id: "is_payed",
     accessorKey: "is_payed",
     header: "Pagamento",
+    cell: ({ row }) => {
+      const kit = row.original;
+      if (kit.model_type == "Kit Gratuito") {
+        return "Não precisa";
+      }
+      return kit.is_payed ? "Pago" : "Pendente";
+    },
   },
   {
     id: "date_created",
@@ -68,14 +73,16 @@ export const columns: ColumnDef<KitToTable>[] = [
     accessorKey: "price",
     header: "Preço",
     cell: ({ row }) => {
-      const userKit = row.original;
-      const amount = parseFloat(userKit.price.toString());
+      const kit = row.original;
+      const amount = parseFloat(kit.price.toString());
       const formatted = new Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL",
       }).format(amount);
-
-      return <div className="text-center font-medium">{formatted}</div>;
+      if (kit.model_type == "Kit Gratuito") {
+        return "Sem preço";
+      }
+      return formatted;
     },
   },
   {
@@ -99,14 +106,17 @@ export const columns: ColumnDef<KitToTable>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={(e) => {
-                setUserKit(kit);
-                setIsUserPayModalOpen(true);
-              }}
-            >
-              Confirmar pagamento
-            </DropdownMenuItem>
+            {kit.model_type != "Kit Gratuito" && (
+              <DropdownMenuItem
+                onClick={(e) => {
+                  setUserKit(kit);
+                  setIsUserPayModalOpen(true);
+                }}
+              >
+                Confirmar pagamento
+              </DropdownMenuItem>
+            )}
+
             <DropdownMenuSeparator />
             <DropdownMenuItem>Apagar Kit</DropdownMenuItem>
           </DropdownMenuContent>

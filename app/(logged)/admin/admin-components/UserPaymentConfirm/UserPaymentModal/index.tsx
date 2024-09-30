@@ -62,14 +62,13 @@ export default function UserPaymentModal({
             Deseja{" "}
             {userKit.is_payed ? "reverter pagamento" : "confirmar pagamento"} de{" "}
             {formatCurrency(
-              (momento(userKit.date_created).isBefore("10/30/2023")
-                ? userKit.model_detail.price - 5
-                : userKit.model_detail.price) *
-                (1 - userKit.discount / 100)
+              momento(userKit.date_created).isBefore("10/30/2024")
+                ? userKit.price - 5
+                : userKit.price
             )}{" "}
             para o usúario de ID {userKit.user}?
           </Text>
-          {userKit.discount != 0 && (
+          {userKit.discount && (
             <div className="my-2 inline-flex items-center gap-1 rounded-md bg-slate-900 p-1 text-yellow-200">
               <span>
                 <LuAlertCircle size={18} />
