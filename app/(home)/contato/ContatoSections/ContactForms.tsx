@@ -1,6 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { set, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import wave_contato from "@/public/SVG/wave-contato.svg";
 import FloatButton from "@/components/FloatButton";
@@ -9,6 +9,8 @@ import TextAreaInput from "@/components/TextAreaInput";
 import Decoration from "@/components/SECTIONS/Cronograma/DecorationStripes/decoration";
 import Image from "next/image";
 import axios from "axios";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 const createContactSchema = z.object({
   email: z
@@ -44,9 +46,18 @@ export default function ContactForms() {
   } = useForm<CreateContactData>({
     resolver: zodResolver(createContactSchema),
   });
-
-  function createContact(data: any) {
-    const response = axios.post("/api/contactEmail", data);
+  const { toast } = useToast();
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
+  async function createContact(data: any) {
+    setIsSendingEmail(true);
+    const response = await axios.post("/api/contactEmail", data);
+    if (response.status === 200) {
+      toast({
+        title: "Mensagem enviada",
+        description: "Em breve entraremos em contato",
+      });
+      setIsSendingEmail(false);
+    }
   }
   return (
     <form
@@ -85,7 +96,12 @@ export default function ContactForms() {
         rows={4}
         className=" border-cian-400"
       />
-      <FloatButton type="submit" className=" text-xl" shadowClassname="w-full">
+      <FloatButton
+        disabled={isSendingEmail}
+        type="submit"
+        className=" text-xl"
+        shadowClassname="w-full"
+      >
         Enviar
       </FloatButton>
       <Image

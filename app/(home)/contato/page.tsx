@@ -4,6 +4,7 @@ import Title from "@/components/Title";
 import Image from "next/image";
 import ContactForms from "./ContatoSections/ContactForms";
 import elipse from "@/public/SVG/squares-deco.svg";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata = {
   title: "Contato",
@@ -27,6 +28,7 @@ export default function ContactPage() {
       <Container className="flex justify-center w-full relative z-10">
         <ContactForms />
       </Container>
+      <Toaster />
     </main>
   );
 }

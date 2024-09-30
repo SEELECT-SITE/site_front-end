@@ -1,25 +1,31 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 
+const seelectEmail = process.env.GMAIL_USER;
+const pass = process.env.GMAIL_PASS;
+
 const transporter = nodemailer.createTransport({
   service: "gmail", // ou outro serviço de email
   auth: {
-    user: process.env.GMAIL_USER, // armazenado em variáveis de ambiente
-    pass: process.env.GMAIL_PASS, // armazenado em variáveis de ambiente
+    user: seelectEmail, // armazenado em variáveis de ambiente
+    pass: pass, // armazenado em variáveis de ambiente
   },
 });
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const { name, email, phone, message } = req.body;
+    if (!name || !email || !phone) {
+      return res.status(400).json({ message: "Preencha todos os campos" });
+    }
     const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
+      from: seelectEmail,
+      to: seelectEmail,
       subject: "Uma pessoa está interessada no nosso evento! To Redirect",
-      text: `O usuário ${name} preencheu o formulário!
+      text: `${name} preencheu o formulário!
       Seu telefone é: ${phone}
       Seu email é: ${email}
-      ${req.body.message ? `Sua mensagem é: "${message}"` : ""}
+      ${message ? `Sua mensagem é: "${message}"` : ""}
       `,
     };
 
