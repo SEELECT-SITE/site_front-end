@@ -21,14 +21,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import Input from "@/components/Input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -63,13 +57,13 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
+    <div className="">
       <div className="flex items-center py-4">
         <Input
           placeholder="Encontre por ID do usuário..."
-          value={table.getColumn("user")?.getFilterValue() as string}
+          value={table.getColumn("userID")?.getFilterValue() as string}
           onChange={(event) => {
-            table.getColumn("user")?.setFilterValue(event.target.value);
+            table.getColumn("userID")?.setFilterValue(event.target.value);
           }}
           className="max-w-sm"
         />
@@ -133,7 +127,7 @@ export function DataTable<TData, TValue>({
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          Anterior
         </Button>
         <Button
           variant="outline"
@@ -141,7 +135,7 @@ export function DataTable<TData, TValue>({
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          Proximo
         </Button>
       </div>
     </div>

@@ -37,7 +37,7 @@ function PaymentsTable({ session }: { session: Session }) {
   );
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto ">
       {isUserPayModalOpen && (
         <UserPaymentModal triggerFn={refetch} token={user?.token} />
       )}

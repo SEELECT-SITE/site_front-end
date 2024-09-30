@@ -14,6 +14,7 @@ import {
 } from "./FormsCadastroSchemas";
 import { scrollToElement } from "@/utils/scrollToElement";
 import { axiosClient } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 interface erroReqType {
   status: boolean;
@@ -34,7 +35,7 @@ export default function FormsCadastro() {
     errors: null,
   });
   const errorsDiv = useRef<HTMLDivElement | null>(null);
-  const [registerSuccessMsg, setRegisterSuccessMsg] = useState<string>("");
+  const { toast } = useToast();
   const [sendButtonStatus, setSendButtonStatus] = useState<boolean>(false);
   async function createContact(data: any) {
     setErroReq({ ...erroReq, status: false });
@@ -48,10 +49,14 @@ export default function FormsCadastro() {
     };
     try {
       setSendButtonStatus(true);
-      setRegisterSuccessMsg("CONFIRA SEU EMAIL PARA CONFIRMAR O CADASTRO");
 
       await axiosClient.post(`/api/auth/register/`, formData.toString(), {
         headers,
+      });
+
+      toast({
+        title: "Email enviado",
+        description: "Confira seu email para confirma o cadastro",
       });
       setSendButtonStatus(false);
       router.push("./login");
@@ -69,11 +74,6 @@ export default function FormsCadastro() {
       onSubmit={handleSubmit(createContact)}
       className="w-full max-w-md m-auto relative"
     >
-      {registerSuccessMsg !== "" && (
-        <Alert timeout={4000} className="border-green-400">
-          {registerSuccessMsg}
-        </Alert>
-      )}
       <div className="flex flex-col gap-3 lg:gap-5 my-8">
         <Input
           placeholder="E-mail"

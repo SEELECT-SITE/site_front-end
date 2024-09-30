@@ -17,8 +17,8 @@ import momento from "@/utils/formatDate";
 
 export const columns: ColumnDef<KitToTable>[] = [
   {
-    accessorKey: "user",
-    id: "user",
+    accessorKey: "userID",
+    id: "userID",
     header: ({ column }) => {
       return (
         <Button

@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { cafeFont } from "../fonts";
 import { nextAuthOptions } from "@/pages/api/auth/[...nextauth]";
 import { redirect } from "next/navigation";
+import { Toaster } from "@/components/ui/toaster";
 
 export default async function HomeLayout({
   children,
@@ -17,6 +18,9 @@ export default async function HomeLayout({
     }
   }
   return (
-    <body className={`bg-white w-full ${cafeFont.className}`}>{children}</body>
+    <body className={`bg-white w-full ${cafeFont.className}`}>
+      <Toaster />
+      {children}
+    </body>
   );
 }

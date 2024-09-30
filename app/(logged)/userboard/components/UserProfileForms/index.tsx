@@ -76,7 +76,7 @@ export default function UserProfileForms({
 
     try {
       await axiosClient.put(
-        `users/user/${user.id}/profile/`,
+        `/api/users/user/${user.id}/profile/`,
         formData.toString(),
         { headers }
       );
@@ -87,87 +87,85 @@ export default function UserProfileForms({
     }
   }
   return (
-    <>
-      <form
-        onSubmit={handleSubmit(updateProfile)}
-        className={`w-full m-auto relative max-w-md duration-300`}
+    <form
+      onSubmit={handleSubmit(updateProfile)}
+      className={`w-full m-auto relative max-w-md duration-300`}
+    >
+      <Text
+        className={` lg:mb-1 font-bold tracking-wide lg:text-xl xl:text-2xl`}
       >
-        <Text
-          className={` lg:mb-1 font-bold tracking-wide lg:text-xl xl:text-2xl`}
-        >
-          Atualize suas credenciais
-        </Text>
+        Atualize suas credenciais
+      </Text>
 
-        <div className="flex-col flex gap-2 lg:gap-4 my-6 lg:my-8 max-w-md">
-          <Input
-            defaultValue={user.name?.split(" ")[0] || ""}
-            placeholder="Nome"
-            errorMsg={errors.first_name?.message as string}
-            type="text"
-            required
-            register={register("first_name")}
-          />
-          <Input
-            defaultValue={user.name?.split(" ")[1] || ""}
-            placeholder="Sobrenome"
-            errorMsg={errors.last_name?.message as string}
-            type="text"
-            required
-            register={register("last_name")}
-          />
-          <Input
-            defaultValue={user.name?.split(" ")[1] || ""}
-            placeholder="Data de nascimento"
-            errorMsg={errors.birthday?.message as string}
-            type="date"
-            required
-            register={register("birthday")}
-          />
+      <div className="flex-col flex gap-2 lg:gap-4 my-6 lg:my-8 max-w-md">
+        <Input
+          defaultValue={user.name?.split(" ")[0] || ""}
+          placeholder="Nome"
+          errorMsg={errors.first_name?.message as string}
+          type="text"
+          required
+          register={register("first_name")}
+        />
+        <Input
+          defaultValue={user.name?.split(" ")[1] || ""}
+          placeholder="Sobrenome"
+          errorMsg={errors.last_name?.message as string}
+          type="text"
+          required
+          register={register("last_name")}
+        />
+        <Input
+          defaultValue={user.name?.split(" ")[1] || ""}
+          placeholder="Data de nascimento"
+          errorMsg={errors.birthday?.message as string}
+          type="date"
+          required
+          register={register("birthday")}
+        />
 
-          <SelectInput
-            required
-            register={register("ies")}
-            errorMsg={errors.ies?.message as string}
-            label=""
-            firstOption="Selecione uma instituição de ensino"
-            options={IES_CEARA}
-          />
-          <SelectInput
-            required
-            register={register("course")}
-            errorMsg={errors.course?.message as string}
-            label=""
-            firstOption="Selecione um curso"
-            options={UFC_COURSES}
-          />
-          <Input
-            max={20}
-            min={1}
-            defaultValue={user.semestre}
-            placeholder="Semestre"
-            errorMsg={errors.semester?.message as string}
-            type="number"
-            required
-            register={register("semester", { valueAsNumber: true })}
-          />
-          <Input
-            placeholder="CPF - Apenas os numeros."
-            maxLength={11}
-            minLength={11}
-            errorMsg={errors.cpf?.message as string}
-            required
-            register={register("cpf")}
-          />
-        </div>
+        <SelectInput
+          required
+          register={register("ies")}
+          errorMsg={errors.ies?.message as string}
+          label=""
+          firstOption="Selecione uma instituição de ensino"
+          options={IES_CEARA}
+        />
+        <SelectInput
+          required
+          register={register("course")}
+          errorMsg={errors.course?.message as string}
+          label=""
+          firstOption="Selecione um curso"
+          options={UFC_COURSES}
+        />
+        <Input
+          max={20}
+          min={1}
+          defaultValue={user.semestre}
+          placeholder="Semestre"
+          errorMsg={errors.semester?.message as string}
+          type="number"
+          required
+          register={register("semester", { valueAsNumber: true })}
+        />
+        <Input
+          placeholder="CPF - Apenas os numeros."
+          maxLength={11}
+          minLength={11}
+          errorMsg={errors.cpf?.message as string}
+          required
+          register={register("cpf")}
+        />
+      </div>
 
-        <FloatButton
-          type="submit"
-          className="bg-cian-700 lg:text-lg text-white"
-          shadowClassname="w-full bg-black/80"
-        >
-          Atualizar
-        </FloatButton>
-      </form>
-    </>
+      <FloatButton
+        type="submit"
+        className="bg-cian-700 lg:text-lg text-white"
+        shadowClassname="w-full bg-black/80"
+      >
+        Atualizar
+      </FloatButton>
+    </form>
   );
 }

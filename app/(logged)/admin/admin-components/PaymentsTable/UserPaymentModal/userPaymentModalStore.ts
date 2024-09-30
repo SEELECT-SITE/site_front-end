@@ -1,10 +1,11 @@
+import { KitToTable } from "@/pages/api/auth/nextauth";
 import { create } from "zustand";
 
 type deleteModalProp = {
   isUserPayModalOpen: boolean;
   setIsUserPayModalOpen: (update: boolean) => void;
-  userKit: any;
-  setUserKit: (update: any) => void;
+  userKit: KitToTable | null;
+  setUserKit: (update: KitToTable) => void;
 };
 
 const useUserPaymentStore = create<deleteModalProp>((set) => ({
@@ -12,8 +13,8 @@ const useUserPaymentStore = create<deleteModalProp>((set) => ({
   setIsUserPayModalOpen: (update: boolean) => {
     set((state) => ({ isUserPayModalOpen: update }));
   },
-  userKit: {},
-  setUserKit: (update: any) => {
+  userKit: null,
+  setUserKit: (update: KitToTable) => {
     set((state) => ({ userKit: update }));
   },
 }));

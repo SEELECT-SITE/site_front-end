@@ -23,11 +23,12 @@ export default function UserPaymentModal({
   const { setIsUserPayModalOpen, userKit } = useUserPaymentStore();
   const { setIsAlertAdminOpen, setAlertMsg } = useAlertAdminState();
   async function ConfirmPayment() {
+    if (userKit == null) return;
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded",
       Token: token,
     };
-    const paymentState = `${!userKit.is_payed}`;
+    const paymentState = `${userKit.is_payed}`;
     const formData = new URLSearchParams();
     formData.append(
       "is_payed",
@@ -35,7 +36,7 @@ export default function UserPaymentModal({
     );
     try {
       await axiosClient.post(
-        `api/kits/${userKit.id}/confirm_payment/`,
+        `api/kits/${userKit.kitID}/confirm_payment/`,
         formData,
         {
           headers,
@@ -45,7 +46,7 @@ export default function UserPaymentModal({
       console.log(e);
     }
   }
-
+  if (userKit == null) return <></>;
   return (
     <>
       <div
@@ -66,9 +67,9 @@ export default function UserPaymentModal({
                 ? userKit.price - 5
                 : userKit.price
             )}{" "}
-            para o usúario de ID {userKit.user}?
+            para o usúario de ID {userKit.userID}?
           </Text>
-          {userKit.discount && (
+          {userKit.discount != 0 && (
             <div className="my-2 inline-flex items-center gap-1 rounded-md bg-slate-900 p-1 text-yellow-200">
               <span>
                 <LuAlertCircle size={18} />

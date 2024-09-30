@@ -30,17 +30,19 @@ export interface EventProps {
 }
 
 type KitToTable = {
-  user: string | undefined;
+  userID: string;
+  kitID: string;
   is_payed: boolean;
   price: number;
   model_type: string;
+  discount: number;
   date_created: number;
 };
 
 type Kit = {
   id: number;
   date_created: number;
-  user?: number;
+  user: number;
   discount: number;
   is_payed: boolean;
   model: number;
