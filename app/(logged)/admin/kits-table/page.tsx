@@ -6,8 +6,8 @@ import { useSession } from "next-auth/react";
 import { Session } from "next-auth";
 import { queryClient } from "@/utils/queryClient";
 import { axiosClient, transformKitsToTable } from "@/lib/utils";
-import UserPaymentModal from "../admin-components/UserPaymentConfirm/UserPaymentModal";
-import useUserPaymentStore from "../admin-components/UserPaymentConfirm/UserPaymentModal/userPaymentModalStore";
+import UserPaymentModal from "../admin-components/PaymentsTable/UserPaymentModal";
+import useUserPaymentStore from "../admin-components/PaymentsTable/UserPaymentModal/userPaymentModalStore";
 
 function PaymentsTable({ session }: { session: Session }) {
   const { user } = session;

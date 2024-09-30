@@ -2,7 +2,6 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -13,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { KitToTable } from "@/pages/api/auth/nextauth";
-import useUserPaymentStore from "../UserPaymentConfirm/UserPaymentModal/userPaymentModalStore";
+import useUserPaymentStore from "./UserPaymentModal/userPaymentModalStore";
 import momento from "@/utils/formatDate";
 
 export const columns: ColumnDef<KitToTable>[] = [
