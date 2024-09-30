@@ -44,6 +44,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
   const [eventCapacity, setEventCapacity] = useState<number>(0);
   const [dates, setDates] = useState<string[]>([]);
   const [date, setDate] = useState<string>("");
+  const [initialDate, setInitialDate] = useState<string>("2023-11-06T07:00");
 
   const { data: places, isLoading } = useQuery<OptionPlace[] | undefined>(
     "Places",
@@ -73,6 +74,12 @@ export default function AddEventsForms({ Token }: { Token: string }) {
     if (dates.length % 2 != 0 || dates.length == 0) {
       setErrorReq("Coloque um par de datas");
       return;
+    }
+    for (var i = 0; i < dates.length; i += 2) {
+      if (momento(dates[i]).isAfter(dates[i + 1])) {
+        setErrorReq("Existem datas invertidas");
+        return;
+      }
     }
 
     var eventDates = "{";
@@ -146,9 +153,9 @@ export default function AddEventsForms({ Token }: { Token: string }) {
           />
           <DatePicker
             buttonType="button"
-            min="2023-11-06T07:00"
+            min={initialDate}
             max="2023-11-11T20:00"
-            value="2023-11-06T07:00"
+            defaultValue="2023-11-06T07:00"
             placeholder="Datas"
             type="datetime-local"
             setCurrentValue={setDate}
