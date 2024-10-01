@@ -6,7 +6,6 @@ import FloatButton from "@/components/FloatButton";
 import Input from "@/components/Input";
 import { useRef, useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
-import axios from "axios";
 import SelectInput from "@/components/SelectInput";
 import { useQuery } from "react-query";
 import DatePicker from "@/components/SECTIONS/DatePicker";
@@ -29,6 +28,9 @@ const createAddEventsSchema = z.object({
 
 type CreateAddEvents = z.infer<typeof createAddEventsSchema>;
 
+const startDate = process.env.NEXT_PUBLIC_START_DATE;
+const endDate = process.env.NEXT_PUBLIC_END_DATE;
+
 export default function AddEventsForms({ Token }: { Token: string }) {
   const {
     register,
@@ -44,7 +46,6 @@ export default function AddEventsForms({ Token }: { Token: string }) {
   const [eventCapacity, setEventCapacity] = useState<number>(0);
   const [dates, setDates] = useState<string[]>([]);
   const [date, setDate] = useState<string>("");
-  const [initialDate, setInitialDate] = useState<string>("2023-11-06T07:00");
 
   const { data: places, isLoading } = useQuery<OptionPlace[] | undefined>(
     "Places",
@@ -125,10 +126,10 @@ export default function AddEventsForms({ Token }: { Token: string }) {
       <form
         onSubmit={handleSubmit(addEvent)}
         onKeyDown={(e) => {}}
-        className="w-full m-auto relative overflow-hidden p-3 border border-slate-100 max-w-md bg-white text-dark"
+        className="w-full m-auto relative overflow-hidden p-3 border border-slate-600 max-w-md bg-slate-800 text-slate-100 rounded-md"
       >
         <h1
-          className={`text-2xl lg:mb-1 font-bold tracking-wide lg:text-3xl xl:text-4xl`}
+          className={`text-xl lg:mb-1 font-bold tracking-wide lg:text-2xl xl:text-3xl`}
         >
           Crie um evento
         </h1>
@@ -140,7 +141,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
             register={register("title")}
           />
           <Input
-            placeholder="Falicitadores (Ex:Manuel, Chico e Whindersson)"
+            placeholder="Falicitadores (Ex:Leticia, Felipe e Tonho)"
             errorMsg={errors.host?.message as string}
             type="text"
             register={register("host")}
@@ -153,9 +154,9 @@ export default function AddEventsForms({ Token }: { Token: string }) {
           />
           <DatePicker
             buttonType="button"
-            min={initialDate}
-            max="2023-11-11T20:00"
-            defaultValue="2023-11-06T07:00"
+            min={startDate}
+            max={endDate}
+            defaultValue={startDate}
             placeholder="Datas"
             type="datetime-local"
             setCurrentValue={setDate}
