@@ -1,3 +1,4 @@
+import AdminHeader from "../userboard/components/AdminHeader";
 import UserboardHeader from "../userboard/components/UserboardHeader";
 
 export const metadata = {
@@ -13,7 +14,7 @@ export default function AdminLayout({
 }) {
   return (
     <>
-      <UserboardHeader />
+      <AdminHeader />
       {children}
     </>
   );

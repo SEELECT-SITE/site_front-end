@@ -35,7 +35,6 @@ export default function AddEventsForms({ Token }: { Token: string }) {
   const {
     register,
     handleSubmit,
-    setValue,
     reset,
     formState: { errors },
   } = useForm<CreateAddEvents>({
@@ -126,13 +125,13 @@ export default function AddEventsForms({ Token }: { Token: string }) {
       <form
         onSubmit={handleSubmit(addEvent)}
         onKeyDown={(e) => {}}
-        className="w-full m-auto relative overflow-hidden p-3 border border-slate-600 max-w-md bg-slate-800 text-slate-100 rounded-md"
+        className="w-full overflow-hidden p-3 border border-slate-600 max-w-md bg-slate-800 text-slate-100 rounded-md"
       >
-        <h1
+        <h3
           className={`text-xl lg:mb-1 font-bold tracking-wide lg:text-2xl xl:text-3xl`}
         >
           Crie um evento
-        </h1>
+        </h3>
         <div className="flex flex-col gap-2 lg:gap-4 my-6 lg:my-8">
           <Input
             placeholder="Titulo do Evento"
@@ -206,7 +205,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
           shadowClassname="w-full bg-black/80"
           disabled={false}
         >
-          Entrar
+          Enviar
         </FloatButton>
       </form>
     </>

@@ -72,9 +72,13 @@ export default function AddPlaceForms({ Token }: { Token: string }) {
     <>
       <form
         onSubmit={handleSubmit(addPlace)}
-        className="w-full m-auto relative overflow-hidden p-3 border border-slate-100 max-w-md"
+        className="w-full max-w-md overflow-hidden p-3 border border-slate-600 bg-slate-800 text-slate-100 rounded-md"
       >
-        <Text className="pl-2">Adicione um novo lugar para eventos.</Text>
+        <h3
+          className={`text-xl lg:mb-1 font-bold tracking-wide lg:text-2xl xl:text-3xl`}
+        >
+          Adicione um local
+        </h3>
 
         <div className=" gap-2 lg:gap-3 my-6 lg:my-8 flex flex-col">
           <Input

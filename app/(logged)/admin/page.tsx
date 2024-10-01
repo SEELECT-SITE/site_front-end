@@ -22,9 +22,9 @@ function Admin({ session }: { session: Session }) {
       )}
 
       <Container>
-        <Title>pagina do admin</Title>
+        <Title>Página do admin</Title>
       </Container>
-      <Container className="flex flex-wrap items-stretch">
+      <Container className="flex flex-wrap justify-around items-start">
         {user?.token && (
           <>
             <AddEventsForms Token={user.token} />
