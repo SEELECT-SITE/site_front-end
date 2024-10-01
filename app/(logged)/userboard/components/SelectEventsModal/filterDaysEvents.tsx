@@ -20,7 +20,7 @@ const FilterDaysEvents = () => {
         { title: "Quarta", value: "quarta-feira" },
         { title: "Quinta", value: "quinta-feira" },
         { title: "Sexta", value: "sexta-feira" },
-        { title: "Todos os dias", value: "allDays" },
+        { title: "Todos os dias", value: "allDays", defaultChecked: true },
       ]}
       groupName={"dias da semana"}
     />

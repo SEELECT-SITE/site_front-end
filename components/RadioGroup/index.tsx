@@ -31,6 +31,7 @@ const RadioGroup: FunctionComponent<RadioGroupProps> = ({
               id={elem.value + index}
               className="peer hidden"
               {...props}
+              defaultChecked={elem.defaultChecked}
             />
 
             <label

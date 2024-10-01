@@ -2,7 +2,6 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { User } from "next-auth";
-import axios from "axios";
 import EventCard from "@/components/SECTIONS/Cronograma/EventsCard";
 import removeElem from "@/utils/removeElem";
 import FloatButton from "@/components/FloatButton";
@@ -14,7 +13,6 @@ import { SvgCardLine } from "@/components/PriceCard";
 import useUserboardState from "../userboardStore/PayKitModalStore";
 import momento from "@/utils/formatDate";
 import SkeletonCreator from "@/components/SkeletonCreator";
-import Alert from "@/components/Alert";
 import { scrollToElement } from "@/utils/scrollToElement";
 import isEventDisable from "./isEventDisable";
 import AdviceKitChange from "./adviceKitChange";
@@ -31,11 +29,14 @@ interface SelectEventsModalProps {
   user: User;
   sessionUpdate: Function;
 }
+//Essa variavel escolhe a partir de qual data os eventos vão ser mostrados
+const showEventsDate = process.env.NEXT_PUBLIC_OPEN_INSCRIPTIONS_DATE;
 
 export default function SelectEventsModal({
   user,
   sessionUpdate,
 }: SelectEventsModalProps) {
+  if (!showEventsDate) return <></>;
   const { setIsSelectEventOpen, selectedKit, adviceReaded, dayOfWeek } =
     useSelectEventsState();
   const [selectEvents, setSelectEvents] = useState<number[]>(
@@ -46,36 +47,59 @@ export default function SelectEventsModal({
   const { toast } = useToast();
   const concernAlertDiv = useRef<HTMLDivElement | null>(null);
   const [eventsTimePicked, setEventsTimePicked] = useState<any[]>([]);
-  const [adviceReadedMsg, setAdviceReadedMsg] = useState<string>("");
   const { kitsValues } = useUserboardState();
+  //Conta o numero de workshops/minicursos do usuario
   const [numberOfSelectWorkshops, setNumberOfSelectWorkshops] =
-    useState<number>(0);
+    useState<number>(
+      user.kit?.events.reduce((acc: number, elem: any) => {
+        if (["workshop", "minicurso"].includes(elem.category)) {
+          return acc + 1;
+        }
+        return acc;
+      }, 0) || 0
+    );
+  //Conta o numero de palestras inscritas do usuario
   const [numberOfSelectedSpeeches, setNumberOfSelectedSpeeches] =
-    useState<number>(0);
+    useState<number>(
+      user.kit?.events.reduce((acc: number, elem: any) => {
+        if ("palestra" == elem.category) {
+          return acc + 1;
+        }
+        return acc;
+      }, 0) || 0
+    );
+
   const { data: events, isLoading } = useQuery<any | undefined>(
-    "userEvents",
+    "allEvents",
     async () => {
       const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
         "ngrok-skip-browser-warning": "true",
       };
       try {
-        const { data } = await axiosClient.get<{ results: [EventProps] }>(
+        const { data } = await axiosClient.get<{ results: EventProps[] }>(
           `api/events/`,
           {
             headers,
           }
         );
-        var event = data.results;
-
-        event.sort(
+        var events = data.results;
+        events = events.filter((elem) => {
+          //@ts-ignore
+          if (momento(showEventsDate).isBefore(elem.date["0"].start))
+            return elem;
+        });
+        events.sort(
           (a: any, b: any) =>
             new Date(a.date["0"].start).getTime() -
             new Date(b.date["0"].start).getTime()
         );
-        return event;
+        return events;
       } catch (error) {
-        console.log(error);
+        toast({
+          title: "Algo deu errado",
+          description: "Tente novamente em breve",
+        });
       }
     },
     { refetchOnWindowFocus: false }
@@ -86,23 +110,40 @@ export default function SelectEventsModal({
   }, []);
 
   function toogleElements(id: number, dates: any[]) {
+    // Verifica se o evento com o id fornecido já está na lista de eventos selecionados
     if (selectEvents.includes(id)) {
+      // Se o evento já estiver selecionado, cria uma cópia do vetor de horários dos eventos selecionados
       var newVector: any[] = eventsTimePicked;
+
+      // Para cada data associada ao evento, remove-a do vetor de horários
       dates.forEach((date) => {
+        // Filtra as datas do vetor, removendo a data que corresponde ao evento atual
         newVector = newVector.filter((currentDate) => {
           return currentDate[0] != date[0] || currentDate[1] != date[1];
         });
       });
+
+      // Atualiza o vetor de horários dos eventos com o novo vetor, sem as datas removidas
       setEventsTimePicked(newVector);
+
+      // Remove o evento da lista de eventos selecionados
       setSelectEvents(removeElem(selectEvents, id));
     } else {
+      // Se o evento não estiver selecionado, cria uma cópia do vetor de horários dos eventos
       var newVector: any[] = eventsTimePicked;
 
+      // Para cada data associada ao evento, adiciona-a ao vetor de horários
       dates.forEach((date) => {
         newVector.push(date);
       });
+
+      // Atualiza o vetor de horários com as novas datas do evento
       setEventsTimePicked(newVector);
+
+      // Adiciona o evento à lista de eventos selecionados
       selectEvents.push(id);
+
+      // Remove o elemento com id 0 da lista de eventos selecionados, se houver
       setSelectEvents(removeElem(selectEvents, 0));
     }
   }
@@ -116,19 +157,12 @@ export default function SelectEventsModal({
         title: "Alerta",
         description: "Marque a opção de que leu o aviso no topo da página",
       });
-      setTimeout(() => {
-        setAdviceReadedMsg("");
-      }, 4000);
       return;
     }
-    if (
-      numberOfSelectedSpeeches + numberOfSelectWorkshops < 1 &&
-      adviceReadedMsg !=
-        "Você não está selecionando nenhum dos eventos pagos antes de salvar o kit. Se deseja continuar clique novamente em Atualizar Eventos"
-    ) {
+    if (numberOfSelectedSpeeches + numberOfSelectWorkshops < 1) {
       toast({
         description:
-          "Você não está selecionando nenhum dos eventos pagos antes de salvar o kit. Se deseja continuar clique novamente em Atualizar Eventos",
+          "Você não está selecionando nenhum dos eventos antes de salvar o kit. Selecione pelo menos um evento antes de continuar.",
       });
       return;
     }
@@ -158,6 +192,10 @@ export default function SelectEventsModal({
       }
       sessionUpdate();
     } catch (e) {
+      toast({
+        title: "Algo deu errado",
+        description: "Tente novamente em breve",
+      });
     } finally {
       setIsSelectEventOpen(false);
     }
@@ -187,14 +225,6 @@ export default function SelectEventsModal({
           </div>
 
           <FilterDaysEvents />
-          {adviceReadedMsg !== "" && (
-            <Alert
-              timeout={6000}
-              className="border-green-400 bottom-8 max-w-full bg-slate-950 text-red-300"
-            >
-              {adviceReadedMsg}
-            </Alert>
-          )}
         </Container>
 
         <div className="fixed z-20 left-0 bottom-0 w-full">
@@ -288,7 +318,7 @@ export default function SelectEventsModal({
                   </div>
 
                   <div>
-                    <div className="flex flex-wrap justify-between mb-2 items-start gap-2">
+                    <div className="flex flex-wrap justify-between items-center mb-2 gap-2">
                       <EventCard.Category category={event.category} />
                       <div>
                         {Object.values(event.date).map((date) => {
@@ -305,6 +335,10 @@ export default function SelectEventsModal({
                         })}
                       </div>
                     </div>
+                    <p className="w-full text-right">
+                      {event.title.split("$")[1] == "patrocinador" &&
+                        "Patrocinado"}
+                    </p>
                     <EventCard.Capacity
                       capacity={
                         event.max_number_of_inscriptions -
