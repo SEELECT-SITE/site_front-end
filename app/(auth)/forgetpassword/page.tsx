@@ -1,8 +1,6 @@
-import Link from "next/link";
 import Container from "@/components/Container";
 
 import FormsLogin from "./forgetSections/ForgetPasswordForm";
-import SmallText from "@/components/SmallText";
 import { LuAlertCircle } from "react-icons/lu";
 import Text from "@/components/Text";
 import MarqueeLogin from "../login/LoginSections/MarqueeSign";
@@ -23,7 +21,7 @@ export default function Login() {
           <Container className="w-full m-auto max-w-lg 2xl:p-8">
             <FormsLogin />
             <div className="flex flex-wrap w-full max-w-sm m-auto justify-between mt-2 ">
-              <Text className="inline-flex my-2 p-2 rounded-lg items-center gap-1 text-slate-700 border border-slate-900">
+              <Text className="inline-flex w-full my-1 rounded-lg items-center gap-1 text-slate-700">
                 <span>
                   <LuAlertCircle size={18} />
                 </span>

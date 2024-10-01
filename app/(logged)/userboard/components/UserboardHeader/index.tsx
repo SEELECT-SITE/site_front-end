@@ -11,7 +11,7 @@ export default function UserboardHeader() {
 
   return (
     <header className="w-full bg-white flex justify-between p-4 lg:px-12 xl:px-16 2xl:px-24 items-center  shadow-md shadow-black/30 text-dark">
-      <Link href="/" className="" title="Voltar a home">
+      <Link href="/userboard" className="" title="Voltar ao userboard">
         <div className="w-12 lg:w-16">
           <Image
             width={64}

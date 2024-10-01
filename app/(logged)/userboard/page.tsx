@@ -21,6 +21,7 @@ import BannerLogin from "@/app/(auth)/login/LoginSections/BannerSign";
 import KitsAvaliable from "./components/KitsAvaliabe";
 import useUserboardState from "./components/userboardStore/PayKitModalStore";
 import SkeletonCreator from "@/components/SkeletonCreator";
+import { useRouter } from "next/navigation";
 
 function Userboard({
   session,
@@ -34,6 +35,7 @@ function Userboard({
   const { kitsValues, getKitsValues } = useUserboardState();
   const { isUserFormsOpen, setIsUserFormsOpen } = useUserForms();
   const hasUserName = user?.name !== " ";
+  const router = useRouter();
 
   useEffect(() => {
     if (!hasUserName) {
@@ -51,25 +53,33 @@ function Userboard({
           <SelectEventsModal user={user!} sessionUpdate={sessionUpdate} />
         )}
         {hasUserName && (
-          <Container className="w-full flex flex-wrap justify-between gap-2">
+          <Container className="w-full flex flex-wrap justify-between items-center gap-2">
             <Text className="capitalize">Bem-vindo, {user?.name} </Text>
-            <FloatButton
-              className="flex duration-100 p-1"
-              shadowClassname="my-0"
-              onClick={(e) => {
-                setIsUserFormsOpen(!isUserFormsOpen);
-              }}
-            >
-              {isUserFormsOpen ? (
-                <>
-                  Fechar <MdClose />
-                </>
-              ) : (
-                <>
-                  Editar perfil <HiPencilAlt size={18} />
-                </>
-              )}
-            </FloatButton>
+            <div className="flex gap-2 items-center">
+              <FloatButton
+                className="flex duration-100 p-1"
+                shadowClassname="my-0"
+                onClick={(e) => {
+                  setIsUserFormsOpen(!isUserFormsOpen);
+                }}
+              >
+                {isUserFormsOpen ? (
+                  <>
+                    Fechar <MdClose />
+                  </>
+                ) : (
+                  <>
+                    Editar perfil <HiPencilAlt size={18} />
+                  </>
+                )}
+              </FloatButton>
+              <FloatButton
+                className="flex duration-100 p-1"
+                onClick={() => router.push("/userboard/change-password")}
+              >
+                Trocar senha
+              </FloatButton>
+            </div>
           </Container>
         )}
         {isUserFormsOpen && (

@@ -1,6 +1,4 @@
 import Container from "@/components/Container";
-import { FcGoogle } from "react-icons/fc";
-import FloatButton from "@/components/FloatButton";
 import FormsCadastro from "./CadastroSections/FormsCadastro";
 import MarqueeSign from "../login/LoginSections/MarqueeSign";
 import BannerSign from "../login/LoginSections/BannerSign";
