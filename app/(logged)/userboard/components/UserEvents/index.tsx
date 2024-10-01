@@ -13,6 +13,7 @@ import Text from "@/components/Text";
 import SmallText from "@/components/SmallText";
 import removeElem from "@/utils/removeElem";
 import { axiosClient } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 export default function UserEvents({
   user,
@@ -26,6 +27,7 @@ export default function UserEvents({
   const [isRemoveButtonDisable, setIsRemoveButtonDisable] =
     useState<boolean>(false);
   const [removeEvent, setRemoveEvent] = useState<any>();
+  const { toast } = useToast();
   const userEvents = user.kit?.events.map((elem: any) => elem.id);
 
   async function removeEventAction() {
@@ -44,7 +46,10 @@ export default function UserEvents({
         headers,
       });
     } catch (e) {
-      console.log(e);
+      toast({
+        title: "Algo deu errado",
+        description: "Aguarde alguns instantes e tente novamente.",
+      });
     } finally {
       setIsRemoveButtonDisable(false);
       setModalIsOpen(false);
@@ -100,14 +105,12 @@ export default function UserEvents({
           .sort(
             (a: any, b: any) =>
               //@ts-ignore
-
               new Date(a.date["0"].start) - new Date(b.date["0"].start)
           )
-          .map((event, index) => {
+          .map((event) => {
             return (
               <EventCard.Body
-                key={event.title + index}
-                id={event.title + index}
+                key={event.title}
                 className="lg:py-12 relative justify-between flex flex-col"
               >
                 <EventCard.Delete
@@ -146,7 +149,7 @@ export default function UserEvents({
                       return (
                         <EventCard.Date
                           //@ts-ignore
-                          key={(date?.start + date?.end, event.title)}
+                          key={date?.start + date?.end}
                           //@ts-ignore
 
                           dateStart={date?.start}

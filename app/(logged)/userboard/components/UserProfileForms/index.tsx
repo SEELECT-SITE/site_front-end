@@ -59,7 +59,7 @@ export default function UserProfileForms({
   async function updateProfile(data: CreateUserProfileData) {
     const { last_name, first_name, ies, course, semester, birthday, cpf } =
       data;
-    console.log(momento(birthday));
+
     const formData = new URLSearchParams();
     formData.append("last_name", last_name);
     formData.append("first_name", first_name);
