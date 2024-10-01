@@ -1,5 +1,4 @@
 import momento from "@/utils/formatDate";
-import { NextApiResponse } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata = {
@@ -7,14 +6,16 @@ export const metadata = {
   description:
     "3ª Semana das Engenharias Elétrica, de Computação e de Telecomunicações",
 };
+const inscriptionsDate = process.env.NEXT_PUBLIC_OPEN_INSCRIPTIONS_DATE;
 
 export default function PacotesLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  if (momento().isAfter("11/06/2023")) {
-    redirect("/");
+  if (momento().isBefore(inscriptionsDate)) {
+    redirect("./");
   }
+  if (!inscriptionsDate) return <></>;
   return <>{children}</>;
 }

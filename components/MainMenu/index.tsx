@@ -8,6 +8,9 @@ import { IoIosPeople, IoMdArrowForward } from "react-icons/io";
 import { MdAddShoppingCart } from "react-icons/md";
 import momento from "@/utils/formatDate";
 import { useRouter } from "next/navigation";
+import Badge from "../Badge";
+
+const inscriptionsDate = process.env.NEXT_PUBLIC_OPEN_INSCRIPTIONS_DATE;
 
 export default function MainMenu() {
   const { menuIsOpen, setMenuIsOpen } = useGlobalState();
@@ -37,7 +40,6 @@ export default function MainMenu() {
                 </Link>
               </button>
             </li>
-
             <li className="">
               <button
                 onClick={(e) => setMenuIsOpen(!menuIsOpen)}
@@ -52,8 +54,7 @@ export default function MainMenu() {
                 </Link>
               </button>
             </li>
-
-            {momento().isBefore("2023-11-06") && (
+            {momento().isAfter(inscriptionsDate) && (
               <li className="">
                 <button
                   onClick={(e) => setMenuIsOpen(!menuIsOpen)}
@@ -83,18 +84,41 @@ export default function MainMenu() {
                 </Link>
               </button>
             </li>
-
-            <li>
-              <Button
-                className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:opacity-30 duration-150 w-full"
-                onClick={(e) => {
-                  setMenuIsOpen(!menuIsOpen);
-                  router.push("/login");
-                }}
-              >
-                LOGIN
-              </Button>
-            </li>
+            {/* Checa se as inscrições estão abertas e possibilita o usuario de logar*/}
+            {momento().isBefore(inscriptionsDate) && (
+              <li>
+                <Badge
+                  value="EM BREVE"
+                  className={
+                    "top-0 -translate-y-1/2 p-1 text-white bg-cian-700 rounded-md left-2"
+                  }
+                >
+                  <Button
+                    className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:opacity-30 duration-150 w-full"
+                    onClick={() => {
+                      setMenuIsOpen(!menuIsOpen);
+                      router.push("/login");
+                    }}
+                    disabled
+                  >
+                    LOGIN
+                  </Button>
+                </Badge>
+              </li>
+            )}
+            {momento().isAfter(inscriptionsDate) && (
+              <li>
+                <Button
+                  className="btn-outline border-dark-cian hover:border-p-cian px-8 py-4 border-2 rounded-lg active:opacity-30 duration-150 w-full"
+                  onClick={() => {
+                    setMenuIsOpen(!menuIsOpen);
+                    router.push("/login");
+                  }}
+                >
+                  LOGIN
+                </Button>
+              </li>
+            )}
           </ul>
         </div>
 
@@ -108,7 +132,7 @@ export default function MainMenu() {
       </div>
       {/* Desktop Menu */}
       <div className="hidden lg:inline">
-        <ul className="flex gap-5 text-lg text-dark font-bold ">
+        <ul className="flex justify-center gap-5 text-lg text-dark font-bold ">
           {" "}
           <li className="flex">
             <Link
@@ -126,7 +150,7 @@ export default function MainMenu() {
               Sobre
             </Link>
           </li>
-          {momento().isBefore("2023-11-06") && (
+          {momento().isAfter(inscriptionsDate) && (
             <li className="flex">
               <Link
                 href="/pacotes"
@@ -144,14 +168,34 @@ export default function MainMenu() {
               Contato
             </Link>
           </li>
-          <li className="p-2">
-            <Button
-              className="rounded-full m-0 bg-dark text-white flex p-3 px-8 gap-1 items-center"
-              onClick={(e) => router.push("/login")}
-            >
-              Login <IoMdArrowForward />
-            </Button>
-          </li>
+          {momento().isBefore(inscriptionsDate) && (
+            <li className="p-2">
+              <Badge
+                value="EM BREVE"
+                className={
+                  "top-0 -translate-y-1/2 p-1 text-white bg-cian-700 rounded-md left-2"
+                }
+              >
+                <Button
+                  className="rounded-full m-0 bg-dark text-white flex p-3 px-8 gap-1 items-center"
+                  onClick={(e) => router.push("/login")}
+                  disabled
+                >
+                  Login <IoMdArrowForward />
+                </Button>
+              </Badge>
+            </li>
+          )}
+          {momento().isAfter(inscriptionsDate) && (
+            <li className="flex items-center">
+              <Button
+                className="rounded-full m-0 bg-dark text-white flex p-3 px-8 gap-1 items-center"
+                onClick={(e) => router.push("/login")}
+              >
+                Login <IoMdArrowForward />
+              </Button>
+            </li>
+          )}
         </ul>
       </div>
     </>

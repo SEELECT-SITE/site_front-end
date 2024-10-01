@@ -8,12 +8,17 @@ import axios from "axios";
 import EventCard from "./EventsCard";
 import { SvgCardLine } from "@/components/PriceCard";
 import { useRouter } from "next/navigation";
-import { DJANGO_URL } from "@/utils/consts";
 import SkeletonCreator from "@/components/SkeletonCreator";
 import momento from "@/utils/formatDate";
 import RadioGroup from "@/components/RadioGroup";
+import { axiosClient } from "@/lib/utils";
+import { EventProps } from "@/pages/api/auth/nextauth";
+
+const showEventsDate = process.env.NEXT_PUBLIC_OPEN_INSCRIPTIONS_DATE;
 
 function Cronograma() {
+  if (!showEventsDate) return <></>;
+
   const { data: events, isLoading } = useQuery<any | undefined>(
     "Places",
     async () => {
@@ -23,17 +28,24 @@ function Cronograma() {
       };
 
       try {
-        const { data } = await axios.get(`${DJANGO_URL}api/events/`, {
-          headers,
+        const { data } = await axiosClient.get<{ results: EventProps[] }>(
+          `api/events/`,
+          {
+            headers,
+          }
+        );
+        var events = data.results;
+        events = events.filter((elem) => {
+          //@ts-ignore
+          if (momento(showEventsDate).isBefore(elem.date["0"].start))
+            return elem;
         });
-        var aux = data.results;
-
-        aux.sort(
+        events.sort(
           (a: any, b: any) =>
             //@ts-ignore
             new Date(a.date["0"].start) - new Date(b.date["0"].start)
         );
-        return aux;
+        return events;
       } catch (error) {
         console.log(error);
       }
@@ -54,7 +66,11 @@ function Cronograma() {
             onChange={(e) => setDayOfWeek(e.target.value)}
             label="Dias"
             options={[
-              { title: "Segunda", value: "segunda-feira" },
+              {
+                title: "Segunda",
+                value: "segunda-feira",
+                defaultChecked: true,
+              },
               { title: "Terça", value: "terça-feira" },
               { title: "Quarta", value: "quarta-feira" },
               { title: "Quinta", value: "quinta-feira" },
@@ -83,8 +99,8 @@ function Cronograma() {
                   daysOfWeekEvent.includes(dayOfWeek)
                     ? ""
                     : dayOfWeek == "complet"
-                    ? "flex"
-                    : "hidden"
+                      ? "flex"
+                      : "hidden"
                 }
                   } `}
               >

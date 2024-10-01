@@ -11,7 +11,7 @@ import { useRef, useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import { scrollToElement } from "@/utils/scrollToElement";
 import axios from "axios";
-import { DJANGO_URL } from "@/utils/consts";
+import { axiosClient } from "@/lib/utils";
 
 const createLoginSchema = z.object({
   email: z
@@ -47,8 +47,8 @@ export default function FormsLogin() {
     formData.append("email", email as string);
     setIsSeding(true);
     try {
-      const response = await axios.post(
-        `${DJANGO_URL}api/auth/forget_password/`,
+      const response = await axiosClient.post(
+        `api/auth/forget_password/`,
         formData.toString(),
         {
           headers,
