@@ -29,7 +29,7 @@ const changePasswordSchema = z
 
 type CreateLoginData = z.infer<typeof changePasswordSchema>;
 
-export default function FormsLogin() {
+export default function ChangePassword() {
   const {
     register,
     handleSubmit,

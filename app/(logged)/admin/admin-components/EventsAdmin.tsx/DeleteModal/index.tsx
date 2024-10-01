@@ -7,6 +7,7 @@ import axios from "axios";
 import useAlertAdminState from "../../alertAdminStore";
 import SmallText from "@/components/SmallText";
 import { axiosClient } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export default function DeleteModal({
   token,
@@ -35,25 +36,26 @@ export default function DeleteModal({
   }
 
   return (
-    <>
-      <div
-        onClick={(e) => {
-          if (divDeleteEvent.current == e.target) {
-            setIsDeleteModalOpen(false);
-          }
-        }}
-        ref={divDeleteEvent}
-        className="fixed w-full h-full flex top-0 left-0 p-4 backdrop-blur-sm bg-dark/20 text-dark z-10 items-start justify-center"
-      >
-        <div className="flex flex-col justify-between relative overflow-hidden bg-white rounded-md max-w-md z-10 p-4">
-          <Text className="text-dark">
-            Dejesa deletar o evento{eventTitle}?
-          </Text>
-          <div className=" my-4">
-            <SmallText>Clique duas vezes pra deletar</SmallText>
-            <EventDelete
-              className="text-md right- relative"
-              title="Clique duas vezes para deletar"
+    <div
+      onClick={(e) => {
+        if (divDeleteEvent.current == e.target) {
+          setIsDeleteModalOpen(false);
+        }
+      }}
+      ref={divDeleteEvent}
+      className="fixed w-full h-full flex top-0 left-0 p-4 lg:py-20 backdrop-blur-sm bg-dark/20 text-dark z-10 items-start justify-center"
+    >
+      <div className="flex flex-col justify-between relative overflow-hidden bg-zinc-800 text-zinc-50 rounded-md max-w-md z-10 p-4">
+        <Text>Dejesa deletar o evento "{eventTitle}"?</Text>
+        <div className="flex flex-col space-y-4">
+          <SmallText className="text-right">
+            Clique duas vezes pra deletar
+          </SmallText>
+          <div className="flex justify-end gap-6">
+            <Button
+              variant={"destructive"}
+              size={"sm"}
+              className="bg-red"
               onDoubleClick={async (e) => {
                 try {
                   await deleteEvent();
@@ -72,18 +74,20 @@ export default function DeleteModal({
                   }, 4000);
                 }
               }}
-            />
+            >
+              Deletar Evento
+            </Button>
+            <Button
+              size={"sm"}
+              onClick={(e) => {
+                setIsDeleteModalOpen(false);
+              }}
+            >
+              Cancelar
+            </Button>
           </div>
-          <EventDelete
-            className="text-md w-full right- relative bg-red-500 text-white hover:opacity-90"
-            title="Clique duas vezes para deletar"
-            message="CANCELAR"
-            onClick={(e) => {
-              setIsDeleteModalOpen(false);
-            }}
-          />
         </div>
       </div>
-    </>
+    </div>
   );
 }

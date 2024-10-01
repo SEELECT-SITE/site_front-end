@@ -11,7 +11,7 @@ export default function EventDelete({ message, ...props }: deleteProps) {
     <button
       {...props}
       className={twMerge(
-        "flex absolute p-0.5 text-red-500 right-4 rounded-md text-sm lg:text-md border border-slate-500 items-center justify-center hover:bg-slate-400 hover:text-red-600",
+        "flex absolute p-0.5 text-red-500 right-4 rounded-md text-sm lg:text-md border border-slate-600 items-center justify-center hover:bg-slate-800 top-4 hover:text-red-600",
         props.className
       )}
     >

@@ -7,7 +7,6 @@ import { QueryClientProvider } from "react-query";
 import { queryClient } from "@/utils/queryClient";
 import { Session } from "next-auth";
 import { useSession } from "next-auth/react";
-import EventsAdmin from "./admin-components/EventsAdmin.tsx";
 import Alert from "@/components/Alert";
 import useAlertAdminState from "./admin-components/alertAdminStore";
 function Admin({ session }: { session: Session }) {
@@ -32,8 +31,6 @@ function Admin({ session }: { session: Session }) {
           </>
         )}
       </Container>
-
-      <EventsAdmin user={user!} />
     </main>
   );
 }
