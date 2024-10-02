@@ -11,7 +11,7 @@ export default function UserKitArea({ user }: { user: User }) {
   const { isPayKitModalOpen, setIsPayKitModalOpen } = usePayKitState();
   const { kitsValues } = useUserboardState();
   return (
-    <div className="bg-slate-800 w-auto p-4 lg:p-8 rounded-md my-4 border-2 border-slate-700 flex flex-wrap justify-between gap-12">
+    <div className="bg-slate-800 w-auto p-4 lg:p-8 rounded-md my-4 border-2 border-slate-700 flex flex-wrap justify-between gap-8">
       <div className="lg:max-w-md">
         <Text>
           Você selecionou o{" "}
@@ -37,12 +37,15 @@ export default function UserKitArea({ user }: { user: User }) {
 
       {!user?.kit?.is_payed && user.kit?.model != 1 && (
         <div className="lg:max-w-md">
-          <div className="mb-4 flex justify-between items-center rounded-md">
+          <div className="mb-2 lg:mb-4 flex justify-between flex-wrap gap-2 items-center rounded-md">
             <Text className="flex items-center gap-1">
               <RiMoneyDollarCircleLine size={22} className="text-red-500" />
               Pagamento Pendente
             </Text>
-            <Button onClick={(e) => setIsPayKitModalOpen(true)}>
+            <Button
+              className="w-full lg:w-auto"
+              onClick={(e) => setIsPayKitModalOpen(true)}
+            >
               Fazer pagamento
             </Button>
           </div>
