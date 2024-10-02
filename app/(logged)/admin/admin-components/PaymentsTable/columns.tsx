@@ -67,6 +67,9 @@ export const columns: ColumnDef<KitToTable>[] = [
 
       return <div className="text-center font-medium">{formatted_date}</div>;
     },
+    meta: {
+      filterVariant: "range",
+    },
   },
   {
     id: "price",

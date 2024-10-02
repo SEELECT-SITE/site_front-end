@@ -86,7 +86,7 @@ export default function SelectEventsModal({
         var events = data.results;
         events = events.filter((elem) => {
           //@ts-ignore
-          if (momento(showEventsDate).isBefore(elem.date["0"].start))
+          if (momento(showEventsDate).isAfter(elem.date["0"].start))
             return elem;
         });
         events.sort(

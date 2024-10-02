@@ -13,9 +13,9 @@ export default function isEventDisable(
 ) {
   //Esta condição foi comentada. Ela verificaria se a data atual (momento) é posterior
   //à primeira data do evento, desabilitando o evento se ele já começou.
-  if (momento().isAfter(eventDates[0][0])) {
+  /* if (momento().isAfter(eventDates[0][0])) {
     return true;
-  }
+  } */
 
   // Verifica se o evento já está na lista de eventos selecionados
   if (selectEvents.includes(event.id)) return false;

@@ -23,6 +23,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import Input from "@/components/Input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import Text from "@/components/Text";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -58,7 +60,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="">
-      <div className="flex items-center py-4">
+      <div className="flex items-center gap-4 flex-wrap py-8">
         <Input
           placeholder="Encontre por ID do usuário..."
           value={table.getColumn("userID")?.getFilterValue() as string}
