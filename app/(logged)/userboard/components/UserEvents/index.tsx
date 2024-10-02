@@ -14,6 +14,9 @@ import SmallText from "@/components/SmallText";
 import removeElem from "@/utils/removeElem";
 import { axiosClient } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import momento from "@/utils/formatDate";
+
+const showEventsDate = process.env.NEXT_PUBLIC_OPEN_INSCRIPTIONS_DATE;
 
 export default function UserEvents({
   user,
@@ -23,12 +26,17 @@ export default function UserEvents({
   sessionUpdate: any;
 }) {
   const { setIsSelectEventOpen, setSelectedKit } = useSelectEventsState();
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isRemoveButtonDisable, setIsRemoveButtonDisable] =
     useState<boolean>(false);
   const [removeEvent, setRemoveEvent] = useState<any>();
   const { toast } = useToast();
   const userEvents = user.kit?.events.map((elem: any) => elem.id);
+  const userEventsDetails =
+    user.kit?.events.filter((elem) => {
+      //@ts-ignore
+      if (momento(showEventsDate).isBefore(elem.date["0"].start)) return elem;
+    }) || [];
 
   async function removeEventAction() {
     setIsRemoveButtonDisable(true);
@@ -52,13 +60,13 @@ export default function UserEvents({
       });
     } finally {
       setIsRemoveButtonDisable(false);
-      setModalIsOpen(false);
+      setIsModalOpen(false);
       await sessionUpdate();
     }
   }
   return (
-    <div>
-      <DefaultModal setModalIsOpen={setModalIsOpen} modalIsOpen={modalIsOpen}>
+    <div className="mt-16">
+      <DefaultModal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}>
         {removeEvent && (
           <div className="flex flex-col justify-between relative overflow-hidden bg-white rounded-md max-w-md z-10 p-4">
             <Text className="text-dark">
@@ -78,14 +86,16 @@ export default function UserEvents({
               title="Clique duas vezes para deletar"
               message="CANCELAR"
               onClick={(e) => {
-                setModalIsOpen(false);
+                setIsModalOpen(false);
               }}
             />
           </div>
         )}
       </DefaultModal>
       <Title className="border-l-2 border-cian-400 pl-2 mb-4">
-        Seus Eventos selecionados
+        {userEventsDetails.length! > 0
+          ? "Seus eventos selecionados"
+          : "Sem eventos selecionados"}
       </Title>
 
       <FloatButton
@@ -95,13 +105,13 @@ export default function UserEvents({
           setSelectedKit(user.kit?.model!);
         }}
       >
-        {user?.kit?.events.length! > 0
+        {userEventsDetails.length! > 0
           ? "Trocar de eventos"
           : "Selecione seus eventos"}
       </FloatButton>
 
       <div className="flex w-full gap-4 lg:px-0 py-12 lg:gap-8 flex-wrap items-strecth m-auto justify-around">
-        {user?.kit?.events
+        {userEventsDetails
           .sort(
             (a: any, b: any) =>
               //@ts-ignore
@@ -117,7 +127,7 @@ export default function UserEvents({
                   message="Remover"
                   className="top-4"
                   onClick={(e) => {
-                    setModalIsOpen(true);
+                    setIsModalOpen(true);
                     setRemoveEvent(event);
                   }}
                 />

@@ -8,12 +8,7 @@ interface TextProps {
 
 const SmallText: FunctionComponent<TextProps> = ({ children, className }) => {
   return (
-    <small
-      className={twMerge(
-        "lg:font-thin m-0 p-0 tracking-wide",
-        className
-      )}
-    >
+    <small className={twMerge("m-0 p-0 tracking-wide", className)}>
       {children}
     </small>
   );

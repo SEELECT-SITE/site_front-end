@@ -48,37 +48,39 @@ function Userboard({
 
   return (
     <>
-      <div className="bg-dark-cian relative">
+      <div className=" relative">
         {isSelectEventOpen && (
           <SelectEventsModal user={user!} sessionUpdate={sessionUpdate} />
         )}
         {hasUserName && (
-          <Container className="w-full flex flex-wrap justify-between items-center gap-2">
-            <Text className="capitalize">Bem-vindo, {user?.name} </Text>
-            <div className="flex gap-2 items-center">
-              <FloatButton
-                className="flex duration-100 p-1"
-                shadowClassname="my-0"
-                onClick={(e) => {
-                  setIsUserFormsOpen(!isUserFormsOpen);
-                }}
-              >
-                {isUserFormsOpen ? (
-                  <>
-                    Fechar <MdClose />
-                  </>
-                ) : (
-                  <>
-                    Editar perfil <HiPencilAlt size={18} />
-                  </>
-                )}
-              </FloatButton>
-              <FloatButton
-                className="flex duration-100 p-1"
-                onClick={() => router.push("/userboard/change-password")}
-              >
-                Trocar senha
-              </FloatButton>
+          <Container>
+            <div className="bg-slate-800 w-auto p-4 lg:p-8 rounded-md border-2 border-slate-700 flex flex-wrap justify-between gap-12">
+              <p className="text-2xl">Bem-vindo, {user?.name} </p>
+              <div className="flex gap-2 items-center">
+                <FloatButton
+                  className="flex duration-100 p-1"
+                  shadowClassname="my-0"
+                  onClick={(e) => {
+                    setIsUserFormsOpen(!isUserFormsOpen);
+                  }}
+                >
+                  {isUserFormsOpen ? (
+                    <>
+                      Fechar <MdClose />
+                    </>
+                  ) : (
+                    <>
+                      Editar perfil <HiPencilAlt size={18} />
+                    </>
+                  )}
+                </FloatButton>
+                <FloatButton
+                  className="flex duration-100 p-1"
+                  onClick={() => router.push("/userboard/change-password")}
+                >
+                  Trocar senha
+                </FloatButton>
+              </div>
             </div>
           </Container>
         )}
@@ -96,30 +98,19 @@ function Userboard({
             </Container>
           </div>
         )}
-
-        <Decoration
-          type="light"
-          shadowClassname="h-6 my-2 rounded-none"
-          className="rounded-none"
-          notAnimated={true}
-        />
       </div>
       {hasUserName && (
-        <>
-          <Container className="bg-gradient-to-b from-dark to-dark-cian pb-20 overflow-hidden">
-            <div>
-              {user?.kit ? (
-                <>
-                  <UserKitArea user={user} />
+        <Container className="bg-gradient-to-b from-dark to-dark-cian pb-20 overflow-hidden">
+          {user?.kit ? (
+            <>
+              <UserKitArea user={user} />
 
-                  <UserEvents user={user} sessionUpdate={sessionUpdate} />
-                </>
-              ) : (
-                <KitsAvaliable title={true} />
-              )}
-            </div>
-          </Container>
-        </>
+              <UserEvents user={user} sessionUpdate={sessionUpdate} />
+            </>
+          ) : (
+            <KitsAvaliable title={true} />
+          )}
+        </Container>
       )}
     </>
   );
