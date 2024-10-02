@@ -6,8 +6,8 @@ import EventCard from "@/components/SECTIONS/Cronograma/EventsCard";
 import Title from "@/components/Title";
 import Container from "@/components/Container";
 import { SvgCardLine } from "@/components/PriceCard";
-import useDeleteModalState from "./DeleteModal/deleteModalStore";
-import DeleteModal from "./DeleteModal";
+import useDeleteModalState from "./DeleteEventsModal/deleteEventsModalStore";
+import DeleteModal from "./DeleteEventsModal";
 import RadioGroup from "@/components/RadioGroup";
 import { axiosClient } from "@/lib/utils";
 

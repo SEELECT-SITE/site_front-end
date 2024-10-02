@@ -8,6 +8,9 @@ import { queryClient } from "@/utils/queryClient";
 import { axiosClient, transformKitsToTable } from "@/lib/utils";
 import UserPaymentModal from "../admin-components/PaymentsTable/UserPaymentModal";
 import useUserPaymentStore from "../admin-components/PaymentsTable/UserPaymentModal/userPaymentModalStore";
+import useKitDeleteModalState from "./kits-table-components/deleteKitModal/deleteKitModalStore";
+import DeleteKitModal from "./kits-table-components/deleteKitModal";
+import { KitToTable } from "@/pages/api/auth/nextauth";
 
 function PaymentsTable({ session }: { session: Session }) {
   const { user } = session;
@@ -17,7 +20,7 @@ function PaymentsTable({ session }: { session: Session }) {
     data: usersPayment,
     isLoading,
     refetch,
-  } = useQuery<any | undefined>(
+  } = useQuery<KitToTable[]>(
     "adminUserPay",
     async () => {
       const headers = {
@@ -31,7 +34,9 @@ function PaymentsTable({ session }: { session: Session }) {
         });
         const tableKits = transformKitsToTable(data.results);
         return tableKits;
-      } catch (error) {}
+      } catch (error) {
+        return [];
+      }
     },
     { refetchOnWindowFocus: false }
   );
@@ -41,6 +46,7 @@ function PaymentsTable({ session }: { session: Session }) {
       {isUserPayModalOpen && (
         <UserPaymentModal triggerFn={refetch} token={user?.token} />
       )}
+      <DeleteKitModal token={user?.token} triggerFn={refetch} />
       {usersPayment && <DataTable columns={columns} data={usersPayment} />}
     </div>
   );

@@ -3,7 +3,6 @@ import { useRef } from "react";
 import Text from "@/components/Text";
 import formatCurrency from "@/utils/formatCurrency";
 import EventDelete from "@/components/SECTIONS/Cronograma/EventsCard/EventDelete";
-import axios from "axios";
 import useAlertAdminState from "../../alertAdminStore";
 import SmallText from "@/components/SmallText";
 import useUserPaymentStore from "./userPaymentModalStore";
@@ -85,7 +84,7 @@ export default function UserPaymentModal({
             <Button
               className="text-md right- relative w-full grow bg-green-700 p-2 text-white hover:bg-green-900"
               title="Clique duas vezes para Confirmar"
-              onDoubleClick={async (e) => {
+              onDoubleClick={async () => {
                 try {
                   await ConfirmPayment();
                   triggerFn();

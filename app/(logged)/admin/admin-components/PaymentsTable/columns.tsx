@@ -14,6 +14,7 @@ import {
 import { KitToTable } from "@/pages/api/auth/nextauth";
 import useUserPaymentStore from "./UserPaymentModal/userPaymentModalStore";
 import momento from "@/utils/formatDate";
+import useKitDeleteModalState from "../../kits-table/kits-table-components/deleteKitModal/deleteKitModalStore";
 
 export const columns: ColumnDef<KitToTable>[] = [
   {
@@ -95,6 +96,7 @@ export const columns: ColumnDef<KitToTable>[] = [
     cell: ({ row }) => {
       const kit = row.original;
       const { setIsUserPayModalOpen, setUserKit } = useUserPaymentStore();
+      const { setIsDeleteModalOpen, setKitDelete } = useKitDeleteModalState();
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -107,7 +109,7 @@ export const columns: ColumnDef<KitToTable>[] = [
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
             {kit.model_type != "Kit Gratuito" && (
               <DropdownMenuItem
-                onClick={(e) => {
+                onClick={() => {
                   setUserKit(kit);
                   setIsUserPayModalOpen(true);
                 }}
@@ -117,7 +119,14 @@ export const columns: ColumnDef<KitToTable>[] = [
             )}
 
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Apagar Kit</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                setIsDeleteModalOpen(true);
+                setKitDelete(kit);
+              }}
+            >
+              Apagar Kit
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

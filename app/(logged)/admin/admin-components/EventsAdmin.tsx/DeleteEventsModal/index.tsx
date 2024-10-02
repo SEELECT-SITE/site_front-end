@@ -1,9 +1,7 @@
 "use client";
 import { useRef } from "react";
 import Text from "@/components/Text";
-import useDeleteModalState from "./deleteModalStore";
-import EventDelete from "@/components/SECTIONS/Cronograma/EventsCard/EventDelete";
-import axios from "axios";
+import useDeleteModalState from "./deleteEventsModalStore";
 import useAlertAdminState from "../../alertAdminStore";
 import SmallText from "@/components/SmallText";
 import { axiosClient } from "@/lib/utils";

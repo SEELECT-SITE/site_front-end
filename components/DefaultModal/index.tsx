@@ -8,38 +8,37 @@ import { twMerge } from "tailwind-merge";
 
 export default function DefaultModal({
   children,
-  modalIsOpen,
+  isModalOpen,
   className,
-  setModalIsOpen,
+  setIsModalOpen,
 }: {
-  setModalIsOpen: (state: boolean) => void;
+  setIsModalOpen: (state: boolean) => void;
   className?: string;
   children?: ReactNode;
-  modalIsOpen: boolean;
+  isModalOpen: boolean;
 }) {
   const divModal = useRef<HTMLDivElement | null>(null);
 
   return (
     <>
-      {modalIsOpen && (
+      {isModalOpen && (
         <div
           onClick={(e) => {
             if (divModal.current == e.target) {
-              setModalIsOpen(false);
+              setIsModalOpen(false);
             }
           }}
           ref={divModal}
-          className={twMerge(
-            "fixed w-full h-full z-[9999] flex top-0 left-0 p-4 backdrop-blur-sm bg-dark/20 text-dark  items-center justify-center",
-            className
-          )}
+          className={
+            "fixed w-full h-full z-[9999] flex top-0 left-0 p-4 backdrop-blur-sm bg-dark/20 text-dark  items-center justify-center"
+          }
         >
-          <div className="flex flex-col justify-between items-center relative overflow-hidden bg-white rounded-md max-w-md z-10 border-4 border-white">
-            <EventCard.Delete
-              className="top-1"
-              message="Fechar"
-              onClick={(e) => setModalIsOpen(false)}
-            />
+          <div
+            className={twMerge(
+              "flex flex-col justify-between items-center relative overflow-hidden bg-white rounded-md max-w-md z-10",
+              className
+            )}
+          >
             {children}
           </div>
         </div>
