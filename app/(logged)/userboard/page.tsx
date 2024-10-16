@@ -16,7 +16,6 @@ import useUserForms from "./components/UserProfileForms/userForms";
 import { MdClose } from "react-icons/md";
 import { HiPencilAlt } from "react-icons/hi";
 import UserEvents from "./components/UserEvents";
-import UserKitArea from "./components/UserKitArea";
 import BannerLogin from "@/app/(auth)/login/LoginSections/BannerSign";
 import KitsAvaliable from "./components/KitsAvaliabe";
 import useUserboardState from "./components/userboardStore/PayKitModalStore";
@@ -101,15 +100,7 @@ function Userboard({
       </div>
       {hasUserName && (
         <Container className="bg-gradient-to-b from-dark to-dark-cian pb-20 overflow-hidden">
-          {user?.kit ? (
-            <>
-              <UserKitArea user={user} />
-
-              <UserEvents user={user} sessionUpdate={sessionUpdate} />
-            </>
-          ) : (
-            <KitsAvaliable title={true} />
-          )}
+          {user && <UserEvents user={user} sessionUpdate={sessionUpdate} />}
         </Container>
       )}
     </>

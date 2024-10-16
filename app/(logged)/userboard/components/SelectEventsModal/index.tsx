@@ -5,7 +5,6 @@ import { User } from "next-auth";
 import EventCard from "@/components/SECTIONS/Cronograma/EventsCard";
 import removeElem from "@/utils/removeElem";
 import FloatButton from "@/components/FloatButton";
-import Text from "@/components/Text";
 import useSelectEventsState from "./selectEventsStore";
 import Title from "@/components/Title";
 import Container from "@/components/Container";
@@ -13,9 +12,7 @@ import { SvgCardLine } from "@/components/PriceCard";
 import useUserboardState from "../userboardStore/PayKitModalStore";
 import momento from "@/utils/formatDate";
 import SkeletonCreator from "@/components/SkeletonCreator";
-import { scrollToElement } from "@/utils/scrollToElement";
 import isEventDisable from "./isEventDisable";
-import AdviceKitChange from "./adviceKitChange";
 import FilterDaysEvents from "./filterDaysEvents";
 import SelectedKitAdvantages from "./selectedKitAdvantages";
 import CloseModalButton from "./closeModalButton";
@@ -37,7 +34,7 @@ export default function SelectEventsModal({
   sessionUpdate,
 }: SelectEventsModalProps) {
   if (!showEventsDate) return <></>;
-  const { setIsSelectEventOpen, selectedKit, adviceReaded, dayOfWeek } =
+  const { setIsSelectEventOpen, selectedKit, dayOfWeek } =
     useSelectEventsState();
   const [selectEvents, setSelectEvents] = useState<number[]>(
     user.kit?.events.map((elem: any) => {
@@ -148,17 +145,8 @@ export default function SelectEventsModal({
     }
   }
 
-  const kitModelId = selectedKit ? selectedKit - 1 : user.kit!.model - 1;
-
+  const kitModelId = 0;
   async function updateEvents() {
-    if (!adviceReaded) {
-      scrollToElement(concernAlertDiv);
-      toast({
-        title: "Alerta",
-        description: "Marque a opção de que leu o aviso no topo da página",
-      });
-      return;
-    }
     if (numberOfSelectedSpeeches + numberOfSelectWorkshops < 1) {
       toast({
         description:
@@ -209,19 +197,9 @@ export default function SelectEventsModal({
           <Title className="border-l-2 pl-2 border-cian-700">
             Eventos disponiveis
           </Title>
-          <Text className="underline inline-flex bg-dark rounded-md shadow-md text-white px-2 py-1 my-2">
-            {kitsValues[kitModelId].model} está selecionado
-          </Text>
 
           <div className="flex flex-wrap gap-4">
             <SelectedKitAdvantages kit={kitsValues[kitModelId]} />
-
-            <div
-              ref={concernAlertDiv}
-              className="flex focus:bg-red-900 flex-col gap-2 max-w-md rounded-md my-2 p-2 bg-slate-900 text-yellow-200"
-            >
-              <AdviceKitChange />
-            </div>
           </div>
 
           <FilterDaysEvents />
@@ -258,11 +236,7 @@ export default function SelectEventsModal({
                     setNumberOfSelectWorkshops((value) => value + 1);
                   }
                 }
-                if (
-                  "palestra" == event.category &&
-                  !kitsValues[kitModelId].all_speeches &&
-                  event.title.split("$")[1] != "patrocinador"
-                ) {
+                if ("palestra" == event.category) {
                   if (selectEvents.includes(event.id)) {
                     setNumberOfSelectedSpeeches((value) => value - 1);
                   } else {

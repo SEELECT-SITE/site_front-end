@@ -45,10 +45,10 @@ type Kit = {
   user: number;
   discount: number;
   is_payed: boolean;
-  model: number;
+  model: 1; // Esse valor foi setado, pois os kits pagos foram deletados.
   model_detail: {
     id: number;
-    model: string;
+    model: "Kit Gratuito"; // Esse valor foi setado, pois os kits pagos foram deletados.
     price: number;
     all_speeches: boolean;
     workshops: number;
