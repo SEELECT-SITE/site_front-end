@@ -54,22 +54,6 @@ export default function MainMenu() {
                 </Link>
               </button>
             </li>
-            {momento().isAfter(inscriptionsDate) && (
-              <li className="">
-                <button
-                  onClick={(e) => setMenuIsOpen(!menuIsOpen)}
-                  className="w-full"
-                >
-                  <Link
-                    href={"/pacotes"}
-                    className="active:opacity-30 flex gap-2 items-center w-full pb-4 hover:opacity-80 border-b-2 border-dark-cian hover:border-cian-700 hover:text-cian-700"
-                  >
-                    <MdAddShoppingCart />
-                    Pacotes
-                  </Link>
-                </button>
-              </li>
-            )}
             <li className="">
               <button
                 onClick={(e) => setMenuIsOpen(!menuIsOpen)}
@@ -150,16 +134,6 @@ export default function MainMenu() {
               Sobre
             </Link>
           </li>
-          {momento().isAfter(inscriptionsDate) && (
-            <li className="flex">
-              <Link
-                href="/pacotes"
-                className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
-              >
-                Pacotes
-              </Link>
-            </li>
-          )}
           <li className="flex">
             <Link
               href="/contato"
