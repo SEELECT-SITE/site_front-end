@@ -11,7 +11,10 @@ const urlApi = process.env.NEXT_PUBLIC_API_URL;
 
 export const axiosClient = axios.create({
   baseURL: urlApi,
-  headers: { "ngrok-skip-browser-warning": "69420" },
+  headers: {
+    "ngrok-skip-browser-warning": "true",
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
 });
 
 export function transformKitsToTable(kits: Kit[]): KitToTable[] {

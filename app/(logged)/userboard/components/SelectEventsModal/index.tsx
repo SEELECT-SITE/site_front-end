@@ -52,6 +52,7 @@ export default function SelectEventsModal({
         if (["workshop", "minicurso"].includes(elem.category)) {
           return acc + 1;
         }
+        ``;
         return acc;
       }, 0) || 0
     );
@@ -71,7 +72,6 @@ export default function SelectEventsModal({
     async () => {
       const headers = {
         "Content-Type": "application/x-www-form-urlencoded",
-        "ngrok-skip-browser-warning": "true",
       };
       try {
         const { data } = await axiosClient.get<{ results: EventProps[] }>(
@@ -83,7 +83,7 @@ export default function SelectEventsModal({
         var events = data.results;
         events = events.filter((elem) => {
           //@ts-ignore
-          if (momento(showEventsDate).isAfter(elem.date["0"].start))
+          if (momento(showEventsDate).isBefore(elem.date["0"].start))
             return elem;
         });
         events.sort(

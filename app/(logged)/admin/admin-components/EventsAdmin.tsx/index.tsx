@@ -10,6 +10,8 @@ import useDeleteModalState from "./DeleteEventsModal/deleteEventsModalStore";
 import DeleteModal from "./DeleteEventsModal";
 import RadioGroup from "@/components/RadioGroup";
 import { axiosClient } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
+import { toast } from "@/hooks/use-toast";
 
 interface EventsAdminProps {
   className?: string;
@@ -17,11 +19,7 @@ interface EventsAdminProps {
   user: User;
 }
 
-export default function EventsAdmin({
-  className,
-  children,
-  user,
-}: EventsAdminProps) {
+export default function EventsAdmin({ user }: EventsAdminProps) {
   const [categoryEvent, setCategoryEvent] = useState<string>("todos");
   const {
     isDeleteModalOpen,
@@ -29,16 +27,10 @@ export default function EventsAdmin({
     setEventDeleteID,
     setEventTitle,
   } = useDeleteModalState();
-  const {
-    data: events,
-    isLoading,
-    refetch,
-  } = useQuery<any | undefined>(
+  const { data: events, refetch } = useQuery<any | undefined>(
     "userEvents",
     async () => {
       const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "ngrok-skip-browser-warning": "true",
         Token: user?.token,
       };
       try {
@@ -47,7 +39,11 @@ export default function EventsAdmin({
         });
         return data.results;
       } catch (error) {
-        console.log(error);
+        toast({
+          variant: "destructive",
+          title: "Erro ao carregar eventos",
+          description: "Tente novamente mais tarde",
+        });
       }
     },
     { refetchOnWindowFocus: false }
@@ -72,24 +68,21 @@ export default function EventsAdmin({
             { title: "Workshop", value: "workshop" },
             { title: "Mini-curso", value: "minicurso" },
             { title: "Palestra", value: "palestra" },
-            { title: "Todos", value: "todos" },
+            { title: "Todos", value: "todos", defaultChecked: true },
           ]}
           groupName={"categoryEvents"}
         />
       </div>
       <div className="flex flex-wrap justify-around py-12 gap-8">
         {events?.map((event: any, index: number) => {
+          if (event.category !== categoryEvent && categoryEvent !== "todos") {
+            return null;
+          }
           return (
             <EventCard.Body
-              key={event.title + index}
-              id={event.title + index}
-              className={`lg:py-12 relative justify-between flex-col text-white border gap-2 ${
-                event.category == categoryEvent
-                  ? "flex"
-                  : categoryEvent == "todos"
-                    ? "flex"
-                    : "hidden"
-              }`}
+              key={event.title}
+              id={event.title}
+              className={`lg:py-12 relative justify-between flex-col text-white border gap-2`}
             >
               <EventCard.Delete
                 onClick={(e) => {
@@ -137,6 +130,7 @@ export default function EventsAdmin({
           );
         })}
       </div>
+      <Toaster />
     </Container>
   );
 }

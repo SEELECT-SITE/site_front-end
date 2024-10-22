@@ -1,7 +1,5 @@
-import React, { useRef } from "react";
+import React from "react";
 import Text from "@/components/Text";
-import useUserboardState from "../userboardStore/PayKitModalStore";
-import useSelectEventsState from "./selectEventsStore";
 
 interface Kit {
   id: number;
@@ -11,6 +9,7 @@ interface Kit {
   workshops: number;
   bucks_coup: boolean;
 }
+const workshopLimit = process.env.NEXT_PUBLIC_WORKSHOP_LIMIT;
 
 const SelectedKitAdvantages = ({ kit }: { kit: Kit }) => {
   return (
@@ -21,7 +20,7 @@ const SelectedKitAdvantages = ({ kit }: { kit: Kit }) => {
           kit.all_speeches
             ? "Todas as Palestras"
             : "Palestras patrocinadas + 1 palestra",
-          kit.workshops ? `${kit.workshops} Minicursos/Workshop` : "",
+          workshopLimit ? `${workshopLimit} Minicursos/Workshop` : "",
           kit.bucks_coup ? "Um copo Buck's Exclusivo" : "",
         ].map((elem) => (
           <li

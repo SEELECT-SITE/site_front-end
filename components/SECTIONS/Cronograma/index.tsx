@@ -22,17 +22,9 @@ function Cronograma() {
   const { data: events, isLoading } = useQuery<any | undefined>(
     "Places",
     async () => {
-      const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "ngrok-skip-browser-warning": "true",
-      };
-
       try {
         const { data } = await axiosClient.get<{ results: EventProps[] }>(
-          `api/events/`,
-          {
-            headers,
-          }
+          `api/events/`
         );
         var events = data.results;
         events = events.filter((elem) => {
