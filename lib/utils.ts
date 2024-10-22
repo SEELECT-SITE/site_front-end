@@ -9,7 +9,10 @@ export function cn(...inputs: ClassValue[]) {
 
 const urlApi = process.env.NEXT_PUBLIC_API_URL;
 
-export const axiosClient = axios.create({ baseURL: urlApi });
+export const axiosClient = axios.create({
+  baseURL: urlApi,
+  headers: { "ngrok-skip-browser-warning": "69420" },
+});
 
 export function transformKitsToTable(kits: Kit[]): KitToTable[] {
   return kits.map((kit) => ({

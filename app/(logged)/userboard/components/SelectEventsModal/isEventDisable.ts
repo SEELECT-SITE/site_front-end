@@ -2,6 +2,7 @@ import { EventProps } from "@/pages/api/auth/nextauth";
 import momento from "@/utils/formatDate";
 import isEventOverlap from "@/utils/isEventOverlap";
 
+const workshopLimit = process.env.NEXT_PUBLIC_WORKSHOP_LIMIT;
 export default function isEventDisable(
   event: EventProps, // O evento atual que está sendo verificado
   eventDates: any, // Datas associadas ao evento
@@ -13,9 +14,9 @@ export default function isEventDisable(
 ) {
   //Esta condição foi comentada. Ela verificaria se a data atual (momento) é posterior
   //à primeira data do evento, desabilitando o evento se ele já começou.
-  /* if (momento().isAfter(eventDates[0][0])) {
+  if (!momento().isAfter(eventDates[0][0])) {
     return true;
-  } */
+  }
 
   // Verifica se o evento já está na lista de eventos selecionados
   if (selectEvents.includes(event.id)) return false;
@@ -29,8 +30,9 @@ export default function isEventDisable(
 
   // Verifica se o número de workshops ou minicursos selecionados já atingiu o limite permitido pelo kit
   // Se o limite foi atingido e o evento atual é um workshop ou minicurso, ele será desabilitado
+  const workshopLimit_ = parseInt(workshopLimit ?? "3");
   if (
-    numberOfSelectWorkshops >= kit.workshops &&
+    numberOfSelectWorkshops >= workshopLimit_ &&
     ["workshop", "minicurso"].includes(event.category)
   ) {
     return true;
@@ -38,7 +40,7 @@ export default function isEventDisable(
 
   // Condição comentada que verificaria se o kit permite selecionar todas as palestras (kit.all_speeches),
   // e se o número de palestras selecionadas já atingiu o limite de 1. Se sim, o evento seria desabilitado.
-  if (!kit.all_speeches && numberOfSelectedSpeeches >= 1) return true;
+  //if (/* !kit.all_speeches && */ numberOfSelectedSpeeches >= 1) return true;
 
   // Se nenhuma das condições anteriores for satisfeita, o evento permanece habilitado (retorna false)
   return false;
