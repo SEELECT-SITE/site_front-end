@@ -11,6 +11,7 @@ import Contact from "@/components/SECTIONS/Contact";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "@/utils/queryClient";
 import momento from "@/utils/formatDate";
+import Parceiros from "@/components/SECTIONS/Parceiros";
 
 const inscriptionsDate = process.env.NEXT_PUBLIC_OPEN_INSCRIPTIONS_DATE;
 
@@ -27,7 +28,9 @@ const Home = () => {
           <Image src={wave_svg} alt={"svg de decoração"} className="w-full" />
         </div>
       </div>
-
+      <Container className="bg-dark">
+        <Parceiros />
+      </Container>
       <Retrospec />
       <div className="relative z-10 overflow-hidden bg-gradient-to-b from-dark-cian via-dark/90 via-60% to-dark pt-32">
         {momento(inscriptionsDate).isBefore(momento()) && (
