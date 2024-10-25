@@ -12,6 +12,8 @@ import RadioGroup from "@/components/RadioGroup";
 import { axiosClient } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/hooks/use-toast";
+import { EventProps } from "@/pages/api/auth/nextauth";
+import momento from "@/utils/formatDate";
 
 interface EventsAdminProps {
   className?: string;
@@ -19,7 +21,11 @@ interface EventsAdminProps {
   user: User;
 }
 
+const showEventsDate = process.env.NEXT_PUBLIC_OPEN_INSCRIPTIONS_DATE;
+
 export default function EventsAdmin({ user }: EventsAdminProps) {
+  if (!showEventsDate) return <></>;
+
   const [categoryEvent, setCategoryEvent] = useState<string>("todos");
   const {
     isDeleteModalOpen,
@@ -28,16 +34,19 @@ export default function EventsAdmin({ user }: EventsAdminProps) {
     setEventTitle,
   } = useDeleteModalState();
   const { data: events, refetch } = useQuery<any | undefined>(
-    "userEvents",
+    "adminEvents",
     async () => {
-      const headers = {
-        Token: user?.token,
-      };
       try {
-        const { data } = await axiosClient.get(`api/events/`, {
-          headers,
+        const { data } = await axiosClient.get<{ results: EventProps[] }>(
+          `api/events/`
+        );
+        var events = data.results;
+        events = events.filter((elem) => {
+          //@ts-ignore
+          if (momento(showEventsDate).isBefore(elem.date["0"].start))
+            return elem;
         });
-        return data.results;
+        return events;
       } catch (error) {
         toast({
           variant: "destructive",
