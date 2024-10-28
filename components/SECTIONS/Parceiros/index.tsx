@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import alura_logo from "@/public/parceiros/alura-logo.png";
+import tecnovetti_logo from "@/public/parceiros/LOGO_TECNOVETTI.png";
 import go_ener_logo from "@/public/parceiros/go_ener_logo.png";
 import autocore_logo from "@/public/parceiros/autocore_logo.png";
 import cardapio_web_logo from "@/public/parceiros/cardapio-web_logo.webp";
@@ -19,7 +20,7 @@ function Parceiros() {
 
         <div className="flex items-center justify-evenly flex-wrap gap-8">
           <Link
-            className="text-dark-cian hover:text-dark lg:w-1/5"
+            className="text-dark-cian hover:text-dark lg:w-1/6"
             target="_blank"
             href={"https://www.autocorerobotica.com.br/"}
             title="Ir para site"
@@ -34,7 +35,7 @@ function Parceiros() {
             </div>
           </Link>
           <Link
-            className="text-dark-cian hover:text-dark lg:w-1/5"
+            className="text-dark-cian hover:text-dark lg:w-1/6"
             target="_blank"
             href={"https://www.alura.com.br/"}
             title="Ir para site da Alura"
@@ -49,7 +50,22 @@ function Parceiros() {
             </div>
           </Link>
           <Link
-            className="text-dark-cian hover:text-dark lg:w-1/5"
+            className="text-dark-cian hover:text-dark lg:w-1/6"
+            target="_blank"
+            href={"https://tecnovetti.com.br/"}
+            title="Ir para site da Tecnovetti"
+          >
+            <div className="group rounded-full p-6 border-2 border-slate-700 bg-white hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
+              <Image
+                src={tecnovetti_logo}
+                alt="icone tecnovetti"
+                width={300}
+                className="m-auto drop-shadow-icon-sm scale-110 lg:grayscale-1 aspect-square object-contain"
+              />
+            </div>
+          </Link>
+          <Link
+            className="text-dark-cian hover:text-dark lg:w-1/6"
             target="_blank"
             href={"https://cardapioweb.com/"}
             title="Ir para site da Cardapio Web"
@@ -64,7 +80,7 @@ function Parceiros() {
             </div>
           </Link>
           <Link
-            className="text-dark-cian hover:text-dark lg:w-1/5"
+            className="text-dark-cian hover:text-dark lg:w-1/6"
             target="_blank"
             href={"https://goener.com.br/"}
             title="Ir para site da goener"
