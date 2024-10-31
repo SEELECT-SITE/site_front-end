@@ -14,6 +14,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/hooks/use-toast";
 import { EventProps } from "@/pages/api/auth/nextauth";
 import momento from "@/utils/formatDate";
+import DefaultModal from "@/components/DefaultModal";
+import AddEventsForms from "../AddEventsForms";
 
 interface EventsAdminProps {
   className?: string;
@@ -27,6 +29,8 @@ export default function EventsAdmin({ user }: EventsAdminProps) {
   if (!showEventsDate) return <></>;
 
   const [categoryEvent, setCategoryEvent] = useState<string>("todos");
+  const [eventToEdit, setEventToEdit] = useState<EventProps | undefined>();
+  const [isEditEventOpen, setIsEditEventOpen] = useState<boolean>(false);
   const {
     isDeleteModalOpen,
     setIsDeleteModalOpen,
@@ -82,60 +86,79 @@ export default function EventsAdmin({ user }: EventsAdminProps) {
           groupName={"categoryEvents"}
         />
       </div>
+      <DefaultModal
+        isModalOpen={isEditEventOpen}
+        setIsModalOpen={setIsEditEventOpen}
+      >
+        <AddEventsForms
+          Token={user.token}
+          eventToEdit={eventToEdit}
+          setEditEventModalOpen={setIsEditEventOpen}
+        />
+      </DefaultModal>
       <div className="flex flex-wrap justify-around py-12 gap-8">
         {events?.map((event: any, index: number) => {
           if (event.category !== categoryEvent && categoryEvent !== "todos") {
             return null;
           }
           return (
-            <EventCard.Body
-              key={event.title}
-              id={event.title}
-              className={`lg:py-12 relative justify-between flex-col text-white border gap-2`}
+            <button
+              onClick={() => {
+                setEventToEdit(event);
+                setIsEditEventOpen(true);
+              }}
+              className="w-auto"
+              title="Clique para editar"
             >
-              <EventCard.Delete
-                onClick={(e) => {
-                  setIsDeleteModalOpen(true);
-                  setEventDeleteID(event.id);
-                  setEventTitle(event.title);
-                }}
-              />
-              <div>
-                <EventCard.Title title={event.title} />
-                <EventCard.Hoster hoster={event.host} />
-
-                <EventCard.Location
-                  location={event.place[0].location}
-                  url_location={event.place[0].url_location}
+              <EventCard.Body
+                key={event.title}
+                id={event.title}
+                className={`lg:py-12 bg-slate-800 hover:bg-slate-900 cursor-pointer relative justify-between flex-col text-white border gap-2`}
+              >
+                <EventCard.Delete
+                  onClick={(e) => {
+                    setIsDeleteModalOpen(true);
+                    setEventDeleteID(event.id);
+                    setEventTitle(event.title);
+                  }}
                 />
-                <div className="animate-pulse bg-dark">
-                  <SvgCardLine color="#ffffff" opacity="1" />
-                </div>
-              </div>
-
-              <div className="flex flex-wrap justify-between mb-2 items-start">
-                <EventCard.Category category={event.category} />
                 <div>
-                  {Object.values(event.date).map((date) => {
-                    return (
-                      <EventCard.Date
-                        //@ts-ignore
-                        key={date + Math.random()}
-                        //@ts-ignore
-                        dateStart={date?.start}
-                        //@ts-ignore
-                        dateEnd={date?.end}
-                      />
-                    );
-                  })}
+                  <EventCard.Title title={event.title} />
+                  <EventCard.Hoster hoster={event.host} />
+
+                  <EventCard.Location
+                    location={event.place[0].location}
+                    url_location={event.place[0].url_location}
+                  />
+                  <div className="animate-pulse bg-dark">
+                    <SvgCardLine color="#ffffff" opacity="1" />
+                  </div>
                 </div>
-              </div>
-              <EventCard.Capacity
-                admin={true}
-                limit={event.max_number_of_inscriptions}
-                capacity={event.number_of_inscriptions}
-              />
-            </EventCard.Body>
+
+                <div className="flex flex-wrap justify-between mb-2 items-start">
+                  <EventCard.Category category={event.category} />
+                  <div>
+                    {Object.values(event.date).map((date) => {
+                      return (
+                        <EventCard.Date
+                          //@ts-ignore
+                          key={date + Math.random()}
+                          //@ts-ignore
+                          dateStart={date?.start}
+                          //@ts-ignore
+                          dateEnd={date?.end}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+                <EventCard.Capacity
+                  admin={true}
+                  limit={event.max_number_of_inscriptions}
+                  capacity={event.number_of_inscriptions}
+                />
+              </EventCard.Body>
+            </button>
           );
         })}
       </div>

@@ -1,6 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { set, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FloatButton from "@/components/FloatButton";
 import Input from "@/components/Input";
@@ -10,7 +10,12 @@ import SelectInput from "@/components/SelectInput";
 import { useQuery } from "react-query";
 import DatePicker from "@/components/SECTIONS/DatePicker";
 import momento from "@/utils/formatDate";
-import { axiosClient } from "@/lib/utils";
+import {
+  axiosClient,
+  eventDatesFromDBToApp,
+  eventDatesToDB,
+} from "@/lib/utils";
+import { EventProps } from "@/pages/api/auth/nextauth";
 
 interface OptionPlace {
   location: string;
@@ -19,11 +24,11 @@ interface OptionPlace {
 }
 
 const createAddEventsSchema = z.object({
-  title: z.string().nonempty("Preencha o campo"),
-  category: z.string().nonempty("Preencha o campo"),
-  place: z.string().nonempty("Preencha o campo"),
-  host: z.string().nonempty("Preencha o campo"),
-  description: z.string().nonempty("Preencha o campo"),
+  title: z.string().min(1, "Preencha o campo"),
+  category: z.string().min(1, "Preencha o campo"),
+  place: z.string().min(1, "Preencha o campo"),
+  host: z.string().min(1, "Preencha o campo"),
+  description: z.string().min(1, "Preencha o campo"),
 });
 
 type CreateAddEvents = z.infer<typeof createAddEventsSchema>;
@@ -31,7 +36,15 @@ type CreateAddEvents = z.infer<typeof createAddEventsSchema>;
 const startDate = process.env.NEXT_PUBLIC_START_DATE;
 const endDate = process.env.NEXT_PUBLIC_END_DATE;
 
-export default function AddEventsForms({ Token }: { Token: string }) {
+export default function AddEventsForms({
+  Token,
+  eventToEdit,
+  setEditEventModalOpen,
+}: {
+  Token: string;
+  eventToEdit?: EventProps;
+  setEditEventModalOpen?: (state: boolean) => void;
+}) {
   const {
     register,
     handleSubmit,
@@ -39,19 +52,28 @@ export default function AddEventsForms({ Token }: { Token: string }) {
     formState: { errors },
   } = useForm<CreateAddEvents>({
     resolver: zodResolver(createAddEventsSchema),
+    defaultValues: {
+      title: eventToEdit?.title ?? "",
+      description: eventToEdit?.description ?? "",
+      host: eventToEdit?.host ?? "",
+      category: eventToEdit?.category ?? "",
+      place: eventToEdit?.place.id ?? "",
+    },
   });
   const [errorReq, setErrorReq] = useState<any>("");
   const errorsDiv = useRef<HTMLDivElement | null>(null);
-  const [eventCapacity, setEventCapacity] = useState<number>(0);
-  const [dates, setDates] = useState<string[]>([]);
+  const [eventCapacity, setEventCapacity] = useState<number>(
+    eventToEdit?.max_number_of_inscriptions ?? 0
+  );
+  const [dates, setDates] = useState<string[]>(
+    eventDatesFromDBToApp(eventToEdit?.date) ?? []
+  );
   const [date, setDate] = useState<string>("");
 
   const { data: places, isLoading } = useQuery<OptionPlace[] | undefined>(
     "Places",
     async () => {
       const headers = {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "ngrok-skip-browser-warning": "true",
         Token: Token,
       };
 
@@ -82,18 +104,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
       }
     }
 
-    var eventDates = "{";
-    for (var i = 0; i < dates.length; i += 2) {
-      var wrongDate = momento(dates[i]).isAfter(dates[i + 1]);
-
-      if (wrongDate) {
-        setErrorReq("Horarios invertidos");
-        return;
-      }
-      eventDates += `"${i / 2}": {"start": "${dates[i]}", "end": "${
-        dates[i + 1]
-      }"}${i + 2 >= dates.length ? "}" : ","} `;
-    }
+    const eventDates = eventDatesToDB(dates, setErrorReq);
 
     const formData = new URLSearchParams();
     formData.append("category", category);
@@ -105,13 +116,23 @@ export default function AddEventsForms({ Token }: { Token: string }) {
     formData.append("date", eventDates);
 
     const headers = {
-      "Content-Type": "application/x-www-form-urlencoded",
       Token: Token,
     };
     try {
-      await axiosClient.post(`/api/events/`, formData.toString(), {
-        headers,
-      });
+      if (eventToEdit) {
+        await axiosClient.put(
+          `/api/events/${eventToEdit.id}/`,
+          formData.toString(),
+          {
+            headers,
+          }
+        );
+        setEditEventModalOpen && setEditEventModalOpen(false);
+      } else {
+        await axiosClient.post(`/api/events/`, formData.toString(), {
+          headers,
+        });
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -130,7 +151,7 @@ export default function AddEventsForms({ Token }: { Token: string }) {
         <h3
           className={`text-xl lg:mb-1 font-bold tracking-wide lg:text-2xl xl:text-3xl`}
         >
-          Crie um evento
+          {eventToEdit ? "Edite o evento" : "Crie um evento"}
         </h3>
         <div className="flex flex-col gap-2 lg:gap-4 my-6 lg:my-8">
           <Input

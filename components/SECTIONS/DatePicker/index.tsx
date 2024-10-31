@@ -72,7 +72,7 @@ export default function DatePicker({
       <ul className="flex flex-wrap items-center gap-2 my-1">
         {values.map((elem, index) => {
           return (
-            <li className="flex gap-1 items-center">
+            <li className="flex gap-1 items-center" key={elem}>
               <div
                 key={elem + index}
                 className="bg-slate-500 text-white gap-1 p-2 rounded-md items-center flex justify-between"
