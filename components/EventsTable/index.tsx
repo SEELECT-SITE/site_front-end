@@ -34,6 +34,7 @@ import Input from "../Input";
 function EventsTable_() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const { setIsEventFormOpen, setToEditEvent } = useEventPageState();
+  //Setting ID in url to get the event
 
   const { data, isLoading } = useQuery<EventProps[]>({
     queryKey: ["events"],
@@ -107,7 +108,7 @@ function EventsTable_() {
             {data && table.getRowModel().rows?.length
               ? table.getRowModel().rows.map((row, index) => (
                   <TableRow
-                    key={row.original.title ?? index}
+                    key={row.original.title}
                     data-state={row.getIsSelected() && "selected"}
                   >
                     {row.getVisibleCells().map((cell) => (

@@ -97,6 +97,7 @@ export function EventEditForm_({
   }
 
   if (!toEditEvent) return null;
+
   return (
     <Drawer open={isEventFormOpen} onOpenChange={setIsEventFormOpen}>
       <DrawerContent className="lg:px-12 py-8 ">
@@ -199,6 +200,7 @@ export function EventEditForm({
   toEditEvent: EventProps;
   Token: string;
 }) {
+  const { isEventFormOpen } = useUserPageState();
   const { data: eventsAttendance } = useQuery<EventAttendanceProps>({
     queryKey: [`events/${toEditEvent.id}/attendance`],
     queryFn: async () => {
@@ -218,10 +220,14 @@ export function EventEditForm({
   if (!eventsAttendance) return null;
   if (!toEditEvent) return null;
   return (
-    <EventEditForm_
-      toEditEvent={toEditEvent}
-      eventsAttendance={eventsAttendance}
-      Token={Token}
-    />
+    <>
+      {isEventFormOpen && (
+        <EventEditForm_
+          toEditEvent={toEditEvent}
+          eventsAttendance={eventsAttendance}
+          Token={Token}
+        />
+      )}
+    </>
   );
 }
