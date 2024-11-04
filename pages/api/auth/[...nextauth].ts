@@ -2,6 +2,7 @@ import axios from "axios";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { IUser } from "./nextauth";
+import { axiosClient } from "@/lib/utils";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -23,8 +24,8 @@ export const nextAuthOptions: NextAuthOptions = {
           "Content-Type": "application/x-www-form-urlencoded",
         };
         try {
-          const response = await axios.post(
-            `${API_URL}api/auth/login/`,
+          const response = await axiosClient.post(
+            `api/auth/login/`,
             formData.toString(),
             { headers }
           );

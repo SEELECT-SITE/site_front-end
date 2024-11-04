@@ -74,7 +74,7 @@ export function EventEditForm_({
       await axiosClient
         .put(
           `api/events/${toEditEvent.id}/attendance/`,
-          { eventsAttendanceState },
+          eventsAttendanceState,
           {
             headers,
           }
