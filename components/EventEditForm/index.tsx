@@ -70,6 +70,7 @@ export function EventEditForm_({
     try {
       const headers = {
         Token: Token,
+        "Content-Type": "application/json",
       };
       await axiosClient
         .put(
