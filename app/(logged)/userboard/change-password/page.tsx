@@ -38,9 +38,7 @@ export default function ChangePassword() {
     resolver: zodResolver(changePasswordSchema),
   });
   const { data: session } = useSession();
-  if (!session) {
-    return null;
-  }
+
   const { toast } = useToast();
   const [errorReq, setErrorReq] = useState<any>("");
   const errorsDiv = useRef<HTMLDivElement | null>(null);
@@ -51,8 +49,6 @@ export default function ChangePassword() {
     setErrorReq("");
     const formData = new URLSearchParams();
     const headers = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "ngrok-skip-browser-warning": "true",
       Token: session?.user?.token,
     };
 
@@ -74,6 +70,9 @@ export default function ChangePassword() {
       /* router.push("./login"); */
       setIsSeding(false);
     }
+  }
+  if (!session) {
+    return null;
   }
   return (
     <>

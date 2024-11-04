@@ -1,11 +1,11 @@
 import { withAuth } from "next-auth/middleware";
 
-const adminURLList = ["/admin", "/admin/kits-table"];
+const adminURLList = ["/admin"];
 
 export default withAuth({
   callbacks: {
     authorized({ req, token }) {
-      if (adminURLList.includes(req.nextUrl.pathname)) {
+      if (adminURLList.includes(req.nextUrl.pathname.slice(0, 6))) {
         return token?.role === "admin";
       }
       return !!token;
@@ -13,4 +13,6 @@ export default withAuth({
   },
 });
 
-export const config = { matcher: ["/admin", "/admin/kits-table"] };
+export const config = {
+  matcher: ["/admin"],
+};

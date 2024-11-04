@@ -29,6 +29,14 @@ export default function AdminHeader() {
         </li>
         <li className="flex">
           <Link
+            href="/admin/attendance"
+            className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
+          >
+            Presenças
+          </Link>
+        </li>
+        <li className="flex">
+          <Link
             href="/admin/events"
             className="p-5 hover:opacity-60 hover:scale-105 active:scale-95"
           >

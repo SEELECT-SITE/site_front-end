@@ -13,6 +13,16 @@ interface IUser extends DefaultUser {
   descont?: number;
 }
 
+export type EventAttendanceProps = {
+  title: string;
+  participants: {
+    id: number;
+    name: string;
+    days: boolean[];
+    hours_per_day?: number[];
+  }[];
+};
+
 export interface EventProps {
   title: string;
   hostedBy: string;
