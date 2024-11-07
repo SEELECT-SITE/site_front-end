@@ -39,20 +39,13 @@ export default function FormsLogin() {
     const { email } = data;
     setErrorReq("");
     const formData = new URLSearchParams();
-    const headers = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "ngrok-skip-browser-warning": "true",
-    };
 
     formData.append("email", email as string);
     setIsSeding(true);
     try {
       const response = await axiosClient.post(
         `api/auth/forget_password/`,
-        formData.toString(),
-        {
-          headers,
-        }
+        formData.toString()
       );
       console.log(response);
     } catch (err: any) {
