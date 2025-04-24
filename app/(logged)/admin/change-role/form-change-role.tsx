@@ -23,7 +23,7 @@ const createLoginSchema = z.object({
 
 type ChangeRoleData = z.infer<typeof createLoginSchema>;
 
-export default function FormChangeLogin() {
+export default function FormChangeRole() {
   const {
     register,
     handleSubmit,
@@ -61,7 +61,7 @@ export default function FormChangeLogin() {
     >
       <div className="mb-8 border-l-2 border-dark pl-2 my-6">
         <h3
-          className={`text-xl lg:mb-1 font-bold tracking-wide lg:text-4xl xl:text-5xl`}
+          className={`text-lg lg:mb-1 font-bold tracking-wide lg:text-2xl xl:text-3xl`}
         >
           Mudar função do usuario
         </h3>
@@ -99,7 +99,7 @@ export default function FormChangeLogin() {
         className="bg-cian-700 lg:text-lg text-white"
         shadowClassname="w-full bg-black/80"
       >
-        Enviar e-mail
+        Trocar função
       </FloatButton>
       {errorReq !== "" && (
         <div
