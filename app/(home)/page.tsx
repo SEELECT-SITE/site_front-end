@@ -14,9 +14,10 @@ import momento from "@/utils/formatDate";
 import Parceiros from "@/components/SECTIONS/Parceiros";
 
 const inscriptionsDate = process.env.NEXT_PUBLIC_OPEN_INSCRIPTIONS_DATE;
+const showPartners = process.env.NEXT_PUBLIC_SHOW_PARTNERS;
 
 const Home = () => {
-  if (!inscriptionsDate) return <></>;
+  if (!inscriptionsDate || !showPartners) return <></>;
   return (
     <QueryClientProvider client={queryClient}>
       <div className="bg-gradient-to-b from-dark via-dark via-40% to-dark/70 pt-32 lg:py-44">
@@ -28,9 +29,20 @@ const Home = () => {
           <Image src={wave_svg} alt={"svg de decoração"} className="w-full" />
         </div>
       </div>
-      <Container className="bg-dark">
-        <Parceiros />
-      </Container>
+      {showPartners == "true" && (
+        <>
+          <div className="bg-dark-cian">
+            <Container>
+              <h2 className="text-center text-4xl font-bold text-white py-10">
+                Nossos Parceiros
+              </h2>
+            </Container>
+          </div>
+          <Container className="bg-dark">
+            <Parceiros />
+          </Container>
+        </>
+      )}
       <Retrospec />
       <div className="relative z-10 overflow-hidden bg-gradient-to-b from-dark-cian via-dark/90 via-60% to-dark pt-32">
         {momento(inscriptionsDate).isBefore(momento()) && (
