@@ -17,10 +17,10 @@ module.exports = {
         "5xl": ["3rem", "3.4rem"],
       },
       colors: {
-        "cian-700": "#44c1ba",
-        "cian-400": "#84d1cf",
+        "cian-700": "#2E97B7",
+        "cian-400": "#2E97B7",
         white: "#f4f4f4",
-        "dark-cian": "#0f3849",
+        "dark-cian": "#7B18DB",
         dark: "#101120",
       },
       animation: {

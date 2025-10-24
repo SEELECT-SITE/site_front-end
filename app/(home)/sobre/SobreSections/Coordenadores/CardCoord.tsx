@@ -39,7 +39,7 @@ export default function CardCoord({
           </Link>
         )}
       </div>
-
+\
       <div className="shrink grow ">
         <Title className="text-lg xs:text-xl lg:text-2xl tracking-wide font-bold text-cian-400 drop-shadow-icon-sm">
           {nome}

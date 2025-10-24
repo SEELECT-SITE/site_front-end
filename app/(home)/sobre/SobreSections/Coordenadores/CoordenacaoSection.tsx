@@ -3,54 +3,54 @@ import CardCoord from "./CardCoord";
 import Title from "@/components/Title";
 import Image from "next/image";
 import square_balls from "@/public/SVG/square-balls.svg";
-import cg_comp from "@/public/avatar/cg_comp.jpeg";
-import cg_telecom from "@/public/avatar/cg_telecom.jpeg";
-import cg_eletri from "@/public/avatar/cg_eletri.jpeg";
-import coor_log from "@/public/avatar/coor_log.jpeg";
-import coor_mark from "@/public/avatar/coor_mark.jpeg";
-import coor_eventos from "@/public/avatar/coor_eventos.jpeg";
-import coor_finan from "@/public/avatar/coor_finan.jpeg";
+import cg_comp from "@/public/avatar/cg_comp.jpg";
+import cg_telecom from "@/public/avatar/cg_telecom.jpg";
+import cg_eletri from "@/public/avatar/cg_eletri.jpg";
+import coor_log from "@/public/avatar/coor_log.jpg";
+import coor_mark from "@/public/avatar/coor_mark.jpg";
+import coor_eventos from "@/public/avatar/coor_eventos.jpg";
+import coor_finan from "@/public/avatar/coor_finan.jpg";
 
 const coordenadores = [
   <CardCoord
     linkedin="https://www.linkedin.com/in/daniel-chaves-a81844257/"
-    nome={"Daniel Chaves"}
+    nome={"Isabela Aveino Freire"}
     src={coor_log}
     cargo={"Coordenador de Logística"}
   />,
   <CardCoord
-    linkedin="https://www.linkedin.com/in/davi-pontes-luciano-a236a61a9/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
-    nome={"Davi Pontes"}
+    linkedin="https://www.linkedin.com/in/vin%C3%ADcius-l%C3%B4bo-8bbb16289?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+    nome={"Vinicius Alcantara"}
     src={coor_eventos}
     cargo={"Coordenador de Eventos"}
   />,
   <CardCoord
-    linkedin="https://www.linkedin.com/in/ana-cecília-costa-martins-5bb570296/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-    nome={"Ana Cecília Costa"}
+    linkedin="https://www.linkedin.com/in/davi-sampaio-timb%C3%B3-94408330b/"
+    nome={"Davi Sampaio Timbó"}
     src={cg_telecom}
     cargo={"Coordenadora Geral"}
   />,
   <CardCoord
-    linkedin="https://www.linkedin.com/in/orlando-moreira-de-melo-neto-212877249/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-    nome={"Orlando Moreira"}
+    linkedin="http://www.linkedin.com/in/lucas-araújo-moura-37103a31b"
+    nome={"Lucas Araújo Moura"}
     src={coor_mark}
     cargo={"Coordenador de Marketing"}
   />,
   <CardCoord
-    linkedin="https://www.linkedin.com/in/vitória-reis-lima-301347309/"
-    nome={"Vitória Reis"}
+    // linkedin="https://www.linkedin.com/in/vitória-reis-lima-301347309/"
+    nome={"Alan da Rocha Mota"}
     src={cg_eletri}
-    cargo={"Coordenadora Geral"}
+    cargo={"Coordenador Geral"}
   />,
   <CardCoord
-    linkedin="https://www.linkedin.com/in/ana-letícia-alves-486277234/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
-    nome={"Ana Letícia Alves"}
+    // linkedin="https://www.linkedin.com/in/ana-letícia-alves-486277234/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    nome={"Maria Augusta Costa "}
     src={coor_finan}
     cargo={"Coordenadora Financeira"}
   />,
   <CardCoord
-    linkedin="https://www.linkedin.com/in/hubert-miranda-151535298/"
-    nome={"Hubert Miranda"}
+    // linkedin="https://www.linkedin.com/in/hubert-miranda-151535298/"
+    nome={"Thaís Sousa Barros"}
     src={cg_comp}
     cargo={"Coordenador Geral"}
   />,

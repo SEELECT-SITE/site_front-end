@@ -34,7 +34,7 @@ const Home = () => {
           <div className="bg-dark-cian">
             <Container>
               <h2 className="text-center text-4xl font-bold text-white py-10">
-                Nossos Parceirosa
+                Nossos Parceiros
               </h2>
             </Container>
           </div>

@@ -4,7 +4,8 @@ import Text from "@/components/Text";
 import FloatButton from "@/components/FloatButton";
 import Container from "@/components/Container";
 
-import seelect_logo from "@/public/icone_seelect.webp";
+import seelect_logo from "@/public/SVG/icone_color_seelect.svg";
+// import seelect_logo from "@/public/icone_seelect.webp";
 import squares_deco from "@/public/SVG/squares-deco.svg";
 import elipse from "@/public/SVG/elipse-deco.svg";
 import Link from "next/link";
@@ -18,7 +19,7 @@ export default function PresentationSection() {
             <h1
               className={`text-2xl mb-3 lg:mb-6 font-bold tracking-wide lg:text-4xl xl:text-5xl`}
             >
-              V SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELÉTRICA E
+              VI SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELÉTRICA E
               TELECOMUNICAÇÕES.
             </h1>
           </div>
@@ -45,7 +46,7 @@ export default function PresentationSection() {
         <figure className="m-auto w-2/3 mb-6 max-w-md">
           <Image
             src={seelect_logo}
-            width={1080}
+            width={1000}
             priority={true}
             alt="logo da SEELECT"
             className="lg:min-w-[360px]"

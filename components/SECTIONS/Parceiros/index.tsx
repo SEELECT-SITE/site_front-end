@@ -2,9 +2,9 @@ import React from "react";
 import Image from "next/image";
 import alura_logo from "@/public/parceiros/alura-logo.png";
 import tecnovetti_logo from "@/public/parceiros/LOGO_TECNOVETTI.png";
-import go_ener_logo from "@/public/parceiros/go_ener_logo.png";
+import focus_logo from "@/public/parceiros/focus_logo.jpg";
 import autocore_logo from "@/public/parceiros/autocore_logo.png";
-import cardapio_web_logo from "@/public/parceiros/cardapio-web_logo.webp";
+import arupi_logo from "@/public/parceiros/arupi_logo.png";
 import Title from "@/components/Title";
 import Link from "next/link";
 
@@ -49,7 +49,7 @@ function Parceiros() {
               />
             </div>
           </Link>
-          <Link
+          {/* <Link
             className="text-dark-cian hover:text-dark lg:w-1/6"
             target="_blank"
             href={"https://tecnovetti.com.br/"}
@@ -63,34 +63,34 @@ function Parceiros() {
                 className="m-auto drop-shadow-icon-sm scale-110 lg:grayscale-1 aspect-square object-contain"
               />
             </div>
-          </Link>
+          </Link> */}
           <Link
             className="text-dark-cian hover:text-dark lg:w-1/6"
             target="_blank"
-            href={"https://cardapioweb.com/"}
-            title="Ir para site da Cardapio Web"
+            href={"https://www.instagram.com/arupisucos?igsh=bXVidDcwYzE4cHU2"}
+            title="Instagram da Arupi"
           >
-            <div className="group rounded-full p-6 border-2 border-slate-700 bg-slate-800 hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
+            <div className="group bg-[#fff] rounded-full p-6 border-2 aspect-square flex items-center border-slate-70  hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
               <Image
-                src={cardapio_web_logo}
-                alt="icone cardapio web"
+                src={arupi_logo}
+                alt="icone arupi"
                 width={300}
-                className="m-auto drop-shadow-icon-sm scale-150 lg:grayscale-1 -translate-y-1 aspect-square object-contain"
+                className="m-auto scale-110 p-4"
               />
             </div>
           </Link>
-          <Link
+           <Link
             className="text-dark-cian hover:text-dark lg:w-1/6"
             target="_blank"
-            href={"https://goener.com.br/"}
-            title="Ir para site da goener"
+            href={"https://focusinformatica.com.br/"}
+            title="Site da Focus"
           >
-            <div className="group rounded-full p-6 border-2 aspect-square flex items-center border-slate-700 bg-[#fff] hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
+            <div className="group bg-[#fff] rounded-full p-6 border-2 aspect-square flex items-center border-slate-70  hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
               <Image
-                src={go_ener_logo}
-                alt="logo go ener"
+                src={focus_logo}
+                alt="icone focus"
                 width={300}
-                className="m-auto drop-shadow-icon-sm scale-110 p-4"
+                className="m-auto scale-110 p-4"
               />
             </div>
           </Link>
