@@ -19,7 +19,7 @@ export default function PresentationSection() {
             <h1
               className={`text-2xl mb-3 lg:mb-6 font-bold tracking-wide lg:text-4xl xl:text-5xl`}
             >
-              VI SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELÉTRICA E
+              V SEMANA DAS ENGENHARIAS DE COMPUTAÇÃO, ELÉTRICA E
               TELECOMUNICAÇÕES.
             </h1>
           </div>
