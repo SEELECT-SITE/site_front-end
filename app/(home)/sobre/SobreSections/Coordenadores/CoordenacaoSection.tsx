@@ -13,42 +13,49 @@ import coor_finan from "@/public/avatar/coor_finan.jpg";
 
 const coordenadores = [
   <CardCoord
+    key="isabela"
     linkedin="https://www.linkedin.com/in/daniel-chaves-a81844257/"
     nome={"Isabela Aveino Freire"}
     src={coor_log}
     cargo={"Coordenador de Logística"}
   />,
   <CardCoord
+    key="vinicius"
     linkedin="https://www.linkedin.com/in/vin%C3%ADcius-l%C3%B4bo-8bbb16289?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
     nome={"Vinicius Alcantara"}
     src={coor_eventos}
     cargo={"Coordenador de Eventos"}
   />,
   <CardCoord
+    key="davi"
     linkedin="https://www.linkedin.com/in/davi-sampaio-timb%C3%B3-94408330b/"
     nome={"Davi Sampaio Timbó"}
     src={cg_telecom}
     cargo={"Coordenadora Geral"}
   />,
   <CardCoord
+    key="lucas"
     linkedin="http://www.linkedin.com/in/lucas-araújo-moura-37103a31b"
     nome={"Lucas Araújo Moura"}
     src={coor_mark}
     cargo={"Coordenador de Marketing"}
   />,
   <CardCoord
+    key="alan"
     // linkedin="https://www.linkedin.com/in/vitória-reis-lima-301347309/"
     nome={"Alan da Rocha Mota"}
     src={cg_eletri}
     cargo={"Coordenador Geral"}
   />,
   <CardCoord
+    key="maria"
     // linkedin="https://www.linkedin.com/in/ana-letícia-alves-486277234/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
     nome={"Maria Augusta Costa "}
     src={coor_finan}
     cargo={"Coordenadora Financeira"}
   />,
   <CardCoord
+    key="thais"
     // linkedin="https://www.linkedin.com/in/hubert-miranda-151535298/"
     nome={"Thaís Sousa Barros"}
     src={cg_comp}
