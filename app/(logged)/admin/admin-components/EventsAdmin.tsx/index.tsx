@@ -12,7 +12,7 @@ import RadioGroup from "@/components/RadioGroup";
 import { axiosClient } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
 import { toast } from "@/hooks/use-toast";
-import { EventProps } from "@/pages/api/auth/nextauth";
+import { EventProps } from "@/types/nextauth";
 import momento from "@/utils/formatDate";
 import DefaultModal from "@/components/DefaultModal";
 import AddEventsForms from "../AddEventsForms";

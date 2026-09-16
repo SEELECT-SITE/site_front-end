@@ -1,4 +1,4 @@
-import { EventProps } from "@/pages/api/auth/nextauth";
+import { EventProps } from "@/types/nextauth";
 import momento from "@/utils/formatDate";
 import isEventOverlap from "@/utils/isEventOverlap";
 

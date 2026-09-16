@@ -2,6 +2,7 @@ import axios from "axios";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { IUser } from "./nextauth";
+import { IUser } from "@/types/nextauth";
 import { axiosClient } from "@/lib/utils";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;

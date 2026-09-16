@@ -17,7 +17,7 @@ import { RotateCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useQuery } from "react-query";
-import { EventAttendanceProps, EventProps } from "@/pages/api/auth/nextauth";
+import { EventAttendanceProps, EventProps } from "@/types/nextauth";
 import { axiosClient } from "@/lib/utils";
 
 export function EventEditForm_({

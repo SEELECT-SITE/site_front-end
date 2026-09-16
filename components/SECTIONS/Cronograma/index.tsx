@@ -12,7 +12,7 @@ import SkeletonCreator from "@/components/SkeletonCreator";
 import momento from "@/utils/formatDate";
 import RadioGroup from "@/components/RadioGroup";
 import { axiosClient } from "@/lib/utils";
-import { EventProps } from "@/pages/api/auth/nextauth";
+import { EventProps } from "@/types/nextauth";
 
 const showEventsDate = process.env.NEXT_PUBLIC_OPEN_INSCRIPTIONS_DATE;
 

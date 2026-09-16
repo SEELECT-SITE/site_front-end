@@ -1,4 +1,4 @@
-import { Kit, KitToTable } from "@/pages/api/auth/nextauth";
+import { Kit, KitToTable } from "@/types/nextauth";
 import momento from "@/utils/formatDate";
 import axios from "axios";
 import { clsx, type ClassValue } from "clsx";
