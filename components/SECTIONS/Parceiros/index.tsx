@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import alura_logo from "@/public/parceiros/alura-logo.png";
 import tecnovetti_logo from "@/public/parceiros/LOGO_TECNOVETTI.png";
-import focus_logo from "@/public/parceiros/focus_logo.jpg";
+import mariaacai_logo from "@/public/parceiros/mariaacai_logo.jpeg";
 import autocore_logo from "@/public/parceiros/autocore_logo.png";
 import arupi_logo from "@/public/parceiros/arupi_logo.png";
 import Title from "@/components/Title";
@@ -14,7 +14,7 @@ function Parceiros() {
       <div className="relative">
         <div className="flex items-center gap-2 mb-11">
           <div className=" shadow-slate-800 px-2 rounded-md">
-            <Title className="text-cian-700 mb-10">PATROCINADORES</Title>
+            <Title className="text-[#5b86b6] mb-10">PATROCINADORES</Title>
           </div>
         </div>
 
@@ -34,7 +34,7 @@ function Parceiros() {
               />
             </div>
           </Link>
-          <Link
+          {/* <Link
             className="text-dark-cian hover:text-dark lg:w-1/6"
             target="_blank"
             href={"https://www.alura.com.br/"}
@@ -48,7 +48,7 @@ function Parceiros() {
                 className="m-auto drop-shadow-icon-sm scale-90 lg:grayscale-1 -translate-y-2 aspect-square object-contain"
               />
             </div>
-          </Link>
+          </Link> */}
           {/* <Link
             className="text-dark-cian hover:text-dark lg:w-1/6"
             target="_blank"
@@ -70,7 +70,7 @@ function Parceiros() {
             href={"https://www.instagram.com/arupisucos?igsh=bXVidDcwYzE4cHU2"}
             title="Instagram da Arupi"
           >
-            <div className="group bg-[#fff] rounded-full p-6 border-2 aspect-square flex items-center border-slate-70  hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
+            <div className="group bg-[#1e5230] rounded-full p-6 border-2 aspect-square flex items-center border-[#1e5230] hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
               <Image
                 src={arupi_logo}
                 alt="icone arupi"
@@ -79,16 +79,16 @@ function Parceiros() {
               />
             </div>
           </Link>
-           <Link
+          <Link
             className="text-dark-cian hover:text-dark lg:w-1/6"
             target="_blank"
             href={"https://focusinformatica.com.br/"}
-            title="Site da Focus"
+            title="Insta da Maria Acai"
           >
             <div className="group bg-[#fff] rounded-full p-6 border-2 aspect-square flex items-center border-slate-70  hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
               <Image
-                src={focus_logo}
-                alt="icone focus"
+                src={mariaacai_logo}
+                alt="icone mariacai"
                 width={300}
                 className="m-auto scale-110 p-4"
               />

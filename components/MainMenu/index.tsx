@@ -163,7 +163,7 @@ export default function MainMenu() {
           {momento().isAfter(inscriptionsDate) && (
             <li className="flex items-center">
               <Button
-                className="rounded-full m-0 bg-dark text-white flex p-3 px-8 gap-1 items-center"
+                className="rounded-full m-0 bg-[#3f6593] text-white flex p-3 px-8 gap-1 items-center"
                 onClick={(e) => router.push("/login")}
               >
                 Login <IoMdArrowForward />

@@ -68,7 +68,7 @@ export default function RetrospecSlider() {
           }}
           className="mySwiper max-h-[600px] relative"
         >
-          <div className="w-110% h-24 lg:h-32 rounded-100%  absolute bg-dark top-0 z-10 -left-5% -translate-y-1/2"></div>
+          <div className="w-110% h-24 lg:h-32 rounded-100%  absolute bg-[#000f22] top-0 z-10 -left-5% -translate-y-1/2"></div>
           {imagens.map((elem, index) => {
             return (
               <SwiperSlide key={index + 1} className="border-x aspect-square">

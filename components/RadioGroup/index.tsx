@@ -37,7 +37,7 @@ const RadioGroup: FunctionComponent<RadioGroupProps> = ({
             <label
               htmlFor={elem.value + index}
               className={twMerge(
-                "flex cursor-pointer items-center justify-center rounded-md border border-slate-800    bg-white px-3 py-2 text-gray-900 hover:border-slate-800 peer-checked:shadow-md peer-checked:border-slate-200  peer-checked:bg-cian-700 peer-checked:text-white",
+                "flex cursor-pointer items-center justify-center rounded-md border border-slate-800    bg-white px-3 py-2 text-[#3f6593] hover:border-slate-800 peer-checked:shadow-md peer-checked:border-slate-200  peer-checked:bg-[#3f6593] peer-checked:text-white",
                 className
               )}
             >

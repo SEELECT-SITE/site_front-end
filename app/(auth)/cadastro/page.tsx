@@ -20,11 +20,11 @@ export default function CadastroPage() {
           <Container className="w-full max-w-md m-auto 2xl:p-8">
             <div className="mb-10 w-auto">
               <h1
-                className={`text-3xl lg:mb-1 font-bold tracking-wide lg:text-4xl xl:text-5xl`}
+                className={`text-3xl lg:mb-1 font-bold tracking-wide lg:text-4xl xl:text-5xl text-[#1b3554]`}
               >
                 Cadastre-se
               </h1>
-              <Text className="pl-0.5 text-gray-500">
+              <Text className="pl-0.5 text-[#1b3554]">
                 Preencha os dados abaixo
               </Text>
             </div>

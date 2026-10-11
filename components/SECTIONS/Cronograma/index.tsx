@@ -148,8 +148,8 @@ function Cronograma() {
         <div className="flex gap-2 rounded-lg">
           <Decoration notAnimated />
           <FloatButton
-            className="bg-cian-700 text-xl text-dark lg:py-6 whitespace-nowrap"
-            shadowClassname="bg-black w-2/3 lg:w-1/3"
+            className="bg-white text-xl text-[#3f6593] lg:py-6 whitespace-nowrap"
+            shadowClassname="bg-[#3f6593] w-2/3 lg:w-1/3"
             onClick={(e) => {
               router.push("/cadastro");
             }}

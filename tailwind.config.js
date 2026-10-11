@@ -20,7 +20,7 @@ module.exports = {
         "cian-700": "#2E97B7",
         "cian-400": "#2E97B7",
         white: "#f4f4f4",
-        "dark-cian": "#7B18DB",
+        "dark-cian": "#1b3554",
         dark: "#101120",
       },
       animation: {
