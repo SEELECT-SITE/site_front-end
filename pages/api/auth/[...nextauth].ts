@@ -1,7 +1,6 @@
 import axios from "axios";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { IUser } from "./nextauth";
 import { IUser } from "@/types/nextauth";
 import { axiosClient } from "@/lib/utils";
 
