@@ -26,11 +26,11 @@ export default function EventCardBody({
     <div
       className={twMerge(
         `relative w-full p-4 py-12 lg:p-8 ring-inset rounded-2xl max-w-md overflow-hidden ${
-          isSelected ? "ring-2 ring-cian-400" : "ring-0 ring-slate-400"
+          isSelected ? "ring-2 ring-[#3f6593]" : "ring-0 ring-slate-400"
         } ${
           capacity! <= 0 || disable
             ? "bg-dark-cian grayscale pointer-events-none"
-            : "bg-dark "
+            : "bg-[#000f22] "
         }`,
         className
       )}
@@ -50,7 +50,7 @@ export default function EventCardBody({
       {onClick && (
         <>
           <span
-            className={`absolute h-full left-0 bg-cian-400 top-0 duration-100 ${
+            className={`absolute h-full left-0 bg-[#3f6593] top-0 duration-100 ${
               isSelected ? "w-2" : "w-0"
             }`}
           ></span>

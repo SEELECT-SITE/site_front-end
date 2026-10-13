@@ -94,7 +94,7 @@ export default function SobrePage() {
           />
           <Image
             src={Seelect_icon}
-            alt="icone seelect"
+            w-12 lg:w-16
             width={52}
             className="invert hover:drop-shadow-icon-sm hover:-translate-x-1 hover:-translate-y-1 duration-150"
           />

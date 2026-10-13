@@ -11,7 +11,7 @@ export default function EventCardLocation({
 }) {
   return (
     <Text className="capitalize lg:text-base whitespace-nowrap text-ellipsis overflow-hidden flex gap-0.5 group text-slate-300 hover:text-white">
-      <span className="group-hover:text-cian-400 text-cian-700">
+      <span className="group-hover:text-[#3f6593] text-[#3f6593]">
         <MdLocationPin size={20} />
       </span>
       Local:

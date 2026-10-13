@@ -23,7 +23,7 @@ export default function EventCapacity({
     <span
       {...props}
       className={twMerge(
-        `p-2  bg-white rounded-t-xl absolute bottom-0 right-4 ring-2 ring-inset ring-cian-400 text-sm lg:text-md ${
+        `p-2  bg-white rounded-t-xl absolute bottom-0 right-4 ring-2 ring-inset ring-[#3f6593] text-sm lg:text-md ${
           isUnderTen ? "text-red-500 font-bold" : "text-slate-700"
         }`,
         className

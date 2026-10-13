@@ -7,11 +7,11 @@ import { MdLogout } from "react-icons/md";
 
 export default function AdminHeader() {
   return (
-    <header className="w-full bg-white flex justify-between p-4 lg:px-12 xl:px-16 2xl:px-24 items-center  shadow-md shadow-black/30 text-dark">
+    <header className="w-full absolute bg-white z-50 m-auto flex justify-between px-4 py-1 lg:px-12 lg:py-0 xl:px-16 2xl:px-24 items-center top-0 left-0 shadow-md shadow-black/30">
       <Link href="/admin" className="" title="Voltar ao userboard">
-        <div className="w-12 lg:w-16">
+        <div className="w-14 lg:w-24">
           <Image
-            width={64}
+            width={160}
             src={Seelect_icon}
             alt="icone seelect"
             className="hover:drop-shadow-icon-sm hover:-translate-x-0.5 hover:-translate-y-0.5 duration-150"

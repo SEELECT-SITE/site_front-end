@@ -83,7 +83,7 @@ function Parceiros() {
             className="text-dark-cian hover:text-dark lg:w-1/6"
             target="_blank"
             href={"https://focusinformatica.com.br/"}
-            title="Insta da Maria Acai"
+            title="IFood da Maria Acai"
           >
             <div className="group bg-[#fff] rounded-full p-6 border-2 aspect-square flex items-center border-slate-70  hover:-translate-x-2 hover:-translate-y-2 hover:drop-shadow-icon duration-100 relative">
               <Image

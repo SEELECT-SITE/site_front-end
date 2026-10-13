@@ -17,7 +17,7 @@ export default function EventCardDate({
     <div className="flex items-center gap-1 group">
       <MdCalendarToday
         size={18}
-        className="group-hover:text-cian-400 text-cian-700"
+        className="group-hover:text-[#3f6593] text-[#3f6593]"
       />
       <Text className=" lg:text-base capitalize">{`${
         startDateObj.format("dddd").replace("-", " ").split(" ")[0]
