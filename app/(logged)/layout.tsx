@@ -24,12 +24,10 @@ export default async function LoggedLayout({
     redirect("./login");
   }
   return (
-    <body
-      className={`bg-dark text-white w-full min-h-screen overflow-x-hidden ${cafeFont.className}`}
-    >
-      {children}
-      <Footer />
-      <Toaster />
-    </body>
-  );
+  <div className={`bg-dark text-white w-full min-h-screen overflow-x-hidden ${cafeFont.className}`}>
+    {children}
+    <Footer />
+    <Toaster />
+  </div>
+);
 }

@@ -63,13 +63,13 @@ export default function FormsLogin() {
         onSubmit={handleSubmit(createContact)}
         className="w-full max-w-sm m-auto relative overflow-hidden p-1"
       >
-        <div className="mb-8 border-l-2 border-dark pl-2">
+        <div className="mb-8 border-l-2 border-[#1b3554] pl-2">
           <h1
-            className={`text-3xl lg:mb-1 font-bold tracking-wide lg:text-4xl xl:text-5xl`}
+            className={`text-3xl lg:mb-1 font-bold tracking-wide lg:text-4xl xl:text-5xl text-[#1b3554]`}
           >
             Mudar senha
           </h1>
-          <Text>Digite seu e-mail</Text>
+          <Text className="text-[#1b3554]">Digite suas credenciais</Text>
         </div>
         <div className="flex flex-col gap-2 lg:gap-4 my-6 lg:my-8">
           <Input
@@ -93,8 +93,8 @@ export default function FormsLogin() {
         <FloatButton
           disabled={isSending}
           type="submit"
-          className="bg-cian-700 lg:text-lg text-white"
-          shadowClassname="w-full bg-black/80"
+          className="bg-[#3f6593] lg:text-lg text-white"
+          shadowClassname="w-full bg-[#1b3554]/80"
         >
           Enviar e-mail
         </FloatButton>

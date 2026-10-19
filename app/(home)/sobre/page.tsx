@@ -23,7 +23,7 @@ export default function SobrePage() {
         <div className="absolute w-1/2 lg:w-2/3 min-w-[160px] translate-x-1/3 top-0 right-0 lg:translate-x-2/3 -z-10">
           <Image src={squareDeco} alt="decoration" />
         </div>
-        <Title className="text-4xl text-cian-700 text-justify">SOBRE</Title>
+        <Title className="text-4xl text-[#5b86b6] text-justify">SOBRE</Title>
         <Text className="text-white text-sm text-justify">
           Conheça um pouco mais da SEELECT
         </Text>
@@ -36,7 +36,7 @@ export default function SobrePage() {
           className="absolute w-3/4 hidden lg:inline max-w-md right-0 -translate-y-1/3 translate-x-1/2"
         />
         <div className="backdrop-blur-sm max-w-lg">
-          <Title className="text-2xl text-cian-700">O QUE É A SEELECT?</Title>
+          <Title className="text-2xl text-[#3f6593]">O QUE É A SEELECT?</Title>
         </div>
         <div className=" backdrop-blur-sm lg:max-w-4xl xl:max-w-6xl">
           <Text className="text-dark text-left">
@@ -94,7 +94,7 @@ export default function SobrePage() {
           />
           <Image
             src={Seelect_icon}
-            alt="icone seelect"
+            w-12 lg:w-16
             width={52}
             className="invert hover:drop-shadow-icon-sm hover:-translate-x-1 hover:-translate-y-1 duration-150"
           />

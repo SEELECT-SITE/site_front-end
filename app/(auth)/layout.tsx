@@ -25,9 +25,9 @@ export default async function HomeLayout({
     }
   }
   return (
-    <body className={`bg-white w-full ${cafeFont.className}`}>
-      <Toaster />
-      {children}
-    </body>
-  );
+  <div className={`bg-white w-full min-h-screen ${cafeFont.className}`}>
+    <Toaster />
+    {children}
+  </div>
+);
 }

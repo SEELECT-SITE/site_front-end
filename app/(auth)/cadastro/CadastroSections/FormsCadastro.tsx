@@ -115,8 +115,8 @@ export default function FormsCadastro() {
       <FloatButton
         disabled={sendButtonStatus}
         type="submit"
-        className="bg-cian-700 lg:text-lg text-white"
-        shadowClassname="w-full bg-black/80 mt-4"
+        className="bg-[#3f6593] lg:text-lg text-white"
+        shadowClassname="w-full bg-[#1b3554]/80 mt-4"
       >
         Registrar
       </FloatButton>

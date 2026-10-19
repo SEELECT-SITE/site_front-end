@@ -16,7 +16,7 @@ import isEventDisable from "./isEventDisable";
 import FilterDaysEvents from "./filterDaysEvents";
 import SelectedKitAdvantages from "./selectedKitAdvantages";
 import CloseModalButton from "./closeModalButton";
-import { EventProps } from "@/pages/api/auth/nextauth";
+import { EventProps } from "@/types/nextauth";
 import { axiosClient } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 

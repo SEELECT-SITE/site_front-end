@@ -20,7 +20,7 @@ const Home = () => {
   if (!inscriptionsDate || !showPartners) return <></>;
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="bg-gradient-to-b from-dark via-dark via-40% to-dark/70 pt-32 lg:py-44">
+      <div className="bg-gradient-to-b from-[#000f22] via-[#000f22] via-40% to-[#000f22]/70 pt-32 lg:py-44">
         <PresentationSection />
 
         <Testimony />
@@ -38,13 +38,13 @@ const Home = () => {
               </h2>
             </Container>
           </div>
-          <Container className="bg-dark">
+          <Container className="bg-[#000f22]">
             <Parceiros />
           </Container>
         </>
       )}
       <Retrospec />
-      <div className="relative z-10 overflow-hidden bg-gradient-to-b from-dark-cian via-dark/90 via-60% to-dark pt-32">
+      <div className="relative z-10 overflow-hidden bg-gradient-to-b from-[#000f22] via-[#000f22]/90 via-60% to-[#000f22] pt-32">
         {momento(inscriptionsDate).isBefore(momento()) && (
           <>
             <Container>

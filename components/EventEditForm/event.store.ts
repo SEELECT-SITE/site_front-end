@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { EventProps } from "@/pages/api/auth/nextauth";
+import { EventProps } from "@/types/nextauth";
 
 type EventsPage = {
   isEventFormOpen: boolean;

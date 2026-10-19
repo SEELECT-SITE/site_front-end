@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { EventProps } from "@/pages/api/auth/nextauth";
+import { EventProps } from "@/types/nextauth";
 
 export const eventsTableColumnsDef: ColumnDef<EventProps, any>[] = [
   {

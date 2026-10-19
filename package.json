@@ -31,9 +31,9 @@
     "debug": "^4.3.4",
     "icons": "^1.0.0",
     "moment": "^2.29.4",
-    "next": "^13.4.10",
+    "next": "^16.3.5",
     "next-themes": "^0.3.0",
-    "nodemailer": "^6.9.7",
+    "nodemailer": "^10.0.10",
     "postcss": "8.4.23",
     "qrcode-pix": "^5.0.0",
     "qrcode.react": "^3.1.0",
@@ -59,7 +59,7 @@
     "react-hook-form": "^7.45.2",
     "react-icons": "^4.9.0",
     "react-query": "^3.39.3",
-    "swiper": "^10.0.4",
+    "swiper": "^14.2.0",
     "zod": "^3.21.4"
   }
 }

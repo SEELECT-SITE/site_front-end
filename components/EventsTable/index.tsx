@@ -27,7 +27,7 @@ import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
 import useEventPageState from "../EventEditForm/event.store";
 import { axiosClient } from "@/lib/utils";
-import { EventProps } from "@/pages/api/auth/nextauth";
+import { EventProps } from "@/types/nextauth";
 import { useQuery } from "react-query";
 import Input from "../Input";
 

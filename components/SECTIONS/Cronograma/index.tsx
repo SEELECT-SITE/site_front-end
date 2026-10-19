@@ -12,7 +12,7 @@ import SkeletonCreator from "@/components/SkeletonCreator";
 import momento from "@/utils/formatDate";
 import RadioGroup from "@/components/RadioGroup";
 import { axiosClient } from "@/lib/utils";
-import { EventProps } from "@/pages/api/auth/nextauth";
+import { EventProps } from "@/types/nextauth";
 
 const showEventsDate = process.env.NEXT_PUBLIC_OPEN_INSCRIPTIONS_DATE;
 
@@ -148,8 +148,8 @@ function Cronograma() {
         <div className="flex gap-2 rounded-lg">
           <Decoration notAnimated />
           <FloatButton
-            className="bg-cian-700 text-xl text-dark lg:py-6 whitespace-nowrap"
-            shadowClassname="bg-black w-2/3 lg:w-1/3"
+            className="bg-white text-xl text-[#3f6593] lg:py-6 whitespace-nowrap"
+            shadowClassname="bg-[#3f6593] w-2/3 lg:w-1/3"
             onClick={(e) => {
               router.push("/cadastro");
             }}

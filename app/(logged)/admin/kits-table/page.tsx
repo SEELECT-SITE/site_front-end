@@ -9,7 +9,7 @@ import { axiosClient, transformKitsToTable } from "@/lib/utils";
 import UserPaymentModal from "../admin-components/PaymentsTable/UserPaymentModal";
 import useUserPaymentStore from "../admin-components/PaymentsTable/UserPaymentModal/userPaymentModalStore";
 import DeleteKitModal from "./kits-table-components/deleteKitModal";
-import { Kit, KitToTable } from "@/pages/api/auth/nextauth";
+import { Kit, KitToTable } from "@/types/nextauth";
 import momento from "@/utils/formatDate";
 
 const openInscriptions = process.env.NEXT_PUBLIC_OPEN_INSCRIPTIONS_DATE;

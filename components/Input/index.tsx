@@ -30,7 +30,7 @@ const Input: FunctionComponent<InputProps> = ({
       className={twMerge(
         `${
           cafeFont.className
-        } relative block border rounded-lg my-4 border-black shadow-sm border-b-2 bg-white min-w-[250px] ${
+        } relative block border rounded-lg my-4 border-[#3f6593] shadow-sm border-b-2 bg-white min-w-[250px] ${
           valid === false && "border-b-red-500"
         }
         ${valid === true && "border-b-green-600"}
@@ -42,14 +42,14 @@ const Input: FunctionComponent<InputProps> = ({
         type={showPassword ? "text" : type}
         {...props}
         {...register}
-        className="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none rounded-lg p-4 w-full text-dark focus:ring-2 focus:ring-dark-cian [type='password']"
+        className="peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none rounded-lg p-4 w-full text-dark focus:ring-2 focus:ring-[#1b3554] [type='password']"
       />
 
       {type === "password" && (
         <button
           type="button"
           onClick={(e) => setShowPassword((showPassword) => !showPassword)}
-          className="absolute right-2 bg-cian-700 rounded-full text-white top-1/2 -translate-y-1/2 p-0.5"
+          className="absolute right-2 bg-[#3f6593] rounded-full text-white top-1/2 -translate-y-1/2 p-0.5"
         >
           <IoMdEye size={20} />
         </button>
@@ -57,7 +57,7 @@ const Input: FunctionComponent<InputProps> = ({
 
       <span
         className={`w-2 left-0 peer-focus:w-2 peer-hover:w-2 peer-placeholder-shown:w-0 duration-100 h-full top-0 delay-75 absolute rounded-l-full ${
-          errorMsg ? "bg-red-500" : "bg-cian-700"
+          errorMsg ? "bg-red-500" : "bg-[#3f6593]"
         }`}
       ></span>
 

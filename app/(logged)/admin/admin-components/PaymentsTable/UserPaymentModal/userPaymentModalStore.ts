@@ -1,4 +1,4 @@
-import { KitToTable } from "@/pages/api/auth/nextauth";
+import { KitToTable } from "@/types/nextauth";
 import { create } from "zustand";
 
 type deleteModalProp = {

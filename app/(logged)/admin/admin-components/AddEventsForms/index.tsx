@@ -15,7 +15,7 @@ import {
   eventDatesFromDBToApp,
   eventDatesToDB,
 } from "@/lib/utils";
-import { EventProps } from "@/pages/api/auth/nextauth";
+import { EventProps } from "@/types/nextauth";
 
 interface OptionPlace {
   location: string;

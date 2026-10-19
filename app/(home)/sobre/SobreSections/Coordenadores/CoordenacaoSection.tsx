@@ -13,44 +13,51 @@ import coor_finan from "@/public/avatar/coor_finan.jpg";
 
 const coordenadores = [
   <CardCoord
-    linkedin="https://www.linkedin.com/in/daniel-chaves-a81844257/"
-    nome={"Isabela Aveino Freire"}
+    key="rafael-mendes"
+    linkedin="https://www.linkedin.com/in/rafael-fontenele-mendes-1563ab334/"
+    nome={"Rafael Fontenele Mendes"}
     src={coor_log}
     cargo={"Coordenador de Logística"}
   />,
   <CardCoord
-    linkedin="https://www.linkedin.com/in/vin%C3%ADcius-l%C3%B4bo-8bbb16289?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-    nome={"Vinicius Alcantara"}
+    key="lucas"
+    linkedin="https://www.linkedin.com/in/lucas-martins-menezes-b79613338/"
+    nome={"Lucas Martins Menezes"}
     src={coor_eventos}
     cargo={"Coordenador de Eventos"}
   />,
   <CardCoord
-    linkedin="https://www.linkedin.com/in/davi-sampaio-timb%C3%B3-94408330b/"
-    nome={"Davi Sampaio Timbó"}
+    key="diego"
+    linkedin="https://www.linkedin.com/in/diego-rocha-50a02b350/"
+    nome={"Diego Rocha de Almeida "}
     src={cg_telecom}
-    cargo={"Coordenadora Geral"}
+    cargo={"Coordenador Geral"}
   />,
   <CardCoord
-    linkedin="http://www.linkedin.com/in/lucas-araújo-moura-37103a31b"
-    nome={"Lucas Araújo Moura"}
+    key="rafael-gomes"
+    linkedin="https://www.linkedin.com/in/rafael-gomes-do-nascimento-b878b6268/"
+    nome={"Rafael Gomes do Nascimento"}
     src={coor_mark}
     cargo={"Coordenador de Marketing"}
   />,
   <CardCoord
-    // linkedin="https://www.linkedin.com/in/vitória-reis-lima-301347309/"
-    nome={"Alan da Rocha Mota"}
+    key="lazaro"
+    linkedin="https://www.linkedin.com/in/lazarovieira/"
+    nome={"Lázaro de Sousa Vieira"}
     src={cg_eletri}
     cargo={"Coordenador Geral"}
   />,
   <CardCoord
-    // linkedin="https://www.linkedin.com/in/ana-letícia-alves-486277234/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
-    nome={"Maria Augusta Costa "}
+    key="ana-luisa"
+    //linkedin="https://www.linkedin.com/in/ana-letícia-alves-486277234/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    nome={"Ana Luisa de Sá Fernandes"}
     src={coor_finan}
     cargo={"Coordenadora Financeira"}
   />,
   <CardCoord
-    // linkedin="https://www.linkedin.com/in/hubert-miranda-151535298/"
-    nome={"Thaís Sousa Barros"}
+    key="joao-pedro"
+    linkedin="https://www.linkedin.com/in/jo%C3%A3o-pedro-rolim-ximenes-3a4015197/"
+    nome={"João Pedro Rolim Ximenes"}
     src={cg_comp}
     cargo={"Coordenador Geral"}
   />,
@@ -60,7 +67,7 @@ export default function CoordenacaoSection() {
   return (
     <section className="my-12 lg:my-16">
       <Container className="w-full relative z-10 flex flex-col">
-        <Title className={`text-2xl mb-11 text-cian-700 `}>
+        <Title className={`text-2xl mb-11 text-[#3f6593]`}>
           NOSSA COORDENAÇÃO
         </Title>
         <div className="flex flex-wrap justify-center gap-8 m-auto">

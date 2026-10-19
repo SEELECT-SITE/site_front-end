@@ -1,6 +1,6 @@
 export default function MarqueeLogin() {
   return (
-    <div className="mt-12">
+    <div className="mt-12 text-[#3f6593]">
       <div className="w-2-full lg:animate-login-deco overflow-hidden text-2xl whitespace-nowrap">
         - SEELECT <b> - SEELECT </b>- SEELECT <b> - SEELECT </b>- SEELECT{" "}
         <b> - SEELECT </b>- SEELECT <b> - SEELECT </b>- SEELECT - SEELECT{" "}

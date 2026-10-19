@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { KitToTable } from "@/pages/api/auth/nextauth";
+import { KitToTable } from "@/types/nextauth";
 import useUserPaymentStore from "./UserPaymentModal/userPaymentModalStore";
 import momento from "@/utils/formatDate";
 import useKitDeleteModalState from "../../kits-table/kits-table-components/deleteKitModal/deleteKitModalStore";
