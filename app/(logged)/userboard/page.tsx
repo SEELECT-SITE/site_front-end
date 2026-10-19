@@ -53,7 +53,7 @@ function Userboard({
         )}
         {hasUserName && (
           <Container>
-            <div className="bg-slate-800 w-auto p-4 lg:p-8 rounded-md border-2 border-slate-700 flex flex-wrap justify-between gap-12">
+            <div className="mt-20 bg-slate-800 w-auto p-4 lg:p-8 rounded-md border-2 border-slate-700 flex flex-wrap items-center justify-between gap-4">
               <p className="text-2xl">Bem-vindo, {user?.name} </p>
               <div className="flex gap-2 items-center">
                 <FloatButton
