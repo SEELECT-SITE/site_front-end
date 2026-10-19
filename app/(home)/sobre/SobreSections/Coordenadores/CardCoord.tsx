@@ -29,11 +29,11 @@ export default function CardCoord({
           alt={`${nome} ${cargo}`}
           priority
           width={150}
-          className="rounded-full aspect-square object-cover border-2 border-cian-700"
+          className="rounded-full aspect-square object-cover border-2 border-[#3f6593]"
         />
         {linkedin && (
           <Link href={linkedin} target="_blank">
-            <div className="hover:brightness-110 hover:scale-105 w-1/4 p-1 -bottom-3 left-1/2 -translate-x-1/2 aspect-square bg-cian-700 rounded-md absolute">
+            <div className="hover:brightness-110 hover:scale-105 w-1/4 p-1 -bottom-3 left-1/2 -translate-x-1/2 aspect-square bg-[#3f6593] rounded-md absolute">
               <FaLinkedinIn fill="#101120" size={"100%"} />
             </div>
           </Link>

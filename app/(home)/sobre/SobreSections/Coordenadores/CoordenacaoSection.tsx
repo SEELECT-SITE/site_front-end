@@ -49,14 +49,14 @@ const coordenadores = [
   />,
   <CardCoord
     key="ana-luisa"
-    linkedin="https://www.linkedin.com/in/ana-letícia-alves-486277234/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+    //linkedin="https://www.linkedin.com/in/ana-letícia-alves-486277234/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
     nome={"Ana Luisa de Sá Fernandes"}
     src={coor_finan}
     cargo={"Coordenadora Financeira"}
   />,
   <CardCoord
     key="joao-pedro"
-    linkedin="https://www.linkedin.com/in/hubert-miranda-151535298/"
+    linkedin="https://www.linkedin.com/in/jo%C3%A3o-pedro-rolim-ximenes-3a4015197/"
     nome={"João Pedro Rolim Ximenes"}
     src={cg_comp}
     cargo={"Coordenador Geral"}
