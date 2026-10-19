@@ -30,7 +30,7 @@ export default function EventCardBody({
         } ${
           capacity! <= 0 || disable
             ? "bg-dark-cian grayscale pointer-events-none"
-            : "bg-[#1b3554]"
+            : "bg-[#000f22]"
         }`,
         className
       )}
