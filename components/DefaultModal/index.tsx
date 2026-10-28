@@ -28,14 +28,14 @@ export default function DefaultModal({
               setIsModalOpen(false);
             }
           }}
-          ref={divModal}
+                    ref={divModal}
           className={
-            "fixed w-full h-full z-[9999] flex top-0 left-0 p-4 backdrop-blur-sm bg-dark/20 text-dark  items-center justify-center"
+            "fixed inset-0 z-[9999] overflow-y-auto p-4 backdrop-blur-sm bg-dark/20 text-dark"
           }
         >
           <div
             className={twMerge(
-              "flex flex-col justify-between items-center relative overflow-y-auto max-h-full bg-white rounded-md max-w-md z-10",
+              "flex flex-col justify-between items-center relative bg-white rounded-md max-w-md z-10 m-auto",
               className
             )}
           >
