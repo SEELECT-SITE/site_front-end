@@ -45,7 +45,7 @@ function Cronograma() {
     { refetchOnMount: false, refetchOnWindowFocus: false }
   );
   const router = useRouter();
-  const [dayOfWeek, setDayOfWeek] = useState<string>("segunda-feira");
+  const [dayOfWeek, setDayOfWeek] = useState<string>("terça-feira");
 
   return (
     <section className="w-full py-12 lg:py-24 rounded-md backdrop-blur-sm shadow-md shadow-slate-900 bg-white/10 border border-white/20 ">
@@ -58,11 +58,11 @@ function Cronograma() {
             onChange={(e) => setDayOfWeek(e.target.value)}
             label="Dias"
             options={[
-              {
-                title: "Segunda",
-                value: "segunda-feira",
-                defaultChecked: true,
-              },
+              //{
+              //  title: "Segunda",
+              //  value: "segunda-feira",
+              //  defaultChecked: true,
+              //},
               { title: "Terça", value: "terça-feira" },
               { title: "Quarta", value: "quarta-feira" },
               { title: "Quinta", value: "quinta-feira" },

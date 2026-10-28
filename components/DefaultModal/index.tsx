@@ -35,7 +35,7 @@ export default function DefaultModal({
         >
           <div
             className={twMerge(
-              "flex flex-col justify-between items-center relative overflow-hidden bg-white rounded-md max-w-md z-10",
+              "flex flex-col justify-between items-center relative overflow-y-auto max-h-full bg-white rounded-md max-w-md z-10",
               className
             )}
           >

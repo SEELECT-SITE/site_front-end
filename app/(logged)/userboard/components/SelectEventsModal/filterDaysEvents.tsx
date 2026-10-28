@@ -15,7 +15,7 @@ const FilterDaysEvents = () => {
       onChange={handleDayChange}
       label="Dias"
       options={[
-        { title: "Segunda", value: "segunda-feira" },
+        //{ title: "Segunda", value: "segunda-feira" },
         { title: "Terça", value: "terça-feira" },
         { title: "Quarta", value: "quarta-feira" },
         { title: "Quinta", value: "quinta-feira" },
