@@ -83,6 +83,7 @@ export default function EventsAdmin({ user }: EventsAdminProps) {
             { title: "Workshop", value: "workshop" },
             { title: "Mini-curso", value: "minicurso" },
             { title: "Palestra", value: "palestra" },
+            { title: "Competição", value: "competicao" },
             { title: "Todos", value: "todos", defaultChecked: true },
           ]}
           groupName={"categoryEvents"}

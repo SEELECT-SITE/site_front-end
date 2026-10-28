@@ -195,6 +195,7 @@ export default function AddEventsForms({
               "minicurso",
               "mesa redonda",
               "visita técnica",
+              "competição",
             ]}
             register={register("category")}
           />
