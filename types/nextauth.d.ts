@@ -18,6 +18,7 @@ export type EventAttendanceProps = {
   participants: {
     id: number;
     name: string;
+    email?: string;
     days: boolean[];
     hours_per_day?: number[];
   }[];

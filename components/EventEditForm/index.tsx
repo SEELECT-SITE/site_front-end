@@ -160,7 +160,14 @@ export function EventEditForm_({
                       key={elem.name}
                       className="flex gap-2 justify-between w-full my-2 dark:border-zinc-700 border-zinc-200 py-1 border-b dark:hover:bg-zinc-900 hover:bg-zinc-100 items-center"
                     >
-                      <p className="w-48 lg:w-auto">{elem.name}</p>
+                      <div className="w-48 lg:w-auto flex flex-col min-w-0">
+                        <p className="truncate">{elem.name}</p>
+                        {elem.email && (
+                          <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">
+                            {elem.email}
+                          </p>
+                        )}
+                      </div>
                       <ul className="flex space-x-3 justify-between w-36 px-4">
                         {elem.days.map((_, index) => {
                           return (
